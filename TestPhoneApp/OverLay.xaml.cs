@@ -16,5 +16,10 @@ namespace TestPhoneApp
         {
             InitializeComponent();
         }
+
+        public void setText(string text)
+        {
+            Overlay_Textblock.Text = text;
+        }
     }
 }

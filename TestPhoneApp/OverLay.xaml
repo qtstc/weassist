@@ -9,14 +9,14 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
     
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}" Opacity="0.8">
         <Grid.RowDefinitions>
             <RowDefinition Height="400"/>
             <RowDefinition Height="400"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <ProgressBar IsIndeterminate="True" Foreground="Purple" Height="50" Width="480" VerticalAlignment="Center"/>
-            <TextBlock Text ="{Binding LocalizedResources.ProgressBar_Loading, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Foreground="Purple" HorizontalAlignment="Center"/>
+            <TextBlock x:Name ="Overlay_Textblock" Foreground="Purple" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>

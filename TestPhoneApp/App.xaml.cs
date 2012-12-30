@@ -10,6 +10,8 @@ using TestPhoneApp.Resources;
 using System.IO.IsolatedStorage;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Controls.Primitives;
+using Parse;
 
 namespace TestPhoneApp
 {
@@ -21,12 +23,28 @@ namespace TestPhoneApp
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
-        public const string SETTINGS_PASSWORD_KEY = "settings_password_key";
-        public const string SETTINGS_USERNAME_KEY = "settings_username_key";
+        /// <summary>
+        /// The progress overlay used in the app.
+        /// </summary>
+        private static Popup progressOverlay;
 
-        public const string APP_USERNAME_KEY = "app_username_key";
-        public const string APP_PASSWORD_KEY = "app_password_key";
-        public const string APP_VALIDATED_KEY = "app_validated_key";
+        /// <summary>
+        /// Set the text of the progress overlay and show it.
+        /// </summary>
+        /// <param name="text">the text to be displayed on the progress overlay</param>
+        public static void showProgressOverlay(string text)
+        {
+            (progressOverlay.Child as OverLay).setText(text);
+            progressOverlay.IsOpen = true;
+        }
+
+        /// <summary>
+        /// Hide the progress overlay.
+        /// </summary>
+        public static void hideProgressOverlay()
+        {
+            progressOverlay.IsOpen = false;
+        }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -65,28 +83,19 @@ namespace TestPhoneApp
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            //Set up the progress overlay
+            progressOverlay = new Popup();
+            OverLay ovr = new OverLay();
+            App.progressOverlay.Child = ovr;
+
+            ParseClient.Initialize("eJ2fw5ZYIDLUUbmBer2QIC1142uFXrTfJEwcVFfd", "ngWRcVLvVb7NSdg1UVceMTyDfjpXoR9vJklGu9Eg");
         }
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            //Get the username and password stored inside phone
-            //Code example taken from http://new.efficientcoder.net/2011/09/windows-phone-7-quick-tip-31-safely.html
-            string storedPassword = string.Empty;
-            string storedUsername = string.Empty;
-            if (IsolatedStorageSettings.ApplicationSettings.Contains(SETTINGS_USERNAME_KEY))
-                storedUsername = IsolatedStorageSettings.ApplicationSettings[SETTINGS_USERNAME_KEY] as string;
-            if(IsolatedStorageSettings.ApplicationSettings.Contains(SETTINGS_USERNAME_KEY))
-            {
-                var bytes = IsolatedStorageSettings.ApplicationSettings[SETTINGS_PASSWORD_KEY] as byte[];
-                var unEncrypted = ProtectedData.Unprotect(bytes, null);
-                storedPassword = Encoding.UTF8.GetString(unEncrypted, 0, unEncrypted.Length);
-            }
-            //Stored the username and password into application service, which is used in the application.
-            PhoneApplicationService.Current.State[APP_USERNAME_KEY] = storedUsername;
-            PhoneApplicationService.Current.State[APP_PASSWORD_KEY] = storedPassword;
-            PhoneApplicationService.Current.State[APP_VALIDATED_KEY] = false;
+
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -99,14 +108,12 @@ namespace TestPhoneApp
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            saveToIsolatedStorage();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            saveToIsolatedStorage();
         }
 
         // Code to execute if a navigation fails
@@ -191,18 +198,6 @@ namespace TestPhoneApp
         }
 
         #endregion
-
-        /// <summary>
-        /// Save the username and encrypted password to isolated storage.
-        /// </summary>
-        private void saveToIsolatedStorage()
-        {
-            string newUsername = PhoneApplicationService.Current.State[APP_USERNAME_KEY] as string;
-            string newPassword = PhoneApplicationService.Current.State[APP_PASSWORD_KEY] as string;
-            var encrypted = ProtectedData.Protect(Encoding.UTF8.GetBytes(newPassword), null);
-            IsolatedStorageSettings.ApplicationSettings[SETTINGS_PASSWORD_KEY] = encrypted;
-            IsolatedStorageSettings.ApplicationSettings[SETTINGS_USERNAME_KEY] = newUsername;
-        }
 
         // Initialize the app's font and flow direction as defined in its localized resource strings.
         //

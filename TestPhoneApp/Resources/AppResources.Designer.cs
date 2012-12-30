@@ -194,5 +194,14 @@ namespace TestPhoneApp.Resources {
                 return ResourceManager.GetString("Setting_PageHeader", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign up.
+        /// </summary>
+        public static string Signup_PageHeader {
+            get {
+                return ResourceManager.GetString("Signup_PageHeader", resourceCulture);
+            }
+        }
     }
 }

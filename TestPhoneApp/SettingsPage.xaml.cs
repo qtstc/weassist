@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TestPhoneApp.Resources;
+using Parse;
 
 namespace TestPhoneApp
 {
@@ -24,10 +25,7 @@ namespace TestPhoneApp
 
         private void Change_User_Button_Click(object sender, RoutedEventArgs e)
         {
-            //First clear all stored data.
-            PhoneApplicationService.Current.State[App.APP_USERNAME_KEY] = string.Empty;
-            PhoneApplicationService.Current.State[App.APP_PASSWORD_KEY] = string.Empty;
-            PhoneApplicationService.Current.State[App.APP_VALIDATED_KEY] = false;
+            ParseUser.LogOut();
             //Go back to login page
             NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
             //Remove back entry. Prevent user from coming back to settings page by pressing back button

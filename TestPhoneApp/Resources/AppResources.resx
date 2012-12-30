@@ -164,4 +164,7 @@
   <data name="ProgressBar_VerifyingUser" xml:space="preserve">
     <value>Verifying User</value>
   </data>
+  <data name="Signup_PageHeader" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
 </root>

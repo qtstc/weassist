@@ -39,8 +39,6 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\D
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\ru\System.Windows.Interactivity.resources.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\TestPhoneApp.csprojResolveAssemblyReference.cache
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Microsoft.Phone.Controls.Toolkit.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Newtonsoft.Json.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Parse.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Parse.Phone.dll
@@ -48,3 +46,4 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\D
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Parse.xml
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Parse.Phone.xml
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\OverLay.g.cs
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\SignupPage.g.cs

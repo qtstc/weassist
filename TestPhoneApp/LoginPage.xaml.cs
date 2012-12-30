@@ -7,14 +7,14 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Windows.Controls.Primitives;
+using Parse;
+using System.Diagnostics;
 
 namespace TestPhoneApp
 {
     public partial class LoginPage : PhoneApplicationPage
     {
-
-        private OverLay progressOverlay;
-
         public LoginPage()
         {
             InitializeComponent();
@@ -23,40 +23,58 @@ namespace TestPhoneApp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string storedUsername = PhoneApplicationService.Current.State[App.APP_USERNAME_KEY] as string;
-            string storedPassword = PhoneApplicationService.Current.State[App.APP_PASSWORD_KEY] as string;
-            if (!storedUsername.Equals(string.Empty) && !storedPassword.Equals(string.Empty))
+            if (ParseUser.CurrentUser != null)
             {
-                //Populate UI with previous data.
-                login_username_textbox.Text = storedUsername;
-                login_password_textbox.Password = storedPassword;
-                login();
+                navigateToSettingsPage();
             }
         }
 
         private void Login_Signin_Button_Click(object sender, RoutedEventArgs e)
         {
-            login();
+            App.showProgressOverlay("loading");
+            loginWithProgressOverlay();
+        }
+
+        private void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
         }
 
         /// <summary>
-        /// Get user credentials from UI and try to log in.
-        /// If successful, user credentials will be stored in PhoneApplicationService.
-        /// User will than be redirected to the settings page.
+        /// Getting username and password from UI and attemp to log in with parse.
+        /// If login succeeded, navigate the user to the settings page.
+        /// Show the progress overlay before calling this async method.
         /// </summary>
-        private void login()
+        private async void loginWithProgressOverlay()
         {
             string username = login_username_textbox.Text;
             string password = login_password_textbox.Password;
-            UserManager.loginState validationResult = UserManager.validateUser(username, password);
-            if (validationResult == UserManager.loginState.VALIDATED)
+            try
             {
-                PhoneApplicationService.Current.State[App.APP_USERNAME_KEY] = username;
-                PhoneApplicationService.Current.State[App.APP_PASSWORD_KEY] = password;
-                PhoneApplicationService.Current.State[App.APP_VALIDATED_KEY] = true;
-                NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
-                NavigationService.RemoveBackEntry();
+                await ParseUser.LogInAsync(username, password);
+                Debug.WriteLine("Log in with " + username + " and " + password + " succeeded.");
+                //Move to change user page if logged in successfully.
+                navigateToSettingsPage();
             }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Log in with " + username + " and " + password + " failed.");
+                Debug.WriteLine(e.ToString());
+            }
+            //Remove the progress overlay.
+            App.hideProgressOverlay();
+        }
+
+        /// <summary>
+        /// Navigate to the settings page after the user is logged in.
+        /// It also remove the log in page from the stack.
+        /// So when user tap the back button in the settings page,
+        /// the application will exit instead of coming back to the login page.
+        /// </summary>
+        private void navigateToSettingsPage()
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+            NavigationService.RemoveBackEntry();
         }
     }
 }
