@@ -47,3 +47,4 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\D
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Parse.Phone.xml
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\OverLay.g.cs
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\SignupPage.g.cs
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\TestPhoneApp.csprojResolveAssemblyReference.cache
