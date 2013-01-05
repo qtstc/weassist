@@ -46,10 +46,10 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <StackPanel x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0">
             <Button Content = "{Binding LocalizedResources.Setting_ChangeUser, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Change_User_Button_Click" />
-
-        </Grid>
+            <CheckBox x:Name="EnableTrackingCheckBox" Content="{Binding LocalizedResources.Setting_EnableTracking, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Checked="EnableTrackingCheckBox_Checked" Unchecked="EnableTrackingCheckBox_Unchecked"/>
+        </StackPanel>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to

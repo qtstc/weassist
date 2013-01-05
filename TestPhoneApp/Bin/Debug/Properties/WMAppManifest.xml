@@ -17,6 +17,9 @@
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="LoginPage.xaml" />
+      <ExtendedTask Name="BackgroundTask">
+        <BackgroundServiceAgent Specifier="ScheduledTaskAgent" Name="ScheduledLocationAgent" Source="ScheduledLocationAgent" Type="ScheduledLocationAgent.ScheduledAgent" />
+      </ExtendedTask>
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="TestPhoneAppToken" TaskName="_default">

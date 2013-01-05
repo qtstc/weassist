@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define DEBUG_AGENT
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,11 +11,18 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TestPhoneApp.Resources;
 using Parse;
+using Microsoft.Phone.Scheduler;
+using System.Diagnostics;
 
 namespace TestPhoneApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
+
+        PeriodicTask periodicTask;
+
+        string periodicTaskName = "PeriodicAgent";
+
         // Constructor
         public MainPage()
         {
@@ -31,6 +40,69 @@ namespace TestPhoneApp
             //Remove back entry. Prevent user from coming back to settings page by pressing back button
             //when he or she is on the login page
             NavigationService.RemoveBackEntry();
+        }
+
+
+
+        private void StartPeriodicAgent()
+        {
+            // Obtain a reference to the period task, if one exists
+            periodicTask = ScheduledActionService.Find(periodicTaskName) as PeriodicTask;
+
+            // If the task already exists and the IsEnabled property is false, background
+            // agents have been disabled by the user
+            if (periodicTask != null && !periodicTask.IsEnabled)
+            {
+                MessageBox.Show("Background agents for this application have been disabled by the user.");
+                return;
+            }
+
+            // If the task already exists and background agents are enabled for the
+            // application, you must remove the task and then add it again to update 
+            // the schedule
+            if (periodicTask != null && periodicTask.IsEnabled)
+            {
+                RemoveAgent(periodicTaskName);
+            }
+
+            periodicTask = new PeriodicTask(periodicTaskName);
+
+            // The description is required for periodic agents. This is the string that the user
+            // will see in the background services Settings page on the device.
+            periodicTask.Description = "This demonstrates a periodic task.";
+
+            Debug.WriteLine("here");
+
+            if (periodicTask == null)
+                Debug.WriteLine("fail");
+
+            ScheduledActionService.Add(periodicTask);
+
+                // If debugging is enabled, use LaunchForTest to launch the agent in one minute.
+#if(DEBUG_AGENT)
+    ScheduledActionService.LaunchForTest(periodicTaskName, TimeSpan.FromSeconds(10));
+#endif
+        }
+
+        private void RemoveAgent(string name)
+        {
+            try
+            {
+                ScheduledActionService.Remove(name);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void EnableTrackingCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            StartPeriodicAgent();
+        }
+
+        private void EnableTrackingCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            RemoveAgent(periodicTaskName);
         }
 
         // Sample code for building a localized ApplicationBar

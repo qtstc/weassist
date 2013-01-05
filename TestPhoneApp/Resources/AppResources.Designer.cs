@@ -187,6 +187,15 @@ namespace TestPhoneApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable Tracking.
+        /// </summary>
+        public static string Setting_EnableTracking {
+            get {
+                return ResourceManager.GetString("Setting_EnableTracking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Setting_PageHeader {

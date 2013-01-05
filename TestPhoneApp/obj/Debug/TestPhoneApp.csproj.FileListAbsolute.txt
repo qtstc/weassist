@@ -48,3 +48,5 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\D
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\OverLay.g.cs
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\SignupPage.g.cs
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\TestPhoneApp.csprojResolveAssemblyReference.cache
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\ScheduledLocationAgent.dll
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\ScheduledLocationAgent.pdb
