@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="TestPhoneApp.MainPage"
+    x:Class="TestPhoneApp.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -47,8 +47,16 @@
 
         <!--ContentPanel - place additional content here-->
         <StackPanel x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0">
-            <Button Content = "{Binding LocalizedResources.Setting_ChangeUser, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Change_User_Button_Click" />
-            <CheckBox x:Name="EnableTrackingCheckBox" Content="{Binding LocalizedResources.Setting_EnableTracking, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Checked="EnableTrackingCheckBox_Checked" Unchecked="EnableTrackingCheckBox_Unchecked"/>
+            <Button Content = "{Binding LocalizedResources.Setting_ChangeUser, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="ChangeUserButton_Click" />
+            <StackPanel x:Name="UserSettingsPanel"  d:DataContext="{Binding}">
+            <CheckBox x:Name="EnableTrackingCheckBox" Content="{Binding LocalizedResources.Setting_EnableTracking, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding trackingEnabled, Mode=TwoWay}"/>
+                <TextBox TextWrapping="Wrap" Text="{Binding interval, Mode=TwoWay}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding lastUpdate, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="RefreshButton" Content="{Binding LocalizedResources.Setting_RefreshSettings, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="RefreshButton_Click" />
+                <Button x:Name="ApplySettingsButton" Content="{Binding LocalizedResources.Setting_ApplySettings, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="ApplySettingsButton_Click"/>
+            </StackPanel>
         </StackPanel>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are

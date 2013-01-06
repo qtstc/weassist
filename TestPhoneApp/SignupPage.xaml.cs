@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using TestPhoneApp.Resources;
 using Parse;
 
 namespace TestPhoneApp
@@ -21,6 +22,7 @@ namespace TestPhoneApp
 
         private async void signupWithProgressOverlay()
         {
+            App.showProgressOverlay(AppResources.ProgressBar_SigningUpUser);
             var user = new ParseUser()
             {
                 Username = "tao",
@@ -32,6 +34,7 @@ namespace TestPhoneApp
             user["phone"] = "415-392-0202";
 
             await user.SignUpAsync();
+            App.hideProgressOverlay();
         }
     }
 }

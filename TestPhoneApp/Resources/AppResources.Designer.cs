@@ -151,6 +151,15 @@ namespace TestPhoneApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Signing Up.
+        /// </summary>
+        public static string ProgressBar_SigningUpUser {
+            get {
+                return ResourceManager.GetString("ProgressBar_SigningUpUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verifying User.
         /// </summary>
         public static string ProgressBar_VerifyingUser {
@@ -178,6 +187,15 @@ namespace TestPhoneApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply Settings.
+        /// </summary>
+        public static string Setting_ApplySettings {
+            get {
+                return ResourceManager.GetString("Setting_ApplySettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change User.
         /// </summary>
         public static string Setting_ChangeUser {
@@ -201,6 +219,15 @@ namespace TestPhoneApp.Resources {
         public static string Setting_PageHeader {
             get {
                 return ResourceManager.GetString("Setting_PageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string Setting_RefreshSettings {
+            get {
+                return ResourceManager.GetString("Setting_RefreshSettings", resourceCulture);
             }
         }
         

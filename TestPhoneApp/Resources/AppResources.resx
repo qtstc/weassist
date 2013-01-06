@@ -170,4 +170,13 @@
   <data name="Setting_EnableTracking" xml:space="preserve">
     <value>Enable Tracking</value>
   </data>
+  <data name="ProgressBar_SigningUpUser" xml:space="preserve">
+    <value>Signing Up</value>
+  </data>
+  <data name="Setting_ApplySettings" xml:space="preserve">
+    <value>Apply Settings</value>
+  </data>
+  <data name="Setting_RefreshSettings" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
 </root>

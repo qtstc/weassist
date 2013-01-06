@@ -13,37 +13,55 @@ using TestPhoneApp.Resources;
 using Parse;
 using Microsoft.Phone.Scheduler;
 using System.Diagnostics;
+using System.IO.IsolatedStorage;
+using ScheduledLocationAgent.Data;
 
 namespace TestPhoneApp
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class SettingsPage : PhoneApplicationPage
     {
+        private PeriodicTask periodicTask;
+        private UserSettings userSettings;
 
-        PeriodicTask periodicTask;
-
-        string periodicTaskName = "PeriodicAgent";
+        //Used to identify the periodic task
+        private const string periodicTaskName = "PeriodicAgent";
 
         // Constructor
-        public MainPage()
+        public SettingsPage()
         {
             InitializeComponent();
-
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
+            loadUserSettings();
         }
 
-        private void Change_User_Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Load user settings from the isolated storage.
+        /// If there is no previous user setting,
+        /// a new one will be created and saved in the isolated storage.
+        /// </summary>
+        /// <returns>true if there is a previous user setting</returns>
+        private bool loadUserSettings()
         {
-            ParseUser.LogOut();
-            //Go back to login page
-            NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
-            //Remove back entry. Prevent user from coming back to settings page by pressing back button
-            //when he or she is on the login page
-            NavigationService.RemoveBackEntry();
+            if (IsolatedStorageSettings.ApplicationSettings.Contains(UserSettings.USER_SETTINGS_ISOLATED_STORAGE_KEY))
+            {
+                userSettings = IsolatedStorageSettings.ApplicationSettings[UserSettings.USER_SETTINGS_ISOLATED_STORAGE_KEY] as UserSettings;
+                Debug.WriteLine(userSettings);
+                UserSettingsPanel.DataContext = userSettings;
+                return true;
+            }
+            //Default user setting
+            userSettings = new UserSettings(false, 12, DateTime.Today);
+            IsolatedStorageSettings.ApplicationSettings[UserSettings.USER_SETTINGS_ISOLATED_STORAGE_KEY] = userSettings;
+            IsolatedStorageSettings.ApplicationSettings.Save();
+            UserSettingsPanel.DataContext = userSettings;
+            return false;
         }
 
-
-
+        /// <summary>
+        /// Start the background periodic agent.
+        /// The agent will be scheduled to run every 30 minutes.
+        /// However, in debug mode, this agent will not run,
+        /// and we use ScheduledActionService.LaunchForTest for testing.
+        /// </summary>
         private void StartPeriodicAgent()
         {
             // Obtain a reference to the period task, if one exists
@@ -62,7 +80,7 @@ namespace TestPhoneApp
             // the schedule
             if (periodicTask != null && periodicTask.IsEnabled)
             {
-                RemoveAgent(periodicTaskName);
+                RemoveAgent();
             }
 
             periodicTask = new PeriodicTask(periodicTaskName);
@@ -79,41 +97,60 @@ namespace TestPhoneApp
 #endif
         }
 
-        private void RemoveAgent(string name)
+        /// <summary>
+        /// Remove the background agent with the given name
+        /// </summary>
+        /// <param name="name">the name of the background agent to be removed</param>
+        private void RemoveAgent()
         {
             try
             {
-                ScheduledActionService.Remove(name);
+                ScheduledActionService.Remove(periodicTaskName);
             }
             catch (Exception)
             {
             }
         }
 
-        private void EnableTrackingCheckBox_Checked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Lisenter for the ChangeUserButton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChangeUserButton_Click(object sender, RoutedEventArgs e)
         {
-            StartPeriodicAgent();
+            //ParseUser.LogOut();
+            ////Go back to login page
+            //NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+            ////Remove back entry. Prevent user from coming back to settings page by pressing back button
+            ////when he or she is on the login page
+            //NavigationService.RemoveBackEntry();
+            Debug.WriteLine(userSettings);
+            Debug.WriteLine(IsolatedStorageSettings.ApplicationSettings[UserSettings.USER_SETTINGS_ISOLATED_STORAGE_KEY]);
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
-        private void EnableTrackingCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void ApplySettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            RemoveAgent(periodicTaskName);
+            IsolatedStorageSettings.ApplicationSettings.Save();
+            if (userSettings.trackingEnabled)
+                StartPeriodicAgent();
+            else
+                RemoveAgent();
         }
 
-        // Sample code for building a localized ApplicationBar
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
-        //    ApplicationBar = new ApplicationBar();
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            loadUserSettings();
+        }
 
-        //    // Create a new button and set the text value to the localized string from AppResources.
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
-
-        //    // Create a new menu item with the localized string from AppResources.
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
+        /* DELETED OnNavigatedFrom
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            //No need to save userSettings to the isolated storage
+            //because userSettings and the settings currently stored in isolated storage point to the save object.
+            Debug.WriteLine(IsolatedStorageSettings.ApplicationSettings[USER_SETTINGS_ISOLATED_STORAGE_KEY] as UserSettings);
+        }
+         * */
     }
 }

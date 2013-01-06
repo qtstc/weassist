@@ -32,7 +32,6 @@ namespace TestPhoneApp
 
         private void Login_Signin_Button_Click(object sender, RoutedEventArgs e)
         {
-            App.showProgressOverlay(AppResources.ProgressBar_VerifyingUser);
             loginWithProgressOverlay();
         }
 
@@ -48,6 +47,7 @@ namespace TestPhoneApp
         /// </summary>
         private async void loginWithProgressOverlay()
         {
+            App.showProgressOverlay(AppResources.ProgressBar_VerifyingUser);
             string username = login_username_textbox.Text;
             string password = login_password_textbox.Password;
             try
