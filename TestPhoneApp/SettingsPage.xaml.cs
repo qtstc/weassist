@@ -71,11 +71,6 @@ namespace TestPhoneApp
             // will see in the background services Settings page on the device.
             periodicTask.Description = "This demonstrates a periodic task.";
 
-            Debug.WriteLine("here");
-
-            if (periodicTask == null)
-                Debug.WriteLine("fail");
-
             ScheduledActionService.Add(periodicTask);
 
                 // If debugging is enabled, use LaunchForTest to launch the agent in one minute.

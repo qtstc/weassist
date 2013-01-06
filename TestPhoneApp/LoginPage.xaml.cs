@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Controls.Primitives;
+using TestPhoneApp.Resources;
 using Parse;
 using System.Diagnostics;
 
@@ -31,7 +32,7 @@ namespace TestPhoneApp
 
         private void Login_Signin_Button_Click(object sender, RoutedEventArgs e)
         {
-            App.showProgressOverlay("loading");
+            App.showProgressOverlay(AppResources.ProgressBar_VerifyingUser);
             loginWithProgressOverlay();
         }
 
