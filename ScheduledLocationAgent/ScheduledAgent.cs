@@ -7,6 +7,7 @@ using Microsoft.Phone.Shell;
 using System;
 using System.IO.IsolatedStorage;
 using ScheduledLocationAgent.Data;
+using System.Threading;
 
 namespace ScheduledLocationAgent
 {
@@ -52,32 +53,20 @@ namespace ScheduledLocationAgent
             //toast.Content = toastMessage;
             //toast.Show();
 
-            UserSettings userSettings = getUserSettings();
-            Debug.WriteLine("Background task invoked. Current user settings:\n" + userSettings);
-            Debug.Assert(userSettings.trackingEnabled);
-            if (isTimeToSendData(userSettings.interval, userSettings.lastUpdate))
+            UserSettings settings = UserSettings.loadUserSettings();
+            Debug.WriteLine("Background task invoked. last update:\n" + settings);
+            if (isTimeToSendData(settings.interval, settings.lastUpdate))
             {
                 sendLocationData();
-                userSettings.lastUpdate = DateTime.Now;
-                IsolatedStorageSettings.ApplicationSettings.Save();
-                Debug.WriteLine("Just sent.");
+                settings.lastUpdate = DateTime.Now;
+                UserSettings.saveUserSettings(settings);
             }
-            Debug.WriteLine("Background task finished. Current user settings:\n" + getUserSettings());
+            Debug.WriteLine("Background task finished. last update:\n" + UserSettings.loadUserSettings());
             
 #if DEBUG_AGENT
   ScheduledActionService.LaunchForTest(task.Name, TimeSpan.FromSeconds(60));
 #endif
             NotifyComplete();
-        }
-
-        /// <summary>
-        /// Get the current user settings
-        /// </summary>
-        /// <returns>the current user settings</returns>
-        private UserSettings getUserSettings()
-        {
-            Debug.Assert(IsolatedStorageSettings.ApplicationSettings.Contains(UserSettings.USER_SETTINGS_ISOLATED_STORAGE_KEY));
-            return IsolatedStorageSettings.ApplicationSettings[UserSettings.USER_SETTINGS_ISOLATED_STORAGE_KEY] as UserSettings;
         }
 
         /// <summary>
@@ -100,6 +89,9 @@ namespace ScheduledLocationAgent
         /// <returns>true if succeeded</returns>
         private bool sendLocationData()
         {
+            Debug.WriteLine("start sending.");
+            Thread.Sleep(3000);
+            Debug.WriteLine("sent");
             return true;
         }
     }

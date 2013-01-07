@@ -23,12 +23,13 @@ namespace ScheduledLocationAgent.Data
     [DataContract]
     public class UserSettings : INotifyPropertyChanged
     {
-        //Used to identify the user setting stored in isolated storage
-        public const string USER_SETTINGS_ISOLATED_STORAGE_KEY = "user_settings_isolated_storage_key";
-
         private bool _trackingEnabled;
         private int _interval;
         private DateTime _lastUpdate;
+
+        private const string USER_SETTINGS_FILE_NAME = "user_settings.dat";//Name of the file where the user setting is saved.
+        private const string USER_SETTINGS_MUTEX_NAME = "user_settings_mutex";//The name of the mutex used to manage the user setting file.
+
 
         public UserSettings(bool trackingEnabled, int interval, DateTime lastUpdate)
         {
@@ -84,6 +85,34 @@ namespace ScheduledLocationAgent.Data
             storage = value;
             this.OnPropertyChanged(propertyName);
             return true;
+        }
+
+        /// <summary>
+        /// Save the user settings to the phone's local storage.
+        /// </summary>
+        /// <param name="newSettings">the user setting to be saved</param>
+        public static void saveUserSettings(UserSettings newSettings)
+        {
+            IsolatedStorageHelper.WriteObjectToFileUsingJson(USER_SETTINGS_FILE_NAME, newSettings, USER_SETTINGS_MUTEX_NAME) ;
+        }
+
+        public static void clearUserSettings()
+        {
+            saveUserSettings(null);
+        }
+
+        /// <summary>
+        /// Load user setting from the phone's local storage.
+        /// </summary>
+        /// <returns>the user setting loaded. null if no setting is found.</returns>
+        public static UserSettings loadUserSettings()
+        {
+            if (IsolatedStorageHelper.IsFileExist(USER_SETTINGS_FILE_NAME))
+            {
+                UserSettings settings = IsolatedStorageHelper.ReadObjectFromFileUsingJson<UserSettings>(USER_SETTINGS_FILE_NAME, USER_SETTINGS_MUTEX_NAME);
+                return settings;
+            }
+            return null;
         }
 
         /// <summary>

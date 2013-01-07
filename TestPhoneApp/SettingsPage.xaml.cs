@@ -41,17 +41,16 @@ namespace TestPhoneApp
         /// <returns>true if there is a previous user setting</returns>
         private bool loadUserSettings()
         {
-            if (IsolatedStorageSettings.ApplicationSettings.Contains(UserSettings.USER_SETTINGS_ISOLATED_STORAGE_KEY))
+            userSettings = UserSettings.loadUserSettings();
+            if (userSettings != null)
             {
-                userSettings = IsolatedStorageSettings.ApplicationSettings[UserSettings.USER_SETTINGS_ISOLATED_STORAGE_KEY] as UserSettings;
                 Debug.WriteLine(userSettings);
                 UserSettingsPanel.DataContext = userSettings;
                 return true;
             }
             //Default user setting
             userSettings = new UserSettings(false, 12, DateTime.Today);
-            IsolatedStorageSettings.ApplicationSettings[UserSettings.USER_SETTINGS_ISOLATED_STORAGE_KEY] = userSettings;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+            UserSettings.saveUserSettings(userSettings);
             UserSettingsPanel.DataContext = userSettings;
             return false;
         }
@@ -119,20 +118,19 @@ namespace TestPhoneApp
         /// <param name="e"></param>
         private void ChangeUserButton_Click(object sender, RoutedEventArgs e)
         {
-            //ParseUser.LogOut();
-            ////Go back to login page
-            //NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
-            ////Remove back entry. Prevent user from coming back to settings page by pressing back button
-            ////when he or she is on the login page
-            //NavigationService.RemoveBackEntry();
-            Debug.WriteLine(userSettings);
-            Debug.WriteLine(IsolatedStorageSettings.ApplicationSettings[UserSettings.USER_SETTINGS_ISOLATED_STORAGE_KEY]);
-            IsolatedStorageSettings.ApplicationSettings.Save();
+            ParseUser.LogOut();
+            RemoveAgent();
+            UserSettings.clearUserSettings();
+            //Go back to login page
+            NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+            //Remove back entry. Prevent user from coming back to settings page by pressing back button
+            //when he or she is on the login page
+            NavigationService.RemoveBackEntry();
         }
 
         private void ApplySettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            IsolatedStorageSettings.ApplicationSettings.Save();
+            UserSettings.saveUserSettings(userSettings);
             if (userSettings.trackingEnabled)
                 StartPeriodicAgent();
             else
@@ -143,14 +141,5 @@ namespace TestPhoneApp
         {
             loadUserSettings();
         }
-
-        /* DELETED OnNavigatedFrom
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            //No need to save userSettings to the isolated storage
-            //because userSettings and the settings currently stored in isolated storage point to the save object.
-            Debug.WriteLine(IsolatedStorageSettings.ApplicationSettings[USER_SETTINGS_ISOLATED_STORAGE_KEY] as UserSettings);
-        }
-         * */
     }
 }
