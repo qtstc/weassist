@@ -12,6 +12,10 @@ using Parse;
 
 namespace TestPhoneApp
 {
+    /// <summary>
+    /// This is the page for signing up. Currently not used.
+    /// The web page sign up interface will be used.
+    /// </summary>
     public partial class SignupPage : PhoneApplicationPage
     {
         public SignupPage()

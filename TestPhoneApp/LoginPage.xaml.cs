@@ -11,6 +11,7 @@ using System.Windows.Controls.Primitives;
 using TestPhoneApp.Resources;
 using Parse;
 using System.Diagnostics;
+using Microsoft.Phone.Tasks;
 
 namespace TestPhoneApp
 {
@@ -37,7 +38,10 @@ namespace TestPhoneApp
 
         private void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
+            //NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
+            WebBrowserTask wbt = new WebBrowserTask();
+            wbt.Uri = new Uri("http://www.google.com");
+            wbt.Show();
         }
 
         /// <summary>
