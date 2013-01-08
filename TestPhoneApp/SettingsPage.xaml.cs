@@ -15,6 +15,8 @@ using Microsoft.Phone.Scheduler;
 using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using ScheduledLocationAgent.Data;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace TestPhoneApp
 {
@@ -30,31 +32,35 @@ namespace TestPhoneApp
         public SettingsPage()
         {
             InitializeComponent();
-            loadUserSettings();
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
         }
 
         /// <summary>
         /// Load user settings from the isolated storage.
         /// If there is no previous user setting,
-        /// a new one will be created and saved in the isolated storage.
+        /// a new one will be loaded from the web site.
         /// </summary>
         /// <returns>true if there is a previous user setting</returns>
-        private bool loadUserSettings()
+        private async Task<bool> loadUserSettings()
         {
-            userSettings = UserSettings.loadUserSettings();
+            userSettings = UserSettings.loadUserSettingsFromPhone();
             if (userSettings != null)
             {
                 Debug.WriteLine(userSettings);
                 UserSettingsPanel.DataContext = userSettings;
                 return true;
             }
-            //Default user setting
-            userSettings = new UserSettings(false, 12, DateTime.Today);
-            UserSettings.saveUserSettings(userSettings);
+            //If no user setting is stored in the phone, load user setting from the web. Default user setting will be created when the user creates account on the website.
+            userSettings = await loadUserSettingsFromServerWithProgressOverlay();
+            UserSettings.saveUserSettingsToPhone(userSettings);
             UserSettingsPanel.DataContext = userSettings;
             return false;
         }
 
+        #region Background Agent
         /// <summary>
         /// Start the background periodic agent.
         /// The agent will be scheduled to run every 30 minutes.
@@ -110,7 +116,9 @@ namespace TestPhoneApp
             {
             }
         }
+        #endregion
 
+        #region Listeners For UI
         /// <summary>
         /// Lisenter for the ChangeUserButton
         /// </summary>
@@ -120,7 +128,7 @@ namespace TestPhoneApp
         {
             ParseUser.LogOut();
             RemoveAgent();
-            UserSettings.clearUserSettings();
+            UserSettings.clearUserSettingsInPhone();
             //Go back to login page
             NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
             //Remove back entry. Prevent user from coming back to settings page by pressing back button
@@ -130,16 +138,63 @@ namespace TestPhoneApp
 
         private void ApplySettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            UserSettings.saveUserSettings(userSettings);
-            if (userSettings.trackingEnabled)
-                StartPeriodicAgent();
-            else
-                RemoveAgent();
+            saveUserSettingsToServerWithProgressOverlay(new UserSettings(false,134,DateTime.Today));
+            //UserSettings.saveUserSettingsToPhone(userSettings);
+            //if (userSettings.trackingEnabled)
+            //    StartPeriodicAgent();
+            //else
+            //    RemoveAgent();
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            loadUserSettings();
+            //await loadUserSettings();
+            Debug.WriteLine("Interval from saved!:"+ParseUser.CurrentUser.Get<int>("update_interval"));
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Load user settings from the server. The progress overlay will be shown.
+        /// </summary>
+        /// <returns>the user settings loaded from the server. null if nothing.</returns>
+        private async Task<UserSettings> loadUserSettingsFromServerWithProgressOverlay()
+        {
+            App.showProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
+            UserSettings result = null;
+            try
+            {
+                result = await UserSettings.loadUserSettingsFromParseServer();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Fail to load user settings from the server:\n");
+                Debug.WriteLine(e.ToString());
+                MessageBox.Show(AppResources.Setting_SyncingFailed);
+            }
+            App.hideProgressOverlay();
+            return result;
+        }
+
+        /// <summary>
+        /// Save user settings to the server
+        /// </summary>
+        /// <param name="toBeSaved">the UserSettings instance to be saved</param>
+        private async void saveUserSettingsToServerWithProgressOverlay(UserSettings toBeSaved)
+        {
+            App.showProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
+            try
+            {
+                await UserSettings.saveUserSettingsToParseServer(toBeSaved);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Fail to save user settings to the server:\n");
+                Debug.WriteLine(e.ToString());
+                MessageBox.Show(AppResources.Setting_SyncingFailed);
+            }
+            App.hideProgressOverlay();
+
         }
     }
 }

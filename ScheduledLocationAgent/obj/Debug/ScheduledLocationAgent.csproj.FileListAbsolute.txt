@@ -5,3 +5,7 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationA
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\Newtonsoft.Json.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\Newtonsoft.Json.xml
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\obj\Debug\ScheduledLocationAgent.csprojResolveAssemblyReference.cache
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\Parse.dll
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\Parse.Phone.dll
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\Parse.xml
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\Parse.Phone.xml

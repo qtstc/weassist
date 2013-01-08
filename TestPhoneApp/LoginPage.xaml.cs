@@ -17,6 +17,9 @@ namespace TestPhoneApp
 {
     public partial class LoginPage : PhoneApplicationPage
     {
+
+        private const string LOGIN_PAGE_URL = "http://www.google.com";
+
         public LoginPage()
         {
             InitializeComponent();
@@ -25,10 +28,11 @@ namespace TestPhoneApp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Navigate driectly to the settings page if logged in.
             if (ParseUser.CurrentUser != null)
             {
                 navigateToSettingsPage();
-            }
+            } 
         }
 
         private void Login_Signin_Button_Click(object sender, RoutedEventArgs e)
@@ -40,7 +44,7 @@ namespace TestPhoneApp
         {
             //NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
             WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://www.google.com");
+            wbt.Uri = new Uri(LOGIN_PAGE_URL);
             wbt.Show();
         }
 
@@ -61,10 +65,17 @@ namespace TestPhoneApp
                 //Move to change user page if logged in successfully.
                 navigateToSettingsPage();
             }
-            catch (Exception e)
+            catch (ParseException e)//When login failed because of parse exception
             {
                 Debug.WriteLine("Log in with " + username + " and " + password + " failed.");
                 Debug.WriteLine(e.ToString());
+                MessageBox.Show(AppResources.Login_LoginWrongCredentials);
+            }
+            catch (Exception e)//When login failed because of other exceptions(mostly network problem)
+            {
+                Debug.WriteLine("Log in with " + username + " and " + password + " failed.");
+                Debug.WriteLine(e.ToString());
+                MessageBox.Show(AppResources.Login_LoginFailMessage);
             }
             //Remove the progress overlay.
             App.hideProgressOverlay();

@@ -97,6 +97,24 @@ namespace TestPhoneApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login failed.Please check network settings and try again later..
+        /// </summary>
+        public static string Login_LoginFailMessage {
+            get {
+                return ResourceManager.GetString("Login_LoginFailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incorrect username or password..
+        /// </summary>
+        public static string Login_LoginWrongCredentials {
+            get {
+                return ResourceManager.GetString("Login_LoginWrongCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log in.
         /// </summary>
         public static string Login_PageHeader {
@@ -228,6 +246,24 @@ namespace TestPhoneApp.Resources {
         public static string Setting_RefreshSettings {
             get {
                 return ResourceManager.GetString("Setting_RefreshSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to sync user settings with the server..
+        /// </summary>
+        public static string Setting_SyncingFailed {
+            get {
+                return ResourceManager.GetString("Setting_SyncingFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Syncing User Settings.
+        /// </summary>
+        public static string Setting_SyncingUserSettingsWithParseServer {
+            get {
+                return ResourceManager.GetString("Setting_SyncingUserSettingsWithParseServer", resourceCulture);
             }
         }
         

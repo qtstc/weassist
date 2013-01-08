@@ -9,6 +9,7 @@ namespace ScheduledLocationAgent.Data
     /// <summary>
     /// Original from http://dotnetapp.com/blog/2012/11/25/how-to-avoid-application-settings-corruption-when-a-background-agent-is-used/?utm_source=rss&utm_medium=rss&utm_campaign=how-to-avoid-application-settings-corruption-when-a-background-agent-is-used.
     /// Added save string methods for ease of use.
+    /// The methods in this class are used because saving data using IsolatedStorageSettings is not thread-safe when both the foreground app and background agent are accessing the data.
     /// </summary>
     public static class IsolatedStorageHelper
     {

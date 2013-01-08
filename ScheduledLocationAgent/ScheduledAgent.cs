@@ -53,15 +53,15 @@ namespace ScheduledLocationAgent
             //toast.Content = toastMessage;
             //toast.Show();
 
-            UserSettings settings = UserSettings.loadUserSettings();
+            UserSettings settings = UserSettings.loadUserSettingsFromPhone();
             Debug.WriteLine("Background task invoked. last update:\n" + settings);
             if (isTimeToSendData(settings.interval, settings.lastUpdate))
             {
                 sendLocationData();
                 settings.lastUpdate = DateTime.Now;
-                UserSettings.saveUserSettings(settings);
+                UserSettings.saveUserSettingsToPhone(settings);
             }
-            Debug.WriteLine("Background task finished. last update:\n" + UserSettings.loadUserSettings());
+            Debug.WriteLine("Background task finished. last update:\n" + UserSettings.loadUserSettingsFromPhone());
             
 #if DEBUG_AGENT
   ScheduledActionService.LaunchForTest(task.Name, TimeSpan.FromSeconds(60));

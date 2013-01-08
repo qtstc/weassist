@@ -179,4 +179,16 @@
   <data name="Setting_RefreshSettings" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="Login_LoginFailMessage" xml:space="preserve">
+    <value>Login failed.Please check network settings and try again later.</value>
+  </data>
+  <data name="Login_LoginWrongCredentials" xml:space="preserve">
+    <value>Incorrect username or password.</value>
+  </data>
+  <data name="Setting_SyncingUserSettingsWithParseServer" xml:space="preserve">
+    <value>Syncing User Settings</value>
+  </data>
+  <data name="Setting_SyncingFailed" xml:space="preserve">
+    <value>Failed to sync user settings with the server.</value>
+  </data>
 </root>
