@@ -8,6 +8,10 @@ using System;
 using System.IO.IsolatedStorage;
 using ScheduledLocationAgent.Data;
 using System.Threading;
+using Parse;
+using System.Device.Location;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace ScheduledLocationAgent
 {
@@ -44,24 +48,25 @@ namespace ScheduledLocationAgent
         /// <remarks>
         /// This method is called when a periodic or resource intensive task is invoked
         /// </remarks>
-        protected override void OnInvoke(ScheduledTask task)
+        protected override async void OnInvoke(ScheduledTask task)
         {
-            //TODO: Add code to perform your task in background
-            //string toastMessage = "default message";
-            //ShellToast toast = new ShellToast();
-            //toast.Title = "toast title";
-            //toast.Content = toastMessage;
-            //toast.Show();
+            ParseClient.Initialize("eJ2fw5ZYIDLUUbmBer2QIC1142uFXrTfJEwcVFfd", "ngWRcVLvVb7NSdg1UVceMTyDfjpXoR9vJklGu9Eg");
+           
+            await ParseUser.LogInAsync("tao", "p");
+            ParseUser user = ParseUser.CurrentUser;
 
-            UserSettings settings = UserSettings.loadUserSettingsFromPhone();
-            Debug.WriteLine("Background task invoked. last update:\n" + settings);
-            if (isTimeToSendData(settings.interval, settings.lastUpdate))
+            int lastLocationIndex = user.Get<int>(ParseContract.LAST_LOCATION_INDEX_KEY);
+            GeoPosition<GeoCoordinate> lastLocation = Utilities.convertJSONToGeoPosition(user.Get<string>(ParseContract.LOCATION(lastLocationIndex)));
+            int interval = user.Get<int>(ParseContract.UPDATE_INTERVAL_KEY);
+            Debug.WriteLine("Background task invoked:\nlast location index "+lastLocationIndex+"\ninterval: "+interval+"\nlast update: "+lastLocation.Timestamp.DateTime);
+            if (isTimeToSendData(interval, lastLocation.Timestamp.DateTime))
             {
-                sendLocationData();
-                settings.lastUpdate = DateTime.Now;
-                UserSettings.saveUserSettingsToPhone(settings);
+                lastLocationIndex++;
+                user[ParseContract.LAST_LOCATION_INDEX_KEY] = (lastLocationIndex)%user.Get<int>(ParseContract.LOCATION_DATA_SIZE_KEY);
+                user[ParseContract.LOCATION(lastLocationIndex)] =  Utilities.convertGeoPositionToJSON(getCurrentGeoPosition());
+                await user.SaveAsync();
             }
-            Debug.WriteLine("Background task finished. last update:\n" + UserSettings.loadUserSettingsFromPhone());
+            Debug.WriteLine("Background task finished.");
             
 #if DEBUG_AGENT
   ScheduledActionService.LaunchForTest(task.Name, TimeSpan.FromSeconds(60));
@@ -84,15 +89,12 @@ namespace ScheduledLocationAgent
         }
 
         /// <summary>
-        /// Send the location data to the server.
+        /// Get the curent geo position
         /// </summary>
-        /// <returns>true if succeeded</returns>
-        private bool sendLocationData()
+        /// <returns></returns>
+        private GeoPosition<GeoCoordinate> getCurrentGeoPosition()
         {
-            Debug.WriteLine("start sending.");
-            Thread.Sleep(3000);
-            Debug.WriteLine("sent");
-            return true;
+            return new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.Now), new GeoCoordinate(1.1, 2.2));
         }
     }
 }

@@ -191,4 +191,7 @@
   <data name="Setting_SyncingFailed" xml:space="preserve">
     <value>Failed to sync user settings with the server.</value>
   </data>
+  <data name="Setting_InitializeSettings" xml:space="preserve">
+    <value>Initializing Settings</value>
+  </data>
 </root>

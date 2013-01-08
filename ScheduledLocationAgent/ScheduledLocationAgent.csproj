@@ -85,7 +85,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Data\IsolatedStorageHelper.cs" />
-    <Compile Include="Data\UserSettings.cs" />
+    <Compile Include="Data\ParseContract.cs" />
+    <Compile Include="Data\Utilities.cs" />
     <Compile Include="ScheduledAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

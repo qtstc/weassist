@@ -232,6 +232,15 @@ namespace TestPhoneApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initializing Settings.
+        /// </summary>
+        public static string Setting_InitializeSettings {
+            get {
+                return ResourceManager.GetString("Setting_InitializeSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Setting_PageHeader {

@@ -11,19 +11,10 @@ using System.Diagnostics;
 using System.Threading;
 using Parse;
 
-namespace ScheduledLocationAgent.Data
+namespace TestPhoneApp.Data
 {
     /// <summary>
     /// This class is used as the data context for the UserSettingsPanel of the SettingsPage.
-    /// It is also used to store user settings in the isolated storage.
-    /// It was not supposed to be in the solution of ScheduledLocationAgent.
-    /// However, because we cannot add a reference to the main solution in the soluion of ScheduledLocationAgent
-    /// ("Unable to add the selected reference because it is not supported by background agents."),
-    /// there is no way to refer to this class if it is in the main solution.
-    /// So we moved it here.
-    /// 
-    /// This class also includes a number of static methods for syncing user settings with the phone/server.
-    /// 
     /// </summary>
     [DataContract]
     public class UserSettings : INotifyPropertyChanged
@@ -31,6 +22,8 @@ namespace ScheduledLocationAgent.Data
         private bool _trackingEnabled;
         private int _interval;
         private DateTime _lastUpdate;
+
+        
 
         private const string USER_SETTINGS_FILE_NAME = "user_settings.dat";//Name of the file where the user setting is saved.
         private const string USER_SETTINGS_MUTEX_NAME = "user_settings_mutex";//The name of the mutex used to manage the user setting file.
@@ -116,65 +109,6 @@ namespace ScheduledLocationAgent.Data
         public override string ToString()
         {
             return "Enabled: " + trackingEnabled + "\nInterval: " + interval + "\nLast Update :" + lastUpdate;
-        }
-
-        #endregion
-
-
-        #region Static Methods Used for Syncing Data
-
-        /// <summary>
-        /// Save the user settings to the phone's local storage.
-        /// </summary>
-        /// <param name="newSettings">the user setting to be saved</param>
-        public static void saveUserSettingsToPhone(UserSettings newSettings)
-        {
-            IsolatedStorageHelper.WriteObjectToFileUsingJson(USER_SETTINGS_FILE_NAME, newSettings, USER_SETTINGS_MUTEX_NAME) ;
-        }
-
-        public static void clearUserSettingsInPhone()
-        {
-            saveUserSettingsToPhone(null);
-        }
-
-        /// <summary>
-        /// Load user setting from the phone's local storage.
-        /// </summary>
-        /// <returns>the user setting loaded. null if no setting is found.</returns>
-        public static UserSettings loadUserSettingsFromPhone()
-        {
-            if (IsolatedStorageHelper.IsFileExist(USER_SETTINGS_FILE_NAME))
-            {
-                UserSettings settings = IsolatedStorageHelper.ReadObjectFromFileUsingJson<UserSettings>(USER_SETTINGS_FILE_NAME, USER_SETTINGS_MUTEX_NAME);
-                return settings;
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Save the given user setting to the parse server.
-        /// </summary>
-        /// <param name="newSettings">the user setting to be saved</param>
-        public static async Task saveUserSettingsToParseServer(UserSettings newSettings)
-        {
-            Debug.WriteLine("Start saving user settings to the server.");
-            ParseUser.CurrentUser["update_interval"] = newSettings.interval;
-            ParseUser.CurrentUser["last_update"] = newSettings.lastUpdate;
-            ParseUser.CurrentUser["tracking_enabled"] = newSettings.trackingEnabled;
-            await ParseUser.CurrentUser.SaveAsync();
-            Debug.WriteLine("Finished saving user settings to the server.");
-        }
-
-        /// <summary>
-        /// Load user settings from the parse server.
-        /// </summary>
-        /// <returns>The user settings loaded. null if there isn't any.</returns>
-        public async static Task<UserSettings> loadUserSettingsFromParseServer()
-        {
-            Debug.WriteLine("Start loading user settings from the server.");
-            //ParseObject userSetting = await query.GetAsync("xWMyZ4YEGZ");
-            Debug.WriteLine("Finished loading user settings from the server.");
-            return new UserSettings(false,13,DateTime.Today);
         }
 
         #endregion
