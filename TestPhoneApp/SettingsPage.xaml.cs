@@ -142,15 +142,15 @@ namespace TestPhoneApp
             ParseUser.CurrentUser.FetchAsync();//Sync first because settings can be updated in the background.
 
             //If does not contain one of the keys, initialize the user settings
-            if (!ParseUser.CurrentUser.ContainsKey(ParseContract.TRACKING_ENABLED_KEY))
+            if (!ParseUser.CurrentUser.ContainsKey(ParseContract.UserTable.TRACKING_ENABLED))
                 initializeUserSettingsWithProgressOverlay();
 
             //Use the data to populate UI.
-            bool trackingEnabled = ParseUser.CurrentUser.Get<bool>(ParseContract.TRACKING_ENABLED_KEY);
-            int interval = ParseUser.CurrentUser.Get<int>(ParseContract.UPDATE_INTERVAL_KEY);
-            int lastUpdateIndex = ParseUser.CurrentUser.Get<int>(ParseContract.LAST_LOCATION_INDEX_KEY);
-            DateTime lastUpdate = Utilities.convertJSONToGeoPosition(ParseUser.CurrentUser.Get<string>(ParseContract.LOCATION(lastUpdateIndex))).Timestamp.DateTime;
-            userSettings = new UserSettings(trackingEnabled, interval, lastUpdate);
+            bool trackingEnabled = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.TRACKING_ENABLED);
+            int interval = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
+            int lastUpdateIndex = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
+            ParseObject lastLocation = ParseUser.CurrentUser.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastUpdateIndex));
+            userSettings = new UserSettings(trackingEnabled, interval, lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP));
             UserSettingsPanel.DataContext = userSettings;
 
             Debug.WriteLine(userSettings);
@@ -165,8 +165,8 @@ namespace TestPhoneApp
             try
             {
                 //Not all fields are saved.
-                ParseUser.CurrentUser[ParseContract.UPDATE_INTERVAL_KEY] = userSettings.interval;
-                ParseUser.CurrentUser[ParseContract.TRACKING_ENABLED_KEY] = userSettings.trackingEnabled;
+                ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = userSettings.interval;
+                ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = userSettings.trackingEnabled;
                 await ParseUser.CurrentUser.SaveAsync();
             }
             catch (Exception e)
@@ -187,12 +187,16 @@ namespace TestPhoneApp
             const int DEFAULT_INTERVAL = 60;
             const int DEFAULT_DATA_SIZE = 48;
 
-            ParseUser.CurrentUser[ParseContract.TRACKING_ENABLED_KEY] = false;
-            ParseUser.CurrentUser[ParseContract.UPDATE_INTERVAL_KEY] = DEFAULT_INTERVAL;
-            ParseUser.CurrentUser[ParseContract.LOCATION_DATA_SIZE_KEY] = DEFAULT_DATA_SIZE;
-            ParseUser.CurrentUser[ParseContract.LAST_LOCATION_INDEX_KEY] = 0;
+            ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = false;
+            ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = DEFAULT_INTERVAL;
+            ParseUser.CurrentUser[ParseContract.UserTable.LOCATION_DATA_SIZE] = DEFAULT_DATA_SIZE;
+            ParseUser.CurrentUser[ParseContract.UserTable.LAST_LOCATION_INDEX] = 0;
             for (int i = 0; i < DEFAULT_DATA_SIZE; i++)
-                ParseUser.CurrentUser[ParseContract.LOCATION(i)] = Utilities.convertGeoPositionToJSON(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), GeoCoordinate.Unknown));
+            {
+                //TODO: Change the senitiel value.
+                //ParseUser.CurrentUser[ParseContract.LOCATION(i)] = Utilities.convertGeoPositionToJSON(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), GeoCoordinate.Unknown));
+                ParseUser.CurrentUser[ParseContract.UserTable.LOCATION(i)] = null;
+            }
              App.showProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
              try
              {

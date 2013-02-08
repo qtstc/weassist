@@ -55,15 +55,20 @@ namespace ScheduledLocationAgent
             await ParseUser.LogInAsync("tao", "p");
             ParseUser user = ParseUser.CurrentUser;
 
-            int lastLocationIndex = user.Get<int>(ParseContract.LAST_LOCATION_INDEX_KEY);
-            GeoPosition<GeoCoordinate> lastLocation = Utilities.convertJSONToGeoPosition(user.Get<string>(ParseContract.LOCATION(lastLocationIndex)));
-            int interval = user.Get<int>(ParseContract.UPDATE_INTERVAL_KEY);
-            Debug.WriteLine("Background task invoked:\nlast location index "+lastLocationIndex+"\ninterval: "+interval+"\nlast update: "+lastLocation.Timestamp.DateTime);
-            if (isTimeToSendData(interval, lastLocation.Timestamp.DateTime))
+            int lastLocationIndex = user.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
+
+            //Querying the database for the time of the last update, used to determine whether we should update now.
+            ParseObject lastLocation = user.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastLocationIndex));
+            DateTime lastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP);
+            //Get the update interval.
+            int interval = user.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
+
+            Debug.WriteLine("Background task invoked:\nlast location index "+lastLocationIndex+"\ninterval: "+interval+"\nlast update: "+lastUpdate);
+            if (isTimeToSendData(interval, lastUpdate))
             {
                 lastLocationIndex++;
-                user[ParseContract.LAST_LOCATION_INDEX_KEY] = (lastLocationIndex)%user.Get<int>(ParseContract.LOCATION_DATA_SIZE_KEY);
-                user[ParseContract.LOCATION(lastLocationIndex)] =  Utilities.convertGeoPositionToJSON(getCurrentGeoPosition());
+                user[ParseContract.UserTable.LAST_LOCATION_INDEX] = (lastLocationIndex) % user.Get<int>(ParseContract.UserTable.LOCATION_DATA_SIZE);
+                user[ParseContract.UserTable.LOCATION(lastLocationIndex)] = ParseContract.LocationTable.GeoPositionToParseObject(getCurrentGeoPosition());
                 await user.SaveAsync();
             }
             Debug.WriteLine("Background task finished.");
