@@ -79,7 +79,7 @@ namespace TestPhoneApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SOS App.
+        ///   Looks up a localized string similar to CitySafe.
         /// </summary>
         public static string ApplicationTitle {
             get {
@@ -282,6 +282,51 @@ namespace TestPhoneApp.Resources {
         public static string Signup_PageHeader {
             get {
                 return ResourceManager.GetString("Signup_PageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage lists....
+        /// </summary>
+        public static string SOS_ManageList {
+            get {
+                return ResourceManager.GetString("SOS_ManageList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SOS.
+        /// </summary>
+        public static string SOS_PageHeader {
+            get {
+                return ResourceManager.GetString("SOS_PageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HELP!.
+        /// </summary>
+        public static string SOS_SendSOS {
+            get {
+                return ResourceManager.GetString("SOS_SendSOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracked.
+        /// </summary>
+        public static string Tracker_TrackedHeader {
+            get {
+                return ResourceManager.GetString("Tracker_TrackedHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracking.
+        /// </summary>
+        public static string Tracker_TrackingHeader {
+            get {
+                return ResourceManager.GetString("Tracker_TrackingHeader", resourceCulture);
             }
         }
     }

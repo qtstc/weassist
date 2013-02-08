@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPhoneApp", "TestPhoneApp\TestPhoneApp.csproj", "{66CB5F2F-2EB5-42E5-9A83-6186A54DD3A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySafe", "TestPhoneApp\CitySafe.csproj", "{66CB5F2F-2EB5-42E5-9A83-6186A54DD3A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledLocationAgent", "ScheduledLocationAgent\ScheduledLocationAgent.csproj", "{4D7D645C-2D97-4701-A41D-AE79CF8FA8CA}"
 EndProject

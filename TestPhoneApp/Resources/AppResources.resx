@@ -126,7 +126,7 @@
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>SOS App</value>
+    <value>CitySafe</value>
   </data>
   <data name="AppBarButtonText" xml:space="preserve">
     <value>add</value>
@@ -193,5 +193,20 @@
   </data>
   <data name="Setting_InitializeSettings" xml:space="preserve">
     <value>Initializing Settings</value>
+  </data>
+  <data name="Tracker_TrackedHeader" xml:space="preserve">
+    <value>Tracked</value>
+  </data>
+  <data name="Tracker_TrackingHeader" xml:space="preserve">
+    <value>Tracking</value>
+  </data>
+  <data name="SOS_ManageList" xml:space="preserve">
+    <value>Manage lists...</value>
+  </data>
+  <data name="SOS_PageHeader" xml:space="preserve">
+    <value>SOS</value>
+  </data>
+  <data name="SOS_SendSOS" xml:space="preserve">
+    <value>HELP!</value>
   </data>
 </root>

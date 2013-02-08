@@ -31,7 +31,7 @@ namespace TestPhoneApp
             //Navigate driectly to the settings page if logged in.
             if (ParseUser.CurrentUser != null)
             {
-                navigateToSettingsPage();
+                navigateToSOSPage();
             } 
         }
 
@@ -63,7 +63,7 @@ namespace TestPhoneApp
                 await ParseUser.LogInAsync(username, password);
                 Debug.WriteLine("Log in with " + username + " and " + password + " succeeded.");
                 //Move to change user page if logged in successfully.
-                navigateToSettingsPage();
+                navigateToSOSPage();
             }
             catch (ParseException e)//When login failed because of parse exception
             {
@@ -82,14 +82,14 @@ namespace TestPhoneApp
         }
 
         /// <summary>
-        /// Navigate to the settings page after the user is logged in.
+        /// Navigate to the SOS page after the user is logged in.
         /// It also remove the log in page from the stack.
         /// So when user tap the back button in the settings page,
         /// the application will exit instead of coming back to the login page.
         /// </summary>
-        private void navigateToSettingsPage()
+        private void navigateToSOSPage()
         {
-            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/SOSPage.xaml", UriKind.Relative));
             NavigationService.RemoveBackEntry();
         }
     }
