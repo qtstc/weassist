@@ -50,7 +50,7 @@ namespace ScheduledLocationAgent
         /// </remarks>
         protected override async void OnInvoke(ScheduledTask task)
         {
-            ParseClient.Initialize("eJ2fw5ZYIDLUUbmBer2QIC1142uFXrTfJEwcVFfd", "ngWRcVLvVb7NSdg1UVceMTyDfjpXoR9vJklGu9Eg");
+            ParseClient.Initialize("JCShhMq7PAo4ds86p1aFqD8moEV61yO9tm7kYJw2", "ucvkkkm6IXAtcnNleST3BPbxOVsBgrP3u986c9P4");
            
             await ParseUser.LogInAsync("tao", "p");
             ParseUser user = ParseUser.CurrentUser;
@@ -59,11 +59,12 @@ namespace ScheduledLocationAgent
 
             //Querying the database for the time of the last update, used to determine whether we should update now.
             ParseObject lastLocation = user.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastLocationIndex));
+            await lastLocation.FetchIfNeededAsync();
             DateTime lastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP);
             //Get the update interval.
             int interval = user.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
 
-            Debug.WriteLine("Background task invoked:\nlast location index "+lastLocationIndex+"\ninterval: "+interval+"\nlast update: "+lastUpdate);
+            Debug.WriteLine("Background task invoked:\nlast Locations index "+lastLocationIndex+"\ninterval: "+interval+"\nlast update: "+lastUpdate);
             if (isTimeToSendData(interval, lastUpdate))
             {
                 lastLocationIndex++;

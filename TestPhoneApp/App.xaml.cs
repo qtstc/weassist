@@ -88,7 +88,7 @@ namespace TestPhoneApp
             OverLay ovr = new OverLay();
             App.progressOverlay.Child = ovr;
 
-            ParseClient.Initialize("eJ2fw5ZYIDLUUbmBer2QIC1142uFXrTfJEwcVFfd", "ngWRcVLvVb7NSdg1UVceMTyDfjpXoR9vJklGu9Eg");
+            ParseClient.Initialize("JCShhMq7PAo4ds86p1aFqD8moEV61yO9tm7kYJw2", "ucvkkkm6IXAtcnNleST3BPbxOVsBgrP3u986c9P4");
         }
 
         // Code to execute when the application is launching (eg, from Start)

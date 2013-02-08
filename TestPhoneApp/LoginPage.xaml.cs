@@ -42,10 +42,10 @@ namespace TestPhoneApp
 
         private void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
-            WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri(LOGIN_PAGE_URL);
-            wbt.Show();
+            NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
+            //WebBrowserTask wbt = new WebBrowserTask();
+            //wbt.Uri = new Uri(LOGIN_PAGE_URL);
+            //wbt.Show();
         }
 
         /// <summary>

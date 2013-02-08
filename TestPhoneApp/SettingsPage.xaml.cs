@@ -137,23 +137,35 @@ namespace TestPhoneApp
         /// If there is no previous user setting,
         /// a new one will be loaded from the web site.
         /// </summary>
-        private void loadUserSettings()
+        private async void loadUserSettings()
         {
-            ParseUser.CurrentUser.FetchAsync();//Sync first because settings can be updated in the background.
+            App.showProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
+            try
+            {
+                await ParseUser.CurrentUser.FetchAsync();//Sync first because settings can be updated in the background.
+                //If does not contain one of the keys, initialize the user settings
+                if (!ParseUser.CurrentUser.ContainsKey(ParseContract.UserTable.TRACKING_ENABLED))
+                {
+                    await initializeUserSettings();
+                }
 
-            //If does not contain one of the keys, initialize the user settings
-            if (!ParseUser.CurrentUser.ContainsKey(ParseContract.UserTable.TRACKING_ENABLED))
-                initializeUserSettingsWithProgressOverlay();
-
-            //Use the data to populate UI.
-            bool trackingEnabled = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.TRACKING_ENABLED);
-            int interval = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
-            int lastUpdateIndex = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
-            ParseObject lastLocation = ParseUser.CurrentUser.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastUpdateIndex));
-            userSettings = new UserSettings(trackingEnabled, interval, lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP));
-            UserSettingsPanel.DataContext = userSettings;
-
-            Debug.WriteLine(userSettings);
+                //Use the data to populate UI.
+                bool trackingEnabled = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.TRACKING_ENABLED);
+                int interval = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
+                int lastUpdateIndex = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
+                ParseObject lastLocation = ParseUser.CurrentUser.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastUpdateIndex));
+                //Need to download the object first.
+                await lastLocation.FetchIfNeededAsync();
+                userSettings = new UserSettings(trackingEnabled, interval, lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP));
+                UserSettingsPanel.DataContext = userSettings;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Fail to initialize user settings to the server:\n");
+                Debug.WriteLine(e.ToString());
+                MessageBox.Show(AppResources.Setting_SyncingFailed);
+            }
+            App.hideProgressOverlay();
         }
 
         /// <summary>
@@ -182,33 +194,25 @@ namespace TestPhoneApp
         /// Helper method used to initialize user settings.
         /// Only called when the user uses the app for the first time.
         /// </summary>
-        private async void initializeUserSettingsWithProgressOverlay()
+        private async Task initializeUserSettings()
         {
-            const int DEFAULT_INTERVAL = 60;
-            const int DEFAULT_DATA_SIZE = 48;
-
+            const int DEFAULT_INTERVAL = 30;
+            const int DEFAULT_DATA_SIZE = 96;
             ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = false;
             ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = DEFAULT_INTERVAL;
             ParseUser.CurrentUser[ParseContract.UserTable.LOCATION_DATA_SIZE] = DEFAULT_DATA_SIZE;
-            ParseUser.CurrentUser[ParseContract.UserTable.LAST_LOCATION_INDEX] = 0;
+            ParseUser.CurrentUser[ParseContract.UserTable.LAST_LOCATION_INDEX] = DEFAULT_DATA_SIZE-1;
+
+            //Get the null location used to mark un
+            ParseQuery<ParseObject> nullLocationQuery = ParseObject.GetQuery(ParseContract.LocationTable.TABLE_NAME);
+            ParseObject nullLocation = await nullLocationQuery.GetAsync(ParseContract.LocationTable.DUMMY_LOCATION);
+
             for (int i = 0; i < DEFAULT_DATA_SIZE; i++)
             {
-                //TODO: Change the senitiel value.
-                //ParseUser.CurrentUser[ParseContract.LOCATION(i)] = Utilities.convertGeoPositionToJSON(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), GeoCoordinate.Unknown));
-                ParseUser.CurrentUser[ParseContract.UserTable.LOCATION(i)] = null;
+                ParseUser.CurrentUser[ParseContract.UserTable.LOCATION(i)] = nullLocation;
             }
-             App.showProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
-             try
-             {
-                 await ParseUser.CurrentUser.SaveAsync();
-             }
-             catch (Exception e)
-             {
-                 Debug.WriteLine("Fail to initialize user settings to the server:\n");
-                 Debug.WriteLine(e.ToString());
-                 MessageBox.Show(AppResources.Setting_InitializeSettings);
-             }
-            App.hideProgressOverlay();
+
+            await ParseUser.CurrentUser.SaveAsync();
         }
         #endregion
     }

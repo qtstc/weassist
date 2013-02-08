@@ -1,0 +1,1 @@
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\obj\Release\ScheduledLocationAgent.csprojResolveAssemblyReference.cache
