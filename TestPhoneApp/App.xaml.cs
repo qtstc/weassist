@@ -6,14 +6,14 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using TestPhoneApp.Resources;
+using CitySafe.Resources;
 using System.IO.IsolatedStorage;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Controls.Primitives;
 using Parse;
 
-namespace TestPhoneApp
+namespace CitySafe
 {
     public partial class App : Application
     {

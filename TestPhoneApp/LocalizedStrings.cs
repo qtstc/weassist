@@ -1,6 +1,6 @@
-﻿using TestPhoneApp.Resources;
+﻿using CitySafe.Resources;
 
-namespace TestPhoneApp
+namespace CitySafe
 {
     /// <summary>
     /// Provides access to string resources.

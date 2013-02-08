@@ -6,7 +6,7 @@
     <Language code="zh-Hans" />
     <Language code="zh-CN" />
   </Languages>
-  <App xmlns="" ProductID="{66cb5f2f-2eb5-42e5-9a83-6186a54dd3a6}" Title="TestPhoneApp" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="TestPhoneApp author" Description="Sample description" Publisher="TestPhoneApp" PublisherID="{b2d8d4f4-2d70-478c-bc37-6ce6fb0678c2}">
+  <App xmlns="" ProductID="{66cb5f2f-2eb5-42e5-9a83-6186a54dd3a6}" Title="CitySafe" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="TestPhoneApp author" Description="Sample description" Publisher="TestPhoneApp" PublisherID="{b2d8d4f4-2d70-478c-bc37-6ce6fb0678c2}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -27,7 +27,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>TestPhoneApp</Title>
+          <Title>CitySafe</Title>
           <BackContent></BackContent>
           <BackBackgroundImageURI></BackBackgroundImageURI>
           <BackTitle></BackTitle>

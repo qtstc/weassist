@@ -7,10 +7,10 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using TestPhoneApp.Resources;
+using CitySafe.Resources;
 using Parse;
 
-namespace TestPhoneApp
+namespace CitySafe
 {
     /// <summary>
     /// This is the page for signing up. Currently not used.

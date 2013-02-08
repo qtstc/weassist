@@ -11,7 +11,7 @@ using System.Diagnostics;
 using System.Threading;
 using Parse;
 
-namespace TestPhoneApp.Data
+namespace CitySafe.Data
 {
     /// <summary>
     /// This class is used as the data context for the UserSettingsPanel of the SettingsPage.

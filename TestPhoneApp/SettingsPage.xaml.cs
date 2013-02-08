@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using TestPhoneApp.Resources;
+using CitySafe.Resources;
 using Parse;
 using Microsoft.Phone.Scheduler;
 using System.Diagnostics;
@@ -18,9 +18,9 @@ using ScheduledLocationAgent.Data;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Device.Location;
-using TestPhoneApp.Data;
+using CitySafe.Data;
 
-namespace TestPhoneApp
+namespace CitySafe
 {
     public partial class SettingsPage : PhoneApplicationPage
     {

@@ -8,12 +8,12 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Controls.Primitives;
-using TestPhoneApp.Resources;
+using CitySafe.Resources;
 using Parse;
 using System.Diagnostics;
 using Microsoft.Phone.Tasks;
 
-namespace TestPhoneApp
+namespace CitySafe
 {
     public partial class LoginPage : PhoneApplicationPage
     {
