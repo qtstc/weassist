@@ -62,6 +62,11 @@ namespace ScheduledLocationAgent.Data
         {
             public static string TRACKING { get { return "tracking"; } }
             public static string TRACKED { get { return "tracked"; } }
+            public static string TRACKED_VERIFIED { get {return "trackedVerified";}}
+            public static string TRACKING_VERIFIED {get {return "trackingVerified";}}
+            public static string NOTIFY_BY_SMS { get { return "notifyBySMS"; } }
+            public static string NOTIFY_BY_EMAIL { get { return "notifyByEmail"; } }
+            public static string NOTIFY_BY_PUSH { get { return "notifyByPush"; } }
         }
     }
 }

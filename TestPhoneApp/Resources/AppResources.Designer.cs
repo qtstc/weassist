@@ -313,6 +313,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Tracker_Add {
+            get {
+                return ResourceManager.GetString("Tracker_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tracked.
         /// </summary>
         public static string Tracker_TrackedHeader {

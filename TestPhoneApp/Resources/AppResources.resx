@@ -209,4 +209,7 @@
   <data name="SOS_SendSOS" xml:space="preserve">
     <value>HELP!</value>
   </data>
+  <data name="Tracker_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
 </root>

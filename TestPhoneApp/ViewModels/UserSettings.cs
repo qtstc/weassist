@@ -11,7 +11,7 @@ using System.Diagnostics;
 using System.Threading;
 using Parse;
 
-namespace CitySafe.Data
+namespace CitySafe.ViewModels
 {
     /// <summary>
     /// This class is used as the data context for the UserSettingsPanel of the SettingsPage.
@@ -22,11 +22,6 @@ namespace CitySafe.Data
         private bool _trackingEnabled;
         private int _interval;
         private DateTime _lastUpdate;
-
-        
-
-        private const string USER_SETTINGS_FILE_NAME = "user_settings.dat";//Name of the file where the user setting is saved.
-        private const string USER_SETTINGS_MUTEX_NAME = "user_settings_mutex";//The name of the mutex used to manage the user setting file.
 
         #region Original Methods for the UI Data Context
 

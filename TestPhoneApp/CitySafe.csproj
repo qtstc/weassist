@@ -93,7 +93,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\UserSettings.cs" />
+    <Compile Include="TrackedSettingsPage.xaml.cs">
+      <DependentUpon>TrackedSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TrackingSettingsPage.xaml.cs">
+      <DependentUpon>TrackingSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\TrackingItemModel.cs" />
+    <Compile Include="ViewModels\TrackingViewModel.cs" />
+    <Compile Include="ViewModels\UserSettings.cs" />
     <Compile Include="OverLay.xaml.cs">
       <DependentUpon>OverLay.xaml</DependentUpon>
     </Compile>
@@ -142,6 +150,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SOSPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrackedSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrackingSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
