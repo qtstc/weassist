@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Controls.Primitives;
 using Parse;
+using CitySafe.ViewModels;
 
 namespace CitySafe
 {
@@ -27,6 +28,9 @@ namespace CitySafe
         /// The progress overlay used in the app.
         /// </summary>
         private static Popup progressOverlay;
+
+        public static TrackViewModel trakcingModel;
+
 
         /// <summary>
         /// Set the text of the progress overlay and show it.

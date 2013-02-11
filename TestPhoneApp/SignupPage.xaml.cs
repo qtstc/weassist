@@ -29,13 +29,10 @@ namespace CitySafe
             App.showProgressOverlay(AppResources.ProgressBar_SigningUpUser);
             var user = new ParseUser()
             {
-                Username = "tao",
-                Password = "p",
-                Email = "email@example.com"
+                Username = "dummyuser",
+                Password = "dummypassword",
+                Email = "dummyuser@depauw.edu"
             };
-
-            // other fields can be set just like with ParseObject
-            user["phone"] = "415-392-0202";
 
             await user.SignUpAsync();
             App.hideProgressOverlay();

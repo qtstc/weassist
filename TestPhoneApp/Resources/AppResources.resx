@@ -212,4 +212,16 @@
   <data name="Tracker_Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="Tracker_AddFailed" xml:space="preserve">
+    <value>Failed to send the invitation to the user with the given email.</value>
+  </data>
+  <data name="Tracker_InvalidEmailMessage" xml:space="preserve">
+    <value>Invalid email address</value>
+  </data>
+  <data name="Tracker_InvitationSuccess" xml:space="preserve">
+    <value>Invitation is sent successfully.</value>
+  </data>
+  <data name="Tracker_SendingInvitation" xml:space="preserve">
+    <value>Sending invitation ...</value>
+  </data>
 </root>

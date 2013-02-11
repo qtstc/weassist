@@ -1,49 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+using Parse;
+using ScheduledLocationAgent.Data;
+using System.Diagnostics;
 
 namespace CitySafe.ViewModels
 {
-    class TrackingItemModel
+    public class TrackViewModel : INotifyPropertyChanged
     {
-        private string _objectID;
-        private string _trackingName;
-        private DateTime _trackingLastUpdate;
+        /// <summary>
+        /// A collection for ItemViewModel objects.
+        /// </summary>
+        public ObservableCollection<TrackItemModel> trackItems { get; private set; }
 
-        public TrackingItemModel(string id, string name, DateTime last)
+        public TrackViewModel()
         {
-            objectID = id;
-            trackingName = name;
-            trackingLastUpdate = last;
-        }
-
-        [DataMember(Name = "objectID")]
-        public string objectID
-        {
-            get { return _objectID; }
-            set { SetProperty(ref _objectID, value); }
-        }
-
-        [DataMember(Name = "trackingName")]
-        public string trackingName
-        {
-            get { return _trackingName; }
-            set { SetProperty(ref _trackingName, value); }
-        }
-
-        [DataMember(Name = "trackingLastUpdate")]
-        public DateTime trackingLastUpdate
-        {
-            get { return _trackingLastUpdate; }
-            set { SetProperty(ref _trackingLastUpdate, value); }
+            trackItems = new ObservableCollection<TrackItemModel>();
         }
 
 
+        /// <summary>
+        /// Load data from the parse server.
+        /// </summary>
+        /// <param name="mode">can be either ParseContract.TrackRelationTable.TRACKED or ParseContract.TrackRelationTable.TRACKING</param>
+        public async Task LoadData(String mode)
+        {
+            ParseUser user = await ParseUser.Query.GetAsync(ParseContract.UserTable.DUMMY_USER);
+            trackItems.Add(new TrackItemModel(user));
+
+            //var confirmedRelation = from relation in ParseObject.GetQuery(ParseContract.TrackRelationTable.TABLE_NAME)
+            //                        where relation.Get<bool>(ParseContract.TrackRelationTable.TRACKED_VERIFIED) == true 
+            //                        && relation.Get<bool>(ParseContract.TrackRelationTable.TRACKING_VERIFIED) == true 
+            //                        select relation;
+            //var allQualifiedUsers = from user in ParseUser.Query
+            //                        join relation in confirmedRelation on user equals relation.Get<ParseUser>(mode)
+            //                        select user;
+            //var users = from user in allQualifiedUsers
+            //            where user == ParseUser.CurrentUser
+            //            select user;
+
+            //IEnumerable<ParseUser> relationResult = await users.FindAsync();
+            //trackItems = new ObservableCollection<TrackItemModel>();
+            //foreach (ParseUser u in relationResult)
+            //{
+            //    trackItems.Add(new TrackItemModel(u));
+            //}
+            //Debug.WriteLine(trackItems.Count + "Haha");
+        }
+
+        public void add(TrackItemModel item)
+        {
+            trackItems.Add(item);
+        }
 
         /// <summary>
         /// Multicast event for property change notifications.

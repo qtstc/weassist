@@ -13,12 +13,16 @@ namespace ScheduledLocationAgent.Data
     {
         public static class UserTable
         {
+            public static string TABLE_NAME { get { return "User"; } }
+
             public static string UPDATE_INTERVAL { get { return "updateInterval"; } }
             private static string LOCATION_HISTORY { get { return "location_"; } }
             public static string TRACKING_ENABLED { get { return "trackingEnabled"; } }
             public static string LAST_LOCATION_INDEX { get { return "lastLocationIndex"; } }
             public static string LOCATION_DATA_SIZE { get { return "locationDataSize"; } }
             public static string LOCATION(int key) { return LOCATION_HISTORY + key.ToString("000"); }
+
+            public static string DUMMY_USER { get { return "WNrCdVZZ48"; } }
         }
 
         public static class LocationTable
@@ -58,12 +62,15 @@ namespace ScheduledLocationAgent.Data
             }
         }
 
-        public static class TrackTable
+        public static class TrackRelationTable
         {
+            public static string TABLE_NAME { get { return "TrackRelation"; } }
+
             public static string TRACKING { get { return "tracking"; } }
             public static string TRACKED { get { return "tracked"; } }
             public static string TRACKED_VERIFIED { get {return "trackedVerified";}}
             public static string TRACKING_VERIFIED {get {return "trackingVerified";}}
+            public static string UNREGISTERED_USER_EMAIL { get { return "unregisteredUserEmail"; } }
             public static string NOTIFY_BY_SMS { get { return "notifyBySMS"; } }
             public static string NOTIFY_BY_EMAIL { get { return "notifyByEmail"; } }
             public static string NOTIFY_BY_PUSH { get { return "notifyByPush"; } }
