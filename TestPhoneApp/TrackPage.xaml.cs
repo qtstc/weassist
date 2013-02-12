@@ -13,6 +13,7 @@ using ScheduledLocationAgent.Data;
 using System.Text.RegularExpressions;
 using CitySafe.Resources;
 using Parse;
+using System.Threading.Tasks;
 
 namespace CitySafe
 {
@@ -21,27 +22,136 @@ namespace CitySafe
         public TrackPage()
         {
             InitializeComponent();
-            App.trakcingModel = new TrackViewModel();
-            TrackingList.DataContext = App.trakcingModel;
+            App.trackingModel = new TrackViewModel();
+            App.trackedModel = new TrackViewModel();
+            TrackingList.DataContext = App.trackingModel;
+            TrackedList.DataContext = App.trackedModel;
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-
-            await App.trakcingModel.LoadData(ParseContract.TrackRelationTable.TRACKING);
+            App.ShowProgressOverlay(AppResources.Tracker_LoadList);
+            try
+            {
+                await App.trackingModel.LoadData(ParseContract.TrackRelationTable.TRACKING);
+                await App.trackedModel.LoadData(ParseContract.TrackRelationTable.TRACKED);
+            }
+            catch
+            {
+                MessageBox.Show(AppResources.Tracker_FailToLoadList);
+            }
+            App.HideProgressOverlay();
         }
 
         private void TrackingList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            NavigateToTrackSettingsPage(TrackingList, "/TrackingSettingsPage.xaml");
+        }
+
+        private void TrackedList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            NavigateToTrackSettingsPage(TrackedList, "/TrackedSettingsPage.xaml");
+        }
+
+        private void NavigateToTrackSettingsPage(LongListSelector trackList, String pageUri)
+        {
             // If selected item is null (no selection) do nothing
-            if (TrackingList.SelectedItem == null)
+            if (trackList.SelectedItem == null)
                 return;
 
+            //Save the info of the other user and the track relation to global variable.
+            //So the track settings page does not need to query the server again for them.
+            TrackItemModel model = trackList.SelectedItem as TrackItemModel;
+            App.trackUser = model.user;
+            App.trackRelation = model.relation;
+
             // Navigate to the new page
-            NavigationService.Navigate(new Uri("/TrackingSettingsPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri(pageUri, UriKind.Relative));
 
             // Reset selected item to null (no selection)
-            TrackingList.SelectedItem = null;
+            trackList.SelectedItem = null;
+        }
+
+        /// <summary>
+        /// Add a user to either tracked list or tracking list.
+        /// </summary>
+        /// <param name="newEmail"> the email of the user, used to identify the user</param>
+        /// <param name="list">the list to be add</param>
+        /// <param name="role">the role of the current user</param>
+        /// <returns>the result message</returns>
+        private async Task<String> AddtoList(String newEmail, TrackViewModel list, string role, string verified)
+        {
+            var query = from user in ParseUser.Query
+                        where user.Get<string>("email") == newEmail
+                        select user;
+            IEnumerable<ParseObject> results = await query.FindAsync();
+
+            ParseObject trackRelation = new ParseObject(ParseContract.TrackRelationTable.TABLE_NAME);
+
+            //Put all notification method as true as default.
+            trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_PUSH] = true;
+            trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_SMS] = true;
+            trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL] = true;
+
+            //TODO: check whether a user is adding himself
+
+            bool needNewRecord = true;
+            String resultMessage = AppResources.Tracker_InvitationSuccess;
+            ParseObject invited = null;
+
+            //When the user is registered.
+            if (results.Count() == 1)
+            {
+                invited = results.First<ParseObject>();
+                var relationQuery = from relation in ParseObject.GetQuery(ParseContract.TrackRelationTable.TABLE_NAME)
+                                    where relation.Get<ParseObject>(role) == ParseUser.CurrentUser
+                                    && relation.Get<ParseObject>(ParseContract.TrackRelationTable.OtherRole(role)) == invited
+                                    select relation;
+                IEnumerable<ParseObject> relationResult = await relationQuery.FindAsync();
+
+                if (relationResult.Count() > 0)//If a record already exists.
+                {
+                    needNewRecord = false;
+                    trackRelation = relationResult.First();
+                    trackRelation[verified] = true;
+                    if (trackRelation.Get<bool>(ParseContract.TrackRelationTable.OtherVerified(verified)))//If the other user has already confirmed
+                    {
+                        ParseUser confirmed = trackRelation.Get<ParseUser>(ParseContract.TrackRelationTable.OtherRole(role));
+                        await confirmed.FetchIfNeededAsync();
+                        list.add(new TrackItemModel(confirmed, trackRelation));
+                        resultMessage = AppResources.Tracker_AddSuccess;
+                    }
+                    else
+                    {
+                        //TODO: send the invitation from the current user.
+                        Debug.WriteLine("Send membership invitation");
+                    }
+                }
+            }
+            else if (results.Count() == 0)//When the user is not registered
+            {
+                //Use a place holder as the user
+                invited = await ParseUser.Query.GetAsync(ParseContract.UserTable.DUMMY_USER);
+                //Store the email
+                trackRelation[ParseContract.TrackRelationTable.UNREGISTERED_USER_EMAIL] = newEmail;
+
+                //TODO: send membership invitation that includes the invitation from the current user.
+                Debug.WriteLine("Send membership invitation");
+            }
+            else
+                throw new InvalidOperationException("Duplicate emails!");
+
+            if (needNewRecord)
+            {
+                //Create a new record.
+                trackRelation[role] = ParseUser.CurrentUser;
+                trackRelation[ParseContract.TrackRelationTable.OtherRole(role)] = invited;
+                trackRelation[verified] = true;
+                trackRelation[ParseContract.TrackRelationTable.OtherVerified(verified)] = false;
+            }
+
+            await trackRelation.SaveAsync();
+            return resultMessage;
         }
 
         private async void TrackListAddButton_Click(object sender, RoutedEventArgs e)
@@ -49,154 +159,38 @@ namespace CitySafe
             //First check email address to see whether it is valid.
             String newEmail = TrackAddTextBox.Text;
 
-            String resultMessage = AppResources.Tracker_InvitationSuccess;
-
             if (!IsValidEmail(newEmail))
             {
                 MessageBox.Show(AppResources.Tracker_InvalidEmailMessage);
                 return;
             }
 
-            App.showProgressOverlay(AppResources.Tracker_SendingInvitation);
+            App.ShowProgressOverlay(AppResources.Tracker_SendingInvitation);
+
+            string message = AppResources.Tracker_InvitationSuccess;
 
             try
             {
-                var query = from user in ParseUser.Query
-                            where user.Get<string>("email") == newEmail
-                            select user;
-                IEnumerable<ParseObject> results = await query.FindAsync();
-
-                ParseObject invited = null;
-                ParseObject trackRelation = new ParseObject(ParseContract.TrackRelationTable.TABLE_NAME);
-
-                //When the user is registered.
-                if (results.Count() == 1)
-                    invited = results.First<ParseObject>();
-                else if (results.Count() == 0)//When the user is not registered
-                {
-                    //Use a place holder as the user
-                    invited = await ParseUser.Query.GetAsync(ParseContract.UserTable.DUMMY_USER);
-                    //Store the email
-                    trackRelation[ParseContract.TrackRelationTable.UNREGISTERED_USER_EMAIL] = newEmail;
-                }
-
-                //TODO: check whether a user is adding himself
-
-                if (invited == null)
-                    throw new InvalidOperationException("More than one user have the same email address " + newEmail);
-
-                //Put all notification method as true as default.
-                trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_PUSH] = true;
-                trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_SMS] = true;
-                trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL] = true;
-
-                if (TrackPivot.SelectedIndex == 0)//If adding to the tracking list. The current user is tracking, the other user is tracked.
+                 if (TrackPivot.SelectedIndex == 0)//If adding to the tracking list. The current user is tracking, the other user is tracked.
                 {
                     Debug.WriteLine("Adding user to the tracking table...");
+                    message = await AddtoList(newEmail, App.trackingModel, ParseContract.TrackRelationTable.TRACKING, ParseContract.TrackRelationTable.TRACKING_VERIFIED);
+                 }
+                 else if (TrackPivot.SelectedIndex == 1)//If adding to the tracked list. The current user is tracked, the other user is tracking.
+                 {
+                     Debug.WriteLine("Adding user to the tracked table...");
+                     message = await AddtoList(newEmail, App.trackedModel, ParseContract.TrackRelationTable.TRACKED, ParseContract.TrackRelationTable.TRACKED_VERIFIED);
+                 }
 
-                    bool needNewRecord = true;
-
-                    //Check whether the other user has already sent an invitation to the current user.
-                    //This only happens when the other user is registered.
-                    if(invited.ObjectId != ParseContract.UserTable.DUMMY_USER)//If registered
-                    {
-                        var relationQuery = from relation in ParseObject.GetQuery(ParseContract.TrackRelationTable.TABLE_NAME)
-                                            where relation.Get<ParseObject>(ParseContract.TrackRelationTable.TRACKING) == ParseUser.CurrentUser
-                                            && relation.Get<ParseObject>(ParseContract.TrackRelationTable.TRACKED) == invited 
-                                            select relation; 
-                        IEnumerable<ParseObject> relationResult = await relationQuery.FindAsync();
-                        
-                        if(relationResult.Count()>0)//If a record already exists.
-                        {
-                            needNewRecord = false;
-                            trackRelation = relationResult.First();
-                            Debug.WriteLine("id:\n\n" + trackRelation.ObjectId);
-                            trackRelation[ParseContract.TrackRelationTable.TRACKING_VERIFIED] = true;
-                            if(trackRelation.Get<bool>(ParseContract.TrackRelationTable.TRACKED_VERIFIED))//If the other user has already confirmed
-                            {
-                                ParseUser confirmTracked = await ParseUser.Query.GetAsync(trackRelation.Get<String>(ParseContract.TrackRelationTable.TRACKED));
-                                App.trakcingModel.add(new TrackItemModel(confirmTracked));
-                            }
-                            else
-                            {
-                                //TODO: send the invitation from the current user.
-                                Debug.WriteLine("Send membership invitation to the new tracked");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        //TODO: send membership invitation that includes the invitation from the current user.
-                        Debug.WriteLine("Send membership invitation to the new tracked");
-                    }
-                    //TODO:send invitation
-                    if(needNewRecord)
-                    {
-                        //Create a new record.
-                        trackRelation[ParseContract.TrackRelationTable.TRACKING] = ParseUser.CurrentUser;
-                        trackRelation[ParseContract.TrackRelationTable.TRACKED] = invited;
-                        trackRelation[ParseContract.TrackRelationTable.TRACKING_VERIFIED] = true;
-                        trackRelation[ParseContract.TrackRelationTable.TRACKED_VERIFIED] = false;
-                    }
-                }
-                else if (TrackPivot.SelectedIndex == 1)//If adding to the tracked list. The current user is tracked, the other user is tracking.
-                {
-                    Debug.WriteLine("Adding user to the tracked table...");
-
-                    bool needNewRecord = true;
-
-                    //Check whether the other user has already sent an invitation to the current user.
-                    //This only happens when the other user is registered.
-                    if (invited.ObjectId != ParseContract.UserTable.DUMMY_USER)//If registered
-                    {
-                        var relationQuery = from relation in ParseObject.GetQuery(ParseContract.TrackRelationTable.TABLE_NAME)
-                                            where relation.Get<ParseObject>(ParseContract.TrackRelationTable.TRACKED) == ParseUser.CurrentUser
-                                            && relation.Get<ParseObject>(ParseContract.TrackRelationTable.TRACKING) == invited
-                                            select relation;
-                        IEnumerable<ParseObject> relationResult = await relationQuery.FindAsync();
-                        if (relationResult.Count() > 0)//If a record already exists.
-                        {
-                            needNewRecord = false;
-                            trackRelation = relationResult.First();
-                            trackRelation[ParseContract.TrackRelationTable.TRACKED_VERIFIED] = true;
-                            if (trackRelation.Get<bool>(ParseContract.TrackRelationTable.TRACKING_VERIFIED))//If the other user has already confirmed
-                            {
-                                ParseUser confirmTracking = await ParseUser.Query.GetAsync(trackRelation.Get<String>(ParseContract.TrackRelationTable.TRACKING));
-                                App.trakcingModel.add(new TrackItemModel(confirmTracking));
-                            }
-                            else
-                            {
-                                //TODO: send the invitation from the current user.
-                                Debug.WriteLine("Send invitation to the new tracking");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        //TODO: send membership invitation that includes the invitation from the current user.
-                        Debug.WriteLine("Send membership invitation to the new tracking");
-                    }
-
-                    if (needNewRecord)
-                    {
-                        //Create a new record.
-                        trackRelation[ParseContract.TrackRelationTable.TRACKING] = ParseUser.CurrentUser;
-                        trackRelation[ParseContract.TrackRelationTable.TRACKED] = invited;
-                        trackRelation[ParseContract.TrackRelationTable.TRACKED_VERIFIED] = true;
-                        trackRelation[ParseContract.TrackRelationTable.TRACKING_VERIFIED] = false;
-                    }
-                }
-
-                await trackRelation.SaveAsync();
             }
             catch (Exception ex)
             {
-                resultMessage = AppResources.Tracker_AddFailed;
-                Debug.WriteLine("{"+ex.StackTrace);
-                Debug.WriteLine(ex.ToString()+"}");
+                message = AppResources.Tracker_AddFailed;
+                Debug.WriteLine("{" + ex.StackTrace);
+                Debug.WriteLine(ex.ToString() + "}");
             }
-            App.hideProgressOverlay();
-            MessageBox.Show(resultMessage);
+            App.HideProgressOverlay();
+            MessageBox.Show(message);
         }
 
 

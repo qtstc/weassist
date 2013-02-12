@@ -13,11 +13,13 @@ namespace CitySafe.ViewModels
 {
     public class TrackItemModel
     {
-        private ParseUser user;
+        public ParseUser user;
+        public ParseObject relation;
 
-        public TrackItemModel(ParseUser user)
+        public TrackItemModel(ParseUser user, ParseObject relation)
         {
             this.user = user;
+            this.relation = relation;
         }
 
         [DataMember(Name = "email")]

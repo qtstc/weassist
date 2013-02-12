@@ -29,14 +29,21 @@ namespace CitySafe
         /// </summary>
         private static Popup progressOverlay;
 
-        public static TrackViewModel trakcingModel;
+        //The view models for the lists on the track page.
+        //Made global because we need to access them from other pages.
+        public static TrackViewModel trackingModel;
+        public static TrackViewModel trackedModel;
+
+        //Made these global because we need to pass them from page to pages.
+        public static ParseUser trackUser;
+        public static ParseObject trackRelation;
 
 
         /// <summary>
         /// Set the text of the progress overlay and show it.
         /// </summary>
         /// <param name="text">the text to be displayed on the progress overlay</param>
-        public static void showProgressOverlay(string text)
+        public static void ShowProgressOverlay(string text)
         {
             (progressOverlay.Child as OverLay).setText(text);
             progressOverlay.IsOpen = true;
@@ -45,7 +52,7 @@ namespace CitySafe
         /// <summary>
         /// Hide the progress overlay.
         /// </summary>
-        public static void hideProgressOverlay()
+        public static void HideProgressOverlay()
         {
             progressOverlay.IsOpen = false;
         }

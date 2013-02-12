@@ -139,7 +139,7 @@ namespace CitySafe
         /// </summary>
         private async void loadUserSettings()
         {
-            App.showProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
+            App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
             try
             {
                 await ParseUser.CurrentUser.FetchAsync();//Sync first because settings can be updated in the background.
@@ -165,7 +165,7 @@ namespace CitySafe
                 Debug.WriteLine(e.ToString());
                 MessageBox.Show(AppResources.Setting_SyncingFailed);
             }
-            App.hideProgressOverlay();
+            App.HideProgressOverlay();
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace CitySafe
         /// </summary>
         private async void saveUserSettingsWithProgressOverlay()
         {
-            App.showProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
+            App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
             try
             {
                 //Not all fields are saved.
@@ -187,7 +187,7 @@ namespace CitySafe
                 Debug.WriteLine(e.ToString());
                 MessageBox.Show(AppResources.Setting_SyncingFailed);
             }
-            App.hideProgressOverlay();
+            App.HideProgressOverlay();
         }
 
         /// <summary>

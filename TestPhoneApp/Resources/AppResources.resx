@@ -224,4 +224,13 @@
   <data name="Tracker_SendingInvitation" xml:space="preserve">
     <value>Sending invitation ...</value>
   </data>
+  <data name="Tracker_AddSuccess" xml:space="preserve">
+    <value>User is added to your list successfully.</value>
+  </data>
+  <data name="Tracker_FailToLoadList" xml:space="preserve">
+    <value>Failed to load track lists.</value>
+  </data>
+  <data name="Tracker_LoadList" xml:space="preserve">
+    <value>Loading lists ...</value>
+  </data>
 </root>

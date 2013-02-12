@@ -36,10 +36,17 @@
 
                 <!--Pivot item two-->
                 <phone:PivotItem Header="{Binding LocalizedResources.Tracker_TrackedHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                    <Grid>
-                        <phone:LongListSelector x:Name="TrackedList"></phone:LongListSelector>
-                    </Grid>
-                </phone:PivotItem>
+                <phone:LongListSelector x:Name="TrackedList" ItemsSource="{Binding trackItems}" SelectionChanged="TrackedList_SelectionChanged" >
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding name}"  TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding email}"   TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
+            </phone:PivotItem>
             </phone:Pivot>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <TextBox x:Name="TrackAddTextBox"/>

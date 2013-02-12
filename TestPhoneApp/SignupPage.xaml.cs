@@ -26,7 +26,7 @@ namespace CitySafe
 
         private async void signupWithProgressOverlay()
         {
-            App.showProgressOverlay(AppResources.ProgressBar_SigningUpUser);
+            App.ShowProgressOverlay(AppResources.ProgressBar_SigningUpUser);
             var user = new ParseUser()
             {
                 Username = "dummyuser",
@@ -35,7 +35,7 @@ namespace CitySafe
             };
 
             await user.SignUpAsync();
-            App.hideProgressOverlay();
+            App.HideProgressOverlay();
         }
     }
 }

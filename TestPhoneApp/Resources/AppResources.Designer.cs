@@ -331,6 +331,24 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User is added to your list successfully..
+        /// </summary>
+        public static string Tracker_AddSuccess {
+            get {
+                return ResourceManager.GetString("Tracker_AddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load track lists..
+        /// </summary>
+        public static string Tracker_FailToLoadList {
+            get {
+                return ResourceManager.GetString("Tracker_FailToLoadList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email address.
         /// </summary>
         public static string Tracker_InvalidEmailMessage {
@@ -345,6 +363,15 @@ namespace CitySafe.Resources {
         public static string Tracker_InvitationSuccess {
             get {
                 return ResourceManager.GetString("Tracker_InvitationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading lists ....
+        /// </summary>
+        public static string Tracker_LoadList {
+            get {
+                return ResourceManager.GetString("Tracker_LoadList", resourceCulture);
             }
         }
         

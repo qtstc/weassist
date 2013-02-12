@@ -44,17 +44,17 @@ namespace ScheduledLocationAgent.Data
             public static ParseObject GeoPositionToParseObject(GeoPosition<GeoCoordinate> g)
             { 
                 ParseObject Locations = new ParseObject(TABLE_NAME);
-                Locations[LOCATION] = new ParseGeoPoint(toParseNaN(g.Location.Latitude), toParseNaN(g.Location.Longitude));
+                Locations[LOCATION] = new ParseGeoPoint(ToParseNaN(g.Location.Latitude), ToParseNaN(g.Location.Longitude));
                 Locations[TIME_STAMP] = g.Timestamp.DateTime;
-                Locations[ALTITUDE] = toParseNaN(g.Location.Altitude);
-                Locations[HORIZONTAL_ACCURACY] = toParseNaN(g.Location.HorizontalAccuracy);
-                Locations[VERTICAL_ACCURACY] = toParseNaN(g.Location.VerticalAccuracy);
-                Locations[SPEED] = toParseNaN(g.Location.Speed);
-                Locations[COURSE] = toParseNaN(g.Location.Course);
+                Locations[ALTITUDE] = ToParseNaN(g.Location.Altitude);
+                Locations[HORIZONTAL_ACCURACY] = ToParseNaN(g.Location.HorizontalAccuracy);
+                Locations[VERTICAL_ACCURACY] = ToParseNaN(g.Location.VerticalAccuracy);
+                Locations[SPEED] = ToParseNaN(g.Location.Speed);
+                Locations[COURSE] = ToParseNaN(g.Location.Course);
                 return Locations;
             }
 
-            private static double toParseNaN(double n)
+            private static double ToParseNaN(double n)
             {
                 if (Double.IsNaN(n))
                     return NaNforParse;
@@ -74,6 +74,20 @@ namespace ScheduledLocationAgent.Data
             public static string NOTIFY_BY_SMS { get { return "notifyBySMS"; } }
             public static string NOTIFY_BY_EMAIL { get { return "notifyByEmail"; } }
             public static string NOTIFY_BY_PUSH { get { return "notifyByPush"; } }
+
+            public static string OtherRole(string track)
+            {
+                if (track == TRACKING) return TRACKED;
+                else if (track == TRACKED) return TRACKING;
+                else return "Error";
+            }
+
+            public static string OtherVerified(string verified)
+            {
+                if (verified == TRACKED_VERIFIED) return TRACKING_VERIFIED;
+                else if (verified == TRACKING_VERIFIED) return TRACKED_VERIFIED;
+                else return "Error";
+            }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace CitySafe
         /// </summary>
         private async void loginWithProgressOverlay()
         {
-            App.showProgressOverlay(AppResources.ProgressBar_VerifyingUser);
+            App.ShowProgressOverlay(AppResources.ProgressBar_VerifyingUser);
             string username = login_username_textbox.Text;
             string password = login_password_textbox.Password;
             try
@@ -78,7 +78,7 @@ namespace CitySafe
                 MessageBox.Show(AppResources.Login_LoginFailMessage);
             }
             //Remove the progress overlay.
-            App.hideProgressOverlay();
+            App.HideProgressOverlay();
         }
 
         /// <summary>
