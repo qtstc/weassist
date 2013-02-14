@@ -27,9 +27,14 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
-        </Grid>
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock Text="{Binding LocalizedResources.TrackingSetting_WhenDangerNotify, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+            <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Push, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+            <CheckBox Content="{Binding LocalizedResources.TrackingSetting_SMS, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+            <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Email, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+            <Button Content="{Binding LocalizedResources.Setting_ApplySettings, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+            <Button Content="{Binding LocalizedResources.TrackingSetting_RequestPreviousLocation, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+        </StackPanel>
     </Grid>
 
 </phone:PhoneApplicationPage>

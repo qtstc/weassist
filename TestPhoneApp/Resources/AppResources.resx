@@ -233,4 +233,31 @@
   <data name="Tracker_LoadList" xml:space="preserve">
     <value>Loading lists ...</value>
   </data>
+  <data name="TrackingSetting_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="TrackingSetting_FailToSync" xml:space="preserve">
+    <value>Failed to sync user settings with the server.</value>
+  </data>
+  <data name="TrackingSetting_Loading" xml:space="preserve">
+    <value>Loading tracking settings ...</value>
+  </data>
+  <data name="TrackingSetting_Push" xml:space="preserve">
+    <value>Push Notification</value>
+  </data>
+  <data name="TrackingSetting_Saving" xml:space="preserve">
+    <value>Saving tracking settings ...</value>
+  </data>
+  <data name="TrackingSetting_SMS" xml:space="preserve">
+    <value>SMS</value>
+  </data>
+  <data name="TrackingSetting_WhenDangerNotify" xml:space="preserve">
+    <value>When the person being tracked is in danger, notify me by:</value>
+  </data>
+  <data name="TrackingSetting_LocationRequestDenied" xml:space="preserve">
+    <value>Your request has been denied.</value>
+  </data>
+  <data name="TrackingSetting_RequestPreviousLocation" xml:space="preserve">
+    <value>Check Previous Locations</value>
+  </data>
 </root>

@@ -401,5 +401,86 @@ namespace CitySafe.Resources {
                 return ResourceManager.GetString("Tracker_TrackingHeader", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string TrackingSetting_Email {
+            get {
+                return ResourceManager.GetString("TrackingSetting_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to sync user settings with the server..
+        /// </summary>
+        public static string TrackingSetting_FailToSync {
+            get {
+                return ResourceManager.GetString("TrackingSetting_FailToSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading tracking settings ....
+        /// </summary>
+        public static string TrackingSetting_Loading {
+            get {
+                return ResourceManager.GetString("TrackingSetting_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your request has been denied..
+        /// </summary>
+        public static string TrackingSetting_LocationRequestDenied {
+            get {
+                return ResourceManager.GetString("TrackingSetting_LocationRequestDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Push Notification.
+        /// </summary>
+        public static string TrackingSetting_Push {
+            get {
+                return ResourceManager.GetString("TrackingSetting_Push", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check Previous Locations.
+        /// </summary>
+        public static string TrackingSetting_RequestPreviousLocation {
+            get {
+                return ResourceManager.GetString("TrackingSetting_RequestPreviousLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving tracking settings ....
+        /// </summary>
+        public static string TrackingSetting_Saving {
+            get {
+                return ResourceManager.GetString("TrackingSetting_Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMS.
+        /// </summary>
+        public static string TrackingSetting_SMS {
+            get {
+                return ResourceManager.GetString("TrackingSetting_SMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When the person being tracked is in danger, notify me by:.
+        /// </summary>
+        public static string TrackingSetting_WhenDangerNotify {
+            get {
+                return ResourceManager.GetString("TrackingSetting_WhenDangerNotify", resourceCulture);
+            }
+        }
     }
 }
