@@ -26,9 +26,11 @@ namespace CitySafe
             App.trackedModel = new TrackViewModel();
             TrackingList.DataContext = App.trackingModel;
             TrackedList.DataContext = App.trackedModel;
+            loadLists();
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        //protected async override void OnNavigatedTo(NavigationEventArgs e)
+        private async void loadLists()
         {
             App.ShowProgressOverlay(AppResources.Tracker_LoadList);
             try

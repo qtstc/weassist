@@ -99,6 +99,7 @@
     <Compile Include="TrackingSettingsPage.xaml.cs">
       <DependentUpon>TrackingSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Settings.cs" />
     <Compile Include="ViewModels\TrackedSettings.cs" />
     <Compile Include="ViewModels\TrackingSettings.cs" />
     <Compile Include="ViewModels\TrackItemModel.cs" />

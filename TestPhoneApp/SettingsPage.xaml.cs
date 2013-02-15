@@ -34,7 +34,7 @@ namespace CitySafe
         public SettingsPage()
         {
             InitializeComponent();
-            loadUserSettings();
+            LoadUserSettings();
         }
 
         #region Background Agent
@@ -115,7 +115,7 @@ namespace CitySafe
         private void ApplySettingsButton_Click(object sender, RoutedEventArgs e)
         {
             //First save the user settings.
-            saveUserSettingsWithProgressOverlay();
+            SaveUserSettings();
             //Then register/unregister the agent.
             if (userSettings.trackingEnabled)
                 StartPeriodicAgent();
@@ -125,7 +125,7 @@ namespace CitySafe
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            loadUserSettings();
+            LoadUserSettings();
         }
 
         #endregion
@@ -137,7 +137,7 @@ namespace CitySafe
         /// If there is no previous user setting,
         /// a new one will be loaded from the web site.
         /// </summary>
-        private async void loadUserSettings()
+        private async void LoadUserSettings()
         {
             App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
             try
@@ -146,7 +146,7 @@ namespace CitySafe
                 //If does not contain one of the keys, initialize the user settings
                 if (!ParseUser.CurrentUser.ContainsKey(ParseContract.UserTable.TRACKING_ENABLED))
                 {
-                    await initializeUserSettings();
+                    await InitializeUserSettings();
                 }
 
                 //Use the data to populate UI.
@@ -171,7 +171,7 @@ namespace CitySafe
         /// <summary>
         /// Helper method used to save user settings.
         /// </summary>
-        private async void saveUserSettingsWithProgressOverlay()
+        private async void SaveUserSettings()
         {
             App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
             try
@@ -194,7 +194,7 @@ namespace CitySafe
         /// Helper method used to initialize user settings.
         /// Only called when the user uses the app for the first time.
         /// </summary>
-        private async Task initializeUserSettings()
+        private async Task InitializeUserSettings()
         {
             const int DEFAULT_INTERVAL = 30;
             const int DEFAULT_DATA_SIZE = 96;
@@ -214,6 +214,7 @@ namespace CitySafe
 
             await ParseUser.CurrentUser.SaveAsync();
         }
+
         #endregion
     }
 }

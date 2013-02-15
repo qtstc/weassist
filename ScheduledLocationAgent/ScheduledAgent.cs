@@ -65,7 +65,7 @@ namespace ScheduledLocationAgent
             int interval = user.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
 
             Debug.WriteLine("Background task invoked:\nlast Locations index "+lastLocationIndex+"\ninterval: "+interval+"\nlast update: "+lastUpdate);
-            if (isTimeToSendData(interval, lastUpdate))
+            if (IsTimeToSendData(interval, lastUpdate))
             {
                 lastLocationIndex++;
                 user[ParseContract.UserTable.LAST_LOCATION_INDEX] = (lastLocationIndex) % user.Get<int>(ParseContract.UserTable.LOCATION_DATA_SIZE);
@@ -86,7 +86,7 @@ namespace ScheduledLocationAgent
         /// <param name="interval">the interval set by the user, in minutes</param>
         /// <param name="lastDate">the last time when the location data was sent</param>
         /// <returns>true if the location data should be sent, false otherwise</returns>
-        private bool isTimeToSendData(int interval, DateTime lastDate)
+        private bool IsTimeToSendData(int interval, DateTime lastDate)
         {
             DateTime scheduledTime = lastDate.AddMinutes(interval);
             if (scheduledTime <= DateTime.Now)

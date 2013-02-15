@@ -8,3 +8,4 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationA
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\Parse.Phone.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\Parse.xml
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\Parse.Phone.xml
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\obj\Debug\ScheduledLocationAgent.csprojResolveAssemblyReference.cache

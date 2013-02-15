@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CitySafe.ViewModels
 {
-    class TrackedSettings
+    public class TrackedSettings
     {
     }
 }

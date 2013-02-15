@@ -21,10 +21,10 @@ namespace CitySafe
         public SignupPage()
         {
             InitializeComponent();
-            signupWithProgressOverlay();
+            SignUp();
         }
 
-        private async void signupWithProgressOverlay()
+        private async void SignUp()
         {
             App.ShowProgressOverlay(AppResources.ProgressBar_SigningUpUser);
             var user = new ParseUser()
