@@ -448,6 +448,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Removing user ....
+        /// </summary>
+        public static string TrackingSetting_RemovingUser {
+            get {
+                return ResourceManager.GetString("TrackingSetting_RemovingUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Previous Locations.
         /// </summary>
         public static string TrackingSetting_RequestPreviousLocation {
@@ -471,6 +480,15 @@ namespace CitySafe.Resources {
         public static string TrackingSetting_SMS {
             get {
                 return ResourceManager.GetString("TrackingSetting_SMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Tracking.
+        /// </summary>
+        public static string TrackingSetting_StopTracking {
+            get {
+                return ResourceManager.GetString("TrackingSetting_StopTracking", resourceCulture);
             }
         }
         

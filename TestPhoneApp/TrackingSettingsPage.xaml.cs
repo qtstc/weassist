@@ -12,6 +12,7 @@ using CitySafe.Resources;
 using Parse;
 using ScheduledLocationAgent.Data;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace CitySafe
 {
@@ -22,24 +23,22 @@ namespace CitySafe
         public TrackingSettingsPage()
         {
             InitializeComponent();
-            LoadTrackingSettings();
+            trackingSettings = new TrackingSettings();
+            LoadUIData();
+            TrackingSettingsPanel.DataContext = trackingSettings;
         }
 
         /// <summary>
-        /// Load tracking settings.
+        /// Load UI data from the server
         /// </summary>
-        private async void LoadTrackingSettings()
+        private async Task LoadUIData()
         {
             App.ShowProgressOverlay(AppResources.TrackingSetting_Loading);
             try
             {
-                //Use the data to populate UI.
-                bool usePushNotification = App.trackRelation.Get<bool>(ParseContract.TrackRelationTable.NOTIFY_BY_PUSH);
-                bool useSMS = App.trackRelation.Get<bool>(ParseContract.TrackRelationTable.NOTIFY_BY_SMS);
-                bool useEmail = App.trackRelation.Get<bool>(ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL);
-                TrackingTitle.Text = App.trackUser.Username;
-                trackingSettings = new TrackingSettings(usePushNotification, useSMS, useEmail);
-                TrackingSettingsPanel.DataContext = trackingSettings;
+               //Set the title
+                TrackingTitle.Text = App.trackItemModel.user.Username;
+                await trackingSettings.LoadSettings();
             }
             catch (Exception e)
             {
@@ -51,18 +50,14 @@ namespace CitySafe
         }
 
         /// <summary>
-        /// Helper method used to save tracking settings.
+        /// Save the UI data to the server.
         /// </summary>
-        private async void SaveTrackingSettings()
+        private async Task SaveUIData()
         {
             App.ShowProgressOverlay(AppResources.TrackingSetting_Saving);
             try
             {
-                //Not all fields are saved.
-                App.trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_PUSH] = trackingSettings.usePushNotification;
-                App.trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_SMS] = trackingSettings.useSMS;
-                App.trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL] = trackingSettings.useEmail;
-                await App.trackRelation.SaveAsync();
+                await trackingSettings.SaveSettings();
             }
             catch (Exception e)
             {
@@ -73,9 +68,24 @@ namespace CitySafe
             App.HideProgressOverlay();
         }
 
-        private void Apply_Button_Click(object sender, RoutedEventArgs e)
+        private async void Apply_Button_Click(object sender, RoutedEventArgs e)
         {
-            SaveTrackingSettings();
+            await SaveUIData();
+        }
+
+        private async void Stop_Tracking_Button_Click(object sender, RoutedEventArgs e)
+        {
+            App.ShowProgressOverlay(AppResources.TrackingSetting_RemovingUser);
+            try
+            {
+                await trackingSettings.RemoveRelation();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(AppResources.TrackingSetting_FailToSync);
+            }
+            NavigationService.Navigate(new Uri("/TrackPage.xaml", UriKind.Relative));
+            NavigationService.RemoveBackEntry();
         }
     }
 }

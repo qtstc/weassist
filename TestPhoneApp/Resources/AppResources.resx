@@ -260,4 +260,10 @@
   <data name="TrackingSetting_RequestPreviousLocation" xml:space="preserve">
     <value>Check Previous Locations</value>
   </data>
+  <data name="TrackingSetting_RemovingUser" xml:space="preserve">
+    <value>Removing user ...</value>
+  </data>
+  <data name="TrackingSetting_StopTracking" xml:space="preserve">
+    <value>Stop Tracking</value>
+  </data>
 </root>

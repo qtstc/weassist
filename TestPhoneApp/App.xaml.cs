@@ -34,9 +34,8 @@ namespace CitySafe
         public static TrackViewModel trackingModel;
         public static TrackViewModel trackedModel;
 
-        //Made these global because we need to pass them from page to pages.
-        public static ParseUser trackUser;
-        public static ParseObject trackRelation;
+        //Made these global because we need to pass it from page to pages.
+        public static TrackItemModel trackItemModel;
 
 
         /// <summary>

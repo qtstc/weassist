@@ -46,7 +46,7 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <StackPanel x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0">
+        <StackPanel x:Name="SettingsPanel" Grid.Row="2" Margin="12,0,12,0">
             <Button Content = "{Binding LocalizedResources.Setting_ChangeUser, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="ChangeUserButton_Click" />
             <StackPanel x:Name="UserSettingsPanel"  d:DataContext="{Binding}">
             <CheckBox x:Name="EnableTrackingCheckBox" Content="{Binding LocalizedResources.Setting_EnableTracking, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding trackingEnabled, Mode=TwoWay}"/>

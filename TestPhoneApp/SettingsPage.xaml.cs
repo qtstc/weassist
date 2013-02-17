@@ -22,6 +22,11 @@ using CitySafe.ViewModels;
 
 namespace CitySafe
 {
+    /// <summary>
+    /// The settings page for the app.
+    /// It also controls the PeriodicTask used to 
+    /// sending location data to the server in the background.
+    /// </summary>
     public partial class SettingsPage : PhoneApplicationPage
     {
         private PeriodicTask periodicTask;
@@ -34,7 +39,10 @@ namespace CitySafe
         public SettingsPage()
         {
             InitializeComponent();
-            LoadUserSettings();
+
+            userSettings = new UserSettings();
+            SettingsPanel.DataContext = userSettings;
+            LoadUIData();
         }
 
         #region Background Agent
@@ -112,10 +120,10 @@ namespace CitySafe
             NavigationService.RemoveBackEntry();
         }
 
-        private void ApplySettingsButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplySettingsButton_Click(object sender, RoutedEventArgs e)
         {
             //First save the user settings.
-            SaveUserSettings();
+            await SaveUIData();
             //Then register/unregister the agent.
             if (userSettings.trackingEnabled)
                 StartPeriodicAgent();
@@ -123,9 +131,9 @@ namespace CitySafe
                 RemoveAgent();
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        private async void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadUserSettings();
+            await LoadUIData();
         }
 
         #endregion
@@ -133,31 +141,14 @@ namespace CitySafe
         #region Helper_Method
 
         /// <summary>
-        /// Load user settings.
-        /// If there is no previous user setting,
-        /// a new one will be loaded from the web site.
+        /// Load the data for the UI.
         /// </summary>
-        private async void LoadUserSettings()
+        private async Task LoadUIData()
         {
             App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
             try
             {
-                await ParseUser.CurrentUser.FetchAsync();//Sync first because settings can be updated in the background.
-                //If does not contain one of the keys, initialize the user settings
-                if (!ParseUser.CurrentUser.ContainsKey(ParseContract.UserTable.TRACKING_ENABLED))
-                {
-                    await InitializeUserSettings();
-                }
-
-                //Use the data to populate UI.
-                bool trackingEnabled = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.TRACKING_ENABLED);
-                int interval = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
-                int lastUpdateIndex = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
-                ParseObject lastLocation = ParseUser.CurrentUser.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastUpdateIndex));
-                //Need to download the object first.
-                await lastLocation.FetchIfNeededAsync();
-                userSettings = new UserSettings(trackingEnabled, interval, lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP));
-                UserSettingsPanel.DataContext = userSettings;
+                await userSettings.LoadSettings();
             }
             catch (Exception e)
             {
@@ -169,17 +160,14 @@ namespace CitySafe
         }
 
         /// <summary>
-        /// Helper method used to save user settings.
+        /// Save the UI data to the server.
         /// </summary>
-        private async void SaveUserSettings()
+        private async Task SaveUIData()
         {
             App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
             try
             {
-                //Not all fields are saved.
-                ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = userSettings.interval;
-                ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = userSettings.trackingEnabled;
-                await ParseUser.CurrentUser.SaveAsync();
+                await userSettings.SaveSettings();
             }
             catch (Exception e)
             {
@@ -188,31 +176,6 @@ namespace CitySafe
                 MessageBox.Show(AppResources.Setting_SyncingFailed);
             }
             App.HideProgressOverlay();
-        }
-
-        /// <summary>
-        /// Helper method used to initialize user settings.
-        /// Only called when the user uses the app for the first time.
-        /// </summary>
-        private async Task InitializeUserSettings()
-        {
-            const int DEFAULT_INTERVAL = 30;
-            const int DEFAULT_DATA_SIZE = 96;
-            ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = false;
-            ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = DEFAULT_INTERVAL;
-            ParseUser.CurrentUser[ParseContract.UserTable.LOCATION_DATA_SIZE] = DEFAULT_DATA_SIZE;
-            ParseUser.CurrentUser[ParseContract.UserTable.LAST_LOCATION_INDEX] = DEFAULT_DATA_SIZE-1;
-
-            //Get the null location used to mark un
-            ParseQuery<ParseObject> nullLocationQuery = ParseObject.GetQuery(ParseContract.LocationTable.TABLE_NAME);
-            ParseObject nullLocation = await nullLocationQuery.GetAsync(ParseContract.LocationTable.DUMMY_LOCATION);
-
-            for (int i = 0; i < DEFAULT_DATA_SIZE; i++)
-            {
-                ParseUser.CurrentUser[ParseContract.UserTable.LOCATION(i)] = nullLocation;
-            }
-
-            await ParseUser.CurrentUser.SaveAsync();
         }
 
         #endregion

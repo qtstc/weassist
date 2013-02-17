@@ -10,8 +10,12 @@ using System.Threading.Tasks;
 namespace CitySafe.ViewModels
 {
     [DataContract]
-    public class Settings : INotifyPropertyChanged
+    public abstract class Settings : INotifyPropertyChanged
     {
+        public abstract Task LoadSettings();
+
+        public abstract Task SaveSettings();
+
         /// <summary>
         /// Multicast event for property change notifications.
         /// </summary>
