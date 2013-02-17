@@ -313,6 +313,60 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow access to my location 24/7.
+        /// </summary>
+        public static string TrackedSetting_FullLocationAccess {
+            get {
+                return ResourceManager.GetString("TrackedSetting_FullLocationAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning: when checked, the user who is tracking you will have full access to your location data. By default, he or she will only have access to your location data when you are in danger..
+        /// </summary>
+        public static string TrackedSetting_FullLocationAccessInfo {
+            get {
+                return ResourceManager.GetString("TrackedSetting_FullLocationAccessInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading tracked settings ....
+        /// </summary>
+        public static string TrackedSetting_Loading {
+            get {
+                return ResourceManager.GetString("TrackedSetting_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing user from tracked list ....
+        /// </summary>
+        public static string TrackedSetting_RemovingUser {
+            get {
+                return ResourceManager.GetString("TrackedSetting_RemovingUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving tracked settings ....
+        /// </summary>
+        public static string TrackedSetting_Saving {
+            get {
+                return ResourceManager.GetString("TrackedSetting_Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove From Tracked List.
+        /// </summary>
+        public static string TrackedSetting_StopTracked {
+            get {
+                return ResourceManager.GetString("TrackedSetting_StopTracked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Tracker_Add {
@@ -412,15 +466,6 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to sync user settings with the server..
-        /// </summary>
-        public static string TrackingSetting_FailToSync {
-            get {
-                return ResourceManager.GetString("TrackingSetting_FailToSync", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Loading tracking settings ....
         /// </summary>
         public static string TrackingSetting_Loading {
@@ -448,7 +493,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing user ....
+        ///   Looks up a localized string similar to Removing user from tracking list ....
         /// </summary>
         public static string TrackingSetting_RemovingUser {
             get {

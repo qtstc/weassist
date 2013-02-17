@@ -42,9 +42,8 @@ namespace CitySafe
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Fail to initialize tracking settings to the server:\n");
                 Debug.WriteLine(e.ToString());
-                MessageBox.Show(AppResources.TrackingSetting_FailToSync);
+                MessageBox.Show(AppResources.Setting_SyncingFailed);
             }
             App.HideProgressOverlay();
         }
@@ -61,9 +60,8 @@ namespace CitySafe
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Fail to save user settings to the server:\n");
                 Debug.WriteLine(e.ToString());
-                MessageBox.Show(AppResources.TrackingSetting_FailToSync);
+                MessageBox.Show(AppResources.Setting_SyncingFailed);
             }
             App.HideProgressOverlay();
         }
@@ -82,7 +80,7 @@ namespace CitySafe
             }
             catch (Exception ex)
             {
-                MessageBox.Show(AppResources.TrackingSetting_FailToSync);
+                MessageBox.Show(AppResources.Setting_SyncingFailed);
             }
             NavigationService.Navigate(new Uri("/TrackPage.xaml", UriKind.Relative));
             NavigationService.RemoveBackEntry();

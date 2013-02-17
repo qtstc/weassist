@@ -74,6 +74,7 @@ namespace ScheduledLocationAgent.Data
             public static string NOTIFY_BY_SMS { get { return "notifyBySMS"; } }
             public static string NOTIFY_BY_EMAIL { get { return "notifyByEmail"; } }
             public static string NOTIFY_BY_PUSH { get { return "notifyByPush"; } }
+            public static string ALLOW_LOCATION_ACCESS { get { return "allowLocationAccess"; } }
 
             public static string OtherRole(string track)
             {

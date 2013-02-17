@@ -236,9 +236,6 @@
   <data name="TrackingSetting_Email" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="TrackingSetting_FailToSync" xml:space="preserve">
-    <value>Failed to sync user settings with the server.</value>
-  </data>
   <data name="TrackingSetting_Loading" xml:space="preserve">
     <value>Loading tracking settings ...</value>
   </data>
@@ -261,9 +258,27 @@
     <value>Check Previous Locations</value>
   </data>
   <data name="TrackingSetting_RemovingUser" xml:space="preserve">
-    <value>Removing user ...</value>
+    <value>Removing user from tracking list ...</value>
   </data>
   <data name="TrackingSetting_StopTracking" xml:space="preserve">
     <value>Stop Tracking</value>
+  </data>
+  <data name="TrackedSetting_FullLocationAccess" xml:space="preserve">
+    <value>Allow access to my location 24/7</value>
+  </data>
+  <data name="TrackedSetting_FullLocationAccessInfo" xml:space="preserve">
+    <value>Warning: when checked, the user who is tracking you will have full access to your location data. By default, he or she will only have access to your location data when you are in danger.</value>
+  </data>
+  <data name="TrackedSetting_Loading" xml:space="preserve">
+    <value>Loading tracked settings ...</value>
+  </data>
+  <data name="TrackedSetting_Saving" xml:space="preserve">
+    <value>Saving tracked settings ...</value>
+  </data>
+  <data name="TrackedSetting_StopTracked" xml:space="preserve">
+    <value>Remove From Tracked List</value>
+  </data>
+  <data name="TrackedSetting_RemovingUser" xml:space="preserve">
+    <value>Removing user from tracked list ...</value>
   </data>
 </root>

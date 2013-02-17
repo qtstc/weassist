@@ -23,13 +23,17 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock  Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
-            <TextBlock  Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock  x:Name="TrackedTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <StackPanel x:Name="TrackedSettingsPanel" Grid.Row="1" Margin="12,0,12,0">
+            <CheckBox Content="{Binding LocalizedResources.TrackedSetting_FullLocationAccess, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding allowLocationAccess, Mode=TwoWay}"/>
+            <TextBlock Text="{Binding LocalizedResources.TrackedSetting_FullLocationAccessInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontWeight="Light" FontSize="16"/>
+            <Button Content="{Binding LocalizedResources.Setting_ApplySettings, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Apply_Button_Click"/>
+            <Button Content="{Binding LocalizedResources.TrackedSetting_StopTracked, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Stop_Tracked_Button_Click"/>
+        </StackPanel>
 
-        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>

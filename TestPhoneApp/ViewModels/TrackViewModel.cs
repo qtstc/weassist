@@ -102,6 +102,9 @@ namespace CitySafe.ViewModels
             trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_PUSH] = true;
             trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_SMS] = true;
             trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL] = true;
+           
+            //Put default location access as false
+            trackRelation[ParseContract.TrackRelationTable.ALLOW_LOCATION_ACCESS] = false;
 
             //TODO: check whether a user is adding himself
 
