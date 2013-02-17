@@ -116,6 +116,7 @@ namespace CitySafe.ViewModels
             ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = DEFAULT_INTERVAL;
             ParseUser.CurrentUser[ParseContract.UserTable.LOCATION_DATA_SIZE] = DEFAULT_DATA_SIZE;
             ParseUser.CurrentUser[ParseContract.UserTable.LAST_LOCATION_INDEX] = DEFAULT_DATA_SIZE - 1;
+            ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = false;
 
             //Get the null location used to mark un
             ParseQuery<ParseObject> nullLocationQuery = ParseObject.GetQuery(ParseContract.LocationTable.TABLE_NAME);

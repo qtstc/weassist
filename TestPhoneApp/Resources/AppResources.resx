@@ -281,4 +281,7 @@
   <data name="TrackedSetting_RemovingUser" xml:space="preserve">
     <value>Removing user from tracked list ...</value>
   </data>
+  <data name="Map_LocationOf" xml:space="preserve">
+    <value>Locations of</value>
+  </data>
 </root>

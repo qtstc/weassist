@@ -21,6 +21,7 @@ namespace ScheduledLocationAgent.Data
             public static string LAST_LOCATION_INDEX { get { return "lastLocationIndex"; } }
             public static string LOCATION_DATA_SIZE { get { return "locationDataSize"; } }
             public static string LOCATION(int key) { return LOCATION_HISTORY + key.ToString("000"); }
+            public static string IN_DANGER { get { return "inDanger"; } }
 
             public static string DUMMY_USER { get { return "WNrCdVZZ48"; } }
         }
@@ -29,7 +30,7 @@ namespace ScheduledLocationAgent.Data
         {
             public static string TABLE_NAME { get { return "Locations"; } }
 
-            public static string LOCATION { get { return "Locations";} }
+            public static string LOCATION { get { return "geoLocation";} }
             public static string TIME_STAMP { get { return "timeStamp"; } }
             public static string ALTITUDE { get { return "altitude"; } }
             public static string HORIZONTAL_ACCURACY { get { return "horizontalAccuracy"; } }
@@ -60,6 +61,15 @@ namespace ScheduledLocationAgent.Data
                     return NaNforParse;
                 else return n;
             }
+        }
+
+        public static class SOSRequestTable
+        {
+            public static string TABLE_NAME { get { return "SOSRequest"; } }
+
+            public static string SENDER { get { return "sender"; } }
+            public static string RESOLVED { get { return "resolved"; } }
+            public static string sentLocation { get { return "sentLocation"; } }
         }
 
         public static class TrackRelationTable

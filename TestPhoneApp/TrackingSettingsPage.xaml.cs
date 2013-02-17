@@ -85,5 +85,17 @@ namespace CitySafe
             NavigationService.Navigate(new Uri("/TrackPage.xaml", UriKind.Relative));
             NavigationService.RemoveBackEntry();
         }
+
+        private void Check_Previous_Location_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.trackItemModel.user.Get<Boolean>(ParseContract.UserTable.IN_DANGER) || App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.ALLOW_LOCATION_ACCESS))
+            {
+                NavigationService.Navigate(new Uri("/MapPage.xaml", UriKind.Relative));
+            }
+            else 
+            {
+                MessageBox.Show(AppResources.TrackingSetting_LocationRequestDenied);
+            }
+        }
     }
 }
