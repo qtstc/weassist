@@ -160,7 +160,25 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Locations of.
+        ///   Looks up a localized string similar to Failed to load the location data..
+        /// </summary>
+        public static string Map_LoadingFailed {
+            get {
+                return ResourceManager.GetString("Map_LoadingFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading location data ....
+        /// </summary>
+        public static string Map_LoadingLocation {
+            get {
+                return ResourceManager.GetString("Map_LoadingLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;s Locations.
         /// </summary>
         public static string Map_LocationOf {
             get {

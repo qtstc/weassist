@@ -282,6 +282,12 @@
     <value>Removing user from tracked list ...</value>
   </data>
   <data name="Map_LocationOf" xml:space="preserve">
-    <value>Locations of</value>
+    <value>'s Locations</value>
+  </data>
+  <data name="Map_LoadingFailed" xml:space="preserve">
+    <value>Failed to load the location data.</value>
+  </data>
+  <data name="Map_LoadingLocation" xml:space="preserve">
+    <value>Loading location data ...</value>
   </data>
 </root>

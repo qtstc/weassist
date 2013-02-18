@@ -23,7 +23,7 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="LocationHeader" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -33,8 +33,9 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Controls:Map x:Name="LocationMap" Grid.Row="0"/>
-            <Slider x:Name="LocationSlider"  Grid.Row="1"/>
+            
+            <Controls:Map x:Name="LocationMap" Grid.Row="0" ZoomLevel="5" CenterChanged="LocationMap_CenterChanged" Loaded="LocationMap_Loaded"/>
+            <Slider x:Name="LocationSlider"  Grid.Row="1" SmallChange="1" ValueChanged="LocationSlider_ValueChanged"/>
             <TextBlock x:Name="LocationInfoTextBlock"  Grid.Row="2"/>
         </Grid>
     </Grid>

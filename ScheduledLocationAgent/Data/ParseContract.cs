@@ -55,6 +55,42 @@ namespace ScheduledLocationAgent.Data
                 return Locations;
             }
 
+            public static GeoPosition<GeoCoordinate> ParseObjectToGeoPosition(ParseObject p)
+            {
+                GeoPosition<GeoCoordinate> g = new GeoPosition<GeoCoordinate>();
+
+                g.Timestamp = new DateTimeOffset(p.Get<DateTime>(TIME_STAMP));
+                ParseGeoPoint pGeoPoint = p.Get<ParseGeoPoint>(LOCATION);
+
+                g.Location = new GeoCoordinate();
+                if (pGeoPoint.Latitude != NaNforParse)
+                    g.Location.Latitude = pGeoPoint.Latitude;
+                if (pGeoPoint.Longitude != NaNforParse)
+                    g.Location.Longitude = pGeoPoint.Longitude;
+
+                Double pAltitude = p.Get<Double>(ALTITUDE);
+                if (pAltitude != NaNforParse)
+                    g.Location.Altitude = pAltitude;
+
+                Double pHAccuracy = p.Get<Double>(HORIZONTAL_ACCURACY);
+                if (pHAccuracy != NaNforParse)
+                    g.Location.HorizontalAccuracy = pHAccuracy;
+
+                Double pVAccuracy = p.Get<Double>(VERTICAL_ACCURACY);
+                if (pVAccuracy != NaNforParse)
+                    g.Location.VerticalAccuracy = pVAccuracy;
+
+                Double pSpeed = p.Get<Double>(SPEED);
+                if (pSpeed != NaNforParse)
+                    g.Location.Speed = pSpeed;
+
+                Double pCourse = p.Get<Double>(COURSE);
+                if (pCourse != NaNforParse)
+                    g.Location.Course = pCourse;
+
+                return g;
+            }
+
             private static double ToParseNaN(double n)
             {
                 if (Double.IsNaN(n))
