@@ -7,7 +7,6 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\D
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\AppManifest.xaml
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\TestPhoneApp_Debug_AnyCPU.xap
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Microsoft.Expression.Interactions.dll
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Microsoft.Phone.Controls.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Newtonsoft.Json.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Parse.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Parse.Phone.dll
@@ -56,4 +55,3 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\D
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\TrackedSettingsPage.g.cs
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\TrackingSettingsPage.g.cs
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\MapPage.g.cs
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Microsoft.Phone.Controls.Toolkit.dll

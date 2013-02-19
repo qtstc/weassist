@@ -13,7 +13,6 @@ using Parse;
 using ScheduledLocationAgent.Data;
 using System.Diagnostics;
 using CitySafe.Resources;
-using Microsoft.Phone.Maps.Toolkit;
 
 namespace CitySafe
 {
@@ -24,14 +23,7 @@ namespace CitySafe
         public MapPage()
         {
             InitializeComponent();
-            InitializeMap();
             LoadUIData();
-        }
-
-        private void InitializeMap()
-        {
-            LocationMap = new Map();
-            LocationMap.Center = new GeoCoordinate(47.6097, -22.3331);
         }
 
         private async void LoadUIData()
@@ -76,15 +68,8 @@ namespace CitySafe
         {
             GeoPosition<GeoCoordinate> newLocation = locationList.ElementAt((Int32)e.NewValue);
             LocationInfoTextBlock.Text = newLocation.Location.ToString();
-            LocationMap.Center = newLocation.Location;
-            //LocationMap.InvalidateArrange();
-            //LocationMap.SetView(newLocation.Location, 10, MapAnimationKind.Parabolic);
-        }
-
-        private void LocationMap_CenterChanged(object sender, MapCenterChangedEventArgs e)
-        {
-          //  LocationMap.SetView(LocationMap.Center, LocationMap.ZoomLevel, MapAnimationKind.Parabolic);
-            Debug.WriteLine("cc");
+            //LocationMap.Center = newLocation.Location;
+            LocationMap.SetView(newLocation.Location, 10, MapAnimationKind.Parabolic);
         }
 
         private void LocationMap_Loaded(object sender, RoutedEventArgs e)
