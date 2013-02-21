@@ -34,10 +34,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             
-            <Controls:Map x:Name="LocationMap" Grid.Row="0" ZoomLevel="5"  Loaded="LocationMap_Loaded"/>
-            <Slider x:Name="LocationSlider"  Grid.Row="1" SmallChange="1" ValueChanged="LocationSlider_ValueChanged"/>
-            <TextBlock x:Name="LocationInfoTextBlock"  Grid.Row="2"/>
+            <Controls:Map x:Name="LocationMap" Grid.Row="0"  Loaded="LocationMap_Loaded"/>
         </Grid>
     </Grid>
-
 </phone:PhoneApplicationPage>

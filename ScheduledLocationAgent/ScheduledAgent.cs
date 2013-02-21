@@ -69,7 +69,7 @@ namespace ScheduledLocationAgent
             {
                 lastLocationIndex++;
                 user[ParseContract.UserTable.LAST_LOCATION_INDEX] = (lastLocationIndex) % user.Get<int>(ParseContract.UserTable.LOCATION_DATA_SIZE);
-                user[ParseContract.UserTable.LOCATION(lastLocationIndex)] = ParseContract.LocationTable.GeoPositionToParseObject(getCurrentGeoPosition());
+                user[ParseContract.UserTable.LOCATION(lastLocationIndex)] = ParseContract.LocationTable.GeoPositionToParseObject(Utilities.getCurrentGeoPosition());
                 await user.SaveAsync();
             }
             Debug.WriteLine("Background task finished.");
@@ -92,15 +92,6 @@ namespace ScheduledLocationAgent
             if (scheduledTime <= DateTime.Now)
                 return true;
             return false;
-        }
-
-        /// <summary>
-        /// Get the curent geo position
-        /// </summary>
-        /// <returns></returns>
-        private GeoPosition<GeoCoordinate> getCurrentGeoPosition()
-        {
-            return new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.Now), new GeoCoordinate(1.1, 2.2));
         }
     }
 }

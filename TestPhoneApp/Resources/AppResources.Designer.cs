@@ -187,6 +187,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to my location.
+        /// </summary>
+        public static string Map_MyLocation {
+            get {
+                return ResourceManager.GetString("Map_MyLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading.
         /// </summary>
         public static string ProgressBar_Loading {

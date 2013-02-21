@@ -29,5 +29,14 @@ namespace ScheduledLocationAgent.Data
 
             return result;
         }
+
+        /// <summary>
+        /// Get the curent geo position
+        /// </summary>
+        /// <returns></returns>
+        public static GeoPosition<GeoCoordinate> getCurrentGeoPosition()
+        {
+            return new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.Now), new GeoCoordinate(1.1, 2.2));
+        }
     }
 }
