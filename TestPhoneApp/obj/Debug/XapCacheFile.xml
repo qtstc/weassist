@@ -1,5 +1,5 @@
-﻿<xapCache source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\TestPhoneApp_Debug_AnyCPU.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="2/21/2013 1:14:54 AM">
-  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\CitySafe.dll" archivePath="CitySafe.dll" lastWriteTime="2/21/2013 1:14:53 AM" />
+﻿<xapCache source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\TestPhoneApp_Debug_AnyCPU.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="2/22/2013 1:08:20 AM">
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\CitySafe.dll" archivePath="CitySafe.dll" lastWriteTime="2/22/2013 1:08:19 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="12/29/2012 10:53:49 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\AppBar\MyLocation.png" archivePath="Assets\AppBar\MyLocation.png" lastWriteTime="2/20/2013 10:11:45 PM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\AppBar\SOS.png" archivePath="Assets\AppBar\SOS.png" lastWriteTime="2/20/2013 10:11:47 PM" />
@@ -20,5 +20,5 @@
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Newtonsoft.Json.xml" archivePath="Newtonsoft.Json.xml" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Parse.xml" archivePath="Parse.xml" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Parse.Phone.xml" archivePath="Parse.Phone.xml" lastWriteTime="2/21/2013 12:52:58 AM" />
-  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="2/21/2013 1:14:54 AM" />
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="2/22/2013 1:08:20 AM" />
 </xapCache>

@@ -293,4 +293,25 @@
   <data name="Map_MyLocation" xml:space="preserve">
     <value>my location</value>
   </data>
+  <data name="SOS_CancelingRequest" xml:space="preserve">
+    <value>Canceling SOS requests ...</value>
+  </data>
+  <data name="SOS_Resolved" xml:space="preserve">
+    <value>Resolved</value>
+  </data>
+  <data name="SOS_SendingRequest" xml:space="preserve">
+    <value>Sending SOS requests ...</value>
+  </data>
+  <data name="SOS_SOSCanceledFail" xml:space="preserve">
+    <value>Failed to cancel your SOS request.</value>
+  </data>
+  <data name="SOS_SOSCanceledSuccess" xml:space="preserve">
+    <value>Your SOS request was canceled successfully.</value>
+  </data>
+  <data name="SOS_SOSSentFail" xml:space="preserve">
+    <value>Sending SOS message failed.</value>
+  </data>
+  <data name="SOS_SOSSentSuccess" xml:space="preserve">
+    <value>Your SOS message was sent successfully.</value>
+  </data>
 </root>

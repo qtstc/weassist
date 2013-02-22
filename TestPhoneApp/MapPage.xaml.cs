@@ -60,8 +60,16 @@ namespace CitySafe
                 //Add the user's location to the maplayer.
                 LocationMapLayer.Add(myLocationPushpin.pushpinLayer);
                 //Add the last location to the maplayer.
-                AddNewPushpin(lastLocations.First());
-                lastPushpin = lastLocations.First();
+                if (lastLocations.Count > 0)
+                {
+                    AddNewPushpin(lastLocations.First());
+                    lastPushpin = lastLocations.First();
+                }
+                else if (sosLocations.Count > 0)
+                {
+                    AddNewPushpin(sosLocations.First());
+                    lastPushpin = sosLocations.First();
+                }
             }
             catch (Exception e)
             {
@@ -77,17 +85,26 @@ namespace CitySafe
         /// <returns>The list of all the SOS locations</returns>
         private async Task<List<Pushpin>> LoadSOSLocations()
         {
-            //var sosLocation = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME)
-            //                        where request.Get<ParseUser>(ParseContract.SOSRequestTable.SENDER) == App.trackItemModel.user
-            //                        select request;
-            //IEnumerable<ParseObject> results = await sosLocation.FindAsync();
+            var sosLocation = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME)
+                              where request.Get<ParseUser>(ParseContract.SOSRequestTable.SENDER) == App.trackItemModel.user
+                              where request.Get<bool>(ParseContract.SOSRequestTable.RESOLVED) == false
+                              select request;
+            IEnumerable<ParseObject> results = await sosLocation.FindAsync();
             List<Pushpin> list = new List<Pushpin>();
-            Pushpin sos1 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)), SOS_PUSHPIN_COLOR);
-            Pushpin sos2 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)), SOS_PUSHPIN_COLOR);
-            Pushpin sos3 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)),SOS_PUSHPIN_COLOR);
-            list.Add(sos1);
-            list.Add(sos2);
-            list.Add(sos3);
+            for (int i = 0; i < results.Count(); i++)
+            {
+                ParseObject request = results.ElementAt(i);
+                ParseObject location = request.Get<ParseObject>(ParseContract.SOSRequestTable.sentLocation);
+                await location.FetchIfNeededAsync();
+                list.Add(new Pushpin(ParseContract.LocationTable.ParseObjectToGeoPosition(location), SOS_PUSHPIN_COLOR));
+            }
+            //Pushpin sos1 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)), SOS_PUSHPIN_COLOR);
+            //Pushpin sos2 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)), SOS_PUSHPIN_COLOR);
+            //Pushpin sos3 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)),SOS_PUSHPIN_COLOR);
+            //list.Add(sos1);
+            //list.Add(sos2);
+            //list.Add(sos3);
+            list.Sort((x, y) => x.position.Timestamp.DateTime.CompareTo(y.position.Timestamp.DateTime));
             return list;
         }
 

@@ -322,6 +322,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Canceling SOS requests ....
+        /// </summary>
+        public static string SOS_CancelingRequest {
+            get {
+                return ResourceManager.GetString("SOS_CancelingRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage lists....
         /// </summary>
         public static string SOS_ManageList {
@@ -340,11 +349,65 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resolved.
+        /// </summary>
+        public static string SOS_Resolved {
+            get {
+                return ResourceManager.GetString("SOS_Resolved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending SOS requests ....
+        /// </summary>
+        public static string SOS_SendingRequest {
+            get {
+                return ResourceManager.GetString("SOS_SendingRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HELP!.
         /// </summary>
         public static string SOS_SendSOS {
             get {
                 return ResourceManager.GetString("SOS_SendSOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to cancel your SOS request..
+        /// </summary>
+        public static string SOS_SOSCanceledFail {
+            get {
+                return ResourceManager.GetString("SOS_SOSCanceledFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your SOS request was canceled successfully..
+        /// </summary>
+        public static string SOS_SOSCanceledSuccess {
+            get {
+                return ResourceManager.GetString("SOS_SOSCanceledSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending SOS message failed..
+        /// </summary>
+        public static string SOS_SOSSentFail {
+            get {
+                return ResourceManager.GetString("SOS_SOSSentFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your SOS message was sent successfully..
+        /// </summary>
+        public static string SOS_SOSSentSuccess {
+            get {
+                return ResourceManager.GetString("SOS_SOSSentSuccess", resourceCulture);
             }
         }
         
