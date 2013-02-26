@@ -88,6 +88,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This is the background task for CitySafe..
+        /// </summary>
+        public static string Background_Description {
+            get {
+                return ResourceManager.GetString("Background_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forget password?.
         /// </summary>
         public static string Login_ForgetPassword {

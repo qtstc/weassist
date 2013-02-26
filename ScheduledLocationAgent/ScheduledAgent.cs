@@ -51,8 +51,9 @@ namespace ScheduledLocationAgent
         protected override async void OnInvoke(ScheduledTask task)
         {
             ParseClient.Initialize("JCShhMq7PAo4ds86p1aFqD8moEV61yO9tm7kYJw2", "ucvkkkm6IXAtcnNleST3BPbxOVsBgrP3u986c9P4");
-           
-            await ParseUser.LogInAsync("tao", "p");
+            String[] credential = Utilities.GetParseCredential();
+            Debug.WriteLine("Background agent logging in using: " + credential[0] + " " + credential[1]);
+            await ParseUser.LogInAsync(credential[0], credential[1]);
             ParseUser user = ParseUser.CurrentUser;
 
             int lastLocationIndex = user.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);

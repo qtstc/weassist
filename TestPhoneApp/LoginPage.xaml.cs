@@ -12,6 +12,7 @@ using CitySafe.Resources;
 using Parse;
 using System.Diagnostics;
 using Microsoft.Phone.Tasks;
+using ScheduledLocationAgent.Data;
 
 namespace CitySafe
 {
@@ -62,6 +63,8 @@ namespace CitySafe
             {
                 await ParseUser.LogInAsync(username, password);
                 Debug.WriteLine("Log in with " + username + " and " + password + " succeeded.");
+                //Save the username and password to the app so the background agent can log in.
+                Utilities.SaveParseCredential(username, password);
                 //Move to change user page if logged in successfully.
                 navigateToSOSPage();
             }

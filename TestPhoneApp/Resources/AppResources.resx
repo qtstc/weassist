@@ -314,4 +314,7 @@
   <data name="SOS_SOSSentSuccess" xml:space="preserve">
     <value>Your SOS message was sent successfully.</value>
   </data>
+  <data name="Background_Description" xml:space="preserve">
+    <value>This is the background task for CitySafe.</value>
+  </data>
 </root>

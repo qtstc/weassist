@@ -5,29 +5,38 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Device.Location;
+using Microsoft.Phone.Shell;
+using System.IO.IsolatedStorage;
+using System.Security.Cryptography;
 
 namespace ScheduledLocationAgent.Data
 {
     public class Utilities
     {
-        public static string convertGeoPositionToJSON(GeoPosition<GeoCoordinate> position)
+        private const String SETTINGS_USERNAME_KEY = "settings_username_key";
+        private const String SETTINGS_PASSWORD_KEY = "settings_password_key";
+
+        public static void SaveParseCredential(String username, String password)
         {
-            JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.None };
-#if DEBUG
-            string json = JsonConvert.SerializeObject(position, Formatting.Indented, jsonSerializerSettings);
-#else
-                                string json = JsonConvert.SerializeObject(objectToSave, Formatting.None, jsonSerializerSettings);
-#endif
-            return json;
+             var encrypted = ProtectedData.Protect(Encoding.UTF8.GetBytes(password), null);
+             IsolatedStorageSettings.ApplicationSettings[SETTINGS_PASSWORD_KEY] = encrypted;
+             IsolatedStorageSettings.ApplicationSettings[SETTINGS_USERNAME_KEY] = username;
+             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
-        public static GeoPosition<GeoCoordinate> convertJSONToGeoPosition(string json)
+        public static String[] GetParseCredential()
         {
-            JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.None };
-
-            GeoPosition<GeoCoordinate> result = JsonConvert.DeserializeObject<GeoPosition<GeoCoordinate>>(json, jsonSerializerSettings);
-
-            return result;
+            String storedUsername = "";
+            String storedPassword = "";
+            if (IsolatedStorageSettings.ApplicationSettings.Contains(SETTINGS_USERNAME_KEY))
+                 storedUsername = IsolatedStorageSettings.ApplicationSettings[SETTINGS_USERNAME_KEY] as string;
+             if(IsolatedStorageSettings.ApplicationSettings.Contains(SETTINGS_USERNAME_KEY))
+             {
+                 var bytes = IsolatedStorageSettings.ApplicationSettings[SETTINGS_PASSWORD_KEY] as byte[];
+                 var unEncrypted = ProtectedData.Unprotect(bytes, null);
+                 storedPassword = Encoding.UTF8.GetString(unEncrypted, 0, unEncrypted.Length);
+             }
+             return new String[] { storedUsername, storedPassword };
         }
 
         /// <summary>

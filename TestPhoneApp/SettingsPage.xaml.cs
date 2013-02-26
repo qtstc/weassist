@@ -77,7 +77,7 @@ namespace CitySafe
 
             // The description is required for periodic agents. This is the string that the user
             // will see in the background services Settings page on the device.
-            periodicTask.Description = "This demonstrates a periodic task.";
+            periodicTask.Description = AppResources.Background_Description;
 
             ScheduledActionService.Add(periodicTask);
 
@@ -112,6 +112,7 @@ namespace CitySafe
         private void ChangeUserButton_Click(object sender, RoutedEventArgs e)
         {
             ParseUser.LogOut();
+            Utilities.SaveParseCredential("", "");//Also clear the user credential stored in the phone.
             RemoveAgent();
             //Go back to login page
             NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
