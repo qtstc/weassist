@@ -84,6 +84,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Data\AzureContract.cs" />
     <Compile Include="IsolatedStorageHelper.cs" />
     <Compile Include="Data\ParseContract.cs" />
     <Compile Include="Utilities.cs" />
