@@ -1,20 +1,27 @@
 ﻿using Parse;
 using System;
-using System.Collections.Generic;
 using System.Device.Location;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScheduledLocationAgent.Data
 {
+    /// <summary>
+    /// The contract used to manage the data stored in the parse server.
+    /// </summary>
     public static class ParseContract
     {
+        //Credentials necessary for connecting to the Parse server.
+        public const string applicationID = "JCShhMq7PAo4ds86p1aFqD8moEV61yO9tm7kYJw2";
+        public const string windowsKey = "ucvkkkm6IXAtcnNleST3BPbxOVsBgrP3u986c9P4";
+
+        /// <summary>
+        /// Data contract for the User table.
+        /// </summary>
         public static class UserTable
         {
             public static string TABLE_NAME { get { return "User"; } }
 
+            public static string FIRST_NAME { get { return "firstName"; } }
+            public static string LAST_NAME { get { return "lastName"; } }
             public static string UPDATE_INTERVAL { get { return "updateInterval"; } }
             private static string LOCATION_HISTORY { get { return "location_"; } }
             public static string TRACKING_ENABLED { get { return "trackingEnabled"; } }
@@ -24,8 +31,13 @@ namespace ScheduledLocationAgent.Data
             public static string IN_DANGER { get { return "inDanger"; } }
 
             public static string DUMMY_USER { get { return "WNrCdVZZ48"; } }
+
+            public static int INITIAL_LAST_LOCATION { get { return -1; } }
         }
 
+        /// <summary>
+        /// Data contract for the Locations table.
+        /// </summary>
         public static class LocationTable
         {
             public static string TABLE_NAME { get { return "Locations"; } }
@@ -42,19 +54,39 @@ namespace ScheduledLocationAgent.Data
 
             public static double NaNforParse = -1;
 
+            /// <summary>
+            /// Converts a GeoPosition instance to a ParseObject.
+            /// </summary>
+            /// <param name="g">the GeoPosition instance</param>
+            /// <returns>the ParseObject</returns>
             public static ParseObject GeoPositionToParseObject(GeoPosition<GeoCoordinate> g)
             { 
                 ParseObject Locations = new ParseObject(TABLE_NAME);
-                Locations[LOCATION] = new ParseGeoPoint(ToParseNaN(g.Location.Latitude), ToParseNaN(g.Location.Longitude));
-                Locations[TIME_STAMP] = g.Timestamp.DateTime;
-                Locations[ALTITUDE] = ToParseNaN(g.Location.Altitude);
-                Locations[HORIZONTAL_ACCURACY] = ToParseNaN(g.Location.HorizontalAccuracy);
-                Locations[VERTICAL_ACCURACY] = ToParseNaN(g.Location.VerticalAccuracy);
-                Locations[SPEED] = ToParseNaN(g.Location.Speed);
-                Locations[COURSE] = ToParseNaN(g.Location.Course);
+                GeoPositionSetParseObject(g, Locations);
                 return Locations;
             }
 
+            /// <summary>
+            /// Use a GeoPosition instance to populate a ParseObject
+            /// </summary>
+            /// <param name="g">the GeoPosition</param>
+            /// <param name="p">the ParseObject</param>
+            public static void GeoPositionSetParseObject(GeoPosition<GeoCoordinate> g, ParseObject p)
+            {
+                p[LOCATION] = new ParseGeoPoint(ToParseNaN(g.Location.Latitude), ToParseNaN(g.Location.Longitude));
+                p[TIME_STAMP] = g.Timestamp.DateTime;
+                p[ALTITUDE] = ToParseNaN(g.Location.Altitude);
+                p[HORIZONTAL_ACCURACY] = ToParseNaN(g.Location.HorizontalAccuracy);
+                p[VERTICAL_ACCURACY] = ToParseNaN(g.Location.VerticalAccuracy);
+                p[SPEED] = ToParseNaN(g.Location.Speed);
+                p[COURSE] = ToParseNaN(g.Location.Course);
+            }
+
+            /// <summary>
+            /// Convert a ParseObject to its GeoPosition counterpart
+            /// </summary>
+            /// <param name="p">the ParseObject instance</param>
+            /// <returns>the GeoPosition object</returns>
             public static GeoPosition<GeoCoordinate> ParseObjectToGeoPosition(ParseObject p)
             {
                 GeoPosition<GeoCoordinate> g = new GeoPosition<GeoCoordinate>();
@@ -91,6 +123,12 @@ namespace ScheduledLocationAgent.Data
                 return g;
             }
 
+            /// <summary>
+            /// Because Parse does not accept the Double.NaN in its table,
+            /// we convert it to a special value.
+            /// </summary>
+            /// <param name="n">the original value if n is not a NaN, otherwise NaNforParse</param>
+            /// <returns></returns>
             private static double ToParseNaN(double n)
             {
                 if (Double.IsNaN(n))
@@ -99,6 +137,9 @@ namespace ScheduledLocationAgent.Data
             }
         }
 
+        /// <summary>
+        /// DataContract for the SOSRequest table.
+        /// </summary>
         public static class SOSRequestTable
         {
             public static string TABLE_NAME { get { return "SOSRequest"; } }
@@ -108,6 +149,9 @@ namespace ScheduledLocationAgent.Data
             public static string sentLocation { get { return "sentLocation"; } }
         }
 
+        /// <summary>
+        /// DataContract for the TrackRelation table.
+        /// </summary>
         public static class TrackRelationTable
         {
             public static string TABLE_NAME { get { return "TrackRelation"; } }
@@ -122,6 +166,11 @@ namespace ScheduledLocationAgent.Data
             public static string NOTIFY_BY_PUSH { get { return "notifyByPush"; } }
             public static string ALLOW_LOCATION_ACCESS { get { return "allowLocationAccess"; } }
 
+            /// <summary>
+            /// Get the other role.
+            /// </summary>
+            /// <param name="track">either TRACKED or TRACKING</param>
+            /// <returns>the other one</returns>
             public static string OtherRole(string track)
             {
                 if (track == TRACKING) return TRACKED;
@@ -129,6 +178,11 @@ namespace ScheduledLocationAgent.Data
                 else return "Error";
             }
 
+            /// <summary>
+            /// Get the other verified
+            /// </summary>
+            /// <param name="verified">either TRACKING_VERIFIED or TRACKED_VERIFIED</param>
+            /// <returns>the other one</returns>
             public static string OtherVerified(string verified)
             {
                 if (verified == TRACKED_VERIFIED) return TRACKING_VERIFIED;

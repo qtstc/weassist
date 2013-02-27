@@ -39,7 +39,6 @@ namespace CitySafe
         public SettingsPage()
         {
             InitializeComponent();
-
             userSettings = new UserSettings();
             SettingsPanel.DataContext = userSettings;
             LoadUIData();

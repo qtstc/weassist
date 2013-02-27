@@ -38,7 +38,7 @@ namespace CitySafe
                     ParseObject sos = new ParseObject(ParseContract.SOSRequestTable.TABLE_NAME);
                     sos[ParseContract.SOSRequestTable.SENDER] = ParseUser.CurrentUser;
                     sos[ParseContract.SOSRequestTable.RESOLVED] = false;
-                    sos[ParseContract.SOSRequestTable.sentLocation] = ParseContract.LocationTable.GeoPositionToParseObject(Utilities.getCurrentGeoPosition());
+                    sos[ParseContract.SOSRequestTable.sentLocation] = ParseContract.LocationTable.GeoPositionToParseObject(await Utilities.getCurrentGeoPosition());
                     await sos.SaveAsync();
 
                     ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = true;

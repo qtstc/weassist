@@ -53,7 +53,7 @@ namespace CitySafe
 
                 List<Pushpin> lastLocations =  await LoadLastLocations();
                 List<Pushpin> sosLocations = await LoadSOSLocations();
-                myLocationPushpin = LoadUserLocation();
+                myLocationPushpin = await LoadUserLocation();
 
                 InitAppBar(lastLocations,sosLocations);
 
@@ -112,9 +112,9 @@ namespace CitySafe
         /// Get the location of the current user and create a pushpin with it.
         /// </summary>
         /// <returns></returns>
-        private Pushpin LoadUserLocation()
+        private async Task<Pushpin> LoadUserLocation()
         {
-            return new Pushpin(Utilities.getCurrentGeoPosition(), MY_LOCATION_PUSHPIN_COLOR);
+            return new Pushpin(await Utilities.getCurrentGeoPosition(), MY_LOCATION_PUSHPIN_COLOR);
         }
 
         /// <summary>

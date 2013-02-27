@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CitySafe.Resources;
-using System.IO.IsolatedStorage;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows.Controls.Primitives;
 using Parse;
 using CitySafe.ViewModels;
+using ScheduledLocationAgent.Data;
 
 namespace CitySafe
 {
@@ -24,11 +21,6 @@ namespace CitySafe
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
-        /// <summary>
-        /// The progress overlay used in the app.
-        /// </summary>
-        private static Popup progressOverlay;
-
         //The view models for the lists on the track page.
         //Made global because we need to access them from other pages.
         public static TrackViewModel trackingModel;
@@ -37,6 +29,13 @@ namespace CitySafe
         //Made these global because we need to pass it from page to pages.
         public static TrackItemModel trackItemModel;
 
+
+        #region ProgressOverlay
+
+        /// <summary>
+        /// The progress overlay used in the app.
+        /// </summary>
+        private static Popup progressOverlay;
 
         /// <summary>
         /// Set the text of the progress overlay and show it.
@@ -55,6 +54,8 @@ namespace CitySafe
         {
             progressOverlay.IsOpen = false;
         }
+
+        #endregion
 
         /// <summary>
         /// Constructor for the Application object.
@@ -98,7 +99,7 @@ namespace CitySafe
             OverLay ovr = new OverLay();
             App.progressOverlay.Child = ovr;
 
-            ParseClient.Initialize("JCShhMq7PAo4ds86p1aFqD8moEV61yO9tm7kYJw2", "ucvkkkm6IXAtcnNleST3BPbxOVsBgrP3u986c9P4");
+            ParseClient.Initialize(ParseContract.applicationID, ParseContract.windowsKey);
         }
 
         // Code to execute when the application is launching (eg, from Start)
