@@ -317,4 +317,10 @@
   <data name="Background_Description" xml:space="preserve">
     <value>This is the background task for CitySafe.</value>
   </data>
+  <data name="SOS_FailToSetUpPush" xml:space="preserve">
+    <value>Failed to set up push notification ...</value>
+  </data>
+  <data name="SOS_SettingUpPush" xml:space="preserve">
+    <value>Setting up ...</value>
+  </data>
 </root>

@@ -96,9 +96,6 @@
     <Compile Include="MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PushNotification.xaml.cs">
-      <DependentUpon>PushNotification.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pushpin.cs" />
     <Compile Include="TrackedSettingsPage.xaml.cs">
       <DependentUpon>TrackedSettingsPage.xaml</DependentUpon>
@@ -152,10 +149,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OverLay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PushNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

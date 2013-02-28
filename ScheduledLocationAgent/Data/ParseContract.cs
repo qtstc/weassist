@@ -29,6 +29,7 @@ namespace ScheduledLocationAgent.Data
             public static string LOCATION_DATA_SIZE { get { return "locationDataSize"; } }
             public static string LOCATION(int key) { return LOCATION_HISTORY + key.ToString("000"); }
             public static string IN_DANGER { get { return "inDanger"; } }
+            public static string WIN_PNONE_PUSH_URI { get { return "winPhonePushURI"; } }
 
             public static string DUMMY_USER { get { return "WNrCdVZZ48"; } }
 

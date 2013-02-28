@@ -340,6 +340,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to set up push notification ....
+        /// </summary>
+        public static string SOS_FailToSetUpPush {
+            get {
+                return ResourceManager.GetString("SOS_FailToSetUpPush", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage lists....
         /// </summary>
         public static string SOS_ManageList {
@@ -381,6 +390,15 @@ namespace CitySafe.Resources {
         public static string SOS_SendSOS {
             get {
                 return ResourceManager.GetString("SOS_SendSOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting up ....
+        /// </summary>
+        public static string SOS_SettingUpPush {
+            get {
+                return ResourceManager.GetString("SOS_SettingUpPush", resourceCulture);
             }
         }
         

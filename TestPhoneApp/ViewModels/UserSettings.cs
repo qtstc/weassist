@@ -117,6 +117,7 @@ namespace CitySafe.ViewModels
             ParseUser.CurrentUser[ParseContract.UserTable.LOCATION_DATA_SIZE] = DEFAULT_DATA_SIZE;
             ParseUser.CurrentUser[ParseContract.UserTable.LAST_LOCATION_INDEX] = DEFAULT_DATA_SIZE - 1;
             ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = false;
+            ParseUser.CurrentUser[ParseContract.UserTable.WIN_PNONE_PUSH_URI] = "";
 
             //Get the null location used to mark un
             ParseQuery<ParseObject> nullLocationQuery = ParseObject.GetQuery(ParseContract.LocationTable.TABLE_NAME);

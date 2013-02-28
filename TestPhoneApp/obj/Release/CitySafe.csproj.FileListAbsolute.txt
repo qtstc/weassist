@@ -44,7 +44,6 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\R
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Release\LoginPage.g.cs
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Release\MapPage.g.cs
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Release\OverLay.g.cs
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Release\PushNotification.g.cs
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Release\SettingsPage.g.cs
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Release\SignupPage.g.cs
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Release\SOSPage.g.cs
