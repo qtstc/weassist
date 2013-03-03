@@ -28,14 +28,20 @@
 
         <!--ContentPanel - place additional content here-->
         <StackPanel x:Name="TrackingSettingsPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Text="{Binding LocalizedResources.TrackingSetting_WhenDangerNotify, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
-            <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Push, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding usePushNotification, Mode=TwoWay}"/>
-            <CheckBox Content="{Binding LocalizedResources.TrackingSetting_SMS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding useSMS, Mode=TwoWay}"/>
-            <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Email, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding useEmail, Mode=TwoWay}"/>
-            <Button Content="{Binding LocalizedResources.Setting_ApplySettings, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Apply_Button_Click"/>
-            <Button Content="{Binding LocalizedResources.TrackingSetting_StopTracking, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Stop_Tracking_Button_Click"/>
-            <Button Content="{Binding LocalizedResources.TrackingSetting_RequestPreviousLocation, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Check_Previous_Location_Button_Click"/>
+            <TextBlock Text="{Binding LocalizedResources.TrackingSetting_WhenDangerNotify, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="16" Margin="12,0"/>
+            <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Push, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding usePushNotification, Mode=TwoWay}" Margin="12,24"/>
+            <TextBlock Text="{Binding LocalizedResources.TrackingSetting_PushInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="14" Margin="36,-36,36,0"/>
+            <CheckBox Content="{Binding LocalizedResources.TrackingSetting_SMS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding useSMS, Mode=TwoWay}" Margin="12,24"/>
+            <TextBlock Text="{Binding LocalizedResources.TrackingSetting_SMSInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="14" Margin="36,-36,36,0"/>
+            <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Email, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding useEmail, Mode=TwoWay}" Margin="12,24"/>
+            <TextBlock Text="{Binding LocalizedResources.TrackingSetting_EmailInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="14" Margin="36,-36,36,0"/>
+            <Button Content="{Binding LocalizedResources.TrackingSetting_RequestPreviousLocation, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Check_Previous_Location_Button_Click" Margin="24,24,24,0"/>
         </StackPanel>
     </Grid>
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="save" Click="Apply_Button_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/delete.png" Text="delete user"  Click="Stop_Tracking_Button_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

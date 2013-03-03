@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -64,7 +60,7 @@ namespace CitySafe
             App.HideProgressOverlay();
         }
 
-        private async void Stop_Tracked_Button_Click(object sender, RoutedEventArgs e)
+        private async void Stop_Tracked_Button_Click(object sender, EventArgs e)
         {
             App.ShowProgressOverlay(AppResources.TrackedSetting_RemovingUser);
             try
@@ -79,7 +75,7 @@ namespace CitySafe
             NavigationService.RemoveBackEntry();
         }
 
-        private async void Apply_Button_Click(object sender, RoutedEventArgs e)
+        private async void Apply_Button_Click(object sender, EventArgs e)
         {
             await SaveUIData();
         }

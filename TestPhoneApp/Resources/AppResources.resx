@@ -159,10 +159,10 @@
     <value>Change User</value>
   </data>
   <data name="ProgressBar_Loading" xml:space="preserve">
-    <value>Loading</value>
+    <value>Loading ...</value>
   </data>
   <data name="ProgressBar_VerifyingUser" xml:space="preserve">
-    <value>Verifying User</value>
+    <value>Verifying User ...</value>
   </data>
   <data name="Signup_PageHeader" xml:space="preserve">
     <value>Sign up</value>
@@ -171,7 +171,7 @@
     <value>Enable Tracking</value>
   </data>
   <data name="ProgressBar_SigningUpUser" xml:space="preserve">
-    <value>Signing Up</value>
+    <value>Signing Up ...</value>
   </data>
   <data name="Setting_ApplySettings" xml:space="preserve">
     <value>Apply Settings</value>
@@ -180,19 +180,19 @@
     <value>Refresh</value>
   </data>
   <data name="Login_LoginFailMessage" xml:space="preserve">
-    <value>Login failed.Please check network settings and try again later.</value>
+    <value>Login failed.Please check your network settings and try again later.</value>
   </data>
   <data name="Login_LoginWrongCredentials" xml:space="preserve">
     <value>Incorrect username or password.</value>
   </data>
   <data name="Setting_SyncingUserSettingsWithParseServer" xml:space="preserve">
-    <value>Syncing User Settings</value>
+    <value>Syncing User Settings ...</value>
   </data>
   <data name="Setting_SyncingFailed" xml:space="preserve">
-    <value>Failed to sync user settings with the server.</value>
+    <value>Failed to sync user settings with the server. Please check network settings and try again later.</value>
   </data>
   <data name="Setting_InitializeSettings" xml:space="preserve">
-    <value>Initializing Settings</value>
+    <value>Initializing Settings ...</value>
   </data>
   <data name="Tracker_TrackedHeader" xml:space="preserve">
     <value>Tracked</value>
@@ -207,13 +207,13 @@
     <value>SOS</value>
   </data>
   <data name="SOS_SendSOS" xml:space="preserve">
-    <value>HELP!</value>
+    <value>HELP</value>
   </data>
   <data name="Tracker_Add" xml:space="preserve">
     <value>Add</value>
   </data>
   <data name="Tracker_AddFailed" xml:space="preserve">
-    <value>Failed to send the invitation to the user with the given email.</value>
+    <value>Failed to send the invitation to the user with the given email. Please check your network settings and try again later.</value>
   </data>
   <data name="Tracker_InvalidEmailMessage" xml:space="preserve">
     <value>Invalid email address</value>
@@ -228,7 +228,7 @@
     <value>User is added to your list successfully.</value>
   </data>
   <data name="Tracker_FailToLoadList" xml:space="preserve">
-    <value>Failed to load track lists.</value>
+    <value>Failed to load track lists. Please check your network settings and try again later.</value>
   </data>
   <data name="Tracker_LoadList" xml:space="preserve">
     <value>Loading lists ...</value>
@@ -275,9 +275,6 @@
   <data name="TrackedSetting_Saving" xml:space="preserve">
     <value>Saving tracked settings ...</value>
   </data>
-  <data name="TrackedSetting_StopTracked" xml:space="preserve">
-    <value>Remove From Tracked List</value>
-  </data>
   <data name="TrackedSetting_RemovingUser" xml:space="preserve">
     <value>Removing user from tracked list ...</value>
   </data>
@@ -285,7 +282,7 @@
     <value>'s Locations</value>
   </data>
   <data name="Map_LoadingFailed" xml:space="preserve">
-    <value>Failed to load the location data.</value>
+    <value>Failed to load the location data. Please check your network settings and try again later.</value>
   </data>
   <data name="Map_LoadingLocation" xml:space="preserve">
     <value>Loading location data ...</value>
@@ -303,19 +300,19 @@
     <value>Sending SOS requests ...</value>
   </data>
   <data name="SOS_SOSCanceledFail" xml:space="preserve">
-    <value>Failed to cancel your SOS request.</value>
+    <value>Failed to cancel your SOS request. Please check your network settings and try again later</value>
   </data>
   <data name="SOS_SOSCanceledSuccess" xml:space="preserve">
     <value>Your SOS request was canceled successfully.</value>
   </data>
   <data name="SOS_SOSSentFail" xml:space="preserve">
-    <value>Sending SOS message failed.</value>
+    <value>Sending SOS message failed. Please check your network settings.</value>
   </data>
   <data name="SOS_SOSSentSuccess" xml:space="preserve">
     <value>Your SOS message was sent successfully.</value>
   </data>
   <data name="Background_Description" xml:space="preserve">
-    <value>This is the background task for CitySafe.</value>
+    <value>CitySafe background location updater.</value>
   </data>
   <data name="SOS_FailToSetUpPush" xml:space="preserve">
     <value>Failed to set up push notification ...</value>
@@ -324,12 +321,30 @@
     <value>Setting up ...</value>
   </data>
   <data name="Setting_AgentDisabled" xml:space="preserve">
-    <value>The location update background agent is disabled by the user.</value>
+    <value>The location update background agent is disabled by the user. Please enable it in the phone settings to allow location update.</value>
   </data>
   <data name="Setting_LastUpdateAt" xml:space="preserve">
     <value>Last location was sent at </value>
   </data>
   <data name="Setting_UpdateFrequency" xml:space="preserve">
     <value>Send my location to the server every: </value>
+  </data>
+  <data name="TrackingSetting_EmailInfo" xml:space="preserve">
+    <value>An email will be sent to your email address. It is recommended that you always leave this option on.</value>
+  </data>
+  <data name="TrackingSetting_PushInfo" xml:space="preserve">
+    <value>Because the deliever of push noticaition is not guranteed and may be affected by network connection, user is encouraged to use it with other notification method.</value>
+  </data>
+  <data name="TrackingSetting_SMSInfo" xml:space="preserve">
+    <value>An SMS message will be sent to the assocaited with this account. You may be charged for receiving the message depending on your carrier.</value>
+  </data>
+  <data name="App_ConnectionError" xml:space="preserve">
+    <value>Cannot connect to the  server, please check network settings.</value>
+  </data>
+  <data name="Setting_FailToLogOut" xml:space="preserve">
+    <value>Failed to save settings to the server before logging out. Please check your network settings and try again later.</value>
+  </data>
+  <data name="Setting_Loggingout" xml:space="preserve">
+    <value>Saving user settings ...</value>
   </data>
 </root>

@@ -4,11 +4,12 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using CitySafe.Resources;
 using Parse;
-using Microsoft.Phone.Scheduler;
 using System.Diagnostics;
 using ScheduledLocationAgent.Data;
 using System.Threading.Tasks;
 using CitySafe.ViewModels;
+using Microsoft.Phone.Shell;
+using Microsoft.Phone.Notification;
 
 namespace CitySafe
 {
@@ -36,8 +37,20 @@ namespace CitySafe
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ChangeUserButton_Click(object sender, EventArgs e)
+        private async void ChangeUserButton_Click(object sender, EventArgs e)
         {
+            App.ShowProgressOverlay(AppResources.Setting_Loggingout);
+            try
+            {
+                HttpNotificationChannel.Find(LoginPage.CHANNEL_NAME).Close();
+                ParseUser.CurrentUser[ParseContract.UserTable.WIN_PNONE_PUSH_URI] = "";
+                await ParseUser.CurrentUser.SaveAsync();
+            }
+            catch {
+                MessageBox.Show(AppResources.Setting_FailToLogOut);
+                App.HideProgressOverlay();
+                return;
+            }
             ParseUser.LogOut();
             Utilities.SaveParseCredential("", "");//Also clear the user credential stored in the phone.
             App.RemoveAgent();
@@ -46,6 +59,7 @@ namespace CitySafe
             //Remove back entry. Prevent user from coming back to settings page by pressing back button
             //when he or she is on the login page
             NavigationService.RemoveBackEntry();
+            App.HideProgressOverlay();
         }
 
         private async void ApplySettingsButton_Click(object sender, EventArgs e)
@@ -101,7 +115,7 @@ namespace CitySafe
         /// <summary>
         /// Save the UI data to the server.
         /// </summary>
-        private async Task<bool>  SaveUIData()
+        private async Task<bool> SaveUIData()
         {
             bool result = true;
             App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);

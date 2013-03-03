@@ -6,17 +6,15 @@
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
-    
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}" Opacity="1">
+    d:DesignHeight="800" d:DesignWidth="800"  >
+
+    <Grid x:Name="LayoutRoot" Opacity="1" Background="Black" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="400"/>
-            <RowDefinition Height="400"/>
+            <RowDefinition Height="800"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <ProgressBar IsIndeterminate="True" Foreground="Purple" Height="50" Width="480" VerticalAlignment="Center"/>
-            <TextBlock x:Name ="Overlay_Textblock" Foreground="Purple" HorizontalAlignment="Center"/>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ProgressBar IsIndeterminate="True" Foreground="{StaticResource PhoneAccentBrush}" Height="50" Width="480" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name ="Overlay_Textblock" Foreground="{StaticResource PhoneTextBoxBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>

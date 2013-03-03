@@ -7,8 +7,7 @@ using Parse;
 using ScheduledLocationAgent.Data;
 using CitySafe.Resources;
 using System.Diagnostics;
-using Microsoft.Phone.Notification;
-using System.Text;
+using Microsoft.Phone.Shell;
 
 namespace CitySafe
 {
@@ -25,11 +24,11 @@ namespace CitySafe
             InitializeComponent();
 
             //Change the text of the help button if the user is in danger.
-            if(ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.IN_DANGER))
+            if (ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.IN_DANGER))
                 HelpButton.Content = AppResources.SOS_Resolve;
         }
 
-      
+
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             string message = "";

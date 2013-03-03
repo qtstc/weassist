@@ -19,10 +19,14 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <phone:Pivot  x:Name="TrackPivot"  Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <phone:Pivot  x:Name="TrackPivot"  Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0" Grid.ColumnSpan="2" FontSize="20">
                 <!--Pivot item one-->
-                <phone:PivotItem Header="{Binding LocalizedResources.Tracker_TrackingHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                    <phone:LongListSelector x:Name="TrackingList" ItemsSource="{Binding trackItems}" SelectionChanged="TrackingList_SelectionChanged" >
+            <phone:PivotItem Header="{Binding LocalizedResources.Tracker_TrackingHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Margin="24,0">
+                    <phone:LongListSelector x:Name="TrackingList" ItemsSource="{Binding trackItems}" SelectionChanged="TrackingList_SelectionChanged"  >
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
@@ -35,7 +39,7 @@
             </phone:PivotItem>
 
                 <!--Pivot item two-->
-                <phone:PivotItem Header="{Binding LocalizedResources.Tracker_TrackedHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+            <phone:PivotItem Header="{Binding LocalizedResources.Tracker_TrackedHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Margin="24,0">
                 <phone:LongListSelector x:Name="TrackedList" ItemsSource="{Binding trackItems}" SelectionChanged="TrackedList_SelectionChanged" >
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
@@ -48,10 +52,10 @@
                 </phone:LongListSelector>
             </phone:PivotItem>
             </phone:Pivot>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <TextBox x:Name="TrackAddTextBox"/>
-            <Button x:Name ="TrackListAddButton" Content="{Binding LocalizedResources.Tracker_Add, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="TrackListAddButton_Click"/>
-        </StackPanel>
+
+        <TextBox x:Name="TrackAddTextBox" Grid.Row="1" Grid.Column="0"  Margin="12,0,0,0"/>
+        <Button x:Name ="TrackListAddButton" Grid.Row="1" Grid.Column="1" Content="{Binding LocalizedResources.Tracker_Add, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="TrackListAddButton_Click"  Margin="0,0,12,0"/>
+
     </Grid>
 
 </phone:PhoneApplicationPage>

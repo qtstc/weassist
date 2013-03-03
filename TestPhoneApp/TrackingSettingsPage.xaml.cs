@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CitySafe.ViewModels;
 using CitySafe.Resources;
-using Parse;
 using ScheduledLocationAgent.Data;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -36,7 +31,7 @@ namespace CitySafe
             App.ShowProgressOverlay(AppResources.TrackingSetting_Loading);
             try
             {
-               //Set the title
+                //Set the title
                 TrackingTitle.Text = App.trackItemModel.user.Username;
                 await trackingSettings.LoadSettings();
             }
@@ -66,12 +61,12 @@ namespace CitySafe
             App.HideProgressOverlay();
         }
 
-        private async void Apply_Button_Click(object sender, RoutedEventArgs e)
+        private async void Apply_Button_Click(object sender, EventArgs e)
         {
             await SaveUIData();
         }
 
-        private async void Stop_Tracking_Button_Click(object sender, RoutedEventArgs e)
+        private async void Stop_Tracking_Button_Click(object sender, EventArgs e)
         {
             App.ShowProgressOverlay(AppResources.TrackingSetting_RemovingUser);
             try
@@ -92,7 +87,7 @@ namespace CitySafe
             {
                 NavigationService.Navigate(new Uri("/MapPage.xaml", UriKind.Relative));
             }
-            else 
+            else
             {
                 MessageBox.Show(AppResources.TrackingSetting_LocationRequestDenied);
             }

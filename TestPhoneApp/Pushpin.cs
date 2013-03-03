@@ -1,10 +1,5 @@
 ﻿using Microsoft.Phone.Maps.Controls;
-using System;
-using System.Collections.Generic;
 using System.Device.Location;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -23,7 +18,7 @@ namespace CitySafe
         private GeoPosition<GeoCoordinate> _position;
         private MapOverlay _pushpinOverlay;
 
-        public GeoPosition<GeoCoordinate> position { get { return _position;} }
+        public GeoPosition<GeoCoordinate> position { get { return _position; } }
         public MapOverlay pushpinLayer { get { return _pushpinOverlay; } }
 
         public Pushpin(GeoPosition<GeoCoordinate> position, Color c)
@@ -32,7 +27,7 @@ namespace CitySafe
             _pushpinOverlay = GetPushpinOverlay(position.Location, c);
         }
 
-        private static MapOverlay GetPushpinOverlay(GeoCoordinate coord,Color c)
+        private static MapOverlay GetPushpinOverlay(GeoCoordinate coord, Color c)
         {
             var aPushpin = CreatePushpinObject(c);
 

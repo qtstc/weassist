@@ -9,6 +9,7 @@ using ScheduledLocationAgent.Data;
 using Microsoft.Phone.Notification;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Phone.Shell;
 
 namespace CitySafe
 {
@@ -23,12 +24,14 @@ namespace CitySafe
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private const string DUMMY_PASSWORD = "DUMMY_PASSWORD";
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Navigate driectly to the settings page if logged in.
+          //Navigate driectly to the settings page if logged in.
             if (ParseUser.CurrentUser != null)
             {
-                NavigateToSOSPage();
+                 await NavigateToSOSPage();
             } 
         }
 
@@ -48,6 +51,7 @@ namespace CitySafe
         #endregion
 
         #region helper methods
+
         /// <summary>
         /// Getting username and password from UI and attemp to log in with parse.
         /// If login succeeded, navigate the user to the settings page.
@@ -56,6 +60,12 @@ namespace CitySafe
         /// </summary>
         private async void loginWithProgressOverlay()
         {
+            if (ParseUser.CurrentUser != null && login_password_textbox.Password.Equals(DUMMY_PASSWORD)&& login_username_textbox.Text.Equals(ParseUser.CurrentUser.Username))
+            {
+                await NavigateToSOSPage();
+                return;
+            } 
+
             App.ShowProgressOverlay(AppResources.ProgressBar_VerifyingUser);
             string username = login_username_textbox.Text;
             string password = login_password_textbox.Password;
@@ -68,7 +78,7 @@ namespace CitySafe
                 //Remove the progress overlay.
                 App.HideProgressOverlay();
                 //Move to change user page if logged in successfully.
-                NavigateToSOSPage();
+                await NavigateToSOSPage();
             }
             catch (ParseException e)//When login failed because of parse exception
             {
@@ -95,37 +105,52 @@ namespace CitySafe
         /// So when user tap the back button in the settings page,
         /// the application will exit instead of coming back to the login page.
         /// </summary>
-        private async void NavigateToSOSPage()
+        private async Task NavigateToSOSPage()
         {
-            await SetUpAfterLogin();
-            NavigationService.Navigate(new Uri("/SOSPage.xaml", UriKind.Relative));
-            NavigationService.RemoveBackEntry();
+            if (await SetUpAfterLogin())
+            {
+                NavigationService.Navigate(new Uri("/SOSPage.xaml", UriKind.Relative));
+                NavigationService.RemoveBackEntry();
+            }
         }
 
         /// <summary>
         /// Set up push notification and periodagent.
         /// </summary>
-        private async Task SetUpAfterLogin()
+        private async Task<bool> SetUpAfterLogin()
         {
             App.ShowProgressOverlay(AppResources.Login_SettingUp);
-            await ParseUser.CurrentUser.FetchAsync();
-            //Start the periodic agent even when the user does not navigate to the settings page.
-            if (ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.TRACKING_ENABLED))
-                App.StartPeriodicAgent();
-            //Start the push notification channel.
+            bool result = true;
+
             try
             {
-                await SetUpChannel();
+                await ParseUser.CurrentUser.FetchAsync();
+                //Start the periodic agent even when the user does not navigate to the settings page.
+                if (ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.TRACKING_ENABLED))
+                    App.StartPeriodicAgent();
+                //Start the push notification channel.
+                try
+                {
+                    await SetUpChannel();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.ToString());
+                    MessageBox.Show(AppResources.SOS_FailToSetUpPush);
+                }
+                //Send the unsent location data to the server.
+                UnsentLocationQueue queue = new UnsentLocationQueue(ParseUser.CurrentUser.Username);
+                await queue.SendLocations(ParseUser.CurrentUser);
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.ToString());
-                MessageBox.Show(AppResources.SOS_FailToSetUpPush);
+                login_username_textbox.Text = ParseUser.CurrentUser.Username;
+                login_password_textbox.Password = DUMMY_PASSWORD;
+                MessageBox.Show(AppResources.App_ConnectionError);
+                result = false;
             }
-            //Send the unsent location data to the server.
-            UnsentLocationQueue queue = new UnsentLocationQueue(ParseUser.CurrentUser.Username);
-            await queue.SendLocations(ParseUser.CurrentUser);
             App.HideProgressOverlay();
+            return result;
         }
 
         #endregion
@@ -212,28 +237,28 @@ namespace CitySafe
         /// <param name="e"></param>
         void PushChannel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
         {
-            StringBuilder message = new StringBuilder();
-            string relativeUri = string.Empty;
+            //StringBuilder message = new StringBuilder();
 
-            message.AppendFormat("Received Toast {0}:\n", DateTime.Now.ToShortTimeString());
+            //message.AppendFormat("Received Toast {0}:\n", DateTime.Now.ToShortTimeString());
 
-            // Parse out the information that was part of the message.
-            foreach (string key in e.Collection.Keys)
-            {
-                message.AppendFormat("{0}: {1}\n", key, e.Collection[key]);
+            //string relativeUri = string.Empty;
+            // //Parse out the information that was part of the message.
+            //foreach (string key in e.Collection.Keys)
+            //{
+            //    message.AppendFormat("{0}: {1}\n", key, e.Collection[key]);
 
-                if (string.Compare(
-                    key,
-                    "wp:Param",
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    System.Globalization.CompareOptions.IgnoreCase) == 0)
-                {
-                    relativeUri = e.Collection[key];
-                }
-            }
+            //    if (string.Compare(
+            //        key,
+            //        "wp:Param",
+            //        System.Globalization.CultureInfo.InvariantCulture,
+            //        System.Globalization.CompareOptions.IgnoreCase) == 0)
+            //    {
+            //        relativeUri = e.Collection[key];
+            //    }
+            //}
 
-            // Display a dialog of all the fields in the toast.
-            Dispatcher.BeginInvoke(() => MessageBox.Show(message.ToString()));
+             //Display a dialog of all the fields in the toast.
+            Dispatcher.BeginInvoke(() => MessageBox.Show(e.Collection["wp:Text2"]));
         }
 
         #endregion

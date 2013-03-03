@@ -33,7 +33,6 @@ namespace CitySafe
         //Made these global because we need to pass it from page to pages.
         public static TrackItemModel trackItemModel;
 
-
         #region ProgressOverlay
 
         /// <summary>

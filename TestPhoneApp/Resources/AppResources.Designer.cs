@@ -61,6 +61,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot connect to the  server, please check network settings..
+        /// </summary>
+        public static string App_ConnectionError {
+            get {
+                return ResourceManager.GetString("App_ConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to add.
         /// </summary>
         public static string AppBarButtonText {
@@ -88,7 +97,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is the background task for CitySafe..
+        ///   Looks up a localized string similar to CitySafe background location updater..
         /// </summary>
         public static string Background_Description {
             get {
@@ -106,7 +115,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login failed.Please check network settings and try again later..
+        ///   Looks up a localized string similar to Login failed.Please check your network settings and try again later..
         /// </summary>
         public static string Login_LoginFailMessage {
             get {
@@ -178,7 +187,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to load the location data..
+        ///   Looks up a localized string similar to Failed to load the location data. Please check your network settings and try again later..
         /// </summary>
         public static string Map_LoadingFailed {
             get {
@@ -214,7 +223,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading.
+        ///   Looks up a localized string similar to Loading ....
         /// </summary>
         public static string ProgressBar_Loading {
             get {
@@ -223,7 +232,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Signing Up.
+        ///   Looks up a localized string similar to Signing Up ....
         /// </summary>
         public static string ProgressBar_SigningUpUser {
             get {
@@ -232,7 +241,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verifying User.
+        ///   Looks up a localized string similar to Verifying User ....
         /// </summary>
         public static string ProgressBar_VerifyingUser {
             get {
@@ -259,7 +268,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The location update background agent is disabled by the user..
+        ///   Looks up a localized string similar to The location update background agent is disabled by the user. Please enable it in the phone settings to allow location update..
         /// </summary>
         public static string Setting_AgentDisabled {
             get {
@@ -295,7 +304,16 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Initializing Settings.
+        ///   Looks up a localized string similar to Failed to save settings to the server before logging out. Please check your network settings and try again later..
+        /// </summary>
+        public static string Setting_FailToLogOut {
+            get {
+                return ResourceManager.GetString("Setting_FailToLogOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initializing Settings ....
         /// </summary>
         public static string Setting_InitializeSettings {
             get {
@@ -309,6 +327,15 @@ namespace CitySafe.Resources {
         public static string Setting_LastUpdateAt {
             get {
                 return ResourceManager.GetString("Setting_LastUpdateAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving user settings ....
+        /// </summary>
+        public static string Setting_Loggingout {
+            get {
+                return ResourceManager.GetString("Setting_Loggingout", resourceCulture);
             }
         }
         
@@ -331,7 +358,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to sync user settings with the server..
+        ///   Looks up a localized string similar to Failed to sync user settings with the server. Please check network settings and try again later..
         /// </summary>
         public static string Setting_SyncingFailed {
             get {
@@ -340,7 +367,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Syncing User Settings.
+        ///   Looks up a localized string similar to Syncing User Settings ....
         /// </summary>
         public static string Setting_SyncingUserSettingsWithParseServer {
             get {
@@ -421,7 +448,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HELP!.
+        ///   Looks up a localized string similar to HELP.
         /// </summary>
         public static string SOS_SendSOS {
             get {
@@ -430,7 +457,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to cancel your SOS request..
+        ///   Looks up a localized string similar to Failed to cancel your SOS request. Please check your network settings and try again later.
         /// </summary>
         public static string SOS_SOSCanceledFail {
             get {
@@ -448,7 +475,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sending SOS message failed..
+        ///   Looks up a localized string similar to Sending SOS message failed. Please check your network settings..
         /// </summary>
         public static string SOS_SOSSentFail {
             get {
@@ -511,15 +538,6 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove From Tracked List.
-        /// </summary>
-        public static string TrackedSetting_StopTracked {
-            get {
-                return ResourceManager.GetString("TrackedSetting_StopTracked", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Tracker_Add {
@@ -529,7 +547,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to send the invitation to the user with the given email..
+        ///   Looks up a localized string similar to Failed to send the invitation to the user with the given email. Please check your network settings and try again later..
         /// </summary>
         public static string Tracker_AddFailed {
             get {
@@ -547,7 +565,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to load track lists..
+        ///   Looks up a localized string similar to Failed to load track lists. Please check your network settings and try again later..
         /// </summary>
         public static string Tracker_FailToLoadList {
             get {
@@ -619,6 +637,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An email will be sent to your email address. It is recommended that you always leave this option on..
+        /// </summary>
+        public static string TrackingSetting_EmailInfo {
+            get {
+                return ResourceManager.GetString("TrackingSetting_EmailInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading tracking settings ....
         /// </summary>
         public static string TrackingSetting_Loading {
@@ -642,6 +669,15 @@ namespace CitySafe.Resources {
         public static string TrackingSetting_Push {
             get {
                 return ResourceManager.GetString("TrackingSetting_Push", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Because the deliever of push noticaition is not guranteed and may be affected by network connection, user is encouraged to use it with other notification method..
+        /// </summary>
+        public static string TrackingSetting_PushInfo {
+            get {
+                return ResourceManager.GetString("TrackingSetting_PushInfo", resourceCulture);
             }
         }
         
@@ -678,6 +714,15 @@ namespace CitySafe.Resources {
         public static string TrackingSetting_SMS {
             get {
                 return ResourceManager.GetString("TrackingSetting_SMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An SMS message will be sent to the assocaited with this account. You may be charged for receiving the message depending on your carrier..
+        /// </summary>
+        public static string TrackingSetting_SMSInfo {
+            get {
+                return ResourceManager.GetString("TrackingSetting_SMSInfo", resourceCulture);
             }
         }
         

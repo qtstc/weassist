@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -14,17 +12,25 @@ using ScheduledLocationAgent.Data;
 using System.Diagnostics;
 using CitySafe.Resources;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Threading.Tasks;
 
 namespace CitySafe
 {
+    /// <summary>
+    /// The page that is used to display map data.
+    /// Currently it uses the application bar to show a 
+    /// list of locations. In the future, a panaroma page with
+    /// LongListSelector will suit the need better.
+    /// </summary>
     public partial class MapPage : PhoneApplicationPage
     {
         private Color LAST_LOCATION_PUSHPIN_COLOR = Colors.Blue;
         private Color SOS_PUSHPIN_COLOR = Colors.Red;
         private Color MY_LOCATION_PUSHPIN_COLOR = Colors.Black;
         private int ZOOMLEVEL = 10;
+        //The maximum number of last locations loaded. We set a value because the app bar can have at most 50 items.
+        //No point loading more.
+        private int LOCATION_SIZE_LIMIT = 40;
 
         private MapLayer LocationMapLayer;
         private Pushpin lastPushpin;//Used to store the last Pushpin on Map.
@@ -40,6 +46,7 @@ namespace CitySafe
             LocationMap.Layers.Add(LocationMapLayer);
         }
 
+        #region data loading helper method.
         /// <summary>
         /// Load location data from the server.
         /// Also intialize the application bar with the loaded data.
@@ -51,11 +58,11 @@ namespace CitySafe
             {
                 LocationHeader.Text = App.trackItemModel.user.Username + AppResources.Map_LocationOf;
 
-                List<Pushpin> lastLocations =  await LoadLastLocations();
+                List<Pushpin> lastLocations = await LoadLastLocations();
                 List<Pushpin> sosLocations = await LoadSOSLocations();
                 myLocationPushpin = await LoadUserLocation();
 
-                InitAppBar(lastLocations,sosLocations);
+                InitAppBar(lastLocations, sosLocations);
 
                 //Add the user's location to the maplayer.
                 LocationMapLayer.Add(myLocationPushpin.pushpinLayer);
@@ -133,6 +140,8 @@ namespace CitySafe
 
             for (int i = 0; i < locationSize; i++)
             {
+                if (Locations.Count == LOCATION_SIZE_LIMIT)
+                    break;
                 ParseObject location = App.trackItemModel.user.Get<ParseObject>(ParseContract.UserTable.LOCATION((i + startPoint) % locationSize));
                 if (location.ObjectId != ParseContract.LocationTable.DUMMY_LOCATION)
                 {
@@ -148,16 +157,9 @@ namespace CitySafe
             return Locations;
         }
 
-        /// <summary>
-        /// Add a pushpin to the map and zoom to the position.
-        /// </summary>
-        /// <param name="p">the pushpin to be added</param>
-        private void AddNewPushpin(Pushpin p)
-        {
-            LocationMap.SetView(p.position.Location, ZOOMLEVEL, MapAnimationKind.Parabolic);
-            LocationMapLayer.Add(p.pushpinLayer);
-        }
+        #endregion
 
+        #region app bar setup
         /// <summary>
         /// Listener for the menu button. Zoom to the location of the user.
         /// </summary>
@@ -202,7 +204,7 @@ namespace CitySafe
             {
                 ApplicationBarMenuItem item = new ApplicationBarMenuItem();
                 Pushpin p = sosLocations.ElementAt<Pushpin>(i);
-                item.Text = p.ToString()+ " (SOS)";
+                item.Text = p.ToString() + " (SOS)";
                 appBar.MenuItems.Add(item);
                 item.Click += (sender, e) => LocationMenuItem_Click(sender, e, p);
             }
@@ -210,8 +212,6 @@ namespace CitySafe
             //Add the list of last locations to the application bar.
             for (int i = 0; i < lastLocations.Count; i++)
             {
-                if (i > 40)//TODO: there can be at most 50 items
-                    break;
                 ApplicationBarMenuItem item = new ApplicationBarMenuItem();
                 Pushpin p = lastLocations.ElementAt<Pushpin>(i);
                 item.Text = p.ToString();
@@ -221,12 +221,23 @@ namespace CitySafe
 
             ApplicationBar = appBar;
         }
+        #endregion
+
+
+        /// <summary>
+        /// Add a pushpin to the map and zoom to the position.
+        /// </summary>
+        /// <param name="p">the pushpin to be added</param>
+        private void AddNewPushpin(Pushpin p)
+        {
+            LocationMap.SetView(p.position.Location, ZOOMLEVEL, MapAnimationKind.Parabolic);
+            LocationMapLayer.Add(p.pushpinLayer);
+        }
 
         private void LocationMap_Loaded(object sender, RoutedEventArgs e)
         {
             Microsoft.Phone.Maps.MapsSettings.ApplicationContext.ApplicationId = "be4cc146-3d36-4480-8558-dc73c118ff75";
             Microsoft.Phone.Maps.MapsSettings.ApplicationContext.AuthenticationToken = "ve8Kh91JtSnobnbc6D_d4w";
         }
-
     }
 }

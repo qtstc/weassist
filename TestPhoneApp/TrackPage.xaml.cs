@@ -9,6 +9,7 @@ using ScheduledLocationAgent.Data;
 using System.Text.RegularExpressions;
 using CitySafe.Resources;
 using System.Threading.Tasks;
+using Microsoft.Phone.Shell;
 
 namespace CitySafe
 {
@@ -28,8 +29,6 @@ namespace CitySafe
             LoadUIData();
         }
 
-        //protected async override void OnNavigatedTo(NavigationEventArgs e)
-
         /// <summary>
         /// Load the UI data from the server.
         /// </summary>
@@ -48,6 +47,7 @@ namespace CitySafe
             App.HideProgressOverlay();
         }
 
+        #region track list setup
         private void TrackingList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             NavigateToTrackSettingsPage(TrackingList, "/TrackingSettingsPage.xaml");
@@ -99,27 +99,28 @@ namespace CitySafe
 
             try
             {
-                 if (TrackPivot.SelectedIndex == 0)//If adding to the tracking list. The current user is tracking, the other user is tracked.
+                if (TrackPivot.SelectedIndex == 0)//If adding to the tracking list. The current user is tracking, the other user is tracked.
                 {
                     Debug.WriteLine("Adding user to the tracking table...");
                     message = await App.trackingModel.AddNewUser(newEmail, ParseContract.TrackRelationTable.TRACKING, ParseContract.TrackRelationTable.TRACKING_VERIFIED);
-                 }
-                 else if (TrackPivot.SelectedIndex == 1)//If adding to the tracked list. The current user is tracked, the other user is tracking.
-                 {
-                     Debug.WriteLine("Adding user to the tracked table...");
-                     message = await App.trackedModel.AddNewUser(newEmail, ParseContract.TrackRelationTable.TRACKED, ParseContract.TrackRelationTable.TRACKED_VERIFIED);
-                 }
+                }
+                else if (TrackPivot.SelectedIndex == 1)//If adding to the tracked list. The current user is tracked, the other user is tracking.
+                {
+                    Debug.WriteLine("Adding user to the tracked table...");
+                    message = await App.trackedModel.AddNewUser(newEmail, ParseContract.TrackRelationTable.TRACKED, ParseContract.TrackRelationTable.TRACKED_VERIFIED);
+                }
 
             }
             catch (Exception ex)
             {
                 message = AppResources.Tracker_AddFailed;
-                Debug.WriteLine("{" + ex.StackTrace);
-                Debug.WriteLine(ex.ToString() + "}");
+                Debug.WriteLine(ex.ToString());
             }
             App.HideProgressOverlay();
             MessageBox.Show(message);
         }
+
+        #endregion
 
         /// <summary>
         /// Validate email address

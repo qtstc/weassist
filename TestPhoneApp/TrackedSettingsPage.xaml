@@ -28,12 +28,15 @@
 
         <!--ContentPanel - place additional content here-->
         <StackPanel x:Name="TrackedSettingsPanel" Grid.Row="1" Margin="12,0,12,0">
-            <CheckBox Content="{Binding LocalizedResources.TrackedSetting_FullLocationAccess, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding allowLocationAccess, Mode=TwoWay}"/>
-            <TextBlock Text="{Binding LocalizedResources.TrackedSetting_FullLocationAccessInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontWeight="Light" FontSize="16"/>
-            <Button Content="{Binding LocalizedResources.Setting_ApplySettings, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Apply_Button_Click"/>
-            <Button Content="{Binding LocalizedResources.TrackedSetting_StopTracked, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Stop_Tracked_Button_Click"/>
+            <CheckBox Content="{Binding LocalizedResources.TrackedSetting_FullLocationAccess, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding allowLocationAccess, Mode=TwoWay}" Margin="12,0"/>
+            <TextBlock Text="{Binding LocalizedResources.TrackedSetting_FullLocationAccessInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontWeight="Light" FontSize="16" Margin="36,0"/>
         </StackPanel>
-
     </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="save" Click="Apply_Button_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/delete.png" Text="delete user"  Click="Stop_Tracked_Button_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

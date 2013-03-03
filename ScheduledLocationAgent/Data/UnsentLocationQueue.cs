@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ScheduledLocationAgent.Data
@@ -55,7 +53,8 @@ namespace ScheduledLocationAgent.Data
             {
                 IsolatedStorageHelper.WriteObjectToFileUsingJson(username + FILE_NAME_SUFFIX, locationQueue, username + MUTEX_SUFFIX);
             }
-            catch {
+            catch
+            {
                 return false;
             }
             return true;
@@ -89,7 +88,6 @@ namespace ScheduledLocationAgent.Data
                 if (result <= 0)
                     result += locationQueue.queue.Length;
             }
-            Debug.WriteLine("Queue size is: " + result);
             return result;
         }
 
@@ -146,7 +144,7 @@ namespace ScheduledLocationAgent.Data
                 }
                 await user.SaveAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine("Failed to send the unsent locations");
                 Debug.WriteLine(e.ToString());

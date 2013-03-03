@@ -16,7 +16,7 @@ namespace CitySafePushWebService
         {
             NameValueCollection data = new NameValueCollection();
             data.Add(AzureContract.PushNotificationPost.TITLE, "zzzz");
-            data.Add(AzureContract.PushNotificationPost.SUBSCRIPTION_URI, "http://sn1.notify.live.net/throttledthirdparty/01.00/AAHymbYafGhYSbxVlVmJPenDAgAAAAADAQAAAAQUZm52OkJCMjg1QTg1QkZDMkUxREQ");
+            data.Add(AzureContract.PushNotificationPost.SUBSCRIPTION_URI, "http://sn1.notify.live.net/throttledthirdparty/01.00/AAEFdJz1dD5bRJL9EPDYxCWYAgAAAAADAQAAAAQUZm52OkJCMjg1QTg1QkZDMkUxREQ");
             data.Add(AzureContract.PushNotificationPost.CONTENT, "ccccc");
             data.Add(AzureContract.PushNotificationPost.NAVIGATION_URI, "/LoginPage.xaml");
             RedirectAndPOST(this.Page, "http://citysafe.azurewebsites.net/citysafepush.aspx", data);

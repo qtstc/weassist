@@ -27,7 +27,7 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="MapPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="MapPanel" Grid.Row="1" Margin="24">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>

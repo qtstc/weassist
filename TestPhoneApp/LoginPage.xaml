@@ -32,8 +32,8 @@
             <TextBox x:Name="login_username_textbox" TextWrapping="Wrap" InputScope="EmailUserName" AcceptsReturn="True" ToolTipService.ToolTip="" Margin="12,12,12,0"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_Password, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="24" Margin="12,32,0,0"/>
             <PasswordBox x:Name="login_password_textbox" Margin="12,12,12,0" />
-            <Button Content="{Binding LocalizedResources.Login_Signin, Mode=OneWay, Source={StaticResource LocalizedStrings}}"  Click="Login_Signin_Button_Click" Margin="12,96,12,0" BorderThickness="3" />
-            <Button Content="{Binding LocalizedResources.Login_Signup, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Login_Signup_Button_Click" Margin="12,8,12,0"/>
+            <Button Content="{Binding LocalizedResources.Login_Signin, Mode=OneWay, Source={StaticResource LocalizedStrings}}"  Click="Login_Signin_Button_Click" Margin="12,60,12,0" />
+            <Button Content="{Binding LocalizedResources.Login_Signup, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Login_Signup_Button_Click" Margin="12,0,12,0"/>
             <!--<TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_ForgetPassword, Mode=OneWay, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Right"/>-->
         </StackPanel>
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
