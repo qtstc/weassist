@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using Windows.Devices.Geolocation;
 using System.Threading.Tasks;
 using Microsoft.Phone.Shell;
+using Parse;
 
 namespace ScheduledLocationAgent.Data
 {
@@ -89,6 +90,34 @@ namespace ScheduledLocationAgent.Data
                 geocoordinate.Speed ?? Double.NaN,
                 geocoordinate.Heading ?? Double.NaN
                 );
+        }
+
+        /// <summary>
+        /// Save a new location data to the parse user.
+        /// This method does not save the data to the server.
+        /// Need to call SaveAsync on the user afterwards.
+        /// </summary>
+        /// <param name="user">the user whose location is to be saved</param>
+        /// <param name="newData">the new location data</param>
+        public static void SaveLocationToParseUser(ParseUser user, GeoPosition<GeoCoordinate> newData)
+        {
+            int lastLocationIndex = user.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
+            int newLocationIndex = lastLocationIndex + 1;
+            newLocationIndex %= user.Get<int>(ParseContract.UserTable.LOCATION_DATA_SIZE);
+            user[ParseContract.UserTable.LAST_LOCATION_INDEX] = newLocationIndex;
+
+            ParseObject newLocation = user.Get<ParseObject>(ParseContract.UserTable.LOCATION(newLocationIndex));
+
+            if (newLocation.ObjectId == ParseContract.LocationTable.DUMMY_LOCATION)//If the new location is a dummy
+            {
+                //Create a new location.
+                user[ParseContract.UserTable.LOCATION(newLocationIndex)] = ParseContract.LocationTable.GeoPositionToParseObject(newData);
+            }
+            else//If the new location contains a valid location
+            {
+                //Change the location entry without creating a new one.
+                ParseContract.LocationTable.GeoPositionSetParseObject(newData, newLocation);
+            }
         }
         #endregion
 

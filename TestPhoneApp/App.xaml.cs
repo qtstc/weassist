@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define DEBUG_AGENT
+
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Markup;
@@ -11,6 +13,7 @@ using Parse;
 using CitySafe.ViewModels;
 using ScheduledLocationAgent.Data;
 using Microsoft.Phone.Notification;
+using Microsoft.Phone.Scheduler;
 
 namespace CitySafe
 {
@@ -58,6 +61,68 @@ namespace CitySafe
 
         #endregion
 
+        #region Background Agent
+
+        //Used to identify the periodic task
+        private const string periodicTaskName = "CitySafeLocationPeriodicAgent";
+
+        /// <summary>
+        /// Start the background periodic agent.
+        /// The agent will be scheduled to run every 30 minutes.
+        /// However, in debug mode, this agent will not run,
+        /// and we use ScheduledActionService.LaunchForTest for testing.
+        /// </summary>
+        /// <returns>true if the agent is started succesfully</returns>
+        public static bool StartPeriodicAgent()
+        {
+            // Obtain a reference to the period task, if one exists
+            PeriodicTask periodicTask = ScheduledActionService.Find(periodicTaskName) as PeriodicTask;
+
+            // If the task already exists and the IsEnabled property is false, background
+            // agents have been disabled by the user
+            if (periodicTask != null && !periodicTask.IsEnabled)
+            {
+                MessageBox.Show(AppResources.Setting_AgentDisabled);
+                return false;
+            }
+
+            // If the task already exists and background agents are enabled for the
+            // application, you must remove the task and then add it again to update 
+            // the schedule
+            if (periodicTask != null && periodicTask.IsEnabled)
+            {
+                RemoveAgent();
+            }
+
+            periodicTask = new PeriodicTask(periodicTaskName);
+
+            // The description is required for periodic agents. This is the string that the user
+            // will see in the background services Settings page on the device.
+            periodicTask.Description = AppResources.Background_Description;
+
+            ScheduledActionService.Add(periodicTask);
+
+            // If debugging is enabled, use LaunchForTest to launch the agent in one minute.
+#if(DEBUG_AGENT)
+            ScheduledActionService.LaunchForTest(periodicTaskName, TimeSpan.FromSeconds(10));
+#endif
+            return true;
+        }
+
+        /// <summary>
+        /// Remove the background agent with the given name
+        /// </summary>
+        /// <param name="name">the name of the background agent to be removed</param>
+        public static void RemoveAgent()
+        {
+            try
+            {
+                ScheduledActionService.Remove(periodicTaskName);
+            }
+            catch { }
+        }
+        #endregion
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
@@ -103,6 +168,7 @@ namespace CitySafe
             ParseClient.Initialize(ParseContract.applicationID, ParseContract.windowsKey);
         }
 
+        #region listeners
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
@@ -136,6 +202,7 @@ namespace CitySafe
                 Debugger.Break();
             }
         }
+        #endregion
 
         // Code to execute on Unhandled Exceptions
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)

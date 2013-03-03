@@ -296,8 +296,8 @@
   <data name="SOS_CancelingRequest" xml:space="preserve">
     <value>Canceling SOS requests ...</value>
   </data>
-  <data name="SOS_Resolved" xml:space="preserve">
-    <value>Resolved</value>
+  <data name="SOS_Resolve" xml:space="preserve">
+    <value>Resolve</value>
   </data>
   <data name="SOS_SendingRequest" xml:space="preserve">
     <value>Sending SOS requests ...</value>
@@ -320,7 +320,10 @@
   <data name="SOS_FailToSetUpPush" xml:space="preserve">
     <value>Failed to set up push notification ...</value>
   </data>
-  <data name="SOS_SettingUpPush" xml:space="preserve">
+  <data name="Login_SettingUp" xml:space="preserve">
     <value>Setting up ...</value>
+  </data>
+  <data name="Setting_AgentDisabled" xml:space="preserve">
+    <value>The location update background agent is disabled by the user.</value>
   </data>
 </root>

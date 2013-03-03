@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using CitySafe.ViewModels;
 using System.Diagnostics;
 using ScheduledLocationAgent.Data;
 using System.Text.RegularExpressions;
 using CitySafe.Resources;
-using Parse;
 using System.Threading.Tasks;
 
 namespace CitySafe
@@ -107,12 +102,12 @@ namespace CitySafe
                  if (TrackPivot.SelectedIndex == 0)//If adding to the tracking list. The current user is tracking, the other user is tracked.
                 {
                     Debug.WriteLine("Adding user to the tracking table...");
-                    message = await App.trackingModel.addNewUser(newEmail, ParseContract.TrackRelationTable.TRACKING, ParseContract.TrackRelationTable.TRACKING_VERIFIED);
+                    message = await App.trackingModel.AddNewUser(newEmail, ParseContract.TrackRelationTable.TRACKING, ParseContract.TrackRelationTable.TRACKING_VERIFIED);
                  }
                  else if (TrackPivot.SelectedIndex == 1)//If adding to the tracked list. The current user is tracked, the other user is tracking.
                  {
                      Debug.WriteLine("Adding user to the tracked table...");
-                     message = await App.trackedModel.addNewUser(newEmail, ParseContract.TrackRelationTable.TRACKED, ParseContract.TrackRelationTable.TRACKED_VERIFIED);
+                     message = await App.trackedModel.AddNewUser(newEmail, ParseContract.TrackRelationTable.TRACKED, ParseContract.TrackRelationTable.TRACKED_VERIFIED);
                  }
 
             }

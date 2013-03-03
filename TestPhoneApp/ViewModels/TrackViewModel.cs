@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Parse;
 using ScheduledLocationAgent.Data;
 using System.Diagnostics;
-using System.Runtime.Serialization;
 using CitySafe.Resources;
 
 namespace CitySafe.ViewModels
@@ -89,7 +87,7 @@ namespace CitySafe.ViewModels
         /// <param name="newEmail"> the email of the user, used to identify the user</param>
         /// <param name="role">the role of the current user</param>
         /// <returns>the result message</returns>
-        public async Task<String> addNewUser(string newEmail, string role, string verified)
+        public async Task<String> AddNewUser(string newEmail, string role, string verified)
         {
             var query = from user in ParseUser.Query
                         where user.Get<string>("email") == newEmail
@@ -98,17 +96,10 @@ namespace CitySafe.ViewModels
 
             ParseObject trackRelation = new ParseObject(ParseContract.TrackRelationTable.TABLE_NAME);
 
-            //Put all notification method as true as default.
-            trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_PUSH] = true;
-            trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_SMS] = true;
-            trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL] = true;
-           
-            //Put default location access as false
-            trackRelation[ParseContract.TrackRelationTable.ALLOW_LOCATION_ACCESS] = false;
-
             //TODO: check whether a user is adding himself
 
             bool needNewRecord = true;
+            bool needTrackInvitation = true;
             String resultMessage = AppResources.Tracker_InvitationSuccess;
             ParseObject invited = null;
 
@@ -129,15 +120,11 @@ namespace CitySafe.ViewModels
                     trackRelation[verified] = true;
                     if (trackRelation.Get<bool>(ParseContract.TrackRelationTable.OtherVerified(verified)))//If the other user has already confirmed
                     {
+                        needTrackInvitation = false;
                         ParseUser confirmed = trackRelation.Get<ParseUser>(ParseContract.TrackRelationTable.OtherRole(role));
                         await confirmed.FetchIfNeededAsync();
                         addToList(new TrackItemModel(confirmed, trackRelation));
                         resultMessage = AppResources.Tracker_AddSuccess;
-                    }
-                    else
-                    {
-                        //TODO: send the invitation from the current user.
-                        Debug.WriteLine("Send membership invitation");
                     }
                 }
             }
@@ -147,9 +134,11 @@ namespace CitySafe.ViewModels
                 invited = await ParseUser.Query.GetAsync(ParseContract.UserTable.DUMMY_USER);
                 //Store the email
                 trackRelation[ParseContract.TrackRelationTable.UNREGISTERED_USER_EMAIL] = newEmail;
-
-                //TODO: send membership invitation that includes the invitation from the current user.
+                needTrackInvitation = false;
                 Debug.WriteLine("Send membership invitation");
+
+                string result = await ParseContract.CloudFunction.InviteNewUser(newEmail, role);
+                Debug.WriteLine("string returned " + result);
             }
             else
                 throw new InvalidOperationException("Duplicate emails!");
@@ -161,9 +150,23 @@ namespace CitySafe.ViewModels
                 trackRelation[ParseContract.TrackRelationTable.OtherRole(role)] = invited;
                 trackRelation[verified] = true;
                 trackRelation[ParseContract.TrackRelationTable.OtherVerified(verified)] = false;
-            }
 
+                //Put all notification method as true as default.
+                trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_PUSH] = true;
+                trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_SMS] = true;
+                trackRelation[ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL] = true;
+
+                //Put default location access as false
+                trackRelation[ParseContract.TrackRelationTable.ALLOW_LOCATION_ACCESS] = false;
+            }
             await trackRelation.SaveAsync();
+
+            if (needTrackInvitation)
+            {
+                Debug.WriteLine("Send track invitation");
+                string result = await ParseContract.CloudFunction.SendTrackInvitation(trackRelation.Get<ParseUser>(ParseContract.TrackRelationTable.OtherRole(role)).ObjectId, role);
+                Debug.WriteLine("string returned " + result);
+            }
             return resultMessage;
         }
 

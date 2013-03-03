@@ -142,6 +142,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Setting up ....
+        /// </summary>
+        public static string Login_SettingUp {
+            get {
+                return ResourceManager.GetString("Login_SettingUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign in.
         /// </summary>
         public static string Login_Signin {
@@ -246,6 +255,15 @@ namespace CitySafe.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The location update background agent is disabled by the user..
+        /// </summary>
+        public static string Setting_AgentDisabled {
+            get {
+                return ResourceManager.GetString("Setting_AgentDisabled", resourceCulture);
             }
         }
         
@@ -367,11 +385,11 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resolved.
+        ///   Looks up a localized string similar to Resolve.
         /// </summary>
-        public static string SOS_Resolved {
+        public static string SOS_Resolve {
             get {
-                return ResourceManager.GetString("SOS_Resolved", resourceCulture);
+                return ResourceManager.GetString("SOS_Resolve", resourceCulture);
             }
         }
         
@@ -390,15 +408,6 @@ namespace CitySafe.Resources {
         public static string SOS_SendSOS {
             get {
                 return ResourceManager.GetString("SOS_SendSOS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Setting up ....
-        /// </summary>
-        public static string SOS_SettingUpPush {
-            get {
-                return ResourceManager.GetString("SOS_SettingUpPush", resourceCulture);
             }
         }
         

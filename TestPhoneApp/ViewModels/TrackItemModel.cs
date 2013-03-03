@@ -36,10 +36,10 @@ namespace CitySafe.ViewModels
         [DataMember(Name = "name")]
         public string name
         {
-            get { return user.Username; }
+            get { return user.Get<string>(ParseContract.UserTable.FIRST_NAME); }
             set 
             {
-                user.Username = value;
+                user[ParseContract.UserTable.FIRST_NAME] = value;
                 this.OnPropertyChanged(name);
             }
         }

@@ -9,7 +9,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
     
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}" Opacity="0.8">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}" Opacity="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="400"/>
             <RowDefinition Height="400"/>

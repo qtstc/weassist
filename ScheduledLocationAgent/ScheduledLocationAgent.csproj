@@ -85,6 +85,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Data\AzureContract.cs" />
+    <Compile Include="Data\UnsentLocations.cs" />
+    <Compile Include="Data\UnsentLocationQueue.cs" />
     <Compile Include="IsolatedStorageHelper.cs" />
     <Compile Include="Data\ParseContract.cs" />
     <Compile Include="Utilities.cs" />

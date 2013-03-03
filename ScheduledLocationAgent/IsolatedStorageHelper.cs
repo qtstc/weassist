@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Threading;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace ScheduledLocationAgent.Data
 {
@@ -129,7 +130,7 @@ namespace ScheduledLocationAgent.Data
                         {
                             try
                             {
-                                JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All };
+                                JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.None };
 
 
 #if DEBUG
@@ -181,14 +182,16 @@ namespace ScheduledLocationAgent.Data
                         {
                             try
                             {
-                                JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All };
+                                JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.None };
 
                                 string json = streamReader.ReadToEnd();
 
                                 result = JsonConvert.DeserializeObject<T>(json, jsonSerializerSettings);
                             }
-                            catch
+                            catch(Exception e)
                             {
+                                Debug.WriteLine("File opening error: ");
+                                Debug.WriteLine(e.ToString());
                             }
                         }
                     }

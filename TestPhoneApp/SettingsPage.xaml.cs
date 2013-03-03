@@ -1,23 +1,13 @@
-﻿#define DEBUG_AGENT
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using CitySafe.Resources;
 using Parse;
 using Microsoft.Phone.Scheduler;
 using System.Diagnostics;
-using System.IO.IsolatedStorage;
 using ScheduledLocationAgent.Data;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Device.Location;
 using CitySafe.ViewModels;
 
 namespace CitySafe
@@ -29,13 +19,9 @@ namespace CitySafe
     /// </summary>
     public partial class SettingsPage : PhoneApplicationPage
     {
-        private PeriodicTask periodicTask;
-        private UserSettings userSettings;
+        //private PeriodicTask periodicTask;//The background agent used to update user location
+        private UserSettings userSettings;//View Model for loading and saving data.
 
-        //Used to identify the periodic task
-        private const string periodicTaskName = "PeriodicAgent";
-
-        // Constructor
         public SettingsPage()
         {
             InitializeComponent();
@@ -43,64 +29,6 @@ namespace CitySafe
             SettingsPanel.DataContext = userSettings;
             LoadUIData();
         }
-
-        #region Background Agent
-        /// <summary>
-        /// Start the background periodic agent.
-        /// The agent will be scheduled to run every 30 minutes.
-        /// However, in debug mode, this agent will not run,
-        /// and we use ScheduledActionService.LaunchForTest for testing.
-        /// </summary>
-        private void StartPeriodicAgent()
-        {
-            // Obtain a reference to the period task, if one exists
-            periodicTask = ScheduledActionService.Find(periodicTaskName) as PeriodicTask;
-
-            // If the task already exists and the IsEnabled property is false, background
-            // agents have been disabled by the user
-            if (periodicTask != null && !periodicTask.IsEnabled)
-            {
-                MessageBox.Show("Background agents for this application have been disabled by the user.");
-                return;
-            }
-
-            // If the task already exists and background agents are enabled for the
-            // application, you must remove the task and then add it again to update 
-            // the schedule
-            if (periodicTask != null && periodicTask.IsEnabled)
-            {
-                RemoveAgent();
-            }
-
-            periodicTask = new PeriodicTask(periodicTaskName);
-
-            // The description is required for periodic agents. This is the string that the user
-            // will see in the background services Settings page on the device.
-            periodicTask.Description = AppResources.Background_Description;
-
-            ScheduledActionService.Add(periodicTask);
-
-                // If debugging is enabled, use LaunchForTest to launch the agent in one minute.
-#if(DEBUG_AGENT)
-    ScheduledActionService.LaunchForTest(periodicTaskName, TimeSpan.FromSeconds(10));
-#endif
-        }
-
-        /// <summary>
-        /// Remove the background agent with the given name
-        /// </summary>
-        /// <param name="name">the name of the background agent to be removed</param>
-        private void RemoveAgent()
-        {
-            try
-            {
-                ScheduledActionService.Remove(periodicTaskName);
-            }
-            catch (Exception)
-            {
-            }
-        }
-        #endregion
 
         #region Listeners For UI
         /// <summary>
@@ -112,7 +40,7 @@ namespace CitySafe
         {
             ParseUser.LogOut();
             Utilities.SaveParseCredential("", "");//Also clear the user credential stored in the phone.
-            RemoveAgent();
+            App.RemoveAgent();
             //Go back to login page
             NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
             //Remove back entry. Prevent user from coming back to settings page by pressing back button
@@ -123,12 +51,23 @@ namespace CitySafe
         private async void ApplySettingsButton_Click(object sender, RoutedEventArgs e)
         {
             //First save the user settings.
-            await SaveUIData();
+            bool savingResult = await SaveUIData();
+            if (!savingResult)
+                return;
+
+            bool agentStartingResult = true;
+
             //Then register/unregister the agent.
             if (userSettings.trackingEnabled)
-                StartPeriodicAgent();
+                agentStartingResult = App.StartPeriodicAgent();
             else
-                RemoveAgent();
+                App.RemoveAgent();
+
+            if (!agentStartingResult)//If the period agent was not started successfully,
+            {
+                userSettings.trackingEnabled = false;
+                await SaveUIData();
+            }
         }
 
         private async void RefreshButton_Click(object sender, RoutedEventArgs e)
@@ -162,8 +101,9 @@ namespace CitySafe
         /// <summary>
         /// Save the UI data to the server.
         /// </summary>
-        private async Task SaveUIData()
+        private async Task<bool>  SaveUIData()
         {
+            bool result = true;
             App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
             try
             {
@@ -174,8 +114,10 @@ namespace CitySafe
                 Debug.WriteLine("Fail to save user settings to the server:\n");
                 Debug.WriteLine(e.ToString());
                 MessageBox.Show(AppResources.Setting_SyncingFailed);
+                result = false;
             }
             App.HideProgressOverlay();
+            return result;
         }
 
         #endregion

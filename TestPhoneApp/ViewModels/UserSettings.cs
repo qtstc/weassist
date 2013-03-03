@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using System.ComponentModel;
 using System.Runtime.Serialization;
-using System.IO.IsolatedStorage;
-using System.Diagnostics;
-using System.Threading;
 using Parse;
 using ScheduledLocationAgent.Data;
 
@@ -26,6 +18,7 @@ namespace CitySafe.ViewModels
         private bool _trackingEnabled;
         private int _interval;
         private DateTime _lastUpdate;
+        private UnsentLocationQueue queue;
 
         private UserSettings(bool trackingEnabled, int interval, DateTime lastUpdate)
         {
@@ -33,7 +26,7 @@ namespace CitySafe.ViewModels
             _interval = interval;
             _lastUpdate = lastUpdate;
         }
-        
+
         /// <summary>
         /// Default constructor. Does not do anything.
         /// Remember to call loadUserSettings() before set an instance of 
@@ -41,10 +34,10 @@ namespace CitySafe.ViewModels
         /// </summary>
         public UserSettings()
         {
- 
+
         }
 
-        [DataMember(Name="trackingEnabled")]
+        [DataMember(Name = "trackingEnabled")]
         public bool trackingEnabled
         {
             get { return _trackingEnabled; }
@@ -74,22 +67,28 @@ namespace CitySafe.ViewModels
         /// </summary>
         public async override Task LoadSettings()
         {
-                await ParseUser.CurrentUser.FetchAsync();//Sync first because settings can be updated in the background.
+            await ParseUser.CurrentUser.FetchAsync();//Sync first because settings can be updated in the background.
 
-                //If does not contain one of the keys, initialize the user settings
-                if (!ParseUser.CurrentUser.ContainsKey(ParseContract.UserTable.TRACKING_ENABLED))
-                {
-                    await InitializeUserSettings();
-                }
+            //If does not contain one of the keys, initialize the user settings
+            if (!ParseUser.CurrentUser.ContainsKey(ParseContract.UserTable.TRACKING_ENABLED))
+            {
+                await InitializeUserSettings();
+            }
 
-                //Get the data used to populate UI.
-                trackingEnabled = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.TRACKING_ENABLED);
-                interval = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
-                int lastUpdateIndex = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
-                ParseObject lastLocation = ParseUser.CurrentUser.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastUpdateIndex));
-                //Need to download the object first.
-                await lastLocation.FetchIfNeededAsync();
-                lastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP);
+            //Get the data used to populate UI.
+            trackingEnabled = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.TRACKING_ENABLED);
+            interval = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
+            int lastUpdateIndex = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
+            ParseObject lastLocation = ParseUser.CurrentUser.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastUpdateIndex));
+            //Need to download the object first.
+            await lastLocation.FetchIfNeededAsync();
+            lastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP);
+
+            //Sync the local data.
+            queue = new UnsentLocationQueue(ParseUser.CurrentUser.Username);
+            queue.LastUpdate = lastUpdate;
+            queue.UpdateInterval = interval;
+            queue.Save();
         }
 
         /// <summary>
@@ -98,9 +97,10 @@ namespace CitySafe.ViewModels
         /// </summary>
         public async override Task SaveSettings()
         {
-                ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = interval;
-                ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = trackingEnabled;
-                await ParseUser.CurrentUser.SaveAsync();
+            ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = interval;
+            ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = trackingEnabled;
+            await ParseUser.CurrentUser.SaveAsync();
+            queue.Save();
         }
 
         /// <summary>
@@ -110,20 +110,18 @@ namespace CitySafe.ViewModels
         /// </summary>
         private async Task InitializeUserSettings()
         {
-            const int DEFAULT_INTERVAL = 30;
-            const int DEFAULT_DATA_SIZE = 96;
             ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = false;
-            ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = DEFAULT_INTERVAL;
-            ParseUser.CurrentUser[ParseContract.UserTable.LOCATION_DATA_SIZE] = DEFAULT_DATA_SIZE;
-            ParseUser.CurrentUser[ParseContract.UserTable.LAST_LOCATION_INDEX] = DEFAULT_DATA_SIZE - 1;
+            ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = ParseContract.UserTable.DEFAULT_INTERVAL;
+            ParseUser.CurrentUser[ParseContract.UserTable.LOCATION_DATA_SIZE] = ParseContract.UserTable.DEFAULT_DATA_SIZE;
+            ParseUser.CurrentUser[ParseContract.UserTable.LAST_LOCATION_INDEX] = ParseContract.UserTable.DEFAULT_DATA_SIZE - 1;
             ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = false;
             ParseUser.CurrentUser[ParseContract.UserTable.WIN_PNONE_PUSH_URI] = "";
 
-            //Get the null location used to mark un
+            //Get the null location used to mark unintialized location
             ParseQuery<ParseObject> nullLocationQuery = ParseObject.GetQuery(ParseContract.LocationTable.TABLE_NAME);
             ParseObject nullLocation = await nullLocationQuery.GetAsync(ParseContract.LocationTable.DUMMY_LOCATION);
 
-            for (int i = 0; i < DEFAULT_DATA_SIZE; i++)
+            for (int i = 0; i < ParseContract.UserTable.DEFAULT_DATA_SIZE; i++)
             {
                 ParseUser.CurrentUser[ParseContract.UserTable.LOCATION(i)] = nullLocation;
             }

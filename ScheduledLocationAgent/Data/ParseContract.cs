@@ -1,6 +1,8 @@
 ﻿using Parse;
 using System;
+using System.Collections.Generic;
 using System.Device.Location;
+using System.Threading.Tasks;
 
 namespace ScheduledLocationAgent.Data
 {
@@ -34,6 +36,9 @@ namespace ScheduledLocationAgent.Data
             public static string DUMMY_USER { get { return "WNrCdVZZ48"; } }
 
             public static int INITIAL_LAST_LOCATION { get { return -1; } }
+
+            public const int DEFAULT_INTERVAL = 30;
+            public const int DEFAULT_DATA_SIZE = 96;
         }
 
         /// <summary>
@@ -191,5 +196,35 @@ namespace ScheduledLocationAgent.Data
                 else return "Error";
             }
         }
+
+        public static class CloudFunction
+        {
+            public static async Task<string> SendTrackInvitation(string userID,string role)
+            {
+                IDictionary<string, object> parameters = new Dictionary<string, object>();
+                parameters.Add("userID", userID);
+                parameters.Add("relation", role);
+                string result = await ParseCloud.CallFunctionAsync<string>("InviteExistingUser", parameters);
+                return result;
+            }
+
+            public static async Task<string> InviteNewUser(string newEmail, string role)
+            {
+                IDictionary<string, object> parameters = new Dictionary<string, object>();
+                parameters.Add("email", newEmail);
+                parameters.Add("relation", role);
+                string result = await ParseCloud.CallFunctionAsync<string>("InviteNewUser", parameters);
+                return result;
+            }
+
+            public static async Task<string> NewSOSCall(string requestTableRowID)
+            {
+                IDictionary<string, object> parameters = new Dictionary<string, object>();
+                parameters.Add("requestTableRowID", requestTableRowID);
+                string result = await ParseCloud.CallFunctionAsync<string>("NewSOSCall", parameters);
+                return result;
+            }
+        }
+
     }
 }

@@ -49,58 +49,86 @@ namespace ScheduledLocationAgent
         /// </remarks>
         protected override async void OnInvoke(ScheduledTask task)
         {
-            try
+            ParseUser user = null;
+            //Get the user credentials.
+            String[] credential = Utilities.GetParseCredential();
+            //Get the location sending info stored in the phone, this does not require internet connection
+            UnsentLocationQueue queue = new UnsentLocationQueue(credential[0]);
+            DateTime lastUpdate = queue.LastUpdate;//The lastUpdate stored in the phone, should be the same as the one in the server.
+            int interval = queue.UpdateInterval;//The update interval stored in the phone, should be the same as the one in the server.
+            int unsentSize = queue.QueueSize();
+
+            Debug.WriteLine("Background task invoked:\ninterval: " + interval + "\nlast update: " + lastUpdate+"\nunsent size: "+unsentSize);
+
+            if (unsentSize > 0)//First try to send the unsent locations if there is any.
             {
-                ParseClient.Initialize(ParseContract.applicationID, ParseContract.windowsKey);
-                String[] credential = Utilities.GetParseCredential();
-                Debug.WriteLine("Background agent logging in using: " + credential[0] + " " + credential[1]);
-                await ParseUser.LogInAsync(credential[0], credential[1]);
-                ParseUser user = ParseUser.CurrentUser;
-
-                int lastLocationIndex = user.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
-
-                //Querying the database for the time of the last update, used to determine whether we should update now.
-                ParseObject lastLocation = user.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastLocationIndex));
-                await lastLocation.FetchIfNeededAsync();
-
-                DateTime lastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP);
-                //Get the update interval.
-                int interval = user.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
-
-                Debug.WriteLine("Background task invoked:\nlast Locations index " + lastLocationIndex + "\ninterval: " + interval + "\nlast update: " + lastUpdate);
-                if (IsTimeToSendData(interval, lastUpdate))
+                try
                 {
-                    int newLocationIndex = lastLocationIndex + 1;
-                    newLocationIndex %= user.Get<int>(ParseContract.UserTable.LOCATION_DATA_SIZE);
-                    user[ParseContract.UserTable.LAST_LOCATION_INDEX] = newLocationIndex;
-
-                    ParseObject newLocation = user.Get<ParseObject>(ParseContract.UserTable.LOCATION(newLocationIndex));
-
-                    GeoPosition<GeoCoordinate> newData = await Utilities.getCurrentGeoPosition();
-                    if (newLocation.ObjectId == ParseContract.LocationTable.DUMMY_LOCATION)//If the new location is a dummy
-                    {
-                        //Create a new location.
-                        user[ParseContract.UserTable.LOCATION(newLocationIndex)] = ParseContract.LocationTable.GeoPositionToParseObject(newData);
-                    }
-                    else//If the new location contains a valid location
-                    {
-                        //Change the location entry without creating a new one.
-                        ParseContract.LocationTable.GeoPositionSetParseObject(newData, newLocation);
-                    }
-                    await user.SaveAsync();
+                    ParseClient.Initialize(ParseContract.applicationID, ParseContract.windowsKey);
+                    Debug.WriteLine("Background agent logging in using: " + credential[0] + " " + credential[1]);
+                    await ParseUser.LogInAsync(credential[0], credential[1]);
+                    user = ParseUser.CurrentUser;
+                    await queue.SendLocations(user);
                 }
+                catch (Exception e)
+                {
+                    Debug.WriteLine("Login failed in the background:");
+                    Debug.WriteLine(e.ToString());
+                }
+            }
+
+            if (queue.QueueSize() > 0)//Display message when there are unsent locations.
+            {
+                Utilities.ShowToast("CitySafe", "Failed to upload location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
+                Debug.WriteLine("Sending unsent location failed");
+            }
+
+            if (IsTimeToSendData(interval, lastUpdate))//Then try to update the current location to the server.
+            {
+                //First get the new location.
+                GeoPosition<GeoCoordinate> newLocation = await Utilities.getCurrentGeoPosition();
+                if (queue.QueueSize() == 0)//Only send new data when previous data was sent.
+                {
+                    try
+                    {
+                        if (user == null)//Only log in when ParseUser is not already logged in
+                        {
+                            ParseClient.Initialize(ParseContract.applicationID, ParseContract.windowsKey);
+                            Debug.WriteLine("Background agent logging in using: " + credential[0] + " " + credential[1]);
+                            await ParseUser.LogInAsync(credential[0], credential[1]);
+                            user = ParseUser.CurrentUser;
+                        }
+
+                        ////Get the update interval and lastUpdate from the server, they should be the same as the ones stored in the phone
+                        //int interval = user.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
+                        ////Querying the database for the time of the last update, used to determine whether we should update now.
+                        //ParseObject lastLocation = user.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastLocationIndex));
+                        //await lastLocation.FetchIfNeededAsync();
+                        //DateTime lastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP);
+
+                        Utilities.SaveLocationToParseUser(user, newLocation);
+                        await user.SaveAsync();
+                        queue.LastUpdate = newLocation.Timestamp.DateTime;
+                        Debug.WriteLine("Location updated to the server for user: " + credential[0]);
+                    }
+                    catch (Exception e)
+                    {
+                        Utilities.ShowToast("CitySafe", "Failed to upload location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
+                        Debug.WriteLine("Failed to send location data to the server, stored it to the local location queue:");
+                        Debug.WriteLine(e.ToString());
+                        queue.Enqueue(newLocation);
+                    }
+                }
+                else//If the unsent data was not sent, just add the current location to the unsent data.
+                queue.Enqueue(newLocation);
+            }
+
+            queue.Save();
 
 #if DEBUG_AGENT
-                ScheduledActionService.LaunchForTest(task.Name, TimeSpan.FromSeconds(60));
+            ScheduledActionService.LaunchForTest(task.Name, TimeSpan.FromSeconds(60));
 #endif
-                NotifyComplete();
-            }
-            catch(Exception e)
-            {
-                Utilities.ShowToast("CitySafe", "Failed to upload location data.", new Uri("/SettingsPage.xaml", UriKind.Relative));
-                Debug.WriteLine(e.ToString());
-                Debug.WriteLine("Error in background agent.");
-            }
+            NotifyComplete();
         }
 
         /// <summary>

@@ -22,14 +22,14 @@ namespace CitySafePushWebService
             LiteralControl lt = new LiteralControl();
             this.Controls.Add(lt);
 
-            //if (string.IsNullOrEmpty(nvc[AzureContract.PushNotificationPost.TITLE]) ||
-            //    string.IsNullOrEmpty(nvc[AzureContract.PushNotificationPost.CONTENT]) ||
-            //    string.IsNullOrEmpty(nvc[AzureContract.PushNotificationPost.SUBSCRIPTION_URI]) ||
-            //    string.IsNullOrEmpty(nvc[AzureContract.PushNotificationPost.NAVIGATION_URI]))
-            //{
-            //    lt.Text ="Error, one of the required post fields is empty.";
-            //    return;
-            //}
+            if (string.IsNullOrEmpty(nvc[AzureContract.PushNotificationPost.TITLE]) ||
+                string.IsNullOrEmpty(nvc[AzureContract.PushNotificationPost.CONTENT]) ||
+                string.IsNullOrEmpty(nvc[AzureContract.PushNotificationPost.SUBSCRIPTION_URI]) ||
+                string.IsNullOrEmpty(nvc[AzureContract.PushNotificationPost.NAVIGATION_URI]))
+            {
+                lt.Text = "Error, one of the required post fields is empty.";
+                return;
+            }
             
             string title, content, subscriptionUri, navigationUri;
 
@@ -37,9 +37,9 @@ namespace CitySafePushWebService
             content = nvc[AzureContract.PushNotificationPost.CONTENT];
             subscriptionUri = nvc[AzureContract.PushNotificationPost.SUBSCRIPTION_URI];
             navigationUri = nvc[AzureContract.PushNotificationPost.NAVIGATION_URI];
+            lt.Text = "Toast title:" + title + "\ncontent:" + content + "\nnavigation uri:" + navigationUri + "\nphone uri:" + subscriptionUri;
 
             sendPushNotification(subscriptionUri, title, content, navigationUri);
-            //sendPushNotification("http://sn1.notify.live.net/throttledthirdparty/01.00/AAFL6wCvyfwVRI5jxHqk4-LkAgAAAAADAQAAAAQUZm52OkJCMjg1QTg1QkZDMkUxREQ", "sss", "dddd", "/LoginPage.xaml");
         }
 
         /// <summary>
