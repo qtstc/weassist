@@ -326,4 +326,10 @@
   <data name="Setting_AgentDisabled" xml:space="preserve">
     <value>The location update background agent is disabled by the user.</value>
   </data>
+  <data name="Setting_LastUpdateAt" xml:space="preserve">
+    <value>Last location was sent at </value>
+  </data>
+  <data name="Setting_UpdateFrequency" xml:space="preserve">
+    <value>Send my location to the server every: </value>
+  </data>
 </root>

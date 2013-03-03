@@ -27,17 +27,17 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <StackPanel x:Name="LoginPanel" Grid.Row="1" Margin="12,94,12,-94">
-            <TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_Username, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
-            <TextBox x:Name="login_username_textbox" TextWrapping="Wrap" InputScope="EmailUserName" AcceptsReturn="True" ToolTipService.ToolTip=""/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_Password, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
-            <PasswordBox x:Name="login_password_textbox" />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="{Binding LocalizedResources.Login_Signin, Mode=OneWay, Source={StaticResource LocalizedStrings}}"  Click="Login_Signin_Button_Click" />
-                <Button Content="{Binding LocalizedResources.Login_Signup, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Login_Signup_Button_Click"/>
-            </StackPanel>
-            <TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_ForgetPassword, Mode=OneWay, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Right"/>
+        <StackPanel x:Name="LoginPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock Text="{Binding LocalizedResources.Login_Username, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="24" Margin="12,36,0,0"/>
+            <TextBox x:Name="login_username_textbox" TextWrapping="Wrap" InputScope="EmailUserName" AcceptsReturn="True" ToolTipService.ToolTip="" Margin="12,12,12,0"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_Password, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="24" Margin="12,32,0,0"/>
+            <PasswordBox x:Name="login_password_textbox" Margin="12,12,12,0" />
+            <Button Content="{Binding LocalizedResources.Login_Signin, Mode=OneWay, Source={StaticResource LocalizedStrings}}"  Click="Login_Signin_Button_Click" Margin="12,96,12,0" BorderThickness="3" />
+            <Button Content="{Binding LocalizedResources.Login_Signup, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Login_Signup_Button_Click" Margin="12,8,12,0"/>
+            <!--<TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_ForgetPassword, Mode=OneWay, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Right"/>-->
         </StackPanel>
+        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
     </Grid>
+    
 
 </phone:PhoneApplicationPage>

@@ -32,16 +32,9 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <Button x:Name="HelpButton" Content="{Binding LocalizedResources.SOS_SendSOS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Foreground="#FFE8FF00" BorderBrush="#FFF3FF00" Grid.Row="0" Click="HelpButton_Click" FontSize="125">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF8F251A" Offset="0"/>
-                        <GradientStop Color="Red" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button Content="{Binding LocalizedResources.SOS_ManageList, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="1" Click="Manage_List_Button_Click"/>
-            <Button Content="{Binding LocalizedResources.Setting_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Settings_Button_Click" Grid.Row="2" />
+            <Button x:Name="HelpButton" Content="{Binding LocalizedResources.SOS_SendSOS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0" Click="HelpButton_Click" FontSize="100" Foreground="Red" BorderBrush="#FFC70000" BorderThickness="20" Margin="12"/>
+            <Button Content="{Binding LocalizedResources.SOS_ManageList, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="1" Click="Manage_List_Button_Click" Margin="24,0"/>
+            <Button Content="{Binding LocalizedResources.Setting_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Settings_Button_Click" Grid.Row="2" Margin="24,0" />
         </Grid>
 
         <!--ContentPanel - place additional content here-->

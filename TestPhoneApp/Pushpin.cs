@@ -80,8 +80,8 @@ namespace CitySafe
 
         public override string ToString()
         {
-            string result = "(" + position.Location.Longitude + ", " + position.Location.Latitude+" )";
-            result += " @ " + position.Timestamp.DateTime;
+            string result = "";//"(" + position.Location.Longitude + ", " + position.Location.Latitude+" )";
+            result += position.Timestamp.DateTime;
             return result;
         }
     }

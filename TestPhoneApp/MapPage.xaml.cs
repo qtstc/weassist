@@ -202,7 +202,7 @@ namespace CitySafe
             {
                 ApplicationBarMenuItem item = new ApplicationBarMenuItem();
                 Pushpin p = sosLocations.ElementAt<Pushpin>(i);
-                item.Text = "SOS "+p.ToString();
+                item.Text = p.ToString()+ " (SOS)";
                 appBar.MenuItems.Add(item);
                 item.Click += (sender, e) => LocationMenuItem_Click(sender, e, p);
             }
@@ -210,11 +210,13 @@ namespace CitySafe
             //Add the list of last locations to the application bar.
             for (int i = 0; i < lastLocations.Count; i++)
             {
+                if (i > 40)//TODO: there can be at most 50 items
+                    break;
                 ApplicationBarMenuItem item = new ApplicationBarMenuItem();
                 Pushpin p = lastLocations.ElementAt<Pushpin>(i);
                 item.Text = p.ToString();
                 appBar.MenuItems.Add(item);
-                item.Click += (sender, e) => LocationMenuItem_Click(sender, e, p); 
+                item.Click += (sender, e) => LocationMenuItem_Click(sender, e, p);
             }
 
             ApplicationBar = appBar;

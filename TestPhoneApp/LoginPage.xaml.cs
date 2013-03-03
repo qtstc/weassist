@@ -115,7 +115,7 @@ namespace CitySafe
             //Start the push notification channel.
             try
             {
-                SetUpChannel();
+                await SetUpChannel();
             }
             catch (Exception e)
             {
@@ -134,7 +134,7 @@ namespace CitySafe
 
         public const string CHANNEL_NAME = "CitySafeChannel";// The name of our push channel.
 
-        private void SetUpChannel()
+        private async Task SetUpChannel()
         {
             /// Holds the push channel that is created or found.
             HttpNotificationChannel pushChannel;
@@ -169,6 +169,8 @@ namespace CitySafe
                 // Register for this notification only if you need to receive the notifications while your application is running.
                 pushChannel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(PushChannel_ShellToastNotificationReceived);
                 Debug.WriteLine(String.Format("Channel Uri is {0}", pushChannel.ChannelUri.ToString()));
+                ParseUser.CurrentUser[ParseContract.UserTable.WIN_PNONE_PUSH_URI] = pushChannel.ChannelUri.ToString();
+                await ParseUser.CurrentUser.SaveAsync();
             }
         }
 

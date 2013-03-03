@@ -32,11 +32,11 @@ namespace CitySafe
 
         #region Listeners For UI
         /// <summary>
-        /// Lisenter for the ChangeUserButton
+        /// Lisenter for the change user appbar
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ChangeUserButton_Click(object sender, RoutedEventArgs e)
+        private void ChangeUserButton_Click(object sender, EventArgs e)
         {
             ParseUser.LogOut();
             Utilities.SaveParseCredential("", "");//Also clear the user credential stored in the phone.
@@ -48,7 +48,7 @@ namespace CitySafe
             NavigationService.RemoveBackEntry();
         }
 
-        private async void ApplySettingsButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplySettingsButton_Click(object sender, EventArgs e)
         {
             //First save the user settings.
             bool savingResult = await SaveUIData();
@@ -70,7 +70,7 @@ namespace CitySafe
             }
         }
 
-        private async void RefreshButton_Click(object sender, RoutedEventArgs e)
+        private async void RefreshButton_Click(object sender, EventArgs e)
         {
             await LoadUIData();
         }

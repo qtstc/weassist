@@ -304,6 +304,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last location was sent at .
+        /// </summary>
+        public static string Setting_LastUpdateAt {
+            get {
+                return ResourceManager.GetString("Setting_LastUpdateAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Setting_PageHeader {
@@ -336,6 +345,15 @@ namespace CitySafe.Resources {
         public static string Setting_SyncingUserSettingsWithParseServer {
             get {
                 return ResourceManager.GetString("Setting_SyncingUserSettingsWithParseServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send my location to the server every: .
+        /// </summary>
+        public static string Setting_UpdateFrequency {
+            get {
+                return ResourceManager.GetString("Setting_UpdateFrequency", resourceCulture);
             }
         }
         

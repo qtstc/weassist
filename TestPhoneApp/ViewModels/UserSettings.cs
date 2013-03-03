@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using Parse;
 using ScheduledLocationAgent.Data;
+using System.Diagnostics;
+using CitySafe.Resources;
 
 namespace CitySafe.ViewModels
 {
@@ -15,17 +17,14 @@ namespace CitySafe.ViewModels
     [DataContract]
     public class UserSettings : Settings
     {
+
+
         private bool _trackingEnabled;
-        private int _interval;
-        private DateTime _lastUpdate;
+        private String _lastUpdate;
         private UnsentLocationQueue queue;
 
-        private UserSettings(bool trackingEnabled, int interval, DateTime lastUpdate)
-        {
-            _trackingEnabled = trackingEnabled;
-            _interval = interval;
-            _lastUpdate = lastUpdate;
-        }
+        private int interval;
+        private int[] intervalRadioMultiplier = new int[5] { 30, 60, 180, 360, 1440 };
 
         /// <summary>
         /// Default constructor. Does not do anything.
@@ -34,7 +33,6 @@ namespace CitySafe.ViewModels
         /// </summary>
         public UserSettings()
         {
-
         }
 
         [DataMember(Name = "trackingEnabled")]
@@ -44,18 +42,87 @@ namespace CitySafe.ViewModels
             set { SetProperty(ref _trackingEnabled, value); }
         }
 
-        [DataMember(Name = "interval")]
-        public int interval
+        [DataMember(Name = "intervalRadio0")]
+        public bool intervalRadio0
         {
-            get { return _interval; }
-            set { SetProperty(ref _interval, value); }
+            get {
+                return interval == intervalRadioMultiplier[0]; }
+            set
+            {
+                if (value)
+                {
+                    queue.UpdateInterval = intervalRadioMultiplier[0];
+                    SetProperty(ref interval, intervalRadioMultiplier[0]);
+                }
+            }
+        }
+
+        [DataMember(Name = "intervalRadio1")]
+        public bool intervalRadio1
+        {
+            get { return interval == intervalRadioMultiplier[1]; }
+            set
+            {
+                if (value)
+                {
+                    queue.UpdateInterval = intervalRadioMultiplier[1];
+                    SetProperty(ref interval, intervalRadioMultiplier[1]);
+                }
+            }
+        }
+
+        [DataMember(Name = "intervalRadio2")]
+        public bool intervalRadio2
+        {
+            get { return interval == intervalRadioMultiplier[2]; }
+            set
+            {
+                if (value)
+                {
+                    queue.UpdateInterval = intervalRadioMultiplier[2];
+                    SetProperty(ref interval, intervalRadioMultiplier[2]);
+                }
+            }
+        }
+
+        [DataMember(Name = "intervalRadio3")]
+        public bool intervalRadio3
+        {
+            get { return interval == intervalRadioMultiplier[3]; }
+            set
+            {
+                if (value)
+                {
+                    queue.UpdateInterval = intervalRadioMultiplier[3];
+                    SetProperty(ref interval, intervalRadioMultiplier[3]);
+                }
+            }
+        }
+
+        [DataMember(Name = "intervalRadio4")]
+        public bool intervalRadio4
+        {
+            get {
+                return interval == intervalRadioMultiplier[4]; }
+            set
+            {
+                if (value)
+                {
+                    queue.UpdateInterval = intervalRadioMultiplier[4];
+                    SetProperty(ref interval, intervalRadioMultiplier[4]);
+                }
+            }
         }
 
         [DataMember(Name = "lastUpdate")]
-        public DateTime lastUpdate
+        public String lastUpdate
         {
             get { return _lastUpdate; }
-            set { SetProperty(ref _lastUpdate, value); }
+            set {
+                if(value.Equals(DateTime.MinValue.ToString()))
+                    SetProperty(ref _lastUpdate, "");
+                else SetProperty(ref _lastUpdate, AppResources.Setting_LastUpdateAt+value);
+            }
         }
 
         /// <summary>
@@ -78,15 +145,20 @@ namespace CitySafe.ViewModels
             //Get the data used to populate UI.
             trackingEnabled = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.TRACKING_ENABLED);
             interval = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
+            OnPropertyChanged("intervalRadio0");
+            OnPropertyChanged("intervalRadio1");
+            OnPropertyChanged("intervalRadio2");
+            OnPropertyChanged("intervalRadio3");
+            OnPropertyChanged("intervalRadio4");
             int lastUpdateIndex = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
             ParseObject lastLocation = ParseUser.CurrentUser.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastUpdateIndex));
             //Need to download the object first.
             await lastLocation.FetchIfNeededAsync();
-            lastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP);
+            lastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP).ToString();
 
             //Sync the local data.
             queue = new UnsentLocationQueue(ParseUser.CurrentUser.Username);
-            queue.LastUpdate = lastUpdate;
+            queue.LastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP);
             queue.UpdateInterval = interval;
             queue.Save();
         }
