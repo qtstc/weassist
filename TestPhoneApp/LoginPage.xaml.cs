@@ -10,6 +10,9 @@ using Microsoft.Phone.Notification;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Phone.Shell;
+using Microsoft.Phone.Tasks;
+using Newtonsoft.Json;
+using System.Threading;
 
 namespace CitySafe
 {
@@ -43,10 +46,17 @@ namespace CitySafe
 
         private void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
-            //WebBrowserTask wbt = new WebBrowserTask();
-            //wbt.Uri = new Uri(LOGIN_PAGE_URL);
-            //wbt.Show();
+            //NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
+            WebBrowserTask wbt = new WebBrowserTask();
+            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/signup.php");
+            wbt.Show();
+        }
+
+        private void Forget_Password_Button_Click(object sender, RoutedEventArgs e)
+        {
+            WebBrowserTask wbt = new WebBrowserTask();
+            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/forgetpassword.php");
+            wbt.Show();
         }
         #endregion
 

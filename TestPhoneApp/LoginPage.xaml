@@ -34,7 +34,7 @@
             <PasswordBox x:Name="login_password_textbox" Margin="12,12,12,0" />
             <Button Content="{Binding LocalizedResources.Login_Signin, Mode=OneWay, Source={StaticResource LocalizedStrings}}"  Click="Login_Signin_Button_Click" Margin="12,60,12,0" />
             <Button Content="{Binding LocalizedResources.Login_Signup, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Login_Signup_Button_Click" Margin="12,0,12,0"/>
-            <!--<TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_ForgetPassword, Mode=OneWay, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Right"/>-->
+            <Button Content="{Binding LocalizedResources.Login_ForgetPassword, Mode=OneWay, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Right" Margin="0,0,48,0" BorderBrush="{x:Null}" BorderThickness="0" Padding="0" FontSize="20" Click="Forget_Password_Button_Click"/>
         </StackPanel>
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
     </Grid>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CitySafe.ViewModels
@@ -23,15 +24,15 @@ namespace CitySafe.ViewModels
             set { SetProperty(ref _allowLocationAccess, value); }
         }
 
-        public async override Task LoadSettings()
+        public async override Task LoadSettings(CancellationToken tk)
         {
             allowLocationAccess = App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.ALLOW_LOCATION_ACCESS);
         }
 
-        public async override Task SaveSettings()
+        public async override Task SaveSettings(CancellationToken tk)
         {
             App.trackItemModel.relation[ParseContract.TrackRelationTable.ALLOW_LOCATION_ACCESS] = allowLocationAccess;
-            await App.trackItemModel.relation.SaveAsync();
+            await App.trackItemModel.relation.SaveAsync(tk);
         }
 
         /// <summary>
@@ -39,10 +40,10 @@ namespace CitySafe.ViewModels
         /// Also remove the item from the list.
         /// </summary>
         /// <returns></returns>
-        public async Task RemoveRelation()
+        public async Task RemoveRelation(CancellationToken tk)
         {
             //TODO: notify the other user that the other user has deleted the tracking relation.
-            await App.trackItemModel.relation.DeleteAsync();
+            await App.trackItemModel.relation.DeleteAsync(tk);
             App.trackedModel.remove(App.trackItemModel);
             App.trackItemModel = null;
         }

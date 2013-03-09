@@ -1,12 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <Languages xmlns="">
-    <Language code="zh" />
-    <Language code="zh-Hans" />
-    <Language code="zh-CN" />
-  </Languages>
-  <App xmlns="" ProductID="{66cb5f2f-2eb5-42e5-9a83-6186a54dd3a6}" Title="CitySafe" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="TestPhoneApp author" Description="Sample description" Publisher="CityAppDePauw" PublisherID="{b2d8d4f4-2d70-478c-bc37-6ce6fb0678c2}">
+  <App xmlns="" ProductID="{66cb5f2f-2eb5-42e5-9a83-6186a54dd3a6}" Title="CitySafe" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Tao Qian, Rajat Kumar, Michael Osborn" Description="CitySafe is a location tracking &amp; SOS application to be used among families and friends." Publisher="CitySafeDePauw" PublisherID="{b2d8d4f4-2d70-478c-bc37-6ce6fb0678c2}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -16,6 +11,7 @@
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
       <Capability Name="ID_CAP_MAP" />
       <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
+      <Capability Name="ID_CAP_LOCATION" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="LoginPage.xaml" />

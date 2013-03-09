@@ -26,16 +26,16 @@ namespace CitySafe
 
         private async void SignUp()
         {
-            App.ShowProgressOverlay(AppResources.ProgressBar_SigningUpUser);
-            var user = new ParseUser()
-            {
-                Username = "dummyuser",
-                Password = "dummypassword",
-                Email = "dummyuser@depauw.edu"
-            };
+            //App.ShowProgressOverlay(AppResources.ProgressBar_SigningUpUser);
+            //var user = new ParseUser()
+            //{
+            //    Username = "dummyuser",
+            //    Password = "dummypassword",
+            //    Email = "dummyuser@depauw.edu"
+            //};
 
-            await user.SignUpAsync();
-            App.HideProgressOverlay();
+            //await user.SignUpAsync();
+            //App.HideProgressOverlay();
         }
     }
 }

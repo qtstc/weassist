@@ -1,4 +1,4 @@
-﻿#define DEBUG_AGENT
+﻿//#define DEBUG_AGENT
 
 using System.Diagnostics;
 using System.Windows;
@@ -49,6 +49,7 @@ namespace ScheduledLocationAgent
         /// </remarks>
         protected override async void OnInvoke(ScheduledTask task)
         {
+            Utilities.WriteToExceptionLog("invoked log", DateTime.Now, new Exception("invoked"));
             ParseUser user = null;
             //Get the user credentials.
             String[] credential = Utilities.GetParseCredential();
@@ -74,6 +75,7 @@ namespace ScheduledLocationAgent
                 {
                     Debug.WriteLine("Login failed in the background:");
                     Debug.WriteLine(e.ToString());
+                    Utilities.WriteToExceptionLog("ScheduledAgent logging in", DateTime.Now, e);
                 }
             }
 
@@ -87,6 +89,11 @@ namespace ScheduledLocationAgent
             {
                 //First get the new location.
                 GeoPosition<GeoCoordinate> newLocation = await Utilities.getCurrentGeoPosition();
+                if (newLocation == null)
+                {
+                    Utilities.ShowToast("CitySafe", "Failed to obtain location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
+                    return;
+                }
                 if (queue.QueueSize() == 0)//Only send new data when previous data was sent.
                 {
                     try
@@ -116,6 +123,7 @@ namespace ScheduledLocationAgent
                         Utilities.ShowToast("CitySafe", "Failed to upload location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
                         Debug.WriteLine("Failed to send location data to the server, stored it to the local location queue:");
                         Debug.WriteLine(e.ToString());
+                        Utilities.WriteToExceptionLog("ScheduledAgent sending data", DateTime.Now, e);
                         queue.Enqueue(newLocation);
                     }
                 }

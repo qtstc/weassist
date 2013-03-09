@@ -347,4 +347,10 @@
   <data name="Setting_Loggingout" xml:space="preserve">
     <value>Saving user settings ...</value>
   </data>
+  <data name="Map_CannotObtainLocation" xml:space="preserve">
+    <value>Cannot obtain your current location.</value>
+  </data>
+  <data name="Tracker_AlreadyInList" xml:space="preserve">
+    <value>The user is already in your list.</value>
+  </data>
 </root>

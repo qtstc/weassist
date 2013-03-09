@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Device.Location;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ScheduledLocationAgent.Data
@@ -199,29 +200,29 @@ namespace ScheduledLocationAgent.Data
 
         public static class CloudFunction
         {
-            public static async Task<string> SendTrackInvitation(string userID,string role)
+            public static async Task<string> SendTrackInvitation(string userID,string role,CancellationToken tk)
             {
                 IDictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("userID", userID);
                 parameters.Add("relation", role);
-                string result = await ParseCloud.CallFunctionAsync<string>("InviteExistingUser", parameters);
+                string result = await ParseCloud.CallFunctionAsync<string>("InviteExistingUser", parameters,tk);
                 return result;
             }
 
-            public static async Task<string> InviteNewUser(string newEmail, string role)
+            public static async Task<string> InviteNewUser(string newEmail, string role,CancellationToken tk)
             {
                 IDictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("email", newEmail);
                 parameters.Add("relation", role);
-                string result = await ParseCloud.CallFunctionAsync<string>("InviteNewUser", parameters);
+                string result = await ParseCloud.CallFunctionAsync<string>("InviteNewUser", parameters,tk);
                 return result;
             }
 
-            public static async Task<string> NewSOSCall(string requestTableRowID)
+            public static async Task<string> NewSOSCall(string requestTableRowID,CancellationToken tk)
             {
                 IDictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("requestTableRowID", requestTableRowID);
-                string result = await ParseCloud.CallFunctionAsync<string>("NewSOSCall", parameters);
+                string result = await ParseCloud.CallFunctionAsync<string>("NewSOSCall", parameters,tk);
                 return result;
             }
         }

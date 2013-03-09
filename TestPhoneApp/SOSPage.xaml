@@ -34,7 +34,7 @@
             </Grid.RowDefinitions>
             <Button x:Name="HelpButton" Content="{Binding LocalizedResources.SOS_SendSOS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0" Click="HelpButton_Click" FontSize="100" Foreground="Red" BorderBrush="#FFC70000" BorderThickness="20" Margin="12"/>
             <Button Content="{Binding LocalizedResources.SOS_ManageList, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="1" Click="Manage_List_Button_Click" Margin="24,0"/>
-            <Button Content="{Binding LocalizedResources.Setting_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Settings_Button_Click" Grid.Row="2" Margin="24,0" />
+            <Button Content="{Binding LocalizedResources.Setting_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Settings_Button_Click" Grid.Row="2" Margin="24,-12,24,12" />
         </Grid>
 
         <!--ContentPanel - place additional content here-->

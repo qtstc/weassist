@@ -8,6 +8,9 @@ using ScheduledLocationAgent.Data;
 using CitySafe.Resources;
 using System.Diagnostics;
 using Microsoft.Phone.Shell;
+using System.Device.Location;
+using System.Threading;
+using System.ComponentModel;
 
 namespace CitySafe
 {
@@ -19,6 +22,8 @@ namespace CitySafe
     /// </summary>
     public partial class SOSPage : PhoneApplicationPage
     {
+
+
         public SOSPage()
         {
             InitializeComponent();
@@ -32,25 +37,31 @@ namespace CitySafe
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             string message = "";
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.SOS_SendingRequest);
             try
             {
-                App.ShowProgressOverlay(AppResources.SOS_SendingRequest);
                 if (!ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.IN_DANGER))
                 {
                     message = AppResources.SOS_SOSSentFail;
                     ParseObject sos = new ParseObject(ParseContract.SOSRequestTable.TABLE_NAME);
                     sos[ParseContract.SOSRequestTable.SENDER] = ParseUser.CurrentUser;
                     sos[ParseContract.SOSRequestTable.RESOLVED] = false;
-                    sos[ParseContract.SOSRequestTable.sentLocation] = ParseContract.LocationTable.GeoPositionToParseObject(await Utilities.getCurrentGeoPosition());
-                    await sos.SaveAsync();
+                    GeoPosition<GeoCoordinate> current = await Utilities.getCurrentGeoPosition();
+                    if (current == null)
+                    {
+                        message = AppResources.Map_CannotObtainLocation;
+                        throw new InvalidOperationException("Cannot access location");
+                    }
+                    sos[ParseContract.SOSRequestTable.sentLocation] = ParseContract.LocationTable.GeoPositionToParseObject(current);
+                    await sos.SaveAsync(tk);
 
-                    string result = await ParseContract.CloudFunction.NewSOSCall(sos.ObjectId);
+                    string result = await ParseContract.CloudFunction.NewSOSCall(sos.ObjectId,tk);
                     Debug.WriteLine("string returned " + result);
 
                     ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = true;
                     HelpButton.Content = AppResources.SOS_Resolve;
 
-                    await ParseUser.CurrentUser.SaveAsync();
+                    await ParseUser.CurrentUser.SaveAsync(tk);
                     message = AppResources.SOS_SOSSentSuccess;
                 }
                 else
@@ -61,18 +72,18 @@ namespace CitySafe
                     var requests = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME)
                                    where request.Get<ParseUser>(ParseContract.SOSRequestTable.SENDER) == ParseUser.CurrentUser
                                    select request;
-                    IEnumerable<ParseObject> results = await requests.FindAsync();
+                    IEnumerable<ParseObject> results = await requests.FindAsync(tk);
                     foreach (ParseObject p in results)
                     {
                         p[ParseContract.SOSRequestTable.RESOLVED] = true;
-                        await p.SaveAsync();
+                        await p.SaveAsync(tk);
 
                     }
 
                     ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = false;
                     HelpButton.Content = AppResources.SOS_SendSOS;
 
-                    await ParseUser.CurrentUser.SaveAsync();
+                    await ParseUser.CurrentUser.SaveAsync(tk);
                     message = AppResources.SOS_SOSCanceledSuccess;
                 }
             }
@@ -82,6 +93,12 @@ namespace CitySafe
             }
             App.HideProgressOverlay();
             MessageBox.Show(message);
+        }
+
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            App.HideProgressOverlay();
         }
 
         #region UI Listener for Navigation

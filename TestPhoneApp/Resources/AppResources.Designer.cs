@@ -187,6 +187,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot obtain your current location..
+        /// </summary>
+        public static string Map_CannotObtainLocation {
+            get {
+                return ResourceManager.GetString("Map_CannotObtainLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to load the location data. Please check your network settings and try again later..
         /// </summary>
         public static string Map_LoadingFailed {
@@ -561,6 +570,15 @@ namespace CitySafe.Resources {
         public static string Tracker_AddSuccess {
             get {
                 return ResourceManager.GetString("Tracker_AddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user is already in your list..
+        /// </summary>
+        public static string Tracker_AlreadyInList {
+            get {
+                return ResourceManager.GetString("Tracker_AlreadyInList", resourceCulture);
             }
         }
         

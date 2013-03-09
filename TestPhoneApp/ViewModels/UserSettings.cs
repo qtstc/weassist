@@ -5,6 +5,7 @@ using Parse;
 using ScheduledLocationAgent.Data;
 using System.Diagnostics;
 using CitySafe.Resources;
+using System.Threading;
 
 namespace CitySafe.ViewModels
 {
@@ -132,14 +133,14 @@ namespace CitySafe.ViewModels
         /// on the server if no user setting data exist
         /// on the server.
         /// </summary>
-        public async override Task LoadSettings()
+        public async override Task LoadSettings(CancellationToken tk)
         {
-            await ParseUser.CurrentUser.FetchAsync();//Sync first because settings can be updated in the background.
+            await ParseUser.CurrentUser.FetchAsync(tk);//Sync first because settings can be updated in the background.
 
             //If does not contain one of the keys, initialize the user settings
             if (!ParseUser.CurrentUser.ContainsKey(ParseContract.UserTable.TRACKING_ENABLED))
             {
-                await InitializeUserSettings();
+                await InitializeUserSettings(tk);
             }
 
             //Get the data used to populate UI.
@@ -153,7 +154,7 @@ namespace CitySafe.ViewModels
             int lastUpdateIndex = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
             ParseObject lastLocation = ParseUser.CurrentUser.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastUpdateIndex));
             //Need to download the object first.
-            await lastLocation.FetchIfNeededAsync();
+            await lastLocation.FetchIfNeededAsync(tk);
             lastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP).ToString();
 
             //Sync the local data.
@@ -167,11 +168,11 @@ namespace CitySafe.ViewModels
         /// Save user settings to the server.
         /// No exception handling.
         /// </summary>
-        public async override Task SaveSettings()
+        public async override Task SaveSettings(CancellationToken tk)
         {
             ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = interval;
             ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = trackingEnabled;
-            await ParseUser.CurrentUser.SaveAsync();
+            await ParseUser.CurrentUser.SaveAsync(tk);
             queue.Save();
         }
 
@@ -180,7 +181,7 @@ namespace CitySafe.ViewModels
         /// Only called when the user uses the app for the first time.
         /// No exception handling.
         /// </summary>
-        private async Task InitializeUserSettings()
+        private async Task InitializeUserSettings(CancellationToken tk)
         {
             ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = false;
             ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = ParseContract.UserTable.DEFAULT_INTERVAL;
@@ -191,14 +192,14 @@ namespace CitySafe.ViewModels
 
             //Get the null location used to mark unintialized location
             ParseQuery<ParseObject> nullLocationQuery = ParseObject.GetQuery(ParseContract.LocationTable.TABLE_NAME);
-            ParseObject nullLocation = await nullLocationQuery.GetAsync(ParseContract.LocationTable.DUMMY_LOCATION);
+            ParseObject nullLocation = await nullLocationQuery.GetAsync(ParseContract.LocationTable.DUMMY_LOCATION,tk);
 
             for (int i = 0; i < ParseContract.UserTable.DEFAULT_DATA_SIZE; i++)
             {
                 ParseUser.CurrentUser[ParseContract.UserTable.LOCATION(i)] = nullLocation;
             }
 
-            await ParseUser.CurrentUser.SaveAsync();
+            await ParseUser.CurrentUser.SaveAsync(tk);
         }
     }
 }

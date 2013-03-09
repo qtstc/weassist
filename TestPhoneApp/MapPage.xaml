@@ -33,7 +33,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
             <Controls:Map x:Name="LocationMap" Grid.Row="0"  Loaded="LocationMap_Loaded"/>
         </Grid>
     </Grid>

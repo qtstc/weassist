@@ -64,13 +64,23 @@ namespace ScheduledLocationAgent.Data
         /// <returns></returns>
         public static async Task<GeoPosition<GeoCoordinate>> getCurrentGeoPosition()
         {
-            return new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.Now), new GeoCoordinate(1.1, 2.2));
+            //return new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.Now), new GeoCoordinate(1.1, 2.2));
 
-            //Geolocator locator = new Geolocator();
-            //locator.DesiredAccuracy = PositionAccuracy.High;
-            //Geoposition position = await locator.GetGeopositionAsync();
-            //GeoCoordinate coor = ConvertGeocoordinate(position.Coordinate);
-            //return new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.Now),coor);
+            try
+            {
+                Geolocator locator = new Geolocator();
+                locator.DesiredAccuracy = PositionAccuracy.High;
+                Geoposition position = await locator.GetGeopositionAsync(
+                maximumAge: TimeSpan.FromMinutes(5),
+                timeout: TimeSpan.FromSeconds(10)
+                );
+                GeoCoordinate coor = ConvertGeocoordinate(position.Coordinate);
+                return new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.Now), coor);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -136,5 +146,15 @@ namespace ScheduledLocationAgent.Data
             s.Content = content;
             s.Show();
         }
+
+
+        #region Debugging Log
+        public const string LOG_FILE_NAME = "ExceptionLog.dat";
+        public static void WriteToExceptionLog(String tag, DateTime time, Exception e)
+        {
+            LogEntry log = new LogEntry(tag, time, e.ToString(), e.StackTrace);
+            IsolatedStorageHelper.WriteObjectToFileUsingJson<LogEntry>(true,LOG_FILE_NAME, log,"randomMutex");
+        }
+        #endregion
     }
 }

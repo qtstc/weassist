@@ -38,12 +38,13 @@ namespace ScheduledLocationAgent.Data
             {
                 using (IsolatedStorageFile isolatedStorageFile = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    using (IsolatedStorageFileStream isolatedStorageFileStream = isolatedStorageFile.CreateFile(fileName))
+                    using (IsolatedStorageFileStream isolatedStorageFileStream = isolatedStorageFile.OpenFile(fileName,FileMode.Append,FileAccess.ReadWrite))
                     {
                         using (StreamWriter streamWriter = new StreamWriter(isolatedStorageFileStream))
                         {
                             try
                             {
+                                streamWriter.WriteLine();
                                 streamWriter.Write(stringToSave);
                             }
                             catch
@@ -108,7 +109,7 @@ namespace ScheduledLocationAgent.Data
             return result;
         }
 
-        public static void WriteObjectToFileUsingJson<T>(string fileName, T objectToSave, string mutexName = null) where T : class
+        public static void WriteObjectToFileUsingJson<T>(bool isAppend,string fileName, T objectToSave, string mutexName = null) where T : class
         {
             if (mutexName != null && _mutex == null)
             {
@@ -124,7 +125,7 @@ namespace ScheduledLocationAgent.Data
             {
                 using (IsolatedStorageFile isolatedStorageFile = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    using (IsolatedStorageFileStream isolatedStorageFileStream = isolatedStorageFile.CreateFile(fileName))
+                    using (IsolatedStorageFileStream isolatedStorageFileStream = isAppend ? isolatedStorageFile.OpenFile(fileName, FileMode.Append, FileAccess.Write) : isolatedStorageFile.CreateFile(fileName))
                     {
                         using (StreamWriter streamWriter = new StreamWriter(isolatedStorageFileStream))
                         {
@@ -132,12 +133,11 @@ namespace ScheduledLocationAgent.Data
                             {
                                 JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.None };
 
-
-#if DEBUG
                                 string json = JsonConvert.SerializeObject(objectToSave, Formatting.Indented, jsonSerializerSettings);
-#else
-                                string json = JsonConvert.SerializeObject(objectToSave, Formatting.None, jsonSerializerSettings);
-#endif
+
+                                //string json = JsonConvert.SerializeObject(objectToSave, Formatting.None, jsonSerializerSettings);
+
+                                streamWriter.WriteLine();
                                 streamWriter.Write(json);
                             }
                             catch

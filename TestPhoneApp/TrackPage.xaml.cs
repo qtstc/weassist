@@ -10,6 +10,8 @@ using System.Text.RegularExpressions;
 using CitySafe.Resources;
 using System.Threading.Tasks;
 using Microsoft.Phone.Shell;
+using System.Threading;
+using System.ComponentModel;
 
 namespace CitySafe
 {
@@ -18,10 +20,10 @@ namespace CitySafe
     /// </summary>
     public partial class TrackPage : PhoneApplicationPage
     {
+
         public TrackPage()
         {
             InitializeComponent();
-
             App.trackingModel = new TrackViewModel();
             App.trackedModel = new TrackViewModel();
             TrackingList.DataContext = App.trackingModel;
@@ -34,17 +36,22 @@ namespace CitySafe
         /// </summary>
         private async Task LoadUIData()
         {
-            App.ShowProgressOverlay(AppResources.Tracker_LoadList);
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.Tracker_LoadList);
+            string message = "";
             try
             {
-                await App.trackingModel.LoadData(ParseContract.TrackRelationTable.TRACKING);
-                await App.trackedModel.LoadData(ParseContract.TrackRelationTable.TRACKED);
+                await App.trackingModel.LoadData(ParseContract.TrackRelationTable.TRACKING, tk);
+                await App.trackedModel.LoadData(ParseContract.TrackRelationTable.TRACKED, tk);
             }
             catch
             {
-                MessageBox.Show(AppResources.Tracker_FailToLoadList);
+                message = AppResources.Tracker_FailToLoadList;
+                NavigationService.GoBack();
             }
             App.HideProgressOverlay();
+
+            if (!message.Equals(""))
+                MessageBox.Show(message);
         }
 
         #region track list setup
@@ -93,7 +100,7 @@ namespace CitySafe
                 return;
             }
 
-            App.ShowProgressOverlay(AppResources.Tracker_SendingInvitation);
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.Tracker_SendingInvitation);
 
             string message = AppResources.Tracker_InvitationSuccess;
 
@@ -102,12 +109,12 @@ namespace CitySafe
                 if (TrackPivot.SelectedIndex == 0)//If adding to the tracking list. The current user is tracking, the other user is tracked.
                 {
                     Debug.WriteLine("Adding user to the tracking table...");
-                    message = await App.trackingModel.AddNewUser(newEmail, ParseContract.TrackRelationTable.TRACKING, ParseContract.TrackRelationTable.TRACKING_VERIFIED);
+                    message = await App.trackingModel.AddNewUser(newEmail, ParseContract.TrackRelationTable.TRACKING, ParseContract.TrackRelationTable.TRACKING_VERIFIED, tk);
                 }
                 else if (TrackPivot.SelectedIndex == 1)//If adding to the tracked list. The current user is tracked, the other user is tracking.
                 {
                     Debug.WriteLine("Adding user to the tracked table...");
-                    message = await App.trackedModel.AddNewUser(newEmail, ParseContract.TrackRelationTable.TRACKED, ParseContract.TrackRelationTable.TRACKED_VERIFIED);
+                    message = await App.trackedModel.AddNewUser(newEmail, ParseContract.TrackRelationTable.TRACKED, ParseContract.TrackRelationTable.TRACKED_VERIFIED, tk);
                 }
 
             }
@@ -133,6 +140,12 @@ namespace CitySafe
             return Regex.IsMatch(strIn,
                    @"^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))" +
                    @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$");
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (App.HideProgressOverlay())
+                e.Cancel = true;
         }
     }
 }

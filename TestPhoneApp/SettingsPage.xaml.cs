@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using CitySafe.ViewModels;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Notification;
+using System.Threading;
+using System.ComponentModel;
 
 namespace CitySafe
 {
@@ -39,16 +41,21 @@ namespace CitySafe
         /// <param name="e"></param>
         private async void ChangeUserButton_Click(object sender, EventArgs e)
         {
-            App.ShowProgressOverlay(AppResources.Setting_Loggingout);
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.Setting_Loggingout);
             try
             {
                 HttpNotificationChannel.Find(LoginPage.CHANNEL_NAME).Close();
                 ParseUser.CurrentUser[ParseContract.UserTable.WIN_PNONE_PUSH_URI] = "";
-                await ParseUser.CurrentUser.SaveAsync();
+                await ParseUser.CurrentUser.SaveAsync(tk);
             }
-            catch {
-                MessageBox.Show(AppResources.Setting_FailToLogOut);
+            catch (OperationCanceledException)
+            {
+                Debug.WriteLine("Log out cancelled");
+            }
+            catch
+            {
                 App.HideProgressOverlay();
+                MessageBox.Show(AppResources.Setting_FailToLogOut);
                 return;
             }
             ParseUser.LogOut();
@@ -58,6 +65,7 @@ namespace CitySafe
             NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
             //Remove back entry. Prevent user from coming back to settings page by pressing back button
             //when he or she is on the login page
+            NavigationService.RemoveBackEntry();
             NavigationService.RemoveBackEntry();
             App.HideProgressOverlay();
         }
@@ -98,18 +106,23 @@ namespace CitySafe
         /// </summary>
         private async Task LoadUIData()
         {
-            App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
+            ApplicationBar.IsVisible = false;
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
+            string message = "";
             try
             {
-                await userSettings.LoadSettings();
+                await userSettings.LoadSettings(tk);
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Fail to initialize user settings to the server:\n");
                 Debug.WriteLine(e.ToString());
-                MessageBox.Show(AppResources.Setting_SyncingFailed);
+                message = AppResources.Setting_SyncingFailed;
             }
             App.HideProgressOverlay();
+            if (!message.Equals(""))
+                MessageBox.Show(message);
+            ApplicationBar.IsVisible = true;
         }
 
         /// <summary>
@@ -118,22 +131,31 @@ namespace CitySafe
         private async Task<bool> SaveUIData()
         {
             bool result = true;
-            App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
+            string message = "";
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
             try
             {
-                await userSettings.SaveSettings();
+                await userSettings.SaveSettings(tk);
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Fail to save user settings to the server:\n");
                 Debug.WriteLine(e.ToString());
-                MessageBox.Show(AppResources.Setting_SyncingFailed);
+                message = AppResources.Setting_SyncingFailed;
                 result = false;
             }
             App.HideProgressOverlay();
+            if (!message.Equals(""))
+                MessageBox.Show(message);
             return result;
         }
 
         #endregion
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (App.HideProgressOverlay())
+                e.Cancel = true;
+        }
     }
 }

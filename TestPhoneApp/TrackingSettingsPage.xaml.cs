@@ -8,6 +8,8 @@ using CitySafe.Resources;
 using ScheduledLocationAgent.Data;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Threading;
+using System.ComponentModel;
 
 namespace CitySafe
 {
@@ -26,21 +28,24 @@ namespace CitySafe
         /// <summary>
         /// Load UI data from the server
         /// </summary>
-        private async Task LoadUIData()
+        private void LoadUIData()
         {
-            App.ShowProgressOverlay(AppResources.TrackingSetting_Loading);
-            try
-            {
+            //CancellationToken tk = App.ShowProgressOverlay(AppResources.TrackingSetting_Loading);
+            //string message = "";
+            //try
+            //{
                 //Set the title
-                TrackingTitle.Text = App.trackItemModel.user.Username;
-                await trackingSettings.LoadSettings();
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.ToString());
-                MessageBox.Show(AppResources.Setting_SyncingFailed);
-            }
-            App.HideProgressOverlay();
+                TrackingTitle.Text = App.trackItemModel.user.Get<string>(ParseContract.UserTable.FIRST_NAME);
+                trackingSettings.LoadSettings(CancellationToken.None);
+            //}
+            //catch (Exception e)
+            //{
+            //    Debug.WriteLine(e.ToString());
+            //    message = AppResources.Setting_SyncingFailed;
+            //}
+            //App.HideProgressOverlay();
+            //if (!message.Equals(""))
+            //    MessageBox.Show(message);
         }
 
         /// <summary>
@@ -48,17 +53,20 @@ namespace CitySafe
         /// </summary>
         private async Task SaveUIData()
         {
-            App.ShowProgressOverlay(AppResources.TrackingSetting_Saving);
+            string message = "";
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.TrackingSetting_Saving);
             try
             {
-                await trackingSettings.SaveSettings();
+                await trackingSettings.SaveSettings(tk);
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.ToString());
-                MessageBox.Show(AppResources.Setting_SyncingFailed);
+                message = AppResources.Setting_SyncingFailed;
             }
             App.HideProgressOverlay();
+            if (!message.Equals(""))
+                MessageBox.Show(message);
         }
 
         private async void Apply_Button_Click(object sender, EventArgs e)
@@ -68,10 +76,10 @@ namespace CitySafe
 
         private async void Stop_Tracking_Button_Click(object sender, EventArgs e)
         {
-            App.ShowProgressOverlay(AppResources.TrackingSetting_RemovingUser);
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.TrackingSetting_RemovingUser);
             try
             {
-                await trackingSettings.RemoveRelation();
+                await trackingSettings.RemoveRelation(tk);
             }
             catch (Exception ex)
             {
@@ -91,6 +99,12 @@ namespace CitySafe
             {
                 MessageBox.Show(AppResources.TrackingSetting_LocationRequestDenied);
             }
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (App.HideProgressOverlay())
+                e.Cancel = true;
         }
     }
 }

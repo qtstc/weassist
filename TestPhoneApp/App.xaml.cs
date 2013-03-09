@@ -1,4 +1,4 @@
-﻿#define DEBUG_AGENT
+﻿//#define DEBUG_AGENT
 
 using System;
 using System.Diagnostics;
@@ -14,6 +14,7 @@ using CitySafe.ViewModels;
 using ScheduledLocationAgent.Data;
 using Microsoft.Phone.Notification;
 using Microsoft.Phone.Scheduler;
+using System.Threading;
 
 namespace CitySafe
 {
@@ -39,23 +40,35 @@ namespace CitySafe
         /// The progress overlay used in the app.
         /// </summary>
         private static Popup progressOverlay;
+        private static CancellationTokenSource cancellationTokenSource;
 
         /// <summary>
         /// Set the text of the progress overlay and show it.
         /// </summary>
         /// <param name="text">the text to be displayed on the progress overlay</param>
-        public static void ShowProgressOverlay(string text)
+        public static CancellationToken ShowProgressOverlay(string text)
         {
             (progressOverlay.Child as OverLay).setText(text);
             progressOverlay.IsOpen = true;
+            cancellationTokenSource = new CancellationTokenSource();
+            return cancellationTokenSource.Token;
         }
 
         /// <summary>
         /// Hide the progress overlay.
         /// </summary>
-        public static void HideProgressOverlay()
+        public static bool HideProgressOverlay()
         {
-            progressOverlay.IsOpen = false;
+            if (progressOverlay.IsOpen == true)
+            {
+                cancellationTokenSource.Cancel();
+                progressOverlay.IsOpen = false;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #endregion

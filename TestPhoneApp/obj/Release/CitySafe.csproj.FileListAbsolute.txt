@@ -1,7 +1,4 @@
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\Assets\ApplicationIcon.png
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\Assets\Tiles\FlipCycleTileLarge.png
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\Assets\Tiles\FlipCycleTileMedium.png
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\Assets\Tiles\FlipCycleTileSmall.png
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\Assets\Tiles\IconicTileMediumLarge.png
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\Assets\Tiles\IconicTileSmall.png
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\CitySafe.dll

@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using ScheduledLocationAgent.Data;
+using System.Threading;
 
 namespace CitySafe.ViewModels
 {
@@ -62,7 +63,7 @@ namespace CitySafe.ViewModels
         /// Load tracking settings from the server.
         /// Does not have exception handling.
         /// </summary>
-        public async override Task LoadSettings()
+        public async override Task LoadSettings(CancellationToken tk)
         {
                 //Use the data to populate UI.
                 usePushNotification = App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.NOTIFY_BY_PUSH);
@@ -74,13 +75,13 @@ namespace CitySafe.ViewModels
         /// Save tracking settings to the servr.
         /// Does not have exception handling.
         /// </summary>
-        public async override Task SaveSettings()
+        public async override Task SaveSettings(CancellationToken tk)
         {
                 //Not all fields are saved.
                 App.trackItemModel.relation[ParseContract.TrackRelationTable.NOTIFY_BY_PUSH] = usePushNotification;
                 App.trackItemModel.relation[ParseContract.TrackRelationTable.NOTIFY_BY_SMS] = useSMS;
                 App.trackItemModel.relation[ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL] = useEmail;
-                await App.trackItemModel.relation.SaveAsync();
+                await App.trackItemModel.relation.SaveAsync(tk);
         }
 
         /// <summary>
@@ -88,10 +89,10 @@ namespace CitySafe.ViewModels
         /// Also remove the item from the list.
         /// </summary>
         /// <returns></returns>
-        public async Task RemoveRelation()
+        public async Task RemoveRelation(CancellationToken tk)
         {
             //TODO: notify the other user that the other user has deleted the tracking relation.
-            await App.trackItemModel.relation.DeleteAsync();
+            await App.trackItemModel.relation.DeleteAsync(tk);
             App.trackingModel.remove(App.trackItemModel);
             App.trackItemModel = null;
         }

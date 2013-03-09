@@ -8,13 +8,13 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     d:DesignHeight="800" d:DesignWidth="800"  >
 
-    <Grid x:Name="LayoutRoot" Opacity="1" Background="Black" >
+    <Grid x:Name="LayoutRoot" Opacity="1" Background="{StaticResource PhoneBackgroundBrush}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="800"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ProgressBar IsIndeterminate="True" Foreground="{StaticResource PhoneAccentBrush}" Height="50" Width="480" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock x:Name ="Overlay_Textblock" Foreground="{StaticResource PhoneTextBoxBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name ="Overlay_Textblock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneInverseBackgroundBrush}"/>
         </StackPanel>
     </Grid>
 </UserControl>

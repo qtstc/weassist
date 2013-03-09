@@ -51,7 +51,7 @@ namespace ScheduledLocationAgent.Data
         {
             try
             {
-                IsolatedStorageHelper.WriteObjectToFileUsingJson(username + FILE_NAME_SUFFIX, locationQueue, username + MUTEX_SUFFIX);
+                IsolatedStorageHelper.WriteObjectToFileUsingJson(false,username + FILE_NAME_SUFFIX, locationQueue, username + MUTEX_SUFFIX);
             }
             catch
             {

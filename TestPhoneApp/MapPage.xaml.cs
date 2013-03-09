@@ -13,6 +13,8 @@ using System.Diagnostics;
 using CitySafe.Resources;
 using System.Windows.Media;
 using System.Threading.Tasks;
+using System.Threading;
+using System.ComponentModel;
 
 namespace CitySafe
 {
@@ -27,7 +29,6 @@ namespace CitySafe
         private Color LAST_LOCATION_PUSHPIN_COLOR = Colors.Blue;
         private Color SOS_PUSHPIN_COLOR = Colors.Red;
         private Color MY_LOCATION_PUSHPIN_COLOR = Colors.Black;
-        private int ZOOMLEVEL = 10;
         //The maximum number of last locations loaded. We set a value because the app bar can have at most 50 items.
         //No point loading more.
         private int LOCATION_SIZE_LIMIT = 40;
@@ -53,14 +54,17 @@ namespace CitySafe
         /// </summary>
         private async void LoadUIData()
         {
-            App.ShowProgressOverlay(AppResources.Map_LoadingLocation);
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.Map_LoadingLocation);
+            string message = "";
             try
             {
-                LocationHeader.Text = App.trackItemModel.user.Username + AppResources.Map_LocationOf;
+                LocationHeader.Text = App.trackItemModel.user.Get<string>(ParseContract.UserTable.FIRST_NAME) + AppResources.Map_LocationOf;
 
-                List<Pushpin> lastLocations = await LoadLastLocations();
-                List<Pushpin> sosLocations = await LoadSOSLocations();
+                List<Pushpin> lastLocations = await LoadLastLocations(tk);
+                List<Pushpin> sosLocations = await LoadSOSLocations(tk);
                 myLocationPushpin = await LoadUserLocation();
+                if (myLocationPushpin == null)
+                    MessageBox.Show(AppResources.Map_CannotObtainLocation);
 
                 InitAppBar(lastLocations, sosLocations);
 
@@ -81,29 +85,33 @@ namespace CitySafe
             catch (Exception e)
             {
                 Debug.WriteLine(e.ToString());
-                MessageBox.Show(AppResources.Map_LoadingFailed);
+                message = AppResources.Map_LoadingFailed;
+                NavigationService.GoBack();
             }
             App.HideProgressOverlay();
+            if (!message.Equals(""))
+                MessageBox.Show(message);
         }
 
         /// <summary>
         /// Load the SOS locations of the user being tracked.
         /// </summary>
         /// <returns>The list of all the SOS locations</returns>
-        private async Task<List<Pushpin>> LoadSOSLocations()
+        private async Task<List<Pushpin>> LoadSOSLocations(CancellationToken tk)
         {
             var sosLocation = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME)
                               where request.Get<ParseUser>(ParseContract.SOSRequestTable.SENDER) == App.trackItemModel.user
                               where request.Get<bool>(ParseContract.SOSRequestTable.RESOLVED) == false
                               select request;
-            IEnumerable<ParseObject> results = await sosLocation.FindAsync();
+            IEnumerable<ParseObject> results = await sosLocation.FindAsync(tk);
             List<Pushpin> list = new List<Pushpin>();
             for (int i = 0; i < results.Count(); i++)
             {
                 ParseObject request = results.ElementAt(i);
                 ParseObject location = request.Get<ParseObject>(ParseContract.SOSRequestTable.sentLocation);
-                await location.FetchIfNeededAsync();
-                list.Add(new Pushpin(ParseContract.LocationTable.ParseObjectToGeoPosition(location), SOS_PUSHPIN_COLOR));
+                await location.FetchIfNeededAsync(tk);
+                GeoPosition<GeoCoordinate> l = ParseContract.LocationTable.ParseObjectToGeoPosition(location);
+                list.Add(new Pushpin(l, SOS_PUSHPIN_COLOR,"SOS @ "+DateTimeShortString(l.Timestamp.DateTime)));
             }
             //Pushpin sos1 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)), SOS_PUSHPIN_COLOR);
             //Pushpin sos2 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)), SOS_PUSHPIN_COLOR);
@@ -111,7 +119,7 @@ namespace CitySafe
             //list.Add(sos1);
             //list.Add(sos2);
             //list.Add(sos3);
-            list.Sort((x, y) => x.position.Timestamp.DateTime.CompareTo(y.position.Timestamp.DateTime));
+            list.Sort((x, y) => y.position.Timestamp.DateTime.CompareTo(x.position.Timestamp.DateTime));
             return list;
         }
 
@@ -121,14 +129,17 @@ namespace CitySafe
         /// <returns></returns>
         private async Task<Pushpin> LoadUserLocation()
         {
-            return new Pushpin(await Utilities.getCurrentGeoPosition(), MY_LOCATION_PUSHPIN_COLOR);
+            GeoPosition<GeoCoordinate> p = await Utilities.getCurrentGeoPosition();
+            if(p == null)
+                return null;
+            return new Pushpin(p, MY_LOCATION_PUSHPIN_COLOR,AppResources.Map_MyLocation);
         }
 
         /// <summary>
         /// Initialize and load data into lastLocations.
         /// </summary>
         /// <returns></returns>
-        private async Task<List<Pushpin>> LoadLastLocations()
+        private async Task<List<Pushpin>> LoadLastLocations(CancellationToken tk)
         {
             //Initialize the locationList.
             List<Pushpin> Locations = new List<Pushpin>();
@@ -136,24 +147,27 @@ namespace CitySafe
             //Get the position of the first location data(oldest one).
             int locationSize = App.trackItemModel.user.Get<int>(ParseContract.UserTable.LOCATION_DATA_SIZE);
             int startPoint = App.trackItemModel.user.Get<int>(ParseContract.UserTable.LAST_LOCATION_INDEX);
-            startPoint++;
 
             for (int i = 0; i < locationSize; i++)
             {
                 if (Locations.Count == LOCATION_SIZE_LIMIT)
                     break;
-                ParseObject location = App.trackItemModel.user.Get<ParseObject>(ParseContract.UserTable.LOCATION((i + startPoint) % locationSize));
+                int current = startPoint - i;
+                if (current < 0)
+                    current += locationSize;
+                ParseObject location = App.trackItemModel.user.Get<ParseObject>(ParseContract.UserTable.LOCATION(current));
                 if (location.ObjectId != ParseContract.LocationTable.DUMMY_LOCATION)
                 {
-                    await location.FetchIfNeededAsync();
+                    await location.FetchIfNeededAsync(tk);
                     //Debug.WriteLine("line " + i + " : " + location.ObjectId + " " + location.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP));
                     GeoPosition<GeoCoordinate> gp = ParseContract.LocationTable.ParseObjectToGeoPosition(location);
-                    Locations.Add(new Pushpin(gp, LAST_LOCATION_PUSHPIN_COLOR));
+                    Locations.Add(new Pushpin(gp, LAST_LOCATION_PUSHPIN_COLOR, DateTimeShortString(gp.Timestamp.DateTime)));
                 }
+                Debug.WriteLine(Locations.Count);
             }
             //Sort to make sure the GeoPositions are in sorted order.
             //This is just making sure, the GeoPositions should be sorted already at this point.
-            Locations.Sort((x, y) => x.position.Timestamp.DateTime.CompareTo(y.position.Timestamp.DateTime));
+            Locations.Sort((x, y) => y.position.Timestamp.DateTime.CompareTo(x.position.Timestamp.DateTime));
             return Locations;
         }
 
@@ -167,7 +181,8 @@ namespace CitySafe
         /// <param name="e"></param>
         private void MyLocationMenuButton_Click(object sender, EventArgs e)
         {
-            LocationMap.SetView(myLocationPushpin.position.Location, ZOOMLEVEL, MapAnimationKind.Parabolic);
+            if(myLocationPushpin != null)
+            LocationMap.SetView(myLocationPushpin.position.Location, LocationMap.ZoomLevel, MapAnimationKind.Parabolic);
         }
 
         /// <summary>
@@ -223,21 +238,30 @@ namespace CitySafe
         }
         #endregion
 
-
         /// <summary>
         /// Add a pushpin to the map and zoom to the position.
         /// </summary>
         /// <param name="p">the pushpin to be added</param>
         private void AddNewPushpin(Pushpin p)
         {
-            LocationMap.SetView(p.position.Location, ZOOMLEVEL, MapAnimationKind.Parabolic);
+            LocationMap.SetView(p.position.Location, LocationMap.ZoomLevel, MapAnimationKind.Parabolic);
             LocationMapLayer.Add(p.pushpinLayer);
+        }
+
+        private string DateTimeShortString(DateTime d)
+        {
+            return d.ToShortDateString() + " " + d.ToShortTimeString();
         }
 
         private void LocationMap_Loaded(object sender, RoutedEventArgs e)
         {
             Microsoft.Phone.Maps.MapsSettings.ApplicationContext.ApplicationId = "be4cc146-3d36-4480-8558-dc73c118ff75";
             Microsoft.Phone.Maps.MapsSettings.ApplicationContext.AuthenticationToken = "ve8Kh91JtSnobnbc6D_d4w";
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            App.HideProgressOverlay();
         }
     }
 }

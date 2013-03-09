@@ -1,5 +1,7 @@
 ﻿using Microsoft.Phone.Maps.Controls;
+using System;
 using System.Device.Location;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -21,56 +23,61 @@ namespace CitySafe
         public GeoPosition<GeoCoordinate> position { get { return _position; } }
         public MapOverlay pushpinLayer { get { return _pushpinOverlay; } }
 
-        public Pushpin(GeoPosition<GeoCoordinate> position, Color c)
+        public Pushpin(GeoPosition<GeoCoordinate> position, Color c, string text)
         {
             _position = position;
-            _pushpinOverlay = GetPushpinOverlay(position.Location, c);
+            _pushpinOverlay = GetPushpinOverlay(position, c,text);
         }
 
-        private static MapOverlay GetPushpinOverlay(GeoCoordinate coord, Color c)
+        private static MapOverlay GetPushpinOverlay(GeoPosition<GeoCoordinate> p, Color c,string text)
         {
-            var aPushpin = CreatePushpinObject(c);
+            var aPushpin = CreatePushpinObject(c,text);
 
             //Creating a MapOverlay and adding the Pushpin to it.
             MapOverlay MyOverlay = new MapOverlay();
             MyOverlay.Content = aPushpin;
-            MyOverlay.GeoCoordinate = coord;
-            MyOverlay.PositionOrigin = new Point(0, 0.5);
+            MyOverlay.GeoCoordinate = p.Location;
+            MyOverlay.PositionOrigin = new Point(0, 0);
             return MyOverlay;
         }
 
-        private static Grid CreatePushpinObject(Color c)
+        private static Canvas CreatePushpinObject(Color c, string text)
         {
-            //Creating a Grid element.
-            Grid MyGrid = new Grid();
-            MyGrid.RowDefinitions.Add(new RowDefinition());
-            MyGrid.RowDefinitions.Add(new RowDefinition());
-            MyGrid.Background = new SolidColorBrush(Colors.Transparent);
 
-            //Creating a Rectangle
-            Rectangle MyRectangle = new Rectangle();
-            MyRectangle.Fill = new SolidColorBrush(c);
-            MyRectangle.Height = 20;
-            MyRectangle.Width = 20;
-            MyRectangle.SetValue(Grid.RowProperty, 0);
-            MyRectangle.SetValue(Grid.ColumnProperty, 0);
+            Canvas can = new Canvas();
+            //Ellipse circle = new Ellipse();
+            //circle.Height = 20;
+            //circle.Width = 20;
+            //circle.Fill = new SolidColorBrush(c);
+            //circle.SetValue(Grid.RowProperty, 1);
+            //circle.SetValue(Grid.ColumnProperty, 0);
+            //can.Children.Add(circle);
+            //Canvas.SetLeft(circle, -10);
+            //Canvas.SetTop(circle, -10);
 
-            //Adding the Rectangle to the Grid
-            MyGrid.Children.Add(MyRectangle);
-
-            //Creating a Polygon
             Polygon MyPolygon = new Polygon();
-            MyPolygon.Points.Add(new Point(2, 0));
-            MyPolygon.Points.Add(new Point(22, 0));
-            MyPolygon.Points.Add(new Point(2, 40));
+            MyPolygon.Points.Add(new Point(0, 0));
+            MyPolygon.Points.Add(new Point(20, 0));
+            MyPolygon.Points.Add(new Point(0, 40));
             MyPolygon.Stroke = new SolidColorBrush(c);
             MyPolygon.Fill = new SolidColorBrush(c);
-            MyPolygon.SetValue(Grid.RowProperty, 1);
-            MyPolygon.SetValue(Grid.ColumnProperty, 0);
+            can.Children.Add(MyPolygon);
+            Canvas.SetLeft(MyPolygon, 0);
+            Canvas.SetTop(MyPolygon, -40);
 
-            //Adding the Polygon to the Grid
-            MyGrid.Children.Add(MyPolygon);
-            return MyGrid;
+            TextBox b = new TextBox();
+            b.Text = text;
+            b.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            b.TextWrapping = TextWrapping.Wrap;
+            b.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            b.Foreground = new SolidColorBrush(Colors.White);
+            b.Background = new SolidColorBrush(c);
+            b.IsHitTestVisible = false;
+            can.Children.Add(b);
+            Canvas.SetTop(b,-90);
+            Canvas.SetLeft(b, -25);
+
+            return can;
         }
 
         public override string ToString()

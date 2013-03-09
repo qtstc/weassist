@@ -69,7 +69,19 @@
     <Compile Include="CitySafePush.aspx.designer.cs">
       <DependentUpon>CitySafePush.aspx</DependentUpon>
     </Compile>
+    <Compile Include="forgetpassword.php.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forgetpassword.php.designer.cs">
+      <DependentUpon>forgetpassword.php.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="signup.php.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="signup.php.designer.cs">
+      <DependentUpon>signup.php.cs</DependentUpon>
+    </Compile>
     <Compile Include="test.aspx.cs">
       <DependentUpon>test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -79,8 +91,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="forgetpassword.php" />
     <None Include="Properties\PublishProfiles\citysafe - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\citysafe - Web Deploy.pubxml" />
+    <Content Include="signup.php" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

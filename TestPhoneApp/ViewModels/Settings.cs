@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CitySafe.ViewModels
@@ -13,9 +14,9 @@ namespace CitySafe.ViewModels
     [DataContract]
     public abstract class Settings : INotifyPropertyChanged
     {
-        public abstract Task LoadSettings();
+        public abstract Task LoadSettings(CancellationToken tk);
 
-        public abstract Task SaveSettings();
+        public abstract Task SaveSettings(CancellationToken tk);
 
         /// <summary>
         /// Multicast event for property change notifications.
