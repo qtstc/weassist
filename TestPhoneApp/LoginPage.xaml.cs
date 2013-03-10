@@ -13,6 +13,7 @@ using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using Newtonsoft.Json;
 using System.Threading;
+using System.ComponentModel;
 
 namespace CitySafe
 {
@@ -272,5 +273,11 @@ namespace CitySafe
         }
 
         #endregion
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (App.HideProgressOverlay())
+                e.Cancel = true;
+        }
     }
 }

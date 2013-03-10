@@ -93,7 +93,7 @@ namespace CitySafe
         {
             if (App.trackItemModel.user.Get<Boolean>(ParseContract.UserTable.IN_DANGER) || App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.ALLOW_LOCATION_ACCESS))
             {
-                NavigationService.Navigate(new Uri("/MapPage.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/TrackMapPage.xaml", UriKind.Relative));
             }
             else
             {

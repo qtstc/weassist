@@ -278,8 +278,8 @@
   <data name="TrackedSetting_RemovingUser" xml:space="preserve">
     <value>Removing user from tracked list ...</value>
   </data>
-  <data name="Map_LocationOf" xml:space="preserve">
-    <value>'s Locations</value>
+  <data name="Map_LocationHeader" xml:space="preserve">
+    <value>Locations</value>
   </data>
   <data name="Map_LoadingFailed" xml:space="preserve">
     <value>Failed to load the location data. Please check your network settings and try again later.</value>
@@ -352,5 +352,20 @@
   </data>
   <data name="Tracker_AlreadyInList" xml:space="preserve">
     <value>The user is already in your list.</value>
+  </data>
+  <data name="Map_MapHeader" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="Date_DaysAgo" xml:space="preserve">
+    <value> days ago</value>
+  </data>
+  <data name="Date_Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Date_Yesterday" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="Map_SOSLocation" xml:space="preserve">
+    <value>SOS</value>
   </data>
 </root>

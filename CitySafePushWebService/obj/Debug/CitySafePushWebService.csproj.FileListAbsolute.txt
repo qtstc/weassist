@@ -3,9 +3,6 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebSer
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\obj\Debug\CitySafePushWebService.dll
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\obj\Debug\CitySafePushWebService.pdb
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\Assets\ApplicationIcon.png
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\Assets\Tiles\FlipCycleTileLarge.png
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\Assets\Tiles\FlipCycleTileMedium.png
-E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\Assets\Tiles\FlipCycleTileSmall.png
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\Assets\Tiles\IconicTileMediumLarge.png
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\Assets\Tiles\IconicTileSmall.png
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\CitySafe.dll

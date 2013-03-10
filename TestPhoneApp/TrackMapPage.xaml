@@ -1,0 +1,72 @@
+﻿<phone:PhoneApplicationPage xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps" 
+    x:Class="CitySafe.TrackMapPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <phone:Pivot x:Name="MapPivot" Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+            <!--Pivot item one-->
+            <phone:PivotItem Header="{Binding LocalizedResources.Map_LocationHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" >
+                <phone:LongListSelector x:Name="LocationList" 
+                                        Background="Transparent"
+                                        LayoutMode="List"
+                                        IsGroupingEnabled="true"
+                                        HideEmptyGroups ="true" SelectionChanged="LocationList_SelectionChanged">
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Margin="12,6,12,6">
+                                <TextBlock Text="{Binding time}"  TextWrapping="Wrap" FontSize="30" Foreground="{StaticResource PhoneInverseBackgroundBrush}"/>
+                                <TextBlock Text="{Binding distance}"   TextWrapping="Wrap" FontSize="20" Margin="12,-6,12,0" Foreground="{StaticResource PhoneInverseInactiveBrush}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                    <phone:LongListSelector.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <Border Background="Transparent" Padding="2">
+                                <Border  Margin="0,0,18,0" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Key}" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="40"  FontFamily="{StaticResource PhoneFontFamilySemiLight}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                </Border>
+                            </Border>
+                        </DataTemplate>
+                    </phone:LongListSelector.GroupHeaderTemplate>
+                    <phone:LongListSelector.JumpListStyle>
+                        <Style  TargetType="phone:LongListSelector">
+                            <Setter Property="LayoutMode" Value="List" />
+                            <Setter Property="ItemTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <Border  >
+                                            <TextBlock Text="{Binding Key}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="40"  VerticalAlignment="Center"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </phone:LongListSelector.JumpListStyle>
+                </phone:LongListSelector>
+            </phone:PivotItem>
+
+            <!--Pivot item two-->
+            <phone:PivotItem Header="{Binding LocalizedResources.Map_MapHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" >
+                <Controls:Map x:Name="LocationMap" Grid.Row="0"  Loaded="LocationMap_Loaded"/>
+            </phone:PivotItem>
+        </phone:Pivot>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/MyLocation.png" Text="my location"  Click="MyLocationMenuButton_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

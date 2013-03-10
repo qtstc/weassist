@@ -96,13 +96,17 @@
     <Compile Include="MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pushpin.cs" />
+    <Compile Include="ViewModels\Pushpin.cs" />
     <Compile Include="TrackedSettingsPage.xaml.cs">
       <DependentUpon>TrackedSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="TrackingSettingsPage.xaml.cs">
       <DependentUpon>TrackingSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TrackMapPage.xaml.cs">
+      <DependentUpon>TrackMapPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LocationList.cs" />
     <Compile Include="ViewModels\Settings.cs" />
     <Compile Include="ViewModels\TrackedSettings.cs" />
     <Compile Include="ViewModels\TrackingSettings.cs" />
@@ -169,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TrackingSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrackMapPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

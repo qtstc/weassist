@@ -118,6 +118,7 @@ namespace CitySafe
                 Debug.WriteLine("Fail to initialize user settings to the server:\n");
                 Debug.WriteLine(e.ToString());
                 message = AppResources.Setting_SyncingFailed;
+                NavigationService.GoBack();
             }
             App.HideProgressOverlay();
             if (!message.Equals(""))

@@ -98,7 +98,8 @@ namespace CitySafe
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            App.HideProgressOverlay();
+            if (App.HideProgressOverlay())
+                e.Cancel = true;
         }
 
         #region UI Listener for Navigation

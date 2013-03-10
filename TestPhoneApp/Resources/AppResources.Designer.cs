@@ -106,6 +106,33 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  days ago.
+        /// </summary>
+        public static string Date_DaysAgo {
+            get {
+                return ResourceManager.GetString("Date_DaysAgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today.
+        /// </summary>
+        public static string Date_Today {
+            get {
+                return ResourceManager.GetString("Date_Today", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yesterday.
+        /// </summary>
+        public static string Date_Yesterday {
+            get {
+                return ResourceManager.GetString("Date_Yesterday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forget password?.
         /// </summary>
         public static string Login_ForgetPassword {
@@ -214,11 +241,20 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;s Locations.
+        ///   Looks up a localized string similar to Locations.
         /// </summary>
-        public static string Map_LocationOf {
+        public static string Map_LocationHeader {
             get {
-                return ResourceManager.GetString("Map_LocationOf", resourceCulture);
+                return ResourceManager.GetString("Map_LocationHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        public static string Map_MapHeader {
+            get {
+                return ResourceManager.GetString("Map_MapHeader", resourceCulture);
             }
         }
         
@@ -228,6 +264,15 @@ namespace CitySafe.Resources {
         public static string Map_MyLocation {
             get {
                 return ResourceManager.GetString("Map_MyLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SOS.
+        /// </summary>
+        public static string Map_SOSLocation {
+            get {
+                return ResourceManager.GetString("Map_SOSLocation", resourceCulture);
             }
         }
         
