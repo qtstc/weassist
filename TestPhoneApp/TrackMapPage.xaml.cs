@@ -101,10 +101,10 @@ namespace CitySafe
             for (int i = 0; i < results.Count(); i++)
             {
                 ParseObject request = results.ElementAt(i);
-                ParseObject location = request.Get<ParseObject>(ParseContract.SOSRequestTable.sentLocation);
+                ParseObject location = request.Get<ParseObject>(ParseContract.SOSRequestTable.SENT_LOCATION);
                 await location.FetchIfNeededAsync(tk);
                 GeoPosition<GeoCoordinate> l = ParseContract.LocationTable.ParseObjectToGeoPosition(location);
-                list.Add(new Pushpin(l, Pushpin.TYPE.KNOWN_SOS_LOCATION,reference));
+                list.Add(new Pushpin(l, Pushpin.TYPE.KNOWN_SOS_LOCATION,reference,(sender, s)=>SOSPushpin_Click(sender,s,request)));
             }
             //Pushpin sos1 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)), SOS_PUSHPIN_COLOR);
             //Pushpin sos2 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)), SOS_PUSHPIN_COLOR);
@@ -114,6 +114,19 @@ namespace CitySafe
             //list.Add(sos3);
             list.Sort((x, y) => y.position.Timestamp.DateTime.CompareTo(x.position.Timestamp.DateTime));
             return list;
+        }
+
+        /// <summary>
+        /// The event handler for the pushpin. Because we cannot do navigation in the pushpin class,
+        /// we pass an event handler to it.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="relation"></param>
+        private void SOSPushpin_Click(object sender, RoutedEventArgs e, ParseObject relation)
+        {
+            App.sosRequestInfo = relation;
+            NavigationService.Navigate(new Uri("/SOSInfoPage.xaml", UriKind.Relative));
         }
 
         /// <summary>

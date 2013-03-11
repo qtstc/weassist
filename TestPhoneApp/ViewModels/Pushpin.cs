@@ -1,11 +1,13 @@
 ﻿using CitySafe.Resources;
 using Microsoft.Phone.Maps.Controls;
+using Parse;
 using System;
 using System.Device.Location;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Windows.Devices.Geolocation;
 
@@ -23,6 +25,7 @@ namespace CitySafe.ViewModels
         private MapOverlay _pushpinOverlay;
         private string _type;
         private GeoPosition<GeoCoordinate> _referencePosition;
+        private RoutedEventHandler _pushpinEvent;
 
         public GeoPosition<GeoCoordinate> position { get { return _position; } }
         public MapOverlay pushpinLayer { get { return _pushpinOverlay; } }
@@ -45,12 +48,13 @@ namespace CitySafe.ViewModels
             get { return _type;}
         }
 
-        public Pushpin(GeoPosition<GeoCoordinate> position, string type, GeoPosition<GeoCoordinate> referencePosition = null)
+        public Pushpin(GeoPosition<GeoCoordinate> position, string type, GeoPosition<GeoCoordinate> referencePosition = null, RoutedEventHandler pushpinEvent = null)
         {
+            _referencePosition = referencePosition;
+            _pushpinEvent = pushpinEvent;
             _position = position;
             _type = type;
             _pushpinOverlay = GetPushpinOverlay();
-            _referencePosition = referencePosition;
         }
 
         private MapOverlay GetPushpinOverlay()
@@ -94,21 +98,37 @@ namespace CitySafe.ViewModels
             Canvas.SetLeft(MyPolygon, 0);
             Canvas.SetTop(MyPolygon, -40);
 
-            TextBox b = new TextBox();
-            b.Text = GetLabel();
+            Button b = new Button();
+            b.Content = GetLabel();
             b.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            b.TextWrapping = TextWrapping.Wrap;
             b.BorderBrush = new SolidColorBrush(Colors.Transparent);
             b.Foreground = new SolidColorBrush(Colors.White);
             b.Background = new SolidColorBrush(c);
-            b.IsHitTestVisible = false;
             can.Children.Add(b);
-            Canvas.SetTop(b,-90);
+            Canvas.SetTop(b, -90);
             Canvas.SetLeft(b, -25);
+
+            if (_pushpinEvent != null)
+            {
+                Debug.WriteLine("added");
+                b.Click += _pushpinEvent;
+            }
+            //b.Click += (sender, s) => SOSPushpin_Click(sender, s);
 
             return can;
         }
 
+
+        private void SOSPushpin_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("triggered in pushpin!");
+        }
+
+
+        /// <summary>
+        /// Not really used. Mostly for debugging purpose.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             string result = "";//"(" + position.Location.Longitude + ", " + position.Location.Latitude+" )";
@@ -116,6 +136,10 @@ namespace CitySafe.ViewModels
             return result;
         }
 
+        /// <summary>
+        /// Defines the label of different types of push pins.
+        /// </summary>
+        /// <returns></returns>
         private string GetLabel()
         {
             switch (_type)
@@ -135,6 +159,10 @@ namespace CitySafe.ViewModels
                     
         }
 
+        /// <summary>
+        /// Defines the color of different types of pushpins.
+        /// </summary>
+        /// <returns></returns>
         private Color GetColor()
         {
             switch (_type)
@@ -152,6 +180,9 @@ namespace CitySafe.ViewModels
             }
         }
 
+        /// <summary>
+        /// A class that store the info used to identify different types of Pushpins.
+        /// </summary>
         public static class TYPE
         {
             public const string MY_LOCATION = "MY_LOCATION";

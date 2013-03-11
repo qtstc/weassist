@@ -106,7 +106,7 @@ namespace CitySafe
             for (int i = 0; i < results.Count(); i++)
             {
                 ParseObject request = results.ElementAt(i);
-                ParseObject location = request.Get<ParseObject>(ParseContract.SOSRequestTable.sentLocation);
+                ParseObject location = request.Get<ParseObject>(ParseContract.SOSRequestTable.SENT_LOCATION);
                 await location.FetchIfNeededAsync(tk);
                 GeoPosition<GeoCoordinate> l = ParseContract.LocationTable.ParseObjectToGeoPosition(location);
                 list.Add(new Pushpin(l, Pushpin.TYPE.KNOWN_SOS_LOCATION));

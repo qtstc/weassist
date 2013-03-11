@@ -547,6 +547,60 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;s SOS.
+        /// </summary>
+        public static string SOSInfo_SOSOf {
+            get {
+                return ResourceManager.GetString("SOSInfo_SOSOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I am in danger!!!!! Please help me!!!!!.
+        /// </summary>
+        public static string SOSSend_DefaultMessage {
+            get {
+                return ResourceManager.GetString("SOSSend_DefaultMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string SOSSend_Message {
+            get {
+                return ResourceManager.GetString("SOSSend_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send SOS.
+        /// </summary>
+        public static string SOSSend_PageHeader {
+            get {
+                return ResourceManager.GetString("SOSSend_PageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photo.
+        /// </summary>
+        public static string SOSSend_Photo {
+            get {
+                return ResourceManager.GetString("SOSSend_Photo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SOSSend_Settings {
+            get {
+                return ResourceManager.GetString("SOSSend_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allow access to my location 24/7.
         /// </summary>
         public static string TrackedSetting_FullLocationAccess {

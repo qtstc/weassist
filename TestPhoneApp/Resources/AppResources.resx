@@ -368,4 +368,22 @@
   <data name="Map_SOSLocation" xml:space="preserve">
     <value>SOS</value>
   </data>
+  <data name="SOSInfo_SOSOf" xml:space="preserve">
+    <value>'s SOS</value>
+  </data>
+  <data name="SOSSend_DefaultMessage" xml:space="preserve">
+    <value>I am in danger!!!!! Please help me!!!!!</value>
+  </data>
+  <data name="SOSSend_PageHeader" xml:space="preserve">
+    <value>Send SOS</value>
+  </data>
+  <data name="SOSSend_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="SOSSend_Photo" xml:space="preserve">
+    <value>Photo</value>
+  </data>
+  <data name="SOSSend_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

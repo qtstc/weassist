@@ -34,6 +34,9 @@ namespace CitySafe
         //Made these global because we need to pass it from page to pages.
         public static TrackItemModel trackItemModel;
 
+        //The sos request info to be passed to the SOSInfoPage.
+        public static ParseObject sosRequestInfo;
+
         #region ProgressOverlay
 
         /// <summary>

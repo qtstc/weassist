@@ -56,6 +56,7 @@ namespace ScheduledLocationAgent.Data
             public static string VERTICAL_ACCURACY { get { return "verticalAccuracy"; } }
             public static string SPEED { get { return "speed"; } }
             public static string COURSE { get { return "course"; } }
+            public static string USER { get { return "user"; } }
 
             public static string DUMMY_LOCATION { get { return "CaKfUVexoN"; } }
 
@@ -149,11 +150,24 @@ namespace ScheduledLocationAgent.Data
         /// </summary>
         public static class SOSRequestTable
         {
+            private const int IMAGE_WIDTH = 200;
+
             public static string TABLE_NAME { get { return "SOSRequest"; } }
 
             public static string SENDER { get { return "sender"; } }
             public static string RESOLVED { get { return "resolved"; } }
-            public static string sentLocation { get { return "sentLocation"; } }
+            public static string SENT_LOCATION { get { return "sentLocation"; } }
+            public static string MESSAGE { get { return "message"; } }
+            public static string IMAGE { get { return "image"; } }
+
+            public static string SOS_IMAGE_FILE_NAME { get { return "sosimage.jpg"; } }
+            public const int MAX_MESSAGE_LENGTH = 200;
+
+            public static int[] GetImageWidthHeight(int width, int height)
+            {
+                int newHeight = height * IMAGE_WIDTH / width;
+                return new int[] { IMAGE_WIDTH, newHeight };
+            }
         }
 
         /// <summary>
@@ -205,7 +219,11 @@ namespace ScheduledLocationAgent.Data
                 IDictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("userID", userID);
                 parameters.Add("relation", role);
-                string result = await ParseCloud.CallFunctionAsync<string>("InviteExistingUser", parameters,tk);
+                string result;
+                if(tk != CancellationToken.None)
+                    result = await ParseCloud.CallFunctionAsync<string>("InviteExistingUser", parameters,tk);
+                else
+                    result = await ParseCloud.CallFunctionAsync<string>("InviteExistingUser", parameters);
                 return result;
             }
 
@@ -214,7 +232,11 @@ namespace ScheduledLocationAgent.Data
                 IDictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("email", newEmail);
                 parameters.Add("relation", role);
-                string result = await ParseCloud.CallFunctionAsync<string>("InviteNewUser", parameters,tk);
+                string result;
+                if (tk != CancellationToken.None)
+                    result = await ParseCloud.CallFunctionAsync<string>("InviteNewUser", parameters, tk);
+                else
+                    result = await ParseCloud.CallFunctionAsync<string>("InviteNewUser", parameters);
                 return result;
             }
 
@@ -222,7 +244,11 @@ namespace ScheduledLocationAgent.Data
             {
                 IDictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("requestTableRowID", requestTableRowID);
-                string result = await ParseCloud.CallFunctionAsync<string>("NewSOSCall", parameters,tk);
+                string result;
+                if (tk != CancellationToken.None)
+                    result = await ParseCloud.CallFunctionAsync<string>("NewSOSCall", parameters, tk);
+                else
+                    result = await ParseCloud.CallFunctionAsync<string>("NewSOSCall", parameters);
                 return result;
             }
         }

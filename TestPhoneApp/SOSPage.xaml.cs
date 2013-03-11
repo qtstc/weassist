@@ -23,51 +23,27 @@ namespace CitySafe
     public partial class SOSPage : PhoneApplicationPage
     {
 
+        private bool noCancel;
 
         public SOSPage()
         {
             InitializeComponent();
-
-            //Change the text of the help button if the user is in danger.
-            if (ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.IN_DANGER))
-                HelpButton.Content = AppResources.SOS_Resolve;
+            noCancel = false;
         }
 
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            string message = "";
-            CancellationToken tk = App.ShowProgressOverlay(AppResources.SOS_SendingRequest);
+            if (!ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.IN_DANGER))
+            {
+                NavigationService.Navigate(new Uri("/SOSSendPage.xaml", UriKind.Relative));
+                return;
+            }
+
+            string message = AppResources.SOS_SOSCanceledFail;
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.SOS_CancelingRequest);
             try
             {
-                if (!ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.IN_DANGER))
-                {
-                    message = AppResources.SOS_SOSSentFail;
-                    ParseObject sos = new ParseObject(ParseContract.SOSRequestTable.TABLE_NAME);
-                    sos[ParseContract.SOSRequestTable.SENDER] = ParseUser.CurrentUser;
-                    sos[ParseContract.SOSRequestTable.RESOLVED] = false;
-                    GeoPosition<GeoCoordinate> current = await Utilities.getCurrentGeoPosition();
-                    if (current == null)
-                    {
-                        message = AppResources.Map_CannotObtainLocation;
-                        throw new InvalidOperationException("Cannot access location");
-                    }
-                    sos[ParseContract.SOSRequestTable.sentLocation] = ParseContract.LocationTable.GeoPositionToParseObject(current);
-                    await sos.SaveAsync(tk);
-
-                    string result = await ParseContract.CloudFunction.NewSOSCall(sos.ObjectId,tk);
-                    Debug.WriteLine("string returned " + result);
-
-                    ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = true;
-                    HelpButton.Content = AppResources.SOS_Resolve;
-
-                    await ParseUser.CurrentUser.SaveAsync(tk);
-                    message = AppResources.SOS_SOSSentSuccess;
-                }
-                else
-                {
-                    App.ShowProgressOverlay(AppResources.SOS_CancelingRequest);
-                    message = AppResources.SOS_SOSCanceledFail;
                     //TODO: do this in the cloud.
                     var requests = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME)
                                    where request.Get<ParseUser>(ParseContract.SOSRequestTable.SENDER) == ParseUser.CurrentUser
@@ -77,20 +53,19 @@ namespace CitySafe
                     {
                         p[ParseContract.SOSRequestTable.RESOLVED] = true;
                         await p.SaveAsync(tk);
-
                     }
 
                     ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = false;
                     HelpButton.Content = AppResources.SOS_SendSOS;
-
+                    noCancel = true;
                     await ParseUser.CurrentUser.SaveAsync(tk);
                     message = AppResources.SOS_SOSCanceledSuccess;
-                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
             }
+            noCancel = false;
             App.HideProgressOverlay();
             MessageBox.Show(message);
         }
@@ -98,8 +73,22 @@ namespace CitySafe
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
+            if (noCancel)
+            {
+                e.Cancel = true;
+                return;
+            }
             if (App.HideProgressOverlay())
                 e.Cancel = true;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            //Change the text of the help button if the user is in danger.
+            if (ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.IN_DANGER))
+                HelpButton.Content = AppResources.SOS_Resolve;
+            else
+                HelpButton.Content = AppResources.SOS_SendSOS;
         }
 
         #region UI Listener for Navigation

@@ -96,6 +96,12 @@
     <Compile Include="MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SOSInfoPage.xaml.cs">
+      <DependentUpon>SOSInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SOSSendPage.xaml.cs">
+      <DependentUpon>SOSSendPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Pushpin.cs" />
     <Compile Include="TrackedSettingsPage.xaml.cs">
       <DependentUpon>TrackedSettingsPage.xaml</DependentUpon>
@@ -164,7 +170,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SOSInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SOSPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SOSSendPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,11 +207,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\addphoto.png" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\AppBar\add.png" />
     <Content Include="Assets\AppBar\back.png" />
     <Content Include="Assets\AppBar\basecircle.png" />
     <Content Include="Assets\AppBar\delete.png" />
+    <Content Include="Assets\AppBar\feature.email.png" />
     <Content Include="Assets\AppBar\MyLocation.png" />
     <Content Include="Assets\AppBar\refresh.png" />
     <Content Include="Assets\AppBar\save.png" />
@@ -205,6 +221,7 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\deletephoto.png" />
     <Content Include="Assets\Tiles\IconicTileMediumLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
