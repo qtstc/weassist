@@ -547,11 +547,38 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;s SOS.
+        ///   Looks up a localized string similar to No Photo.
         /// </summary>
-        public static string SOSInfo_SOSOf {
+        public static string SOSInfo_NoPhoto {
             get {
-                return ResourceManager.GetString("SOSInfo_SOSOf", resourceCulture);
+                return ResourceManager.GetString("SOSInfo_NoPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SOS Info.
+        /// </summary>
+        public static string SOSInfo_PageHeader {
+            get {
+                return ResourceManager.GetString("SOSInfo_PageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load the photo, try again..
+        /// </summary>
+        public static string SOSInfo_PhotoLoadFail {
+            get {
+                return ResourceManager.GetString("SOSInfo_PhotoLoadFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sender Info.
+        /// </summary>
+        public static string SOSInfo_SenderInfo {
+            get {
+                return ResourceManager.GetString("SOSInfo_SenderInfo", resourceCulture);
             }
         }
         

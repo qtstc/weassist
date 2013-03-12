@@ -228,6 +228,7 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\placeholder.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
@@ -249,6 +250,9 @@
     <Reference Include="Parse.Phone, Version=1.0.4.0, Culture=neutral, PublicKeyToken=ba48c3a442de616e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\parse.1.0.4\lib\wp8\Parse.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="PhonePerformance">
+      <HintPath>..\packages\PhonePerformance.1.2.1\lib\sl4-windowsphone71\PhonePerformance.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>

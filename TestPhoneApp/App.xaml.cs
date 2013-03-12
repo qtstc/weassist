@@ -15,6 +15,7 @@ using ScheduledLocationAgent.Data;
 using Microsoft.Phone.Notification;
 using Microsoft.Phone.Scheduler;
 using System.Threading;
+using System.Windows.Media.Imaging;
 
 namespace CitySafe
 {

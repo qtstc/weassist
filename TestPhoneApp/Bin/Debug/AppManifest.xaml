@@ -6,6 +6,7 @@
     <AssemblyPart x:Name="Newtonsoft.Json" Source="Newtonsoft.Json.dll" />
     <AssemblyPart x:Name="Parse" Source="Parse.dll" />
     <AssemblyPart x:Name="Parse.Phone" Source="Parse.Phone.dll" />
+    <AssemblyPart x:Name="PhonePerformance" Source="PhonePerformance.dll" />
     <AssemblyPart x:Name="ScheduledLocationAgent" Source="ScheduledLocationAgent.dll" />
     <AssemblyPart x:Name="System.Windows.Interactivity" Source="System.Windows.Interactivity.dll" />
   </Deployment.Parts>

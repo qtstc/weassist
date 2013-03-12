@@ -368,8 +368,8 @@
   <data name="Map_SOSLocation" xml:space="preserve">
     <value>SOS</value>
   </data>
-  <data name="SOSInfo_SOSOf" xml:space="preserve">
-    <value>'s SOS</value>
+  <data name="SOSInfo_PageHeader" xml:space="preserve">
+    <value>SOS Info</value>
   </data>
   <data name="SOSSend_DefaultMessage" xml:space="preserve">
     <value>I am in danger!!!!! Please help me!!!!!</value>
@@ -385,5 +385,14 @@
   </data>
   <data name="SOSSend_Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="SOSInfo_SenderInfo" xml:space="preserve">
+    <value>Sender Info</value>
+  </data>
+  <data name="SOSInfo_NoPhoto" xml:space="preserve">
+    <value>No Photo</value>
+  </data>
+  <data name="SOSInfo_PhotoLoadFail" xml:space="preserve">
+    <value>Failed to load the photo, try again.</value>
   </data>
 </root>

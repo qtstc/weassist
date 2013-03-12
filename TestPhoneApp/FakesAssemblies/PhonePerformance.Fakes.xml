@@ -1,0 +1,611 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PhonePerformance.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:Delay.Fakes.ShimDeferredLoadListBox">
+            <summary>Shim type of Delay.DeferredLoadListBox</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimDeferredLoadListBox.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimDeferredLoadListBox.#ctor(Delay.DeferredLoadListBox)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimDeferredLoadListBox.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimDeferredLoadListBox.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimDeferredLoadListBox.Bind(System.ComponentModel.ISupportInitialize)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimDeferredLoadListBox.FindFirstChildOfTypeOf1DependencyObject``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Windows.DependencyObject,``0})">
+            <summary>Sets the shim of DeferredLoadListBox.FindFirstChildOfType(DependencyObject root)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.Constructor">
+            <summary>Sets the shim of DeferredLoadListBox.DeferredLoadListBox()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.GetContainerForItemOverride">
+            <summary>Sets the shim of DeferredLoadListBox.GetContainerForItemOverride()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.IsItemItsOwnContainerOverrideObject">
+            <summary>Sets the shim of DeferredLoadListBox.IsItemItsOwnContainerOverride(Object item)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.OnApplyTemplate">
+            <summary>Sets the shim of DeferredLoadListBox.OnApplyTemplate()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.OnVerticalOffsetShadowChangedDependencyObjectDependencyPropertyChangedEventArgs">
+            <summary>Sets the shim of DeferredLoadListBox.OnVerticalOffsetShadowChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.OverlapDoubleDoubleDoubleDouble">
+            <summary>Sets the shim of DeferredLoadListBox.Overlap(Double startA, Double endA, Double startB, Double endB)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.PrepareContainerForItemOverrideDependencyObjectObject">
+            <summary>Sets the shim of DeferredLoadListBox.PrepareContainerForItemOverride(DependencyObject element, Object item)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.StaticConstructor">
+            <summary>Sets the shim of DeferredLoadListBox.DeferredLoadListBox()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.UnmaskItemContentInt32">
+            <summary>Sets the shim of DeferredLoadListBox.UnmaskItemContent(Int32 index)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.UnmaskVisibleContent">
+            <summary>Sets the shim of DeferredLoadListBox.UnmaskVisibleContent()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox._PrepareContainerForItemOverrideb__1">
+            <summary>Sets the shim of DeferredLoadListBox.&lt;PrepareContainerForItemOverride&gt;b__1()</summary>
+        </member>
+        <member name="T:Delay.Fakes.ShimDeferredLoadListBox.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.AllInstances.GetContainerForItemOverride">
+            <summary>Sets the shim of DeferredLoadListBox.GetContainerForItemOverride()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.AllInstances.IsItemItsOwnContainerOverrideObject">
+            <summary>Sets the shim of DeferredLoadListBox.IsItemItsOwnContainerOverride(Object item)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.AllInstances.OnApplyTemplate">
+            <summary>Sets the shim of DeferredLoadListBox.OnApplyTemplate()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.AllInstances.PrepareContainerForItemOverrideDependencyObjectObject">
+            <summary>Sets the shim of DeferredLoadListBox.PrepareContainerForItemOverride(DependencyObject element, Object item)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.AllInstances.UnmaskItemContentInt32">
+            <summary>Sets the shim of DeferredLoadListBox.UnmaskItemContent(Int32 index)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.AllInstances.UnmaskVisibleContent">
+            <summary>Sets the shim of DeferredLoadListBox.UnmaskVisibleContent()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBox.AllInstances._PrepareContainerForItemOverrideb__1">
+            <summary>Sets the shim of DeferredLoadListBox.&lt;PrepareContainerForItemOverride&gt;b__1()</summary>
+        </member>
+        <member name="T:Delay.Fakes.ShimDeferredLoadListBoxItem">
+            <summary>Shim type of Delay.DeferredLoadListBoxItem</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimDeferredLoadListBoxItem.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimDeferredLoadListBoxItem.#ctor(Delay.DeferredLoadListBoxItem)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimDeferredLoadListBoxItem.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimDeferredLoadListBoxItem.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBoxItem.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBoxItem.Constructor">
+            <summary>Sets the shim of DeferredLoadListBoxItem.DeferredLoadListBoxItem()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBoxItem.MaskContent">
+            <summary>Sets the shim of DeferredLoadListBoxItem.MaskContent()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBoxItem.MaskedGet">
+            <summary>Sets the shim of DeferredLoadListBoxItem.get_Masked()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBoxItem.MaskedSetBoolean">
+            <summary>Sets the shim of DeferredLoadListBoxItem.set_Masked(Boolean value)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBoxItem.UnmaskContent">
+            <summary>Sets the shim of DeferredLoadListBoxItem.UnmaskContent()</summary>
+        </member>
+        <member name="T:Delay.Fakes.ShimDeferredLoadListBoxItem.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBoxItem.AllInstances.MaskContent">
+            <summary>Sets the shim of DeferredLoadListBoxItem.MaskContent()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBoxItem.AllInstances.MaskedGet">
+            <summary>Sets the shim of DeferredLoadListBoxItem.get_Masked()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBoxItem.AllInstances.MaskedSetBoolean">
+            <summary>Sets the shim of DeferredLoadListBoxItem.set_Masked(Boolean value)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimDeferredLoadListBoxItem.AllInstances.UnmaskContent">
+            <summary>Sets the shim of DeferredLoadListBoxItem.UnmaskContent()</summary>
+        </member>
+        <member name="T:Delay.Fakes.ShimLowProfileImageLoader">
+            <summary>Shim type of Delay.LowProfileImageLoader</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimLowProfileImageLoader.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimLowProfileImageLoader.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Delay.Fakes.ShimLowProfileImageLoader.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimLowProfileImageLoader.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimLowProfileImageLoader.GetUriSourceImage">
+            <summary>Sets the shim of LowProfileImageLoader.GetUriSource(Image obj)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimLowProfileImageLoader.HandleApplicationExitObjectEventArgs">
+            <summary>Sets the shim of LowProfileImageLoader.HandleApplicationExit(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimLowProfileImageLoader.HandleGetResponseResultIAsyncResult">
+            <summary>Sets the shim of LowProfileImageLoader.HandleGetResponseResult(IAsyncResult result)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimLowProfileImageLoader.IsEnabledGet">
+            <summary>Sets the shim of LowProfileImageLoader.get_IsEnabled()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimLowProfileImageLoader.IsEnabledSetBoolean">
+            <summary>Sets the shim of LowProfileImageLoader.set_IsEnabled(Boolean value)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimLowProfileImageLoader.OnUriSourceChangedDependencyObjectDependencyPropertyChangedEventArgs">
+            <summary>Sets the shim of LowProfileImageLoader.OnUriSourceChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimLowProfileImageLoader.SetUriSourceImageUri">
+            <summary>Sets the shim of LowProfileImageLoader.SetUriSource(Image obj, Uri value)</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimLowProfileImageLoader.StaticConstructor">
+            <summary>Sets the shim of LowProfileImageLoader.LowProfileImageLoader()</summary>
+        </member>
+        <member name="P:Delay.Fakes.ShimLowProfileImageLoader.WorkerThreadProcObject">
+            <summary>Sets the shim of LowProfileImageLoader.WorkerThreadProc(Object unused)</summary>
+        </member>
+        <member name="T:Delay.Fakes.StubDeferredLoadListBox">
+            <summary>Stub type of Delay.DeferredLoadListBox</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.ArrangeOverride(System.Windows.Size)">
+            <summary>Sets the stub of FrameworkElement.ArrangeOverride(Size finalSize)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.ArrangeOverrideSize">
+            <summary>Sets the stub of FrameworkElement.ArrangeOverride(Size finalSize)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)">
+            <summary>Sets the stub of Selector.ClearContainerForItemOverride(DependencyObject element, Object item)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.ClearContainerForItemOverrideDependencyObjectObject">
+            <summary>Sets the stub of Selector.ClearContainerForItemOverride(DependencyObject element, Object item)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.GetContainerForItemOverride">
+            <summary>Sets the stub of DeferredLoadListBox.GetContainerForItemOverride()</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.GetContainerForItemOverride01">
+            <summary>Sets the stub of DeferredLoadListBox.GetContainerForItemOverride()</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.InitializeStub">
+            <summary>Initializes a new instance of type StubDeferredLoadListBox</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.IsItemItsOwnContainerOverride(System.Object)">
+            <summary>Sets the stub of DeferredLoadListBox.IsItemItsOwnContainerOverride(Object item)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.IsItemItsOwnContainerOverrideObject">
+            <summary>Sets the stub of DeferredLoadListBox.IsItemItsOwnContainerOverride(Object item)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.MeasureOverride(System.Windows.Size)">
+            <summary>Sets the stub of FrameworkElement.MeasureOverride(Size availableSize)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.MeasureOverrideSize">
+            <summary>Sets the stub of FrameworkElement.MeasureOverride(Size availableSize)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnApplyTemplate">
+            <summary>Sets the stub of DeferredLoadListBox.OnApplyTemplate()</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnApplyTemplate01">
+            <summary>Sets the stub of DeferredLoadListBox.OnApplyTemplate()</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnCreateAutomationPeer">
+            <summary>Sets the stub of ListBox.OnCreateAutomationPeer()</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnCreateAutomationPeer01">
+            <summary>Sets the stub of ListBox.OnCreateAutomationPeer()</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnDoubleTap(System.Windows.Input.GestureEventArgs)">
+            <summary>Sets the stub of Control.OnDoubleTap(GestureEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnDoubleTapGestureEventArgs">
+            <summary>Sets the stub of Control.OnDoubleTap(GestureEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnDragEnter(System.Windows.DragEventArgs)">
+            <summary>Sets the stub of Control.OnDragEnter(DragEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnDragEnterDragEventArgs">
+            <summary>Sets the stub of Control.OnDragEnter(DragEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnDragLeave(System.Windows.DragEventArgs)">
+            <summary>Sets the stub of Control.OnDragLeave(DragEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnDragLeaveDragEventArgs">
+            <summary>Sets the stub of Control.OnDragLeave(DragEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnDragOver(System.Windows.DragEventArgs)">
+            <summary>Sets the stub of Control.OnDragOver(DragEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnDragOverDragEventArgs">
+            <summary>Sets the stub of Control.OnDragOver(DragEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnDrop(System.Windows.DragEventArgs)">
+            <summary>Sets the stub of Control.OnDrop(DragEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnDropDragEventArgs">
+            <summary>Sets the stub of Control.OnDrop(DragEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnGotFocus(System.Windows.RoutedEventArgs)">
+            <summary>Sets the stub of ListBox.OnGotFocus(RoutedEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnGotFocusRoutedEventArgs">
+            <summary>Sets the stub of ListBox.OnGotFocus(RoutedEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnHold(System.Windows.Input.GestureEventArgs)">
+            <summary>Sets the stub of Control.OnHold(GestureEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnHoldGestureEventArgs">
+            <summary>Sets the stub of Control.OnHold(GestureEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>Sets the stub of ListBox.OnItemsChanged(NotifyCollectionChangedEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnItemsChangedNotifyCollectionChangedEventArgs">
+            <summary>Sets the stub of ListBox.OnItemsChanged(NotifyCollectionChangedEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnKeyDown(System.Windows.Input.KeyEventArgs)">
+            <summary>Sets the stub of ListBox.OnKeyDown(KeyEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnKeyDownKeyEventArgs">
+            <summary>Sets the stub of ListBox.OnKeyDown(KeyEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnKeyUp(System.Windows.Input.KeyEventArgs)">
+            <summary>Sets the stub of Control.OnKeyUp(KeyEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnKeyUpKeyEventArgs">
+            <summary>Sets the stub of Control.OnKeyUp(KeyEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnLostFocus(System.Windows.RoutedEventArgs)">
+            <summary>Sets the stub of ListBox.OnLostFocus(RoutedEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnLostFocusRoutedEventArgs">
+            <summary>Sets the stub of ListBox.OnLostFocus(RoutedEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)">
+            <summary>Sets the stub of Control.OnLostMouseCapture(MouseEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnLostMouseCaptureMouseEventArgs">
+            <summary>Sets the stub of Control.OnLostMouseCapture(MouseEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnManipulationCompleted(System.Windows.Input.ManipulationCompletedEventArgs)">
+            <summary>Sets the stub of Control.OnManipulationCompleted(ManipulationCompletedEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnManipulationCompletedManipulationCompletedEventArgs">
+            <summary>Sets the stub of Control.OnManipulationCompleted(ManipulationCompletedEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnManipulationDelta(System.Windows.Input.ManipulationDeltaEventArgs)">
+            <summary>Sets the stub of Control.OnManipulationDelta(ManipulationDeltaEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnManipulationDeltaManipulationDeltaEventArgs">
+            <summary>Sets the stub of Control.OnManipulationDelta(ManipulationDeltaEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnManipulationStarted(System.Windows.Input.ManipulationStartedEventArgs)">
+            <summary>Sets the stub of Control.OnManipulationStarted(ManipulationStartedEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnManipulationStartedManipulationStartedEventArgs">
+            <summary>Sets the stub of Control.OnManipulationStarted(ManipulationStartedEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnMouseEnter(System.Windows.Input.MouseEventArgs)">
+            <summary>Sets the stub of Control.OnMouseEnter(MouseEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnMouseEnterMouseEventArgs">
+            <summary>Sets the stub of Control.OnMouseEnter(MouseEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnMouseLeave(System.Windows.Input.MouseEventArgs)">
+            <summary>Sets the stub of Control.OnMouseLeave(MouseEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnMouseLeaveMouseEventArgs">
+            <summary>Sets the stub of Control.OnMouseLeave(MouseEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>Sets the stub of Control.OnMouseLeftButtonDown(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnMouseLeftButtonDownMouseButtonEventArgs">
+            <summary>Sets the stub of Control.OnMouseLeftButtonDown(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>Sets the stub of Control.OnMouseLeftButtonUp(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnMouseLeftButtonUpMouseButtonEventArgs">
+            <summary>Sets the stub of Control.OnMouseLeftButtonUp(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnMouseMove(System.Windows.Input.MouseEventArgs)">
+            <summary>Sets the stub of Control.OnMouseMove(MouseEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnMouseMoveMouseEventArgs">
+            <summary>Sets the stub of Control.OnMouseMove(MouseEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>Sets the stub of Control.OnMouseRightButtonDown(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnMouseRightButtonDownMouseButtonEventArgs">
+            <summary>Sets the stub of Control.OnMouseRightButtonDown(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnMouseRightButtonUp(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>Sets the stub of Control.OnMouseRightButtonUp(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnMouseRightButtonUpMouseButtonEventArgs">
+            <summary>Sets the stub of Control.OnMouseRightButtonUp(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)">
+            <summary>Sets the stub of Control.OnMouseWheel(MouseWheelEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnMouseWheelMouseWheelEventArgs">
+            <summary>Sets the stub of Control.OnMouseWheel(MouseWheelEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnTap(System.Windows.Input.GestureEventArgs)">
+            <summary>Sets the stub of Control.OnTap(GestureEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnTapGestureEventArgs">
+            <summary>Sets the stub of Control.OnTap(GestureEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnTextInput(System.Windows.Input.TextCompositionEventArgs)">
+            <summary>Sets the stub of Control.OnTextInput(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)">
+            <summary>Sets the stub of Control.OnTextInputStart(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnTextInputStartTextCompositionEventArgs">
+            <summary>Sets the stub of Control.OnTextInputStart(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnTextInputTextCompositionEventArgs">
+            <summary>Sets the stub of Control.OnTextInput(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.OnTextInputUpdate(System.Windows.Input.TextCompositionEventArgs)">
+            <summary>Sets the stub of Control.OnTextInputUpdate(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.OnTextInputUpdateTextCompositionEventArgs">
+            <summary>Sets the stub of Control.OnTextInputUpdate(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBox.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)">
+            <summary>Sets the stub of DeferredLoadListBox.PrepareContainerForItemOverride(DependencyObject element, Object item)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBox.PrepareContainerForItemOverrideDependencyObjectObject">
+            <summary>Sets the stub of DeferredLoadListBox.PrepareContainerForItemOverride(DependencyObject element, Object item)</summary>
+        </member>
+        <member name="P:Delay.Fakes.StubDeferredLoadListBox.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Delay.Fakes.StubDeferredLoadListBox.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:Delay.Fakes.StubDeferredLoadListBox.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:Delay.Fakes.StubDeferredLoadListBoxItem">
+            <summary>Stub type of Delay.DeferredLoadListBoxItem</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.ArrangeOverride(System.Windows.Size)">
+            <summary>Sets the stub of FrameworkElement.ArrangeOverride(Size finalSize)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.ArrangeOverrideSize">
+            <summary>Sets the stub of FrameworkElement.ArrangeOverride(Size finalSize)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.InitializeStub">
+            <summary>Initializes a new instance of type StubDeferredLoadListBoxItem</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.MeasureOverride(System.Windows.Size)">
+            <summary>Sets the stub of FrameworkElement.MeasureOverride(Size availableSize)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.MeasureOverrideSize">
+            <summary>Sets the stub of FrameworkElement.MeasureOverride(Size availableSize)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnApplyTemplate">
+            <summary>Sets the stub of ListBoxItem.OnApplyTemplate()</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnApplyTemplate01">
+            <summary>Sets the stub of ListBoxItem.OnApplyTemplate()</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnContentChanged(System.Object,System.Object)">
+            <summary>Sets the stub of ContentControl.OnContentChanged(Object oldContent, Object newContent)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnContentChangedObjectObject">
+            <summary>Sets the stub of ContentControl.OnContentChanged(Object oldContent, Object newContent)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnCreateAutomationPeer">
+            <summary>Sets the stub of ListBoxItem.OnCreateAutomationPeer()</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnCreateAutomationPeer01">
+            <summary>Sets the stub of ListBoxItem.OnCreateAutomationPeer()</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnDoubleTap(System.Windows.Input.GestureEventArgs)">
+            <summary>Sets the stub of Control.OnDoubleTap(GestureEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnDoubleTapGestureEventArgs">
+            <summary>Sets the stub of Control.OnDoubleTap(GestureEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnDragEnter(System.Windows.DragEventArgs)">
+            <summary>Sets the stub of Control.OnDragEnter(DragEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnDragEnterDragEventArgs">
+            <summary>Sets the stub of Control.OnDragEnter(DragEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnDragLeave(System.Windows.DragEventArgs)">
+            <summary>Sets the stub of Control.OnDragLeave(DragEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnDragLeaveDragEventArgs">
+            <summary>Sets the stub of Control.OnDragLeave(DragEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnDragOver(System.Windows.DragEventArgs)">
+            <summary>Sets the stub of Control.OnDragOver(DragEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnDragOverDragEventArgs">
+            <summary>Sets the stub of Control.OnDragOver(DragEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnDrop(System.Windows.DragEventArgs)">
+            <summary>Sets the stub of Control.OnDrop(DragEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnDropDragEventArgs">
+            <summary>Sets the stub of Control.OnDrop(DragEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnGotFocus(System.Windows.RoutedEventArgs)">
+            <summary>Sets the stub of ListBoxItem.OnGotFocus(RoutedEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnGotFocusRoutedEventArgs">
+            <summary>Sets the stub of ListBoxItem.OnGotFocus(RoutedEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnHold(System.Windows.Input.GestureEventArgs)">
+            <summary>Sets the stub of Control.OnHold(GestureEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnHoldGestureEventArgs">
+            <summary>Sets the stub of Control.OnHold(GestureEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnKeyDown(System.Windows.Input.KeyEventArgs)">
+            <summary>Sets the stub of Control.OnKeyDown(KeyEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnKeyDownKeyEventArgs">
+            <summary>Sets the stub of Control.OnKeyDown(KeyEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnKeyUp(System.Windows.Input.KeyEventArgs)">
+            <summary>Sets the stub of Control.OnKeyUp(KeyEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnKeyUpKeyEventArgs">
+            <summary>Sets the stub of Control.OnKeyUp(KeyEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnLostFocus(System.Windows.RoutedEventArgs)">
+            <summary>Sets the stub of ListBoxItem.OnLostFocus(RoutedEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnLostFocusRoutedEventArgs">
+            <summary>Sets the stub of ListBoxItem.OnLostFocus(RoutedEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)">
+            <summary>Sets the stub of Control.OnLostMouseCapture(MouseEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnLostMouseCaptureMouseEventArgs">
+            <summary>Sets the stub of Control.OnLostMouseCapture(MouseEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnManipulationCompleted(System.Windows.Input.ManipulationCompletedEventArgs)">
+            <summary>Sets the stub of ListBoxItem.OnManipulationCompleted(ManipulationCompletedEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnManipulationCompletedManipulationCompletedEventArgs">
+            <summary>Sets the stub of ListBoxItem.OnManipulationCompleted(ManipulationCompletedEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnManipulationDelta(System.Windows.Input.ManipulationDeltaEventArgs)">
+            <summary>Sets the stub of Control.OnManipulationDelta(ManipulationDeltaEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnManipulationDeltaManipulationDeltaEventArgs">
+            <summary>Sets the stub of Control.OnManipulationDelta(ManipulationDeltaEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnManipulationStarted(System.Windows.Input.ManipulationStartedEventArgs)">
+            <summary>Sets the stub of ListBoxItem.OnManipulationStarted(ManipulationStartedEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnManipulationStartedManipulationStartedEventArgs">
+            <summary>Sets the stub of ListBoxItem.OnManipulationStarted(ManipulationStartedEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseEnter(System.Windows.Input.MouseEventArgs)">
+            <summary>Sets the stub of ListBoxItem.OnMouseEnter(MouseEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseEnterMouseEventArgs">
+            <summary>Sets the stub of ListBoxItem.OnMouseEnter(MouseEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseLeave(System.Windows.Input.MouseEventArgs)">
+            <summary>Sets the stub of ListBoxItem.OnMouseLeave(MouseEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseLeaveMouseEventArgs">
+            <summary>Sets the stub of ListBoxItem.OnMouseLeave(MouseEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>Sets the stub of ListBoxItem.OnMouseLeftButtonDown(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseLeftButtonDownMouseButtonEventArgs">
+            <summary>Sets the stub of ListBoxItem.OnMouseLeftButtonDown(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>Sets the stub of Control.OnMouseLeftButtonUp(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseLeftButtonUpMouseButtonEventArgs">
+            <summary>Sets the stub of Control.OnMouseLeftButtonUp(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseMove(System.Windows.Input.MouseEventArgs)">
+            <summary>Sets the stub of Control.OnMouseMove(MouseEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseMoveMouseEventArgs">
+            <summary>Sets the stub of Control.OnMouseMove(MouseEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>Sets the stub of Control.OnMouseRightButtonDown(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseRightButtonDownMouseButtonEventArgs">
+            <summary>Sets the stub of Control.OnMouseRightButtonDown(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseRightButtonUp(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>Sets the stub of Control.OnMouseRightButtonUp(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseRightButtonUpMouseButtonEventArgs">
+            <summary>Sets the stub of Control.OnMouseRightButtonUp(MouseButtonEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)">
+            <summary>Sets the stub of Control.OnMouseWheel(MouseWheelEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnMouseWheelMouseWheelEventArgs">
+            <summary>Sets the stub of Control.OnMouseWheel(MouseWheelEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnTap(System.Windows.Input.GestureEventArgs)">
+            <summary>Sets the stub of Control.OnTap(GestureEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnTapGestureEventArgs">
+            <summary>Sets the stub of Control.OnTap(GestureEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnTextInput(System.Windows.Input.TextCompositionEventArgs)">
+            <summary>Sets the stub of Control.OnTextInput(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)">
+            <summary>Sets the stub of Control.OnTextInputStart(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnTextInputStartTextCompositionEventArgs">
+            <summary>Sets the stub of Control.OnTextInputStart(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnTextInputTextCompositionEventArgs">
+            <summary>Sets the stub of Control.OnTextInput(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="M:Delay.Fakes.StubDeferredLoadListBoxItem.OnTextInputUpdate(System.Windows.Input.TextCompositionEventArgs)">
+            <summary>Sets the stub of Control.OnTextInputUpdate(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="F:Delay.Fakes.StubDeferredLoadListBoxItem.OnTextInputUpdateTextCompositionEventArgs">
+            <summary>Sets the stub of Control.OnTextInputUpdate(TextCompositionEventArgs e)</summary>
+        </member>
+        <member name="P:Delay.Fakes.StubDeferredLoadListBoxItem.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Delay.Fakes.StubDeferredLoadListBoxItem.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:Delay.Fakes.StubDeferredLoadListBoxItem.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+    </members>
+</doc>
