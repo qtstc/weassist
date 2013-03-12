@@ -161,9 +161,10 @@ namespace CitySafe
                 int current = startPoint - i;
                 if (current < 0)
                     current += locationSize;
-                ParseObject location = App.trackItemModel.user.Get<ParseObject>(ParseContract.UserTable.LOCATION(current));
-                if (location.ObjectId != ParseContract.LocationTable.DUMMY_LOCATION)
+
+                if (App.trackItemModel.user.ContainsKey(ParseContract.UserTable.LOCATION(current)))
                 {
+                    ParseObject location = App.trackItemModel.user.Get<ParseObject>(ParseContract.UserTable.LOCATION(current));
                     await location.FetchIfNeededAsync(tk);
                     //Debug.WriteLine("line " + i + " : " + location.ObjectId + " " + location.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP));
                     GeoPosition<GeoCoordinate> gp = ParseContract.LocationTable.ParseObjectToGeoPosition(location);

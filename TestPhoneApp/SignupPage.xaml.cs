@@ -9,6 +9,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CitySafe.Resources;
 using Parse;
+using ScheduledLocationAgent.Data;
+using System.Diagnostics;
 
 namespace CitySafe
 {
@@ -26,15 +28,16 @@ namespace CitySafe
 
         private async void SignUp()
         {
-            //App.ShowProgressOverlay(AppResources.ProgressBar_SigningUpUser);
-            //var user = new ParseUser()
-            //{
-            //    Username = "dummyuser",
-            //    Password = "dummypassword",
-            //    Email = "dummyuser@depauw.edu"
-            //};
 
-            //await user.SignUpAsync();
+            //App.ShowProgressOverlay(AppResources.ProgressBar_SigningUpUser);
+            var user = new ParseUser()
+            {
+                Username = "mike",
+                Password = "p",
+                Email = "m@depauw.edu"
+            };
+
+            await user.SignUpAsync();
             //App.HideProgressOverlay();
         }
     }

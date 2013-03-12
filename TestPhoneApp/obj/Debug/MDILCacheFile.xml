@@ -1,5 +1,5 @@
-﻿<xapCache source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\TestPhoneApp_Debug_AnyCPU.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="3/11/2013 11:41:44 PM">
-  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\CitySafe.dll" archivePath="CitySafe.dll" lastWriteTime="3/11/2013 11:41:44 PM" />
+﻿<xapCache source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\TestPhoneApp_Debug_AnyCPU.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="3/12/2013 4:23:47 PM">
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Debug\CitySafe.dll" archivePath="CitySafe.dll" lastWriteTime="3/12/2013 4:23:46 PM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\addphoto.png" archivePath="Assets\addphoto.png" lastWriteTime="3/10/2013 9:11:23 PM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="12/29/2012 10:53:49 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\AppBar\add.png" archivePath="Assets\AppBar\add.png" lastWriteTime="3/3/2013 1:26:08 PM" />
@@ -22,12 +22,12 @@
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Parse.dll" archivePath="Parse.dll" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Parse.Phone.dll" archivePath="Parse.Phone.dll" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\PhonePerformance.1.2.1\lib\sl4-windowsphone71\PhonePerformance.dll" archivePath="PhonePerformance.dll" lastWriteTime="3/11/2013 10:33:35 PM" />
-  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\ScheduledLocationAgent.dll" archivePath="ScheduledLocationAgent.dll" lastWriteTime="3/11/2013 11:41:42 PM" />
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Debug\ScheduledLocationAgent.dll" archivePath="ScheduledLocationAgent.dll" lastWriteTime="3/12/2013 4:23:45 PM" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\Windows Phone\v8.0\Libraries\System.Windows.Interactivity.dll" archivePath="System.Windows.Interactivity.dll" lastWriteTime="9/25/2012 2:41:02 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Newtonsoft.Json.xml" archivePath="Newtonsoft.Json.xml" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Parse.xml" archivePath="Parse.xml" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Parse.Phone.xml" archivePath="Parse.Phone.xml" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\PhonePerformance.1.2.1\lib\sl4-windowsphone71\PhonePerformance.xml" archivePath="PhonePerformance.xml" lastWriteTime="3/11/2013 10:33:35 PM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="3/3/2013 9:04:33 PM" />
-  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="3/11/2013 11:41:44 PM" />
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="3/12/2013 4:23:47 PM" />
 </xapCache>

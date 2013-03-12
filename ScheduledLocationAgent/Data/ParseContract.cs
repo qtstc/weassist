@@ -29,14 +29,17 @@ namespace ScheduledLocationAgent.Data
             private static string LOCATION_HISTORY { get { return "location_"; } }
             public static string TRACKING_ENABLED { get { return "trackingEnabled"; } }
             public static string LAST_LOCATION_INDEX { get { return "lastLocationIndex"; } }
+            public static string LAST_LOCATION{get {return "lastLocation";}}
             public static string LOCATION_DATA_SIZE { get { return "locationDataSize"; } }
             public static string LOCATION(int key) { return LOCATION_HISTORY + key.ToString("000"); }
             public static string IN_DANGER { get { return "inDanger"; } }
             public static string WIN_PNONE_PUSH_URI { get { return "winPhonePushURI"; } }
 
-            public static string DUMMY_USER { get { return "WNrCdVZZ48"; } }
+            //public static string DUMMY_USER { get { return "WNrCdVZZ48"; } }
 
-            public static int INITIAL_LAST_LOCATION { get { return -1; } }
+            public static string NOTIFY_BY_SMS_STRANGER{get {return "notifyBySMSStranger";}}
+            public static string NOTIFY_BY_EMAIL_STRANGER{get {return "notifyByEmailStranger";}}
+            public static string NOTIFY_BY_PUSH_STRANGER{get {return "notifyByPushStranger";}}
 
             public const int DEFAULT_INTERVAL = 30;
             public const int DEFAULT_DATA_SIZE = 96;
@@ -58,7 +61,7 @@ namespace ScheduledLocationAgent.Data
             public static string COURSE { get { return "course"; } }
             public static string USER { get { return "user"; } }
 
-            public static string DUMMY_LOCATION { get { return "CaKfUVexoN"; } }
+            //public static string DUMMY_LOCATION { get { return "CaKfUVexoN"; } }
 
             public static double NaNforParse = -1;
 

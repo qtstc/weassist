@@ -153,7 +153,7 @@ namespace CitySafe.ViewModels
                 else//If old result does not exist.
                 {
                     //Use a place holder as the user
-                    invited = await ParseUser.Query.GetAsync(ParseContract.UserTable.DUMMY_USER, tk);
+                    invited = null;
                     //Store the email
                     trackRelation[ParseContract.TrackRelationTable.UNREGISTERED_USER_EMAIL] = newEmail;
                 }
@@ -170,7 +170,8 @@ namespace CitySafe.ViewModels
             {
                 //Create a new record.
                 trackRelation[role] = ParseUser.CurrentUser;
-                trackRelation[ParseContract.TrackRelationTable.OtherRole(role)] = invited;
+                if(invited != null)
+                    trackRelation[ParseContract.TrackRelationTable.OtherRole(role)] = invited;
                 trackRelation[verified] = true;
                 trackRelation[ParseContract.TrackRelationTable.OtherVerified(verified)] = false;
 

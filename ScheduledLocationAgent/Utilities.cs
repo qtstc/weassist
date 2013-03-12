@@ -116,18 +116,19 @@ namespace ScheduledLocationAgent.Data
             newLocationIndex %= user.Get<int>(ParseContract.UserTable.LOCATION_DATA_SIZE);
             user[ParseContract.UserTable.LAST_LOCATION_INDEX] = newLocationIndex;
 
-            ParseObject newLocation = user.Get<ParseObject>(ParseContract.UserTable.LOCATION(newLocationIndex));
 
-            if (newLocation.ObjectId == ParseContract.LocationTable.DUMMY_LOCATION)//If the new location is a dummy
+            if (!user.ContainsKey(ParseContract.UserTable.LOCATION(newLocationIndex)))//If the new slot was not filled.
             {
                 //Create a new location.
                 user[ParseContract.UserTable.LOCATION(newLocationIndex)] = ParseContract.LocationTable.GeoPositionToParseObject(newData);
             }
-            else//If the new location contains a valid location
+            else//If the new slot contains a valid location
             {
+                ParseObject newLocation = user.Get<ParseObject>(ParseContract.UserTable.LOCATION(newLocationIndex));
                 //Change the location entry without creating a new one.
                 ParseContract.LocationTable.GeoPositionSetParseObject(newData, newLocation);
             }
+            user[ParseContract.UserTable.LAST_LOCATION] = user[ParseContract.UserTable.LOCATION(newLocationIndex)];
         }
         #endregion
 

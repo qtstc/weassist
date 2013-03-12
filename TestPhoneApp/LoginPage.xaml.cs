@@ -47,10 +47,10 @@ namespace CitySafe
 
         private void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
-            WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/signup.php");
-            wbt.Show();
+            NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
+            //WebBrowserTask wbt = new WebBrowserTask();
+            //wbt.Uri = new Uri("http://citysafe.azurewebsites.net/signup.php");
+            //wbt.Show();
         }
 
         private void Forget_Password_Button_Click(object sender, RoutedEventArgs e)
@@ -136,6 +136,11 @@ namespace CitySafe
             try
             {
                 await ParseUser.CurrentUser.FetchAsync();
+                //If does not contain one of the keys, initialize the user settings
+                if (!ParseUser.CurrentUser.ContainsKey(ParseContract.UserTable.TRACKING_ENABLED))
+                {
+                    await InitializeUserSettings();
+                }
                 //Start the periodic agent even when the user does not navigate to the settings page.
                 if (ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.TRACKING_ENABLED))
                     App.StartPeriodicAgent();
@@ -162,6 +167,25 @@ namespace CitySafe
             }
             App.HideProgressOverlay();
             return result;
+        }
+
+        /// <summary>
+        /// Helper method used to initialize user settings.
+        /// Only called when the user uses the app for the first time.
+        /// No exception handling.
+        /// </summary>
+        private async Task InitializeUserSettings()
+        {
+            ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = false;
+            ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = ParseContract.UserTable.DEFAULT_INTERVAL;
+            ParseUser.CurrentUser[ParseContract.UserTable.LOCATION_DATA_SIZE] = ParseContract.UserTable.DEFAULT_DATA_SIZE;
+            ParseUser.CurrentUser[ParseContract.UserTable.LAST_LOCATION_INDEX] = ParseContract.UserTable.DEFAULT_DATA_SIZE - 1;
+            ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = false;
+            ParseUser.CurrentUser[ParseContract.UserTable.WIN_PNONE_PUSH_URI] = "";
+            ParseUser.CurrentUser[ParseContract.UserTable.NOTIFY_BY_EMAIL_STRANGER] = false;
+            ParseUser.CurrentUser[ParseContract.UserTable.NOTIFY_BY_SMS_STRANGER] = false;
+            ParseUser.CurrentUser[ParseContract.UserTable.NOTIFY_BY_PUSH_STRANGER] = false;
+            await ParseUser.CurrentUser.SaveAsync();
         }
 
         #endregion
