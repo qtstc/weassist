@@ -85,7 +85,7 @@ namespace ScheduledLocationAgent
                 Debug.WriteLine("Sending unsent location failed");
             }
 
-            if (IsTimeToSendData(interval, lastUpdate))//Then try to update the current location to the server.
+            if (true)//IsTimeToSendData(interval, lastUpdate))//Then try to update the current location to the server.
             {
                 //First get the new location.
                 GeoPosition<GeoCoordinate> newLocation = await Utilities.getCurrentGeoPosition();

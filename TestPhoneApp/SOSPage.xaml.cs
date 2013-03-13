@@ -31,6 +31,16 @@ namespace CitySafe
             noCancel = false;
         }
 
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (noCancel)
+            {
+                e.Cancel = true;
+                return;
+            }
+            if (App.HideProgressOverlay())
+                e.Cancel = true;
+        }
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
@@ -44,22 +54,22 @@ namespace CitySafe
             CancellationToken tk = App.ShowProgressOverlay(AppResources.SOS_CancelingRequest);
             try
             {
-                    //TODO: do this in the cloud.
-                    var requests = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME)
-                                   where request.Get<ParseUser>(ParseContract.SOSRequestTable.SENDER) == ParseUser.CurrentUser
-                                   select request;
-                    IEnumerable<ParseObject> results = await requests.FindAsync(tk);
-                    foreach (ParseObject p in results)
-                    {
-                        p[ParseContract.SOSRequestTable.RESOLVED] = true;
-                        await p.SaveAsync(tk);
-                    }
+                //TODO: do this in the cloud.
+                var requests = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME)
+                               where request.Get<ParseUser>(ParseContract.SOSRequestTable.SENDER) == ParseUser.CurrentUser
+                               select request;
+                IEnumerable<ParseObject> results = await requests.FindAsync(tk);
+                foreach (ParseObject p in results)
+                {
+                    p[ParseContract.SOSRequestTable.RESOLVED] = true;
+                    await p.SaveAsync(tk);
+                }
 
-                    ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = false;
-                    HelpButton.Content = AppResources.SOS_SendSOS;
-                    noCancel = true;
-                    await ParseUser.CurrentUser.SaveAsync(tk);
-                    message = AppResources.SOS_SOSCanceledSuccess;
+                ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = false;
+                HelpButton.Content = AppResources.SOS_SendSOS;
+                noCancel = true;
+                await ParseUser.CurrentUser.SaveAsync(tk);
+                message = AppResources.SOS_SOSCanceledSuccess;
             }
             catch (Exception ex)
             {
@@ -70,17 +80,27 @@ namespace CitySafe
             MessageBox.Show(message);
         }
 
-
-        protected override void OnBackKeyPress(CancelEventArgs e)
+        private void CheckButton_Click(object sender, RoutedEventArgs e)
         {
-            if (noCancel)
-            {
-                e.Cancel = true;
-                return;
-            }
-            if (App.HideProgressOverlay())
-                e.Cancel = true;
+            NavigationService.Navigate(AreaMapPage.GetResolvedUri());
         }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(AreaMapPage.GetUnresolvedUri());
+        }
+
+        #region UI Listener for Navigation
+        private void Settings_Button_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void Manage_List_Button_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/TrackPage.xaml", UriKind.Relative));
+        }
+        #endregion
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -90,17 +110,5 @@ namespace CitySafe
             else
                 HelpButton.Content = AppResources.SOS_SendSOS;
         }
-
-        #region UI Listener for Navigation
-        private void Settings_Button_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
-        }
-
-        private void Manage_List_Button_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/TrackPage.xaml", UriKind.Relative));
-        }
-        #endregion
     }
 }

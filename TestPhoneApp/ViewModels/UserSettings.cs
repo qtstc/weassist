@@ -24,6 +24,10 @@ namespace CitySafe.ViewModels
         private String _lastUpdate;
         private UnsentLocationQueue queue;
 
+        private bool _notifyByPushStranger;
+        private bool _notifyBySMSStranger;
+        private bool _notifyByEmailStranger;
+
         private int interval;
         private int[] intervalRadioMultiplier = new int[5] { 30, 60, 180, 360, 1440 };
 
@@ -126,6 +130,27 @@ namespace CitySafe.ViewModels
             }
         }
 
+        [DataMember(Name = "notifyByPushStranger")]
+        public bool notifyByPushStranger
+        {
+            get { return _notifyByPushStranger; }
+            set{ SetProperty(ref _notifyByPushStranger, value);}
+        }
+
+        [DataMember(Name = "notifyByEmailStranger")]
+        public bool notifyByEmailStranger
+        {
+            get { return _notifyByEmailStranger; }
+            set { SetProperty(ref _notifyByEmailStranger, value); }
+        }
+
+        [DataMember(Name = "notifyBySMSStranger")]
+        public bool notifyBySMSStranger
+        {
+            get { return _notifyBySMSStranger; }
+            set { SetProperty(ref _notifyBySMSStranger, value); }
+        }
+
         /// <summary>
         /// Load user settings from the server.
         /// Does not take care of exception handling.
@@ -140,6 +165,9 @@ namespace CitySafe.ViewModels
             //Get the data used to populate UI.
             trackingEnabled = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.TRACKING_ENABLED);
             interval = ParseUser.CurrentUser.Get<int>(ParseContract.UserTable.UPDATE_INTERVAL);
+            notifyByEmailStranger = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.NOTIFY_BY_EMAIL_STRANGER);
+            notifyBySMSStranger = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.NOTIFY_BY_SMS_STRANGER);
+            notifyByPushStranger = ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.NOTIFY_BY_PUSH_STRANGER);
             OnPropertyChanged("intervalRadio0");
             OnPropertyChanged("intervalRadio1");
             OnPropertyChanged("intervalRadio2");
@@ -174,6 +202,9 @@ namespace CitySafe.ViewModels
         {
             ParseUser.CurrentUser[ParseContract.UserTable.UPDATE_INTERVAL] = interval;
             ParseUser.CurrentUser[ParseContract.UserTable.TRACKING_ENABLED] = trackingEnabled;
+            ParseUser.CurrentUser[ParseContract.UserTable.NOTIFY_BY_EMAIL_STRANGER] = notifyByEmailStranger;
+            ParseUser.CurrentUser[ParseContract.UserTable.NOTIFY_BY_PUSH_STRANGER] = notifyByPushStranger;
+            ParseUser.CurrentUser[ParseContract.UserTable.NOTIFY_BY_SMS_STRANGER] = notifyBySMSStranger;
             await ParseUser.CurrentUser.SaveAsync(tk);
             queue.Save();
         }

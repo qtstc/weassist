@@ -39,7 +39,19 @@
 
             <!--Panorama item three-->
             <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Settings, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <Grid></Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <CheckBox Grid.Row="0" x:Name="ShareRequestCheck" Content="{Binding LocalizedResources.SOSSend_ShareRequest, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Checked="ShareRequestCheck_Checked"  Unchecked="ShareRequestCheck_Checked"/>
+                    <StackPanel Grid.Row="1" x:Name="ShareSettingsPanel" Margin="24">
+                        <TextBlock Text="{Binding LocalizedResources.SOSSend_ShareInfoInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"/>
+                        <CheckBox x:Name="ShareNameCheck" Content="{Binding LocalizedResources.SOSSend_ShareName, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
+                        <CheckBox x:Name="ShareEmailCheck" Content="{Binding LocalizedResources.SOSSend_ShareEmail, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+                        <CheckBox x:Name="SharePhoneCheck" Content="{Binding LocalizedResources.SOSSend_SharePhone, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+                    </StackPanel>
+                </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>
     </Grid>

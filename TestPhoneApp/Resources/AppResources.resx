@@ -152,8 +152,8 @@
   <data name="Login_Username" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="Setting_PageHeader" xml:space="preserve">
-    <value>Settings</value>
+  <data name="Setting_LocationUpdatePageHeader" xml:space="preserve">
+    <value>Location Update</value>
   </data>
   <data name="Setting_ChangeUser" xml:space="preserve">
     <value>Change User</value>
@@ -201,7 +201,7 @@
     <value>Tracking</value>
   </data>
   <data name="SOS_ManageList" xml:space="preserve">
-    <value>Manage lists...</value>
+    <value>Private List</value>
   </data>
   <data name="SOS_PageHeader" xml:space="preserve">
     <value>SOS</value>
@@ -394,5 +394,56 @@
   </data>
   <data name="SOSInfo_PhotoLoadFail" xml:space="preserve">
     <value>Failed to load the photo, try again.</value>
+  </data>
+  <data name="Setting_ReceiveSOSPageHeader" xml:space="preserve">
+    <value>Receive SOS</value>
+  </data>
+  <data name="Setting_WhenDangerNotify" xml:space="preserve">
+    <value>When people near me are in danger, notify me by:</value>
+  </data>
+  <data name="SOS_Setting" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SOS_CheckSurrounding" xml:space="preserve">
+    <value>Check</value>
+  </data>
+  <data name="SOS_SavePeople" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SOSSend_ShareEmail" xml:space="preserve">
+    <value>Share my email</value>
+  </data>
+  <data name="SOSSend_ShareInfoInfo" xml:space="preserve">
+    <value>Decide on how much infomation you want to share in your request:</value>
+  </data>
+  <data name="SOSSend_ShareName" xml:space="preserve">
+    <value>Share my name</value>
+  </data>
+  <data name="SOSSend_SharePhone" xml:space="preserve">
+    <value>Share my phone number</value>
+  </data>
+  <data name="SOSSend_ShareRequest" xml:space="preserve">
+    <value>Share this request</value>
+  </data>
+  <data name="SOSSend_ShareRequestInfo" xml:space="preserve">
+    <value>This request will appear in the check surrounding section of the users around you. They may also receive notification though push/email/SMS depending on their settings</value>
+  </data>
+  <data name="AreaMap_LocationHeader" xml:space="preserve">
+    <value>Past Requests</value>
+  </data>
+  <data name="SOSInfo_EmailTag" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="SOSInfo_LoadInfoFailed" xml:space="preserve">
+    <value>Failed to load sender information.</value>
+  </data>
+  <data name="SOSInfo_LoadUserInfo" xml:space="preserve">
+    <value>Loading sender info ...</value>
+  </data>
+  <data name="SOSInfo_NameTag" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SOSInfo_PhoneTag" xml:space="preserve">
+    <value>Phone</value>
   </data>
 </root>

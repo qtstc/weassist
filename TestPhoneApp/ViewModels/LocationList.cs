@@ -30,11 +30,13 @@ namespace CitySafe.ViewModels
 
         public static List<LocationList<ViewModels.Pushpin>> GroupByTime(LocationList<ViewModels.Pushpin> l, int hours)
         {
+            List<LocationList<ViewModels.Pushpin>> finalList = new List<LocationList<ViewModels.Pushpin>>();
+            if (l.Count == 0)
+                return finalList;
             int size = 0;
             int currentList = 0;
             DateTime t = DateTime.Now.Date;
-            List<LocationList<ViewModels.Pushpin>> finalList = new List<LocationList<ViewModels.Pushpin>>();
-                            ViewModels.Pushpin p = l.ElementAt<ViewModels.Pushpin>(size);
+            ViewModels.Pushpin p = l.ElementAt<ViewModels.Pushpin>(size);
             while (true)
             {
                 while (t > p.position.Timestamp.DateTime)
@@ -60,7 +62,9 @@ namespace CitySafe.ViewModels
                 return AppResources.Date_Today;
             if (n == 1)
                 return AppResources.Date_Yesterday;
-            return n + AppResources.Date_DaysAgo;
+            if( n <= 30)
+               return n + AppResources.Date_DaysAgo;
+            return d.ToShortDateString();
         }
     }
 }

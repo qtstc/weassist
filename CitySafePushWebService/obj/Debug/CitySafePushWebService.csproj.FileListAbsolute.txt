@@ -14,3 +14,5 @@ E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebSer
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\Parse.xml
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\Newtonsoft.Json.xml
 E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\obj\Debug\CitySafePushWebService.csprojResolveAssemblyReference.cache
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\PhonePerformance.dll
+E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\CitySafePushWebService\bin\PhonePerformance.xml

@@ -55,6 +55,10 @@ namespace CitySafe
                 sos[ParseContract.SOSRequestTable.SENDER] = ParseUser.CurrentUser;
                 sos[ParseContract.SOSRequestTable.RESOLVED] = false;
                 sos[ParseContract.SOSRequestTable.MESSAGE] = SOSMessage.Text;
+                sos[ParseContract.SOSRequestTable.SHARE_NAME] = ShareNameCheck.IsChecked;
+                sos[ParseContract.SOSRequestTable.SHARE_PHONE] = SharePhoneCheck.IsChecked;
+                sos[ParseContract.SOSRequestTable.SHARE_REQUEST] = ShareRequestCheck.IsChecked;
+                sos[ParseContract.SOSRequestTable.SHARE_EMAIL] = ShareEmailCheck.IsChecked;
 
                 if (imageStream != null)
                 {
@@ -138,6 +142,10 @@ namespace CitySafe
 
         #region save and load sos message
         private const string SOS_MESSAGE_KEY_SUFFIX = "_sos_message";
+        private const string SHARE_REQUEST_SUFFIX = "_share_message";
+        private const string SHARE_NAME_SUFFIX = "_share_name";
+        private const string SHARE_EMAIL_SUFFIX = "_share_email";
+        private const string SHARE_PHONE_SUFFIX = "_share_phone";
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -146,11 +154,29 @@ namespace CitySafe
             else
                 SOSMessage.Text = AppResources.SOSSend_DefaultMessage;
             CharCount.Text = SOSMessage.Text.Length + "/" + ParseContract.SOSRequestTable.MAX_MESSAGE_LENGTH;
+
+            if (IsolatedStorageSettings.ApplicationSettings.Contains(ParseUser.CurrentUser.ObjectId + SHARE_REQUEST_SUFFIX))
+                CheckShareRequestBox((bool)IsolatedStorageSettings.ApplicationSettings[ParseUser.CurrentUser.ObjectId + SHARE_REQUEST_SUFFIX]);
+            else
+                ShareRequestCheck.IsChecked = true;
+
+            if (IsolatedStorageSettings.ApplicationSettings.Contains(ParseUser.CurrentUser.ObjectId + SHARE_NAME_SUFFIX))
+                ShareNameCheck.IsChecked = (bool)IsolatedStorageSettings.ApplicationSettings[ParseUser.CurrentUser.ObjectId + SHARE_NAME_SUFFIX];
+
+            if (IsolatedStorageSettings.ApplicationSettings.Contains(ParseUser.CurrentUser.ObjectId + SHARE_PHONE_SUFFIX))
+                SharePhoneCheck.IsChecked = (bool)IsolatedStorageSettings.ApplicationSettings[ParseUser.CurrentUser.ObjectId + SHARE_PHONE_SUFFIX];
+
+            if (IsolatedStorageSettings.ApplicationSettings.Contains(ParseUser.CurrentUser.ObjectId + SHARE_EMAIL_SUFFIX))
+                ShareEmailCheck.IsChecked = (bool)IsolatedStorageSettings.ApplicationSettings[ParseUser.CurrentUser.ObjectId + SHARE_EMAIL_SUFFIX];
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             IsolatedStorageSettings.ApplicationSettings[ParseUser.CurrentUser.ObjectId + SOS_MESSAGE_KEY_SUFFIX] = SOSMessage.Text;
+            IsolatedStorageSettings.ApplicationSettings[ParseUser.CurrentUser.ObjectId + SHARE_PHONE_SUFFIX] = SharePhoneCheck.IsChecked;
+            IsolatedStorageSettings.ApplicationSettings[ParseUser.CurrentUser.ObjectId + SHARE_NAME_SUFFIX] = ShareNameCheck.IsChecked;
+            IsolatedStorageSettings.ApplicationSettings[ParseUser.CurrentUser.ObjectId + SHARE_EMAIL_SUFFIX] = ShareEmailCheck.IsChecked;
+            IsolatedStorageSettings.ApplicationSettings[ParseUser.CurrentUser.ObjectId + SHARE_REQUEST_SUFFIX] = ShareRequestCheck.IsChecked;
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
         #endregion
@@ -163,6 +189,23 @@ namespace CitySafe
         private void SOSMessage_TextChanged(object sender, TextChangedEventArgs e)
         {
             CharCount.Text = SOSMessage.Text.Length + "/" + ParseContract.SOSRequestTable.MAX_MESSAGE_LENGTH;
+        }
+
+        private void CheckShareRequestBox(bool check)
+        {
+            ShareRequestCheck.IsChecked = check;
+            if (check)
+                ShareSettingsPanel.Visibility = System.Windows.Visibility.Visible;
+            else
+                ShareSettingsPanel.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void ShareRequestCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ShareRequestCheck.IsChecked.Value)
+                ShareSettingsPanel.Visibility = System.Windows.Visibility.Visible;
+            else
+                ShareSettingsPanel.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }

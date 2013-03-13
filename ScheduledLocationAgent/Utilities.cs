@@ -128,7 +128,7 @@ namespace ScheduledLocationAgent.Data
                 //Change the location entry without creating a new one.
                 ParseContract.LocationTable.GeoPositionSetParseObject(newData, newLocation);
             }
-            user[ParseContract.UserTable.LAST_LOCATION] = user[ParseContract.UserTable.LOCATION(newLocationIndex)];
+            user[ParseContract.UserTable.LAST_LOCATION] = user.Get<ParseObject>(ParseContract.UserTable.LOCATION(newLocationIndex));
         }
         #endregion
 

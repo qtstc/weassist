@@ -26,21 +26,16 @@
             <TextBlock Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Text="{Binding LocalizedResources.SOS_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
         </StackPanel>
 
-        <Grid Grid.Row="3" Margin="12,0,12,0">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-            <Button x:Name="HelpButton" Content="{Binding LocalizedResources.SOS_SendSOS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0" Click="HelpButton_Click" FontSize="100" Foreground="Red" BorderBrush="#FFC70000" BorderThickness="20" Margin="12"/>
-            <Button Content="{Binding LocalizedResources.SOS_ManageList, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="1" Click="Manage_List_Button_Click" Margin="24,0"/>
-            <Button Content="{Binding LocalizedResources.Setting_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Settings_Button_Click" Grid.Row="2" Margin="24,-12,24,12" />
-        </Grid>
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
-        </Grid>
+        <StackPanel Grid.Row="1" Margin="12,0,12,0">
+            <Button x:Name="HelpButton" Content="{Binding LocalizedResources.SOS_SendSOS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0" Click="HelpButton_Click" FontSize="100"/>
+            <Button x:Name="CheckButton" Content="{Binding LocalizedResources.SOS_CheckSurrounding, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0"  FontSize="100" Click="CheckButton_Click"/>
+            <Button x:Name="SaveButton" Content="{Binding LocalizedResources.SOS_SavePeople, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0" FontSize="100" Click="SaveButton_Click"/>
+        </StackPanel>
     </Grid>
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="settings" Click="Settings_Button_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/list.png" Text="private lists" Click="Manage_List_Button_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

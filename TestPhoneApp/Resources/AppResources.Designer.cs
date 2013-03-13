@@ -97,6 +97,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Past Requests.
+        /// </summary>
+        public static string AreaMap_LocationHeader {
+            get {
+                return ResourceManager.GetString("AreaMap_LocationHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CitySafe background location updater..
         /// </summary>
         public static string Background_Description {
@@ -385,6 +394,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location Update.
+        /// </summary>
+        public static string Setting_LocationUpdatePageHeader {
+            get {
+                return ResourceManager.GetString("Setting_LocationUpdatePageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saving user settings ....
         /// </summary>
         public static string Setting_Loggingout {
@@ -394,11 +412,11 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings.
+        ///   Looks up a localized string similar to Receive SOS.
         /// </summary>
-        public static string Setting_PageHeader {
+        public static string Setting_ReceiveSOSPageHeader {
             get {
-                return ResourceManager.GetString("Setting_PageHeader", resourceCulture);
+                return ResourceManager.GetString("Setting_ReceiveSOSPageHeader", resourceCulture);
             }
         }
         
@@ -439,6 +457,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When people near me are in danger, notify me by:.
+        /// </summary>
+        public static string Setting_WhenDangerNotify {
+            get {
+                return ResourceManager.GetString("Setting_WhenDangerNotify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign up.
         /// </summary>
         public static string Signup_PageHeader {
@@ -457,6 +484,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check.
+        /// </summary>
+        public static string SOS_CheckSurrounding {
+            get {
+                return ResourceManager.GetString("SOS_CheckSurrounding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to set up push notification ....
         /// </summary>
         public static string SOS_FailToSetUpPush {
@@ -466,7 +502,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage lists....
+        ///   Looks up a localized string similar to Private List.
         /// </summary>
         public static string SOS_ManageList {
             get {
@@ -493,6 +529,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SOS_SavePeople {
+            get {
+                return ResourceManager.GetString("SOS_SavePeople", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sending SOS requests ....
         /// </summary>
         public static string SOS_SendingRequest {
@@ -507,6 +552,15 @@ namespace CitySafe.Resources {
         public static string SOS_SendSOS {
             get {
                 return ResourceManager.GetString("SOS_SendSOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SOS_Setting {
+            get {
+                return ResourceManager.GetString("SOS_Setting", resourceCulture);
             }
         }
         
@@ -547,6 +601,42 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string SOSInfo_EmailTag {
+            get {
+                return ResourceManager.GetString("SOSInfo_EmailTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load sender information..
+        /// </summary>
+        public static string SOSInfo_LoadInfoFailed {
+            get {
+                return ResourceManager.GetString("SOSInfo_LoadInfoFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading sender info ....
+        /// </summary>
+        public static string SOSInfo_LoadUserInfo {
+            get {
+                return ResourceManager.GetString("SOSInfo_LoadUserInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string SOSInfo_NameTag {
+            get {
+                return ResourceManager.GetString("SOSInfo_NameTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No Photo.
         /// </summary>
         public static string SOSInfo_NoPhoto {
@@ -561,6 +651,15 @@ namespace CitySafe.Resources {
         public static string SOSInfo_PageHeader {
             get {
                 return ResourceManager.GetString("SOSInfo_PageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        public static string SOSInfo_PhoneTag {
+            get {
+                return ResourceManager.GetString("SOSInfo_PhoneTag", resourceCulture);
             }
         }
         
@@ -624,6 +723,60 @@ namespace CitySafe.Resources {
         public static string SOSSend_Settings {
             get {
                 return ResourceManager.GetString("SOSSend_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share my email.
+        /// </summary>
+        public static string SOSSend_ShareEmail {
+            get {
+                return ResourceManager.GetString("SOSSend_ShareEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decide on how much infomation you want to share in your request:.
+        /// </summary>
+        public static string SOSSend_ShareInfoInfo {
+            get {
+                return ResourceManager.GetString("SOSSend_ShareInfoInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share my name.
+        /// </summary>
+        public static string SOSSend_ShareName {
+            get {
+                return ResourceManager.GetString("SOSSend_ShareName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share my phone number.
+        /// </summary>
+        public static string SOSSend_SharePhone {
+            get {
+                return ResourceManager.GetString("SOSSend_SharePhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share this request.
+        /// </summary>
+        public static string SOSSend_ShareRequest {
+            get {
+                return ResourceManager.GetString("SOSSend_ShareRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This request will appear in the check surrounding section of the users around you. They may also receive notification though push/email/SMS depending on their settings.
+        /// </summary>
+        public static string SOSSend_ShareRequestInfo {
+            get {
+                return ResourceManager.GetString("SOSSend_ShareRequestInfo", resourceCulture);
             }
         }
         

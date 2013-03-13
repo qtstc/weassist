@@ -18,14 +18,14 @@
         <phone:Panorama Margin="9,-7,0,0" Title="{Binding LocalizedResources.SOSInfo_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" >
 
             <!--Panorama item one-->
-            <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Message, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+            <phone:PanoramaItem x:Name="MessagePage" Header="{Binding LocalizedResources.SOSSend_Message, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <Grid Margin="24,-12,24,24">
                     <TextBlock x:Name="SOSMessage"  TextWrapping="Wrap"/>
                 </Grid>
             </phone:PanoramaItem>
 
             <!--Panorama item two-->
-            <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Photo, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+            <phone:PanoramaItem x:Name="PhotoPage" Header="{Binding LocalizedResources.SOSSend_Photo, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <ScrollViewer Grid.Row="1">
                     <Grid Margin="36,0,36,36">
                         <Border BorderThickness="12" BorderBrush="{StaticResource PhoneInverseBackgroundBrush}" CornerRadius="12">
@@ -33,6 +33,24 @@
                         </Border>
                     </Grid>
                 </ScrollViewer>
+            </phone:PanoramaItem>
+
+            <!--Panorama item three-->
+            <phone:PanoramaItem x:Name="InfoPage" Header="{Binding LocalizedResources.SOSInfo_SenderInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+                <StackPanel Margin="36,0,36,36">
+                    <StackPanel x:Name="NamePanel" Margin="0,36,0,0">
+                        <TextBlock Text="{Binding LocalizedResources.SOSInfo_NameTag, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+                        <TextBlock x:Name="NameTextBlock" Margin="24,12,0,0"/>
+                    </StackPanel>
+                    <StackPanel x:Name="EmailPanel" Margin="0,36,0,0">
+                        <TextBlock Text="{Binding LocalizedResources.SOSInfo_EmailTag, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+                        <TextBlock x:Name="EmailTextBlock" Margin="24,12,0,0"/>
+                    </StackPanel>
+                    <StackPanel x:Name="PhonePanel" Margin="0,36,0,0">
+                        <TextBlock Text="{Binding LocalizedResources.SOSInfo_PhoneTag, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+                        <TextBlock x:Name="PhoneTextBlock" Margin="24,12,0,0"/>
+                    </StackPanel>
+                </StackPanel>
             </phone:PanoramaItem>
         </phone:Panorama>
     </Grid>

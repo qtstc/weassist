@@ -14,50 +14,37 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid x:Name="SettingsPanel" Background="Transparent">
 
-        <!-- LOCALIZATION NOTE:
-            To localize the displayed strings copy their values to appropriately named
-            keys in the app's neutral language resource file (AppResources.resx) then
-            replace the hard-coded text value between the attributes' quotation marks
-            with the binding clause whose path points to that string name.
+        <phone:Pivot Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="20">
 
-            For example:
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            This binding points to the template's string resource named "ApplicationTitle".
-
-            Adding supported languages in the Project Properties tab will create a
-            new resx file per language that can carry the translated values of your
-            UI strings. The binding in these examples will cause the value of the
-            attributes to be drawn from the .resx file that matches the
-            CurrentUICulture of the app at run time.
-         -->
-
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock  Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0" Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
-            <TextBlock Text="{Binding LocalizedResources.Setting_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
-        <!--ContentPanel - place additional content here-->
-        <StackPanel x:Name="SettingsPanel" Grid.Row="2" Margin="12,0,12,0">
-            <CheckBox x:Name="EnableTrackingCheckBox" Content="{Binding LocalizedResources.Setting_EnableTracking, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding trackingEnabled, Mode=TwoWay}" FontSize="24" Margin="12,0"/>
-            <StackPanel  x:Name="UserSettingsPanel"  d:DataContext="{Binding}" Margin="12,12,12,0">
-                <TextBlock Text="{Binding LocalizedResources.Setting_UpdateFrequency, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
-                <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio0, Mode=TwoWay}" Content="30 minutes" FontSize="18" />
-                <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio1, Mode=TwoWay}" Content="1 hour" FontSize="18"/>
-                <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio2, Mode=TwoWay}" Content="3 hours" FontSize="18"/>
-                <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio3, Mode=TwoWay}" Content="6 hours" FontSize="18"/>
-                <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio4, Mode=TwoWay}" Content="24 hours" FontSize="18"/>
-            </StackPanel>
-            <TextBlock TextWrapping="Wrap" Text="{Binding lastUpdate, Mode=TwoWay}" Margin="12,0"/>
-        </StackPanel>
+            <phone:PivotItem Header="{Binding LocalizedResources.Setting_LocationUpdatePageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" >
+                <StackPanel Margin="12,0,12,0">
+                    <CheckBox x:Name="EnableTrackingCheckBox" Content="{Binding LocalizedResources.Setting_EnableTracking, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding trackingEnabled, Mode=TwoWay}" FontSize="24" Margin="12,0"/>
+                    <StackPanel  x:Name="UserSettingsPanel"  d:DataContext="{Binding}" Margin="12,12,12,0">
+                        <TextBlock Text="{Binding LocalizedResources.Setting_UpdateFrequency, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
+                        <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio0, Mode=TwoWay}" Content="30 minutes" FontSize="18" />
+                        <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio1, Mode=TwoWay}" Content="1 hour" FontSize="18"/>
+                        <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio2, Mode=TwoWay}" Content="3 hours" FontSize="18"/>
+                        <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio3, Mode=TwoWay}" Content="6 hours" FontSize="18"/>
+                        <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio4, Mode=TwoWay}" Content="24 hours" FontSize="18"/>
+                    </StackPanel>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding lastUpdate, Mode=TwoWay}" Margin="12,0"/>
+                </StackPanel>
+            </phone:PivotItem>
+            
+            <phone:PivotItem Header="{Binding LocalizedResources.Setting_ReceiveSOSPageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+                <StackPanel Margin="12,0,12,0">
+                    <TextBlock Text="{Binding LocalizedResources.Setting_WhenDangerNotify, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="16" Margin="12,0"/>
+                    <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Push, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding notifyByPushStranger, Mode=TwoWay}" Margin="12,24"/>
+                    <TextBlock Text="{Binding LocalizedResources.TrackingSetting_PushInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="14" Margin="36,-36,36,0"/>
+                    <CheckBox Content="{Binding LocalizedResources.TrackingSetting_SMS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding notifyBySMSStranger, Mode=TwoWay}" Margin="12,24"/>
+                    <TextBlock Text="{Binding LocalizedResources.TrackingSetting_SMSInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="14" Margin="36,-36,36,0"/>
+                    <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Email, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding notifyByEmailStranger, Mode=TwoWay}" Margin="12,24"/>
+                    <TextBlock Text="{Binding LocalizedResources.TrackingSetting_EmailInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="14" Margin="36,-36,36,0"/>
+                </StackPanel>
+            </phone:PivotItem>
+        </phone:Pivot>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
