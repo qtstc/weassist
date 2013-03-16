@@ -20,7 +20,6 @@ namespace CitySafe
     /// </summary>
     public partial class TrackPage : PhoneApplicationPage
     {
-
         public TrackPage()
         {
             InitializeComponent();
@@ -43,8 +42,14 @@ namespace CitySafe
                 await App.trackingModel.LoadData(ParseContract.TrackRelationTable.TRACKING, tk);
                 await App.trackedModel.LoadData(ParseContract.TrackRelationTable.TRACKED, tk);
             }
-            catch
+            catch(OperationCanceledException e)
             {
+                Debug.WriteLine("Load track page canceled");
+                NavigationService.GoBack();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
                 message = AppResources.Tracker_FailToLoadList;
                 NavigationService.GoBack();
             }

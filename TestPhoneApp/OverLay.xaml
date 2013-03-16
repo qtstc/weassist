@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ProgressBar IsIndeterminate="True" Foreground="{StaticResource PhoneAccentBrush}" Height="50" Width="480" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock x:Name ="Overlay_Textblock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneInverseBackgroundBrush}"/>
+            <TextBlock x:Name ="Overlay_Textblock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneForegroundBrush}" Margin="0,-24,0,0"/>
         </StackPanel>
     </Grid>
 </UserControl>

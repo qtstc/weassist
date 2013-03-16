@@ -149,50 +149,35 @@
   <data name="Login_Signup" xml:space="preserve">
     <value>Sign up</value>
   </data>
-  <data name="Login_Username" xml:space="preserve">
-    <value>Username</value>
-  </data>
   <data name="Setting_LocationUpdatePageHeader" xml:space="preserve">
-    <value>Location Update</value>
-  </data>
-  <data name="Setting_ChangeUser" xml:space="preserve">
-    <value>Change User</value>
+    <value>My Locations</value>
   </data>
   <data name="ProgressBar_Loading" xml:space="preserve">
     <value>Loading ...</value>
   </data>
   <data name="ProgressBar_VerifyingUser" xml:space="preserve">
-    <value>Verifying User ...</value>
+    <value>Verifying user credentials ...</value>
   </data>
   <data name="Signup_PageHeader" xml:space="preserve">
     <value>Sign up</value>
   </data>
   <data name="Setting_EnableTracking" xml:space="preserve">
-    <value>Enable Tracking</value>
-  </data>
-  <data name="ProgressBar_SigningUpUser" xml:space="preserve">
-    <value>Signing Up ...</value>
-  </data>
-  <data name="Setting_ApplySettings" xml:space="preserve">
-    <value>Apply Settings</value>
-  </data>
-  <data name="Setting_RefreshSettings" xml:space="preserve">
-    <value>Refresh</value>
+    <value>Enable tracking</value>
   </data>
   <data name="Login_LoginFailMessage" xml:space="preserve">
-    <value>Login failed.Please check your network settings and try again later.</value>
+    <value>Login failed. Please check your network settings and try again later.</value>
   </data>
   <data name="Login_LoginWrongCredentials" xml:space="preserve">
     <value>Incorrect username or password.</value>
   </data>
   <data name="Setting_SyncingUserSettingsWithParseServer" xml:space="preserve">
-    <value>Syncing User Settings ...</value>
+    <value>Syncing user settings ...</value>
   </data>
   <data name="Setting_SyncingFailed" xml:space="preserve">
     <value>Failed to sync user settings with the server. Please check network settings and try again later.</value>
   </data>
   <data name="Setting_InitializeSettings" xml:space="preserve">
-    <value>Initializing Settings ...</value>
+    <value>Initializing settings ...</value>
   </data>
   <data name="Tracker_TrackedHeader" xml:space="preserve">
     <value>Tracked</value>
@@ -201,7 +186,7 @@
     <value>Tracking</value>
   </data>
   <data name="SOS_ManageList" xml:space="preserve">
-    <value>Private List</value>
+    <value>Private Lists</value>
   </data>
   <data name="SOS_PageHeader" xml:space="preserve">
     <value>SOS</value>
@@ -216,7 +201,7 @@
     <value>Failed to send the invitation to the user with the given email. Please check your network settings and try again later.</value>
   </data>
   <data name="Tracker_InvalidEmailMessage" xml:space="preserve">
-    <value>Invalid email address</value>
+    <value>The email address entered is invalid.</value>
   </data>
   <data name="Tracker_InvitationSuccess" xml:space="preserve">
     <value>Invitation is sent successfully.</value>
@@ -228,7 +213,7 @@
     <value>User is added to your list successfully.</value>
   </data>
   <data name="Tracker_FailToLoadList" xml:space="preserve">
-    <value>Failed to load track lists. Please check your network settings and try again later.</value>
+    <value>Failed to load your private lists. Please check your network settings and try again later.</value>
   </data>
   <data name="Tracker_LoadList" xml:space="preserve">
     <value>Loading lists ...</value>
@@ -240,7 +225,7 @@
     <value>Loading tracking settings ...</value>
   </data>
   <data name="TrackingSetting_Push" xml:space="preserve">
-    <value>Push Notification</value>
+    <value>Push notification</value>
   </data>
   <data name="TrackingSetting_Saving" xml:space="preserve">
     <value>Saving tracking settings ...</value>
@@ -252,22 +237,22 @@
     <value>When the person being tracked is in danger, notify me by:</value>
   </data>
   <data name="TrackingSetting_LocationRequestDenied" xml:space="preserve">
-    <value>Your request has been denied.</value>
+    <value>Your request has been denied. This user only shares location data when in danger.</value>
   </data>
   <data name="TrackingSetting_RequestPreviousLocation" xml:space="preserve">
-    <value>Check Previous Locations</value>
+    <value>Check previous locations</value>
   </data>
   <data name="TrackingSetting_RemovingUser" xml:space="preserve">
-    <value>Removing user from tracking list ...</value>
+    <value>Removing user from your tracking list ...</value>
   </data>
   <data name="TrackingSetting_StopTracking" xml:space="preserve">
-    <value>Stop Tracking</value>
+    <value>Stop tracking</value>
   </data>
   <data name="TrackedSetting_FullLocationAccess" xml:space="preserve">
-    <value>Allow access to my location 24/7</value>
+    <value>Allow full access to my location</value>
   </data>
   <data name="TrackedSetting_FullLocationAccessInfo" xml:space="preserve">
-    <value>Warning: when checked, the user who is tracking you will have full access to your location data. By default, he or she will only have access to your location data when you are in danger.</value>
+    <value>Warning: when checked, the user who is tracking you will have access to your location data 24/7. By default, he or she will only have access to your location data when you have an unresolved SOS request.</value>
   </data>
   <data name="TrackedSetting_Loading" xml:space="preserve">
     <value>Loading tracked settings ...</value>
@@ -276,7 +261,7 @@
     <value>Saving tracked settings ...</value>
   </data>
   <data name="TrackedSetting_RemovingUser" xml:space="preserve">
-    <value>Removing user from tracked list ...</value>
+    <value>Removing user from your tracked list ...</value>
   </data>
   <data name="Map_LocationHeader" xml:space="preserve">
     <value>Locations</value>
@@ -285,19 +270,19 @@
     <value>Failed to load the location data. Please check your network settings and try again later.</value>
   </data>
   <data name="Map_LoadingLocation" xml:space="preserve">
-    <value>Loading location data ...</value>
+    <value>Loading location data. Please wait ...</value>
   </data>
   <data name="Map_MyLocation" xml:space="preserve">
     <value>my location</value>
   </data>
   <data name="SOS_CancelingRequest" xml:space="preserve">
-    <value>Canceling SOS requests ...</value>
+    <value>Canceling your last SOS request ...</value>
   </data>
   <data name="SOS_Resolve" xml:space="preserve">
     <value>Resolve</value>
   </data>
   <data name="SOS_SendingRequest" xml:space="preserve">
-    <value>Sending SOS requests ...</value>
+    <value>Sending SOS your request ...</value>
   </data>
   <data name="SOS_SOSCanceledFail" xml:space="preserve">
     <value>Failed to cancel your SOS request. Please check your network settings and try again later</value>
@@ -306,22 +291,22 @@
     <value>Your SOS request was canceled successfully.</value>
   </data>
   <data name="SOS_SOSSentFail" xml:space="preserve">
-    <value>Sending SOS message failed. Please check your network settings.</value>
+    <value>Sending SOS request failed. Please check your network settings and try again later.</value>
   </data>
   <data name="SOS_SOSSentSuccess" xml:space="preserve">
-    <value>Your SOS message was sent successfully.</value>
+    <value>Your SOS request was sent successfully.</value>
   </data>
   <data name="Background_Description" xml:space="preserve">
     <value>CitySafe background location updater.</value>
   </data>
   <data name="SOS_FailToSetUpPush" xml:space="preserve">
-    <value>Failed to set up push notification ...</value>
+    <value>Failed to set up push notifications. Will try again at next app launch.</value>
   </data>
   <data name="Login_SettingUp" xml:space="preserve">
-    <value>Setting up ...</value>
+    <value>Setting up your account ...</value>
   </data>
   <data name="Setting_AgentDisabled" xml:space="preserve">
-    <value>The location update background agent is disabled by the user. Please enable it in the phone settings to allow location update.</value>
+    <value>The location update background agent is disabled by the user. Please enable it in the phone settings to allow location update in the background.</value>
   </data>
   <data name="Setting_LastUpdateAt" xml:space="preserve">
     <value>Last location was sent at </value>
@@ -330,16 +315,16 @@
     <value>Send my location to the server every: </value>
   </data>
   <data name="TrackingSetting_EmailInfo" xml:space="preserve">
-    <value>An email will be sent to your email address. It is recommended that you always leave this option on.</value>
+    <value>An email will be sent to your email address. It is recommended that you leave this feature on.</value>
   </data>
   <data name="TrackingSetting_PushInfo" xml:space="preserve">
-    <value>Because the deliever of push noticaition is not guranteed and may be affected by network connection, user is encouraged to use it with other notification method.</value>
+    <value>Because the delievery of push noticaition may be affected by network connection, user is encouraged to use it together with other notification method.</value>
   </data>
   <data name="TrackingSetting_SMSInfo" xml:space="preserve">
-    <value>An SMS message will be sent to the assocaited with this account. You may be charged for receiving the message depending on your carrier.</value>
+    <value>An SMS message will be sent to the your phone. You may be charged for receiving the message depending on your plan.</value>
   </data>
   <data name="App_ConnectionError" xml:space="preserve">
-    <value>Cannot connect to the  server, please check network settings.</value>
+    <value>Cannot connect to the  server. Please check network settings and try again later.</value>
   </data>
   <data name="Setting_FailToLogOut" xml:space="preserve">
     <value>Failed to save settings to the server before logging out. Please check your network settings and try again later.</value>
@@ -369,13 +354,13 @@
     <value>SOS</value>
   </data>
   <data name="SOSInfo_PageHeader" xml:space="preserve">
-    <value>SOS Info</value>
+    <value>SOS Request Details</value>
   </data>
   <data name="SOSSend_DefaultMessage" xml:space="preserve">
-    <value>I am in danger!!!!! Please help me!!!!!</value>
+    <value>I am in danger! Please help me!</value>
   </data>
   <data name="SOSSend_PageHeader" xml:space="preserve">
-    <value>Send SOS</value>
+    <value>Send SOS Request</value>
   </data>
   <data name="SOSSend_Message" xml:space="preserve">
     <value>Message</value>
@@ -389,11 +374,8 @@
   <data name="SOSInfo_SenderInfo" xml:space="preserve">
     <value>Sender Info</value>
   </data>
-  <data name="SOSInfo_NoPhoto" xml:space="preserve">
-    <value>No Photo</value>
-  </data>
   <data name="SOSInfo_PhotoLoadFail" xml:space="preserve">
-    <value>Failed to load the photo, try again.</value>
+    <value>Failed to load the photo. Please check network settings and try again.</value>
   </data>
   <data name="Setting_ReceiveSOSPageHeader" xml:space="preserve">
     <value>Receive SOS</value>
@@ -423,27 +405,36 @@
     <value>Share my phone number</value>
   </data>
   <data name="SOSSend_ShareRequest" xml:space="preserve">
-    <value>Share this request</value>
-  </data>
-  <data name="SOSSend_ShareRequestInfo" xml:space="preserve">
-    <value>This request will appear in the check surrounding section of the users around you. They may also receive notification though push/email/SMS depending on their settings</value>
+    <value>Share my request</value>
   </data>
   <data name="AreaMap_LocationHeader" xml:space="preserve">
-    <value>Past Requests</value>
+    <value>Past SOS Requests Around You</value>
   </data>
   <data name="SOSInfo_EmailTag" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="SOSInfo_LoadInfoFailed" xml:space="preserve">
-    <value>Failed to load sender information.</value>
+    <value>Failed to load sender's information. Please check your network settings and try again later.</value>
   </data>
   <data name="SOSInfo_LoadUserInfo" xml:space="preserve">
-    <value>Loading sender info ...</value>
+    <value>Loading sender's info ...</value>
   </data>
   <data name="SOSInfo_NameTag" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="SOSInfo_PhoneTag" xml:space="preserve">
     <value>Phone</value>
+  </data>
+  <data name="TrackedSetting_FailToRemove" xml:space="preserve">
+    <value>Failed to remove the user from your tracked list. Please check network settings and try again later.</value>
+  </data>
+  <data name="TrackingSetting_FailToRemove" xml:space="preserve">
+    <value>Failed to remove the user from your tracking list. Please check your network settings and try again later.</value>
+  </data>
+  <data name="Login_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="SOSSend_ShareRequestInfo" xml:space="preserve">
+    <value>Notify the people near me and allow them to see my request.</value>
   </data>
 </root>

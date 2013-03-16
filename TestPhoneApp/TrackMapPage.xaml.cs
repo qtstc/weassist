@@ -53,12 +53,12 @@ namespace CitySafe
                     MessageBox.Show(AppResources.Map_CannotObtainLocation);
                 else
                     LocationMapLayer.Add(myLocationPushpin.pushpinLayer);//Add the user's location to the maplayer.
-                LocationList<Pushpin> lastLocations = await LoadLastLocations(tk,myLocationPushpin.position);
-                LocationList<Pushpin> sosLocations = await LoadSOSLocations(tk,myLocationPushpin.position);
+                LocationList<Pushpin> lastLocations = await LoadLastLocations(tk, myLocationPushpin.position);
+                LocationList<Pushpin> sosLocations = await LoadSOSLocations(tk, myLocationPushpin.position);
 
                 List<LocationList<Pushpin>> longList = new List<LocationList<Pushpin>>();
                 longList.Add(sosLocations);
-                longList.AddRange(ViewModels.LocationList<Pushpin>.GroupByTime(lastLocations,24));
+                longList.AddRange(ViewModels.LocationList<Pushpin>.GroupByTime(lastLocations, 24));
 
                 LocationList.ItemsSource = longList;
 
@@ -75,11 +75,14 @@ namespace CitySafe
                 }
                 ApplicationBar.IsVisible = true;
             }
+            catch (OperationCanceledException e)
+            {
+                Debug.WriteLine("loading canceled");
+            }
             catch (Exception e)
             {
                 Debug.WriteLine(e.ToString());
                 message = AppResources.Map_LoadingFailed;
-                NavigationService.GoBack();
             }
             App.HideProgressOverlay();
             if (!message.Equals(""))
@@ -230,8 +233,7 @@ namespace CitySafe
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            if (App.HideProgressOverlay())
-                e.Cancel = true;
+            App.HideProgressOverlay();
         }
     }
 }

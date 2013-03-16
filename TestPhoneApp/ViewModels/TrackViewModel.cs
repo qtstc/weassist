@@ -118,7 +118,6 @@ namespace CitySafe.ViewModels
                 {
                     needNewRecord = false;
                     trackRelation = relationResult.First();
-                    trackRelation[verified] = true;
                     if (trackRelation.Get<bool>(ParseContract.TrackRelationTable.OtherVerified(verified)))//If the other user has already confirmed
                     {
                         needTrackInvitation = false;
@@ -134,6 +133,7 @@ namespace CitySafe.ViewModels
                             resultMessage = AppResources.Tracker_AddSuccess;
                         }
                     }
+                    trackRelation[verified] = true;
                 }
             }
             else if (results.Count() == 0)//When the user is not registered

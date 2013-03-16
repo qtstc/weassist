@@ -28,7 +28,7 @@ namespace CitySafe
             InitializeComponent();
         }
 
-        private const string DUMMY_PASSWORD = "DUMMY_PASSWORD";
+        private const string DUMMY_PASSWORD = "DUMMY_PASSWORD";//The password that is used as a place holder on the logging page.
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -47,10 +47,10 @@ namespace CitySafe
 
         private void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
-            //WebBrowserTask wbt = new WebBrowserTask();
-            //wbt.Uri = new Uri("http://citysafe.azurewebsites.net/signup.php");
-            //wbt.Show();
+            //NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
+            WebBrowserTask wbt = new WebBrowserTask();
+            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/signup.php");
+            wbt.Show();
         }
 
         private void Forget_Password_Button_Click(object sender, RoutedEventArgs e)
@@ -297,11 +297,5 @@ namespace CitySafe
         }
 
         #endregion
-
-        protected override void OnBackKeyPress(CancelEventArgs e)
-        {
-            if (App.HideProgressOverlay())
-                e.Cancel = true;
-        }
     }
 }

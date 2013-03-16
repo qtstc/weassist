@@ -22,7 +22,7 @@ namespace CitySafe
 {
     public partial class AreaMapPage : PhoneApplicationPage
     {
-        public const double areaRadius = 1;
+        public const double areaRadius = 1;//The radius of the area to be checked, in kilometers.
 
         private const string MODE_KEY = "mode_areamap";
         private const string RESOLVED_REQUESTS = "resolved";
@@ -61,7 +61,7 @@ namespace CitySafe
                     LocationMapLayer.Add(myLocationPushpin.pushpinLayer);//Add the user's location to the maplayer.
                 LocationList<Pushpin> sosLocations = await LoadSOSLocations(tk, myLocationPushpin.position);
 
-                List<LocationList<Pushpin>> longList = ViewModels.LocationList<Pushpin>.GroupByTime(sosLocations,24);
+                List<LocationList<Pushpin>> longList = ViewModels.LocationList<Pushpin>.GroupByTime(sosLocations, 24);
 
                 LocationList.ItemsSource = longList;
 
@@ -73,6 +73,10 @@ namespace CitySafe
                     lastPushpin = sosLocations.First();
                 }
                 ApplicationBar.IsVisible = true;
+            }
+            catch (OperationCanceledException e)
+            {
+                Debug.WriteLine("Loading UI Canceled.");
             }
             catch (Exception e)
             {
@@ -102,15 +106,17 @@ namespace CitySafe
             var nearLocations = ParseObject.GetQuery(ParseContract.LocationTable.TABLE_NAME).WhereWithinDistance(ParseContract.LocationTable.LOCATION, userL, ParseGeoDistance.FromKilometers(areaRadius));
 
             var sosLocation = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME)
+                              where request.Get<bool>(ParseContract.SOSRequestTable.RESOLVED) == isResolved
+                              where request.Get<bool>(ParseContract.SOSRequestTable.SHARE_REQUEST) == true
                               join location in nearLocations on request[ParseContract.SOSRequestTable.SENT_LOCATION] equals location
                               select request;
 
-            var result = from request in sosLocation 
-                         where request.Get<bool>(ParseContract.SOSRequestTable.RESOLVED) == isResolved
-                         where request.Get<bool>(ParseContract.SOSRequestTable.SHARE_REQUEST) == true
-                         select request;
+            //var result = from request in sosLocation 
+            //             where request.Get<bool>(ParseContract.SOSRequestTable.RESOLVED) == isResolved
+            //             where request.Get<bool>(ParseContract.SOSRequestTable.SHARE_REQUEST) == true
+            //             select request;
 
-            IEnumerable<ParseObject> results = await result.FindAsync(tk);
+            IEnumerable<ParseObject> results = await sosLocation.FindAsync(tk);
 
             LocationList<Pushpin> list = new LocationList<Pushpin>(AppResources.Map_SOSLocation);
             for (int i = 0; i < results.Count(); i++)
@@ -203,8 +209,7 @@ namespace CitySafe
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            if (App.HideProgressOverlay())
-                e.Cancel = true;
+            App.HideProgressOverlay();
         }
 
         public static Uri GetResolvedUri()

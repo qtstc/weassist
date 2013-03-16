@@ -62,10 +62,12 @@ namespace CitySafe
             catch (Exception e)
             {
                 Debug.WriteLine(e.ToString());
-                message = AppResources.Setting_SyncingFailed;
+                message = AppResources.TrackingSetting_FailToRemove;
             }
             App.HideProgressOverlay();
-            if (!message.Equals(""))
+            if (message.Equals(""))
+                NavigationService.GoBack();
+            else
                 MessageBox.Show(message);
         }
 
@@ -83,10 +85,10 @@ namespace CitySafe
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.ToString());
                 MessageBox.Show(AppResources.Setting_SyncingFailed);
             }
-            NavigationService.Navigate(new Uri("/TrackPage.xaml", UriKind.Relative));
-            NavigationService.RemoveBackEntry();
+            NavigationService.GoBack();
         }
 
         private void Check_Previous_Location_Button_Click(object sender, RoutedEventArgs e)

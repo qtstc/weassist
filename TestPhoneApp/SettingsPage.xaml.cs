@@ -113,6 +113,11 @@ namespace CitySafe
             {
                 await userSettings.LoadSettings(tk);
             }
+            catch (OperationCanceledException)
+            {
+                Debug.WriteLine("Loading UI data canceled.");
+                NavigationService.GoBack();
+            }
             catch (Exception e)
             {
                 Debug.WriteLine("Fail to initialize user settings to the server:\n");
@@ -133,6 +138,7 @@ namespace CitySafe
         {
             bool result = true;
             string message = "";
+            ApplicationBar.IsVisible = false;
             CancellationToken tk = App.ShowProgressOverlay(AppResources.Setting_SyncingUserSettingsWithParseServer);
             try
             {
@@ -145,6 +151,7 @@ namespace CitySafe
                 message = AppResources.Setting_SyncingFailed;
                 result = false;
             }
+            ApplicationBar.IsVisible = true;
             App.HideProgressOverlay();
             if (!message.Equals(""))
                 MessageBox.Show(message);

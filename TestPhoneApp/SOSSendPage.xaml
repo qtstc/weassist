@@ -44,9 +44,12 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <CheckBox Grid.Row="0" x:Name="ShareRequestCheck" Content="{Binding LocalizedResources.SOSSend_ShareRequest, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Checked="ShareRequestCheck_Checked"  Unchecked="ShareRequestCheck_Checked"/>
-                    <StackPanel Grid.Row="1" x:Name="ShareSettingsPanel" Margin="24">
-                        <TextBlock Text="{Binding LocalizedResources.SOSSend_ShareInfoInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"/>
+                    <StackPanel>
+                    <CheckBox Grid.Row="0" x:Name="ShareRequestCheck" Content="{Binding LocalizedResources.SOSSend_ShareRequest, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Checked="ShareRequestCheck_Checked"  Unchecked="ShareRequestCheck_Checked" />
+                    <TextBlock  Margin="24,-12,12,-12" Text="{Binding LocalizedResources.SOSSend_ShareRequestInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="16"/>
+                    </StackPanel>
+                        <StackPanel Grid.Row="1" x:Name="ShareSettingsPanel" Margin="24">
+                        <TextBlock Margin ="0,0,0,-12" Text="{Binding LocalizedResources.SOSSend_ShareInfoInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"/>
                         <CheckBox x:Name="ShareNameCheck" Content="{Binding LocalizedResources.SOSSend_ShareName, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
                         <CheckBox x:Name="ShareEmailCheck" Content="{Binding LocalizedResources.SOSSend_ShareEmail, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
                         <CheckBox x:Name="SharePhoneCheck" Content="{Binding LocalizedResources.SOSSend_SharePhone, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>

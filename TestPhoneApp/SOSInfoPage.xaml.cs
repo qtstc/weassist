@@ -21,9 +21,20 @@ using System.Threading.Tasks;
 
 namespace CitySafe
 {
+    /// <summary>
+    /// A page used to show the infomation of a sos request.
+    /// It has three sections, with the first one being the sos message,
+    /// the second one being the sos photo and the last one being the sender info.
+    /// This page has two modes, depending on the URI used. In the public mode,
+    /// the sender's info will be displayed, where as in the private mode,
+    /// the sender's info will not be displayed.
+    /// </summary>
     public partial class SOSInfoPage : PhoneApplicationPage
     {
-
+        /// <summary>
+        /// Used to identify different modes of this page.
+        /// Used in the URI.
+        /// </summary>
         private const string MODE_KEY = "sos_mode";
         private const string PUBLIC_MODE = "public";
         private const string PRIVATE_MODE = "private";
@@ -44,6 +55,12 @@ namespace CitySafe
                 MessagePage.Visibility = System.Windows.Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Load the infomation of the sender.
+        /// And change the UI.
+        /// To be called only when the sender wants to share his/her info.
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadSenderInfo()
         {
             CancellationToken tk = App.ShowProgressOverlay(AppResources.SOSInfo_LoadUserInfo);
@@ -79,17 +96,31 @@ namespace CitySafe
             App.HideProgressOverlay();
         }
 
+        /// <summary>
+        /// Give different URI for different pages.
+        /// Public page has the sender info section.
+        /// </summary>
+        /// <returns></returns>
         public static Uri GetPulicInfoUri()
         {
             return new Uri("/SOSInfoPage.xaml?" + MODE_KEY + "=" + PUBLIC_MODE, UriKind.Relative);
         }
 
+        /// <summary>
+        /// Geve different URI for different pages.
+        /// Private page does not have sender info section.
+        /// </summary>
+        /// <returns></returns>
         public static Uri GetPrivateInfoUri()
         {
             return new Uri("/SOSInfoPage.xaml?" + MODE_KEY + "=" + PRIVATE_MODE, UriKind.Relative);
         }
 
 
+        /// <summary>
+        /// Change the UI depending on the data.
+        /// </summary>
+        /// <param name="e"></param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             if (NavigationContext.QueryString[MODE_KEY].Equals(PRIVATE_MODE))//If in private mode.

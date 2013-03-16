@@ -72,6 +72,7 @@ namespace CitySafe
         private async void Stop_Tracked_Button_Click(object sender, EventArgs e)
         {
             CancellationToken tk = App.ShowProgressOverlay(AppResources.TrackedSetting_RemovingUser);
+            string message = "";
             try
             {
                 await trackedSettings.RemoveRelation(tk);
@@ -79,10 +80,13 @@ namespace CitySafe
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                MessageBox.Show(AppResources.Setting_SyncingFailed);
+                message = AppResources.TrackedSetting_FailToRemove;
             }
-            NavigationService.Navigate(new Uri("/TrackPage.xaml", UriKind.Relative));
-            NavigationService.RemoveBackEntry();
+            App.HideProgressOverlay();
+            if (message.Equals(""))
+                NavigationService.GoBack();
+            else
+                MessageBox.Show(message);
         }
 
         private async void Apply_Button_Click(object sender, EventArgs e)

@@ -35,6 +35,7 @@ namespace CitySafe
             camera = new CameraCaptureTask();
             camera.Completed += camera_Completed;
 
+            //Add the place holder photo.
             defaultAddPhoto = new BitmapImage(new Uri("/Assets/addphoto.png", UriKind.Relative));
             AddPhotoImage.Source = defaultAddPhoto;
             imageStream = null;
@@ -128,18 +129,6 @@ namespace CitySafe
             }
         }
 
-        protected override void OnBackKeyPress(CancelEventArgs e)
-        {
-            //Don't cancel when can't cancel
-            if (noCancel)
-            {
-                e.Cancel = true;
-                return;
-            }
-            if (App.HideProgressOverlay())
-                e.Cancel = true;
-        }
-
         #region save and load sos message
         private const string SOS_MESSAGE_KEY_SUFFIX = "_sos_message";
         private const string SHARE_REQUEST_SUFFIX = "_share_message";
@@ -206,6 +195,18 @@ namespace CitySafe
                 ShareSettingsPanel.Visibility = System.Windows.Visibility.Visible;
             else
                 ShareSettingsPanel.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            //Don't cancel when can't cancel
+            if (noCancel)
+            {
+                e.Cancel = true;
+                return;
+            }
+            if (App.HideProgressOverlay())
+                e.Cancel = true;
         }
     }
 }

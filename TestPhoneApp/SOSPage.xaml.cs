@@ -31,17 +31,6 @@ namespace CitySafe
             noCancel = false;
         }
 
-        protected override void OnBackKeyPress(CancelEventArgs e)
-        {
-            if (noCancel)
-            {
-                e.Cancel = true;
-                return;
-            }
-            if (App.HideProgressOverlay())
-                e.Cancel = true;
-        }
-
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             if (!ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.IN_DANGER))
@@ -51,6 +40,7 @@ namespace CitySafe
             }
 
             string message = AppResources.SOS_SOSCanceledFail;
+            ApplicationBar.IsVisible = false;
             CancellationToken tk = App.ShowProgressOverlay(AppResources.SOS_CancelingRequest);
             try
             {
@@ -77,6 +67,7 @@ namespace CitySafe
             }
             noCancel = false;
             App.HideProgressOverlay();
+            ApplicationBar.IsVisible = true;
             MessageBox.Show(message);
         }
 
@@ -109,6 +100,17 @@ namespace CitySafe
                 HelpButton.Content = AppResources.SOS_Resolve;
             else
                 HelpButton.Content = AppResources.SOS_SendSOS;
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (noCancel)
+            {
+                e.Cancel = true;
+                return;
+            }
+            if (App.HideProgressOverlay())
+                e.Cancel = true;
         }
     }
 }
