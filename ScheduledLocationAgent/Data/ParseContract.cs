@@ -60,9 +60,8 @@ namespace ScheduledLocationAgent.Data
             public static string VERTICAL_ACCURACY { get { return "verticalAccuracy"; } }
             public static string SPEED { get { return "speed"; } }
             public static string COURSE { get { return "course"; } }
-            public static string USER { get { return "user"; } }
 
-            //public static string DUMMY_LOCATION { get { return "CaKfUVexoN"; } }
+            public static string IS_SOS_REQUEST { get { return "isSOSRequest"; } }
 
             public static double NaNforParse = -1;
 

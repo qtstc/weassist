@@ -180,7 +180,8 @@ namespace CitySafe.ViewModels
                 ParseObject lastLocation = ParseUser.CurrentUser.Get<ParseObject>(ParseContract.UserTable.LOCATION(lastUpdateIndex));
                 //Need to download the object first.
                 await lastLocation.FetchIfNeededAsync(tk);
-                lastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP).ToString();
+                DateTime l = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP);
+                lastUpdate = l.ToShortDateString() + " " + l.ToShortTimeString();
 
                 //Sync the local data.
                 queue.LastUpdate = lastLocation.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP);

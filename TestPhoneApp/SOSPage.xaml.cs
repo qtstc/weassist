@@ -8,7 +8,6 @@ using ScheduledLocationAgent.Data;
 using CitySafe.Resources;
 using System.Diagnostics;
 using Microsoft.Phone.Shell;
-using System.Device.Location;
 using System.Threading;
 using System.ComponentModel;
 
@@ -23,7 +22,7 @@ namespace CitySafe
     public partial class SOSPage : PhoneApplicationPage
     {
 
-        private bool noCancel;
+        private bool noCancel;//Flag used to prevent cancellation when sending request.
 
         public SOSPage()
         {
@@ -31,7 +30,7 @@ namespace CitySafe
             noCancel = false;
         }
 
-        private async void HelpButton_Click(object sender, RoutedEventArgs e)
+        private async void HelpButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             if (!ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.IN_DANGER))
             {
@@ -56,7 +55,8 @@ namespace CitySafe
                 }
 
                 ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = false;
-                HelpButton.Content = AppResources.SOS_SendSOS;
+                HelpButton.Text = AppResources.SOS_SendSOS;
+                HelpButtonText.Text = AppResources.SOS_SendSOSSubTitle;
                 noCancel = true;
                 await ParseUser.CurrentUser.SaveAsync(tk);
                 message = AppResources.SOS_SOSCanceledSuccess;
@@ -71,17 +71,12 @@ namespace CitySafe
             MessageBox.Show(message);
         }
 
-        private void CheckButton_Click(object sender, RoutedEventArgs e)
+        #region UI Listener for Navigation
+        private void CheckButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(AreaMapPage.GetResolvedUri());
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(AreaMapPage.GetUnresolvedUri());
-        }
-
-        #region UI Listener for Navigation
         private void Settings_Button_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
@@ -91,15 +86,26 @@ namespace CitySafe
         {
             NavigationService.Navigate(new Uri("/TrackPage.xaml", UriKind.Relative));
         }
+
+        private void SaveButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(AreaMapPage.GetUnresolvedUri());
+        }
         #endregion
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //Change the text of the help button if the user is in danger.
             if (ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.IN_DANGER))
-                HelpButton.Content = AppResources.SOS_Resolve;
+            {
+                HelpButton.Text = AppResources.SOS_Resolve;
+                HelpButtonText.Text = AppResources.SOS_ResolveSubTitle;
+            }
             else
-                HelpButton.Content = AppResources.SOS_SendSOS;
+            {
+                HelpButton.Text = AppResources.SOS_SendSOS;
+                HelpButtonText.Text = AppResources.SOS_SendSOSSubTitle;
+            }
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)

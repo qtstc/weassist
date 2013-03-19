@@ -44,7 +44,7 @@ namespace CitySafe.ViewModels
             //First remove all previous data.
             trackItems.Clear();
             //Query the server for the tracking relations.
-            var confirmedRelation = from relation in ParseObject.GetQuery(ParseContract.TrackRelationTable.TABLE_NAME)
+            var confirmedRelation = from relation in ParseObject.GetQuery(ParseContract.TrackRelationTable.TABLE_NAME).Include(ParseContract.TrackRelationTable.OtherRole(mode))
                                     where relation.Get<bool>(ParseContract.TrackRelationTable.TRACKED_VERIFIED) == true
                                      where relation.Get<bool>(ParseContract.TrackRelationTable.TRACKING_VERIFIED) == true
                                      where relation.Get<ParseUser>(mode) == ParseUser.CurrentUser
@@ -55,7 +55,7 @@ namespace CitySafe.ViewModels
             foreach (ParseObject u in results)
             {
                 ParseUser user = u.Get<ParseUser>(ParseContract.TrackRelationTable.OtherRole(mode));
-                await user.FetchAsync(tk);
+                //await user.FetchAsync(tk);
                 trackItems.Add(new TrackItemModel(user,u));
             }
 

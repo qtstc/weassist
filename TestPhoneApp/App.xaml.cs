@@ -12,10 +12,8 @@ using System.Windows.Controls.Primitives;
 using Parse;
 using CitySafe.ViewModels;
 using ScheduledLocationAgent.Data;
-using Microsoft.Phone.Notification;
 using Microsoft.Phone.Scheduler;
 using System.Threading;
-using System.Windows.Media.Imaging;
 
 namespace CitySafe
 {
@@ -27,6 +25,7 @@ namespace CitySafe
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
+        #region global variable to be passed between pages.
         //The view models for the lists on the track page.
         //Made global because we need to access them from other pages.
         public static TrackViewModel trackingModel;
@@ -37,9 +36,9 @@ namespace CitySafe
 
         //The sos request info to be passed to the SOSInfoPage.
         public static ParseObject sosRequestInfo;
+        #endregion
 
         #region ProgressOverlay
-
         /// <summary>
         /// The progress overlay used in the app.
         /// </summary>
@@ -96,16 +95,16 @@ namespace CitySafe
 
             // If the task already exists and the IsEnabled property is false, background
             // agents have been disabled by the user
-            if (periodicTask != null && !periodicTask.IsEnabled)
-            {
-                MessageBox.Show(AppResources.Setting_AgentDisabled);
-                return false;
-            }
+            //if (periodicTask != null && !periodicTask.IsEnabled)
+            //{
+            //    MessageBox.Show(AppResources.Setting_AgentDisabled);
+            //    return false;
+            //}
 
             // If the task already exists and background agents are enabled for the
             // application, you must remove the task and then add it again to update 
             // the schedule
-            if (periodicTask != null && periodicTask.IsEnabled)
+            if (periodicTask != null)// && periodicTask.IsEnabled)
             {
                 RemoveAgent();
             }
@@ -116,7 +115,15 @@ namespace CitySafe
             // will see in the background services Settings page on the device.
             periodicTask.Description = AppResources.Background_Description;
 
-            ScheduledActionService.Add(periodicTask);
+            try//Exception occurs when the agent is disabled by the user.
+            {
+                ScheduledActionService.Add(periodicTask);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(AppResources.Setting_AgentDisabled);
+                return false;
+            }
 
             // If debugging is enabled, use LaunchForTest to launch the agent in one minute.
 #if(DEBUG_AGENT)
@@ -228,6 +235,7 @@ namespace CitySafe
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
+            MessageBox.Show(AppResources.App_Error);
         }
 
         #region Phone application initialization
@@ -348,7 +356,5 @@ namespace CitySafe
                 throw;
             }
         }
-
-        public static HttpNotificationChannel CurrentChannel { get; private set; }
     }
 }

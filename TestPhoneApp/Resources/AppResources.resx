@@ -180,7 +180,7 @@
     <value>Initializing settings ...</value>
   </data>
   <data name="Tracker_TrackedHeader" xml:space="preserve">
-    <value>Tracked</value>
+    <value>Tracked by</value>
   </data>
   <data name="Tracker_TrackingHeader" xml:space="preserve">
     <value>Tracking</value>
@@ -192,7 +192,7 @@
     <value>SOS</value>
   </data>
   <data name="SOS_SendSOS" xml:space="preserve">
-    <value>HELP</value>
+    <value>Send</value>
   </data>
   <data name="Tracker_Add" xml:space="preserve">
     <value>Add</value>
@@ -282,7 +282,7 @@
     <value>Resolve</value>
   </data>
   <data name="SOS_SendingRequest" xml:space="preserve">
-    <value>Sending SOS your request ...</value>
+    <value>Sending your SOS request ...</value>
   </data>
   <data name="SOS_SOSCanceledFail" xml:space="preserve">
     <value>Failed to cancel your SOS request. Please check your network settings and try again later</value>
@@ -333,7 +333,7 @@
     <value>Saving user settings ...</value>
   </data>
   <data name="Map_CannotObtainLocation" xml:space="preserve">
-    <value>Cannot obtain your current location.</value>
+    <value>Cannot obtain your current location. Please make sure the locaion service is turned on in phone settings.</value>
   </data>
   <data name="Tracker_AlreadyInList" xml:space="preserve">
     <value>The user is already in your list.</value>
@@ -407,9 +407,6 @@
   <data name="SOSSend_ShareRequest" xml:space="preserve">
     <value>Share my request</value>
   </data>
-  <data name="AreaMap_LocationHeader" xml:space="preserve">
-    <value>Past SOS Requests Around You</value>
-  </data>
   <data name="SOSInfo_EmailTag" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -436,5 +433,26 @@
   </data>
   <data name="SOSSend_ShareRequestInfo" xml:space="preserve">
     <value>Notify the people near me and allow them to see my request.</value>
+  </data>
+  <data name="Map_PastSOSHeader" xml:space="preserve">
+    <value>Past Requests</value>
+  </data>
+  <data name="Map_UnresolvedSOSHeader" xml:space="preserve">
+    <value>Unresolved</value>
+  </data>
+  <data name="SOS_CheckSurroundingSubTitle" xml:space="preserve">
+    <value>past SOS requests in your area</value>
+  </data>
+  <data name="SOS_ResolveSubTitle" xml:space="preserve">
+    <value>my last SOS request</value>
+  </data>
+  <data name="SOS_SavePeopleSubTitle" xml:space="preserve">
+    <value>the people who are in danger</value>
+  </data>
+  <data name="SOS_SendSOSSubTitle" xml:space="preserve">
+    <value>SOS request to others</value>
+  </data>
+  <data name="App_Error" xml:space="preserve">
+    <value>An unexpected error occured. Please relaunch the application.</value>
   </data>
 </root>

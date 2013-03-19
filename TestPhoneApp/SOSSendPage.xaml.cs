@@ -27,7 +27,7 @@ namespace CitySafe
         private CameraCaptureTask camera;
         private BitmapImage defaultAddPhoto;
         private MemoryStream imageStream;
-        private bool noCancel;
+        private bool noCancel;//Flag to prevent cancellation when sending request
 
         public SOSSendPage()
         {
@@ -75,14 +75,16 @@ namespace CitySafe
                     message = AppResources.Map_CannotObtainLocation;
                     throw new InvalidOperationException("Cannot access location");
                 }
-                sos[ParseContract.SOSRequestTable.SENT_LOCATION] = ParseContract.LocationTable.GeoPositionToParseObject(current);
+                ParseObject location = ParseContract.LocationTable.GeoPositionToParseObject(current);
+                location[ParseContract.LocationTable.IS_SOS_REQUEST] = true;
+                sos[ParseContract.SOSRequestTable.SENT_LOCATION] = location;
                 await sos.SaveAsync(tk);
                 noCancel = true;
+                await ParseUser.CurrentUser.SaveAsync(tk);//No cancellation because the sos request is already sent.
                 string result = await ParseContract.CloudFunction.NewSOSCall(sos.ObjectId,tk);
                 Debug.WriteLine("string returned " + result);
                 ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = true;
 
-                await ParseUser.CurrentUser.SaveAsync(tk);//No cancellation because the sos request is already sent.
                 message = AppResources.SOS_SOSSentSuccess;
                 NavigationService.GoBack();
             }

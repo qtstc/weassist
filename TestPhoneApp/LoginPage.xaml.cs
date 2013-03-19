@@ -14,6 +14,7 @@ using Microsoft.Phone.Tasks;
 using Newtonsoft.Json;
 using System.Threading;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace CitySafe
 {
@@ -45,9 +46,9 @@ namespace CitySafe
             loginWithProgressOverlay();
         }
 
-        private void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
+        private async void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
             WebBrowserTask wbt = new WebBrowserTask();
             wbt.Uri = new Uri("http://citysafe.azurewebsites.net/signup.php");
             wbt.Show();
@@ -109,7 +110,6 @@ namespace CitySafe
             }
         }
 
-
         /// <summary>
         /// Navigate to the SOS page after the user is logged in.
         /// It also remove the log in page from the stack.
@@ -132,7 +132,6 @@ namespace CitySafe
         {
             App.ShowProgressOverlay(AppResources.Login_SettingUp);
             bool result = true;
-
             try
             {
                 await ParseUser.CurrentUser.FetchAsync();
@@ -160,6 +159,7 @@ namespace CitySafe
             }
             catch (Exception e)
             {
+                Debug.WriteLine(e.ToString());
                 login_username_textbox.Text = ParseUser.CurrentUser.Username;
                 login_password_textbox.Password = DUMMY_PASSWORD;
                 MessageBox.Show(AppResources.App_ConnectionError);
@@ -187,11 +187,9 @@ namespace CitySafe
             ParseUser.CurrentUser[ParseContract.UserTable.NOTIFY_BY_PUSH_STRANGER] = false;
             await ParseUser.CurrentUser.SaveAsync();
         }
-
         #endregion
 
         #region Push Notification Code
-
         public const string CHANNEL_NAME = "CitySafeChannel";// The name of our push channel.
 
         private async Task SetUpChannel()
@@ -233,7 +231,6 @@ namespace CitySafe
                 await ParseUser.CurrentUser.SaveAsync();
             }
         }
-
         /// <summary>
         /// Called every time the channel uri is changed.
         /// It basically updates the uri stored in the parse server.
@@ -259,10 +256,10 @@ namespace CitySafe
         void PushChannel_ErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
         {
             // Error handling logic for your particular application would be here.
-            Dispatcher.BeginInvoke(() =>
-                MessageBox.Show(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}",
-                    e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData))
-                    );
+            //Dispatcher.BeginInvoke(() =>
+            //    MessageBox.Show(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}",
+            //        e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData))
+            //        );
         }
 
         /// <summary>
@@ -295,7 +292,6 @@ namespace CitySafe
              //Display a dialog of all the fields in the toast.
             Dispatcher.BeginInvoke(() => MessageBox.Show(e.Collection["wp:Text2"]));
         }
-
         #endregion
     }
 }

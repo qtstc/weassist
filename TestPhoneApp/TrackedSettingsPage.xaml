@@ -29,7 +29,7 @@
         <!--ContentPanel - place additional content here-->
         <StackPanel x:Name="TrackedSettingsPanel" Grid.Row="1" Margin="12,0,12,0">
             <CheckBox Content="{Binding LocalizedResources.TrackedSetting_FullLocationAccess, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding allowLocationAccess, Mode=TwoWay}" Margin="12,0"/>
-            <TextBlock Text="{Binding LocalizedResources.TrackedSetting_FullLocationAccessInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontWeight="Light" FontSize="16" Margin="36,0"/>
+            <TextBlock Text="{Binding LocalizedResources.TrackedSetting_FullLocationAccessInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontWeight="Light" FontSize="24" Margin="36,0"/>
         </StackPanel>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>

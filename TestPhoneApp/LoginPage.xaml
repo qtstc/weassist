@@ -14,7 +14,10 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/background.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -29,7 +32,7 @@
         <!--ContentPanel - place additional content here-->
         <StackPanel x:Name="LoginPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock Text="{Binding LocalizedResources.Login_Email, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="24" Margin="12,36,0,0"/>
-            <TextBox x:Name="login_username_textbox" TextWrapping="Wrap" InputScope="EmailUserName" AcceptsReturn="True" ToolTipService.ToolTip="" Margin="12,12,12,0"/>
+            <TextBox x:Name="login_username_textbox" InputScope="EmailUserName" AcceptsReturn="True" ToolTipService.ToolTip="" Margin="12,12,12,0"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_Password, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="24" Margin="12,32,0,0"/>
             <PasswordBox x:Name="login_password_textbox" Margin="12,12,12,0" />
             <Button Content="{Binding LocalizedResources.Login_Signin, Mode=OneWay, Source={StaticResource LocalizedStrings}}"  Click="Login_Signin_Button_Click" Margin="12,60,12,0" />

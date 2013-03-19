@@ -12,6 +12,7 @@ using Microsoft.Phone.Shell;
 using Microsoft.Phone.Notification;
 using System.Threading;
 using System.ComponentModel;
+using Microsoft.Phone.Tasks;
 
 namespace CitySafe
 {
@@ -24,13 +25,12 @@ namespace CitySafe
     {
         //private PeriodicTask periodicTask;//The background agent used to update user location
         private UserSettings userSettings;//View Model for loading and saving data.
-
+        
         public SettingsPage()
         {
             InitializeComponent();
             userSettings = new UserSettings();
             SettingsPanel.DataContext = userSettings;
-            LoadUIData();
         }
 
         #region Listeners For UI
@@ -95,6 +95,13 @@ namespace CitySafe
         private async void RefreshButton_Click(object sender, EventArgs e)
         {
             await LoadUIData();
+        }
+
+        private void ChangePersonalInfoBarMenuItem_Click(object sender, EventArgs e)
+        {
+            WebBrowserTask wbt = new WebBrowserTask();
+            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/changeuserinfo.php");
+            wbt.Show();
         }
 
         #endregion
@@ -164,6 +171,13 @@ namespace CitySafe
         {
             if (App.HideProgressOverlay())
                 e.Cancel = true;
+        }
+
+        protected async override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            //Did not use a flag to avoid loading data again here because this page does not lead
+            //to any other pages.
+            await LoadUIData();
         }
     }
 }

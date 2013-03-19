@@ -54,6 +54,7 @@ namespace CitySafe
         private async Task SaveUIData()
         {
             CancellationToken tk = App.ShowProgressOverlay(AppResources.TrackedSetting_Saving);
+            ApplicationBar.IsVisible = false;
             string message = "";
             try
             {
@@ -65,28 +66,27 @@ namespace CitySafe
                 message = AppResources.Setting_SyncingFailed;
             }
             App.HideProgressOverlay();
+            ApplicationBar.IsVisible = true; ;
             if (!message.Equals(""))
                 MessageBox.Show(message);
         }
 
         private async void Stop_Tracked_Button_Click(object sender, EventArgs e)
         {
+            ApplicationBar.IsVisible = false;
             CancellationToken tk = App.ShowProgressOverlay(AppResources.TrackedSetting_RemovingUser);
-            string message = "";
             try
             {
                 await trackedSettings.RemoveRelation(tk);
+                NavigationService.GoBack();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                message = AppResources.TrackedSetting_FailToRemove;
+                MessageBox.Show(AppResources.Setting_SyncingFailed);
             }
             App.HideProgressOverlay();
-            if (message.Equals(""))
-                NavigationService.GoBack();
-            else
-                MessageBox.Show(message);
+            ApplicationBar.IsVisible = true;
         }
 
         private async void Apply_Button_Click(object sender, EventArgs e)

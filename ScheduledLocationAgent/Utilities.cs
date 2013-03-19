@@ -119,7 +119,6 @@ namespace ScheduledLocationAgent.Data
 
             if (!user.ContainsKey(ParseContract.UserTable.LOCATION(newLocationIndex)))//If the new slot was not filled.
             {
-                //Create a new location.
                 user[ParseContract.UserTable.LOCATION(newLocationIndex)] = ParseContract.LocationTable.GeoPositionToParseObject(newData);
             }
             else//If the new slot contains a valid location

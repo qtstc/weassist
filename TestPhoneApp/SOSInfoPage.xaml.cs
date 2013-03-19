@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using Parse;
 using ScheduledLocationAgent.Data;
-using System.Windows.Media.Imaging;
 using System.ComponentModel;
-using System.Windows.Media;
 using CitySafe.Resources;
 using System.Diagnostics;
-using System.IO.IsolatedStorage;
 using Delay;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Phone.Tasks;
 
 namespace CitySafe
 {
@@ -39,10 +32,13 @@ namespace CitySafe
         private const string PUBLIC_MODE = "public";
         private const string PRIVATE_MODE = "private";
 
+        private bool loaded;//Flag used to avoid loading data again in the onNavigatedTo method.
+
         public SOSInfoPage()
         {
+            loaded = false;
             InitializeComponent();
-            
+
             //Show/hide the photo page.
             SOSMessage.Text = App.sosRequestInfo.Get<String>(ParseContract.SOSRequestTable.MESSAGE);
             if (App.sosRequestInfo.ContainsKey(ParseContract.SOSRequestTable.IMAGE))
@@ -54,6 +50,22 @@ namespace CitySafe
             if (App.sosRequestInfo.Get<string>(ParseContract.SOSRequestTable.MESSAGE).Equals(""))
                 MessagePage.Visibility = System.Windows.Visibility.Collapsed;
         }
+
+        #region UI listener
+        private void PhoneTextBlock_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            PhoneCallTask pct = new PhoneCallTask();
+            pct.PhoneNumber = PhoneTextBlock.Text;
+            pct.Show();
+        }
+
+        private void EmailTextBlock_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EmailComposeTask emailComposeTask = new EmailComposeTask();
+            emailComposeTask.To = EmailTextBlock.Text;
+            emailComposeTask.Show();
+        }
+        #endregion
 
         /// <summary>
         /// Load the infomation of the sender.
@@ -84,7 +96,7 @@ namespace CitySafe
                 else
                     PhonePanel.Visibility = System.Windows.Visibility.Collapsed;
             }
-            catch(OperationCanceledException e)
+            catch (OperationCanceledException e)
             {
                 Debug.WriteLine(e.ToString());
             }
@@ -116,13 +128,14 @@ namespace CitySafe
             return new Uri("/SOSInfoPage.xaml?" + MODE_KEY + "=" + PRIVATE_MODE, UriKind.Relative);
         }
 
-
         /// <summary>
         /// Change the UI depending on the data.
         /// </summary>
         /// <param name="e"></param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (loaded)
+                return;
             if (NavigationContext.QueryString[MODE_KEY].Equals(PRIVATE_MODE))//If in private mode.
                 InfoPage.Visibility = System.Windows.Visibility.Collapsed;
             else if (!App.sosRequestInfo.Get<bool>(ParseContract.SOSRequestTable.SHARE_EMAIL)//If in public mode and no info is allowed to be shown.
@@ -131,6 +144,7 @@ namespace CitySafe
                 InfoPage.Visibility = System.Windows.Visibility.Collapsed;
             else//If info is allowed to be shown.
                 await LoadSenderInfo();
+            loaded = true;
         }
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)

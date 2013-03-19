@@ -18,7 +18,7 @@
         <!--Pivot Control-->
         <phone:Pivot x:Name="MapPivot" Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
             <!--Pivot item one-->
-            <phone:PivotItem Header="{Binding LocalizedResources.AreaMap_LocationHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Margin="24,24,24,12">
+            <phone:PivotItem x:Name="LocationPivot" Margin="24,24,24,12">
                 <phone:LongListSelector x:Name="LocationList" 
                                         Background="Transparent"
                                         LayoutMode="List"

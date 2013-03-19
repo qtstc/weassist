@@ -62,6 +62,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="changeuserinfo.php.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="changeuserinfo.php.designer.cs">
+      <DependentUpon>changeuserinfo.php.cs</DependentUpon>
+    </Compile>
     <Compile Include="CitySafePush.aspx.cs">
       <DependentUpon>CitySafePush.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -92,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="forgetpassword.php" />
+    <Content Include="changeuserinfo.php" />
     <None Include="Properties\PublishProfiles\citysafe - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\citysafe - Web Deploy.pubxml" />
     <Content Include="signup.php" />

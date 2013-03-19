@@ -27,7 +27,6 @@ namespace CitySafe
             App.trackedModel = new TrackViewModel();
             TrackingList.DataContext = App.trackingModel;
             TrackedList.DataContext = App.trackedModel;
-            LoadUIData();
         }
 
         /// <summary>
@@ -42,10 +41,9 @@ namespace CitySafe
                 await App.trackingModel.LoadData(ParseContract.TrackRelationTable.TRACKING, tk);
                 await App.trackedModel.LoadData(ParseContract.TrackRelationTable.TRACKED, tk);
             }
-            catch(OperationCanceledException e)
+            catch(OperationCanceledException)
             {
                 Debug.WriteLine("Load track page canceled");
-                NavigationService.GoBack();
             }
             catch (Exception e)
             {
@@ -149,8 +147,12 @@ namespace CitySafe
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            if (App.HideProgressOverlay())
-                e.Cancel = true;
+            App.HideProgressOverlay();
+        }
+
+        protected async override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            await LoadUIData();
         }
     }
 }

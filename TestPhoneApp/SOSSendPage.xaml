@@ -16,7 +16,6 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Panorama Title="{Binding LocalizedResources.SOSSend_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" >
-
             <!--Panorama item one-->
             <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Message, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <Grid Margin="24,-12,24,24">
@@ -46,7 +45,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel>
                     <CheckBox Grid.Row="0" x:Name="ShareRequestCheck" Content="{Binding LocalizedResources.SOSSend_ShareRequest, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Checked="ShareRequestCheck_Checked"  Unchecked="ShareRequestCheck_Checked" />
-                    <TextBlock  Margin="24,-12,12,-12" Text="{Binding LocalizedResources.SOSSend_ShareRequestInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="16"/>
+                    <TextBlock  Margin="12,-12,12,-12" Text="{Binding LocalizedResources.SOSSend_ShareRequestInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="16"/>
                     </StackPanel>
                         <StackPanel Grid.Row="1" x:Name="ShareSettingsPanel" Margin="24">
                         <TextBlock Margin ="0,0,0,-12" Text="{Binding LocalizedResources.SOSSend_ShareInfoInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"/>

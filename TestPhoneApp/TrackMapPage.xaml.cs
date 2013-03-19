@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -26,11 +25,12 @@ namespace CitySafe
         private Pushpin lastPushpin;//Used to store the last Pushpin on Map.
 
         private Pushpin myLocationPushpin;
+        private bool loaded;
 
         public TrackMapPage()
         {
+            loaded = false;
             InitializeComponent();
-            LoadUIData();
             //Creating a MapLayer and adding the MapOverlay to it
             LocationMapLayer = new MapLayer();
             LocationMap.Layers.Add(LocationMapLayer);
@@ -41,7 +41,7 @@ namespace CitySafe
         /// Load location data from the server.
         /// Also intialize the application bar with the loaded data.
         /// </summary>
-        private async void LoadUIData()
+        private async Task LoadUIData()
         {
             ApplicationBar.IsVisible = false;
             CancellationToken tk = App.ShowProgressOverlay(AppResources.Map_LoadingLocation);
@@ -75,7 +75,7 @@ namespace CitySafe
                 }
                 ApplicationBar.IsVisible = true;
             }
-            catch (OperationCanceledException e)
+            catch (OperationCanceledException)
             {
                 Debug.WriteLine("loading canceled");
             }
@@ -95,7 +95,7 @@ namespace CitySafe
         /// <returns>The list of all the SOS locations</returns>
         private async Task<LocationList<Pushpin>> LoadSOSLocations(CancellationToken tk, GeoPosition<GeoCoordinate> reference)
         {
-            var sosLocation = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME)
+            var sosLocation = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME).Include(ParseContract.SOSRequestTable.SENT_LOCATION)
                               where request.Get<ParseUser>(ParseContract.SOSRequestTable.SENDER) == App.trackItemModel.user
                               where request.Get<bool>(ParseContract.SOSRequestTable.RESOLVED) == false
                               select request;
@@ -106,16 +106,9 @@ namespace CitySafe
             {
                 ParseObject request = results.ElementAt(i);
                 ParseObject location = request.Get<ParseObject>(ParseContract.SOSRequestTable.SENT_LOCATION);
-                await location.FetchIfNeededAsync(tk);
                 GeoPosition<GeoCoordinate> l = ParseContract.LocationTable.ParseObjectToGeoPosition(location);
-                list.Add(new Pushpin(l, Pushpin.TYPE.KNOWN_SOS_LOCATION,reference,(sender, s)=>SOSPushpin_Click(sender,s,request)));
+                list.Add(new Pushpin(l, Pushpin.TYPE.KNOWN_SOS_LOCATION, reference, (sender, s) => SOSPushpin_Click(sender, s, request)));
             }
-            //Pushpin sos1 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)), SOS_PUSHPIN_COLOR);
-            //Pushpin sos2 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)), SOS_PUSHPIN_COLOR);
-            //Pushpin sos3 = new Pushpin(new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.MinValue), new GeoCoordinate(12, 13)),SOS_PUSHPIN_COLOR);
-            //list.Add(sos1);
-            //list.Add(sos2);
-            //list.Add(sos3);
             list.Sort((x, y) => y.position.Timestamp.DateTime.CompareTo(x.position.Timestamp.DateTime));
             return list;
         }
@@ -149,7 +142,7 @@ namespace CitySafe
         /// Initialize and load data into lastLocations.
         /// </summary>
         /// <returns></returns>
-        private async Task<LocationList<Pushpin>> LoadLastLocations(CancellationToken tk,GeoPosition<GeoCoordinate> reference)
+        private async Task<LocationList<Pushpin>> LoadLastLocations(CancellationToken tk, GeoPosition<GeoCoordinate> reference)
         {
             //Initialize the locationList.
             LocationList<Pushpin> Locations = new LocationList<Pushpin>(Pushpin.TYPE.TRACKED_LOCATION);
@@ -172,7 +165,7 @@ namespace CitySafe
                     await location.FetchIfNeededAsync(tk);
                     //Debug.WriteLine("line " + i + " : " + location.ObjectId + " " + location.Get<DateTime>(ParseContract.LocationTable.TIME_STAMP));
                     GeoPosition<GeoCoordinate> gp = ParseContract.LocationTable.ParseObjectToGeoPosition(location);
-                    Locations.Add(new Pushpin(gp, Pushpin.TYPE.TRACKED_LOCATION,reference));
+                    Locations.Add(new Pushpin(gp, Pushpin.TYPE.TRACKED_LOCATION, reference));
                 }
             }
             //Sort to make sure the GeoPositions are in sorted order.
@@ -234,6 +227,15 @@ namespace CitySafe
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
             App.HideProgressOverlay();
+        }
+
+        protected async override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (!loaded)
+            {
+                await LoadUIData();
+                loaded = true;
+            }
         }
     }
 }

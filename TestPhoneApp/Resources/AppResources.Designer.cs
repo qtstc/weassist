@@ -70,6 +70,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An unexpected error occured. Please relaunch the application..
+        /// </summary>
+        public static string App_Error {
+            get {
+                return ResourceManager.GetString("App_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to add.
         /// </summary>
         public static string AppBarButtonText {
@@ -93,15 +102,6 @@ namespace CitySafe.Resources {
         public static string ApplicationTitle {
             get {
                 return ResourceManager.GetString("ApplicationTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Past SOS Requests Around You.
-        /// </summary>
-        public static string AreaMap_LocationHeader {
-            get {
-                return ResourceManager.GetString("AreaMap_LocationHeader", resourceCulture);
             }
         }
         
@@ -223,7 +223,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot obtain your current location..
+        ///   Looks up a localized string similar to Cannot obtain your current location. Please make sure the locaion service is turned on in phone settings..
         /// </summary>
         public static string Map_CannotObtainLocation {
             get {
@@ -277,11 +277,29 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Past Requests.
+        /// </summary>
+        public static string Map_PastSOSHeader {
+            get {
+                return ResourceManager.GetString("Map_PastSOSHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SOS.
         /// </summary>
         public static string Map_SOSLocation {
             get {
                 return ResourceManager.GetString("Map_SOSLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unresolved.
+        /// </summary>
+        public static string Map_UnresolvedSOSHeader {
+            get {
+                return ResourceManager.GetString("Map_UnresolvedSOSHeader", resourceCulture);
             }
         }
         
@@ -457,6 +475,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to past SOS requests in your area.
+        /// </summary>
+        public static string SOS_CheckSurroundingSubTitle {
+            get {
+                return ResourceManager.GetString("SOS_CheckSurroundingSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to set up push notifications. Will try again at next app launch..
         /// </summary>
         public static string SOS_FailToSetUpPush {
@@ -493,6 +520,15 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to my last SOS request.
+        /// </summary>
+        public static string SOS_ResolveSubTitle {
+            get {
+                return ResourceManager.GetString("SOS_ResolveSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string SOS_SavePeople {
@@ -502,7 +538,16 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sending SOS your request ....
+        ///   Looks up a localized string similar to the people who are in danger.
+        /// </summary>
+        public static string SOS_SavePeopleSubTitle {
+            get {
+                return ResourceManager.GetString("SOS_SavePeopleSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending your SOS request ....
         /// </summary>
         public static string SOS_SendingRequest {
             get {
@@ -511,11 +556,20 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HELP.
+        ///   Looks up a localized string similar to Send.
         /// </summary>
         public static string SOS_SendSOS {
             get {
                 return ResourceManager.GetString("SOS_SendSOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SOS request to others.
+        /// </summary>
+        public static string SOS_SendSOSSubTitle {
+            get {
+                return ResourceManager.GetString("SOS_SendSOSSubTitle", resourceCulture);
             }
         }
         
@@ -871,7 +925,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tracked.
+        ///   Looks up a localized string similar to Tracked by.
         /// </summary>
         public static string Tracker_TrackedHeader {
             get {
