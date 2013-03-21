@@ -34,6 +34,7 @@ namespace CitySafe
             //Creating a MapLayer and adding the MapOverlay to it
             LocationMapLayer = new MapLayer();
             LocationMap.Layers.Add(LocationMapLayer);
+            LocationMap.ZoomLevel = 15;
         }
 
         #region data loading helper method.

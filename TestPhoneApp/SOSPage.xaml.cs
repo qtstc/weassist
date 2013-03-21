@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using Parse;
 using ScheduledLocationAgent.Data;
 using CitySafe.Resources;
-using System.Diagnostics;
-using Microsoft.Phone.Shell;
 using System.Threading;
+using System.Diagnostics;
 using System.ComponentModel;
+using Microsoft.Phone.Notification;
+using System.Windows.Input;
 
 namespace CitySafe
 {
-    /// <summary>
-    /// This is the navigation page for user after logging in.
-    /// Since it is the first page the user saw after logging,
-    /// it also takes care of the setting up of push notifications,
-    /// which is only available after user signning in.
-    /// </summary>
     public partial class SOSPage : PhoneApplicationPage
     {
-
         private bool noCancel;//Flag used to prevent cancellation when sending request.
 
         public SOSPage()
@@ -30,7 +28,8 @@ namespace CitySafe
             noCancel = false;
         }
 
-        private async void HelpButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+
+        private async void HelpButton_Tap(object sender, GestureEventArgs e)
         {
             if (!ParseUser.CurrentUser.Get<bool>(ParseContract.UserTable.IN_DANGER))
             {
@@ -55,8 +54,7 @@ namespace CitySafe
                 }
 
                 ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = false;
-                HelpButton.Text = AppResources.SOS_SendSOS;
-                HelpButtonText.Text = AppResources.SOS_SendSOSSubTitle;
+                helpTile.SetSOSText(AppResources.SOS_SendSOS);
                 noCancel = true;
                 await ParseUser.CurrentUser.SaveAsync(tk);
                 message = AppResources.SOS_SOSCanceledSuccess;
@@ -72,17 +70,17 @@ namespace CitySafe
         }
 
         #region UI Listener for Navigation
-        private void CheckButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void CheckButton_Tap(object sender, GestureEventArgs e)
         {
             NavigationService.Navigate(AreaMapPage.GetResolvedUri());
         }
 
-        private void Settings_Button_Click(object sender, EventArgs e)
+        private void Settings_Button_Click(object sender, GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
 
-        private void Manage_List_Button_Click(object sender, EventArgs e)
+        private void Manage_List_Button_Click(object sender, GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/TrackPage.xaml", UriKind.Relative));
         }
@@ -93,19 +91,62 @@ namespace CitySafe
         }
         #endregion
 
+        /// <summary>
+        /// Lisenter for the change user appbar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void ChangeUserButton_Click(object sender, EventArgs e)
+        {
+            CancellationToken tk = App.ShowProgressOverlay(AppResources.Setting_Loggingout);
+            try
+            {
+                HttpNotificationChannel.Find(LoginPage.CHANNEL_NAME).Close();
+                ParseUser.CurrentUser[ParseContract.UserTable.WIN_PNONE_PUSH_URI] = "";
+                await ParseUser.CurrentUser.SaveAsync(tk);
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.WriteLine("Log out cancelled");
+            }
+            catch
+            {
+                App.HideProgressOverlay();
+                MessageBox.Show(AppResources.Setting_FailToLogOut);
+                return;
+            }
+            ParseUser.LogOut();
+            Utilities.SaveParseCredential("", "");//Also clear the user credential stored in the phone.
+            App.RemoveAgent();
+            //Go back to login page
+            NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+            //Remove back entry. Prevent user from coming back to settings page by pressing back button
+            //when he or she is on the login page
+            NavigationService.RemoveBackEntry();
+            NavigationService.RemoveBackEntry();
+            App.HideProgressOverlay();
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
             //Change the text of the help button if the user is in danger.
             if (ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.IN_DANGER))
-            {
-                HelpButton.Text = AppResources.SOS_Resolve;
-                HelpButtonText.Text = AppResources.SOS_ResolveSubTitle;
-            }
+                helpTile.SetSOSText(AppResources.SOS_Resolve);
             else
-            {
-                HelpButton.Text = AppResources.SOS_SendSOS;
-                HelpButtonText.Text = AppResources.SOS_SendSOSSubTitle;
-            }
+                helpTile.SetSOSText(AppResources.SOS_SendSOS);
+
+            if (ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.TRACKING_ENABLED))
+                settingsTile.SetLocationUpdateText(AppResources.SOS_TrackingOn);
+            else
+                settingsTile.SetLocationUpdateText(AppResources.SOS_TrackingOff);
+
+            if (ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.NOTIFY_BY_EMAIL_STRANGER)
+                || ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.NOTIFY_BY_PUSH_STRANGER)
+                || ParseUser.CurrentUser.Get<Boolean>(ParseContract.UserTable.NOTIFY_BY_SMS_STRANGER))
+                settingsTile.SetReceivingNotification(AppResources.SOS_NotificationOn);
+            else
+                settingsTile.SetReceivingNotification(AppResources.SOS_NotificationOff);
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)

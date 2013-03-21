@@ -222,11 +222,12 @@ namespace ScheduledLocationAgent.Data
 
         public static class CloudFunction
         {
-            public static async Task<string> SendTrackInvitation(string userID,string role,CancellationToken tk)
+            public static async Task<string> SendTrackInvitation(string userID,string role, string relationID, CancellationToken tk)
             {
                 IDictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("userID", userID);
                 parameters.Add("relation", role);
+                parameters.Add("relationID", relationID);
                 string result;
                 if(tk != CancellationToken.None)
                     result = await ParseCloud.CallFunctionAsync<string>("InviteExistingUser", parameters,tk);

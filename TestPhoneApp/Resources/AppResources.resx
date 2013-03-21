@@ -455,4 +455,16 @@
   <data name="App_Error" xml:space="preserve">
     <value>An unexpected error occured. Please relaunch the application.</value>
   </data>
+  <data name="SOS_NotificationOff" xml:space="preserve">
+    <value>not listening to SOS requests in your area</value>
+  </data>
+  <data name="SOS_NotificationOn" xml:space="preserve">
+    <value>listening to SOS requests in your area</value>
+  </data>
+  <data name="SOS_TrackingOff" xml:space="preserve">
+    <value>location tracking is turned off</value>
+  </data>
+  <data name="SOS_TrackingOn" xml:space="preserve">
+    <value>location tracking is turned on</value>
+  </data>
 </root>

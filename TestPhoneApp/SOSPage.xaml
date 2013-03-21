@@ -11,10 +11,11 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    xmlns:local="clr-namespace:CitySafe">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -22,23 +23,21 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
-          
+            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Margin="0,0,0,0">
-            <TextBlock  Margin="24,-24,24,0" x:Name="HelpButton" Text="{Binding LocalizedResources.SOS_SendSOS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0" Tap="HelpButton_Tap" FontSize="120"  />
-            <TextBlock x:Name="HelpButtonText" Margin="72,-24,24,0" Text="{Binding LocalizedResources.SOS_SendSOSSubTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="28" />
-            <TextBlock Margin="24,48,24,0" x:Name="CheckButton" Text="{Binding LocalizedResources.SOS_CheckSurrounding, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0"  FontSize="120" Tap="CheckButton_Tap"  />
-            <TextBlock  Margin="72,-24,24,0"  FontSize="28" Text="{Binding LocalizedResources.SOS_CheckSurroundingSubTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
-            <TextBlock Margin="24,48,24,0" x:Name="SaveButton" Text="{Binding LocalizedResources.SOS_SavePeople, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Grid.Row="0" FontSize="120" Tap="SaveButton_Tap" />
-            <TextBlock  Margin="72,-24,24,0" Text="{Binding LocalizedResources.SOS_SavePeopleSubTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}"  FontSize="28"/>
-        </StackPanel>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <local:HelpTile x:Name="helpTile" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 0, 0, 0" Width="430" Height="200" Tap="HelpButton_Tap"/>
+            <local:PastRequestTile HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="20,210,0,0" Tap="CheckButton_Tap"/>
+            <local:ConnectionsTile HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230, 210, 0, 0" Tap="Manage_List_Button_Click"/>
+            <local:SettingsTile x:Name="settingsTile" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 420, 0, 0" Tap="Settings_Button_Click"/>
+            <local:CurrentRequestTile HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="230,420,0,0" Tap="SaveButton_Tap"/>
+        </Grid>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="settings" Click="Settings_Button_Click"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/list.png" Text="private lists" Click="Manage_List_Button_Click"/>
+            <shell:ApplicationBarIconButton Text="log out" IconUri="/Assets/AppBar/door.leave.png" Click="ChangeUserButton_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>

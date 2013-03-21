@@ -58,10 +58,7 @@
         <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="save" Click="ApplySettingsButton_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/refresh.png" Text="refresh"  Click="RefreshButton_Click"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="log out"  Click="ChangeUserButton_Click" />
-                <shell:ApplicationBarMenuItem Text="change personal info" Click="ChangePersonalInfoBarMenuItem_Click"/>
-            </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton IconUri ="/Assets/AppBar/people.profile.png"  Text="change info" Click="ChangePersonalInfoBarMenuItem_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

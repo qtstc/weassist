@@ -18,9 +18,11 @@
         <phone:Panorama Title="{Binding LocalizedResources.SOSSend_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" >
             <!--Panorama item one-->
             <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Message, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <Grid Margin="24,-12,24,24">
-                    <TextBox x:Name="SOSMessage"  TextWrapping="Wrap" TextChanged="SOSMessage_TextChanged"/>
+                <Grid Margin="36,0,36,36">
                     <TextBlock x:Name="CharCount"   TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,12"/>
+                    <Border CornerRadius="10" Background="{StaticResource PhoneTextBoxBrush}" >
+                         <TextBox x:Name="SOSMessage"  TextWrapping="Wrap" TextChanged="SOSMessage_TextChanged"/>
+                    </Border>
                 </Grid>
             </phone:PanoramaItem>
 
@@ -28,7 +30,7 @@
             <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Photo, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <ScrollViewer Grid.Row="1">
                     <Grid Margin="36,0,36,36">
-                        <Border BorderThickness="12" BorderBrush="{StaticResource PhoneInverseBackgroundBrush}" CornerRadius="12">
+                        <Border BorderThickness="12" BorderBrush="{StaticResource PhoneTextBoxBrush}" CornerRadius="12">
                             <Image x:Name="AddPhotoImage" Source="/Assets/addphoto.png" Tap="AddPhotoImage_Tap"/>
                         </Border>
                         <Image  x:Name="DeletePhotoImage" Source="/Assets/deletephoto.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-15,-15,0" Visibility="Collapsed" Tap="DeletePhotoImage_Tap"/>

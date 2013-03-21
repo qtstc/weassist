@@ -96,6 +96,24 @@
     <Compile Include="AreaMapPage.xaml.cs">
       <DependentUpon>AreaMapPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InAppTiles\ConnectionsTile.xaml.cs">
+      <DependentUpon>ConnectionsTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InAppTiles\PastRequestTile.xaml.cs">
+      <DependentUpon>PastRequestTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InAppTiles\HelpTile.xaml.cs">
+      <DependentUpon>HelpTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InAppTiles\SettingsTile.xaml.cs">
+      <DependentUpon>SettingsTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InAppTiles\CurrentRequestTile.xaml.cs">
+      <DependentUpon>CurrentRequestTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SOSPage.xaml.cs">
+      <DependentUpon>SOSPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SOSInfoPage.xaml.cs">
       <DependentUpon>SOSInfoPage.xaml</DependentUpon>
     </Compile>
@@ -138,9 +156,6 @@
     <Compile Include="SignupPage.xaml.cs">
       <DependentUpon>SignupPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SOSPage.xaml.cs">
-      <DependentUpon>SOSPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TrackPage.xaml.cs">
       <DependentUpon>TrackPage.xaml</DependentUpon>
     </Compile>
@@ -154,7 +169,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="InAppTiles\ConnectionsTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InAppTiles\PastRequestTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InAppTiles\HelpTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InAppTiles\SettingsTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InAppTiles\CurrentRequestTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SOSPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,10 +210,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SOSInfoPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SOSPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,18 +248,24 @@
     <Content Include="Assets\AppBar\back.png" />
     <Content Include="Assets\AppBar\basecircle.png" />
     <Content Include="Assets\AppBar\delete.png" />
+    <Content Include="Assets\AppBar\door.leave.png" />
     <Content Include="Assets\AppBar\feature.email.png" />
     <Content Include="Assets\AppBar\feature.settings.png" />
     <Content Include="Assets\AppBar\list.png" />
     <Content Include="Assets\AppBar\MyLocation.png" />
+    <Content Include="Assets\AppBar\people.profile.png" />
     <Content Include="Assets\AppBar\refresh.png" />
     <Content Include="Assets\AppBar\save.png" />
     <Content Include="Assets\AppBar\SOS.png" />
+    <Content Include="Assets\AppBar\user.delete.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\InAppTiles\connections.png" />
     <Content Include="Assets\deletephoto.png" />
     <Content Include="Assets\AppBar\history.png" />
+    <Content Include="Assets\InAppTiles\save.png" />
+    <Content Include="Assets\InAppTiles\setting.png" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="Assets\Tiles\IconicTileMediumLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

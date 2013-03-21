@@ -34,41 +34,6 @@ namespace CitySafe
         }
 
         #region Listeners For UI
-        /// <summary>
-        /// Lisenter for the change user appbar
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void ChangeUserButton_Click(object sender, EventArgs e)
-        {
-            CancellationToken tk = App.ShowProgressOverlay(AppResources.Setting_Loggingout);
-            try
-            {
-                HttpNotificationChannel.Find(LoginPage.CHANNEL_NAME).Close();
-                ParseUser.CurrentUser[ParseContract.UserTable.WIN_PNONE_PUSH_URI] = "";
-                await ParseUser.CurrentUser.SaveAsync(tk);
-            }
-            catch (OperationCanceledException)
-            {
-                Debug.WriteLine("Log out cancelled");
-            }
-            catch
-            {
-                App.HideProgressOverlay();
-                MessageBox.Show(AppResources.Setting_FailToLogOut);
-                return;
-            }
-            ParseUser.LogOut();
-            Utilities.SaveParseCredential("", "");//Also clear the user credential stored in the phone.
-            App.RemoveAgent();
-            //Go back to login page
-            NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
-            //Remove back entry. Prevent user from coming back to settings page by pressing back button
-            //when he or she is on the login page
-            NavigationService.RemoveBackEntry();
-            NavigationService.RemoveBackEntry();
-            App.HideProgressOverlay();
-        }
 
         private async void ApplySettingsButton_Click(object sender, EventArgs e)
         {

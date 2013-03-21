@@ -35,7 +35,18 @@ namespace CitySafe.ViewModels
             get {
                 if (_referencePosition == null)
                     return "";
-                return (int)position.Location.GetDistanceTo(_referencePosition.Location) + " m"; }
+                int meter = (int)position.Location.GetDistanceTo(_referencePosition.Location);
+                double miles = meter * 0.000621371;
+                if (miles > 0.25)
+                {
+                    string s = miles.ToString("#.##");
+                    if (s.StartsWith("."))
+                        s = "0" + s;
+                    return s + " miles away";
+                }
+                else
+                    return (int)(meter * 3.28) + " feet away";
+            }
         }
 
         public String time
@@ -155,8 +166,6 @@ namespace CitySafe.ViewModels
                 default:
                     return "";
             }
-
-                    
         }
 
         /// <summary>

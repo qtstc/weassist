@@ -502,6 +502,24 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to not listening to SOS requests in your area.
+        /// </summary>
+        public static string SOS_NotificationOff {
+            get {
+                return ResourceManager.GetString("SOS_NotificationOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listening to SOS requests in your area.
+        /// </summary>
+        public static string SOS_NotificationOn {
+            get {
+                return ResourceManager.GetString("SOS_NotificationOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SOS.
         /// </summary>
         public static string SOS_PageHeader {
@@ -615,6 +633,24 @@ namespace CitySafe.Resources {
         public static string SOS_SOSSentSuccess {
             get {
                 return ResourceManager.GetString("SOS_SOSSentSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to location tracking is turned off.
+        /// </summary>
+        public static string SOS_TrackingOff {
+            get {
+                return ResourceManager.GetString("SOS_TrackingOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to location tracking is turned on.
+        /// </summary>
+        public static string SOS_TrackingOn {
+            get {
+                return ResourceManager.GetString("SOS_TrackingOn", resourceCulture);
             }
         }
         

@@ -27,7 +27,7 @@ namespace CitySafe
     /// </summary>
     public partial class AreaMapPage : PhoneApplicationPage
     {
-        public const double areaRadius = 10;//The radius of the area to be checked, in kilometers.
+        public const double areaRadius = 5;//The radius of the area to be checked, in miles.
 
         private const string MODE_KEY = "mode_areamap";//Key included in the URI.
         private const string RESOLVED_REQUESTS = "resolved";//Value for the resolved mode.
@@ -47,6 +47,7 @@ namespace CitySafe
             //Creating a MapLayer and adding the MapOverlay to it
             LocationMapLayer = new MapLayer();
             LocationMap.Layers.Add(LocationMapLayer);
+            LocationMap.ZoomLevel = 15;
         }
 
         #region data loading helper method.
@@ -121,7 +122,7 @@ namespace CitySafe
                                 where l.Get<bool>(ParseContract.LocationTable.IS_SOS_REQUEST) == true
                                 select l;
 
-            nearLocations = nearLocations.WhereWithinDistance(ParseContract.LocationTable.LOCATION, userL, ParseGeoDistance.FromKilometers(areaRadius));
+            nearLocations = nearLocations.WhereWithinDistance(ParseContract.LocationTable.LOCATION, userL, ParseGeoDistance.FromMiles(areaRadius));
 
             var sosLocation = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME).Include(ParseContract.SOSRequestTable.SENT_LOCATION)
                               where request.Get<bool>(ParseContract.SOSRequestTable.RESOLVED) == isResolved

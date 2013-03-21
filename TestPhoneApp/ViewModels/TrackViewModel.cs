@@ -188,7 +188,7 @@ namespace CitySafe.ViewModels
             if (needTrackInvitation)
             {
                 Debug.WriteLine("Send track invitation");
-                string result = await ParseContract.CloudFunction.SendTrackInvitation(trackRelation.Get<ParseUser>(ParseContract.TrackRelationTable.OtherRole(role)).ObjectId, role,tk);
+                string result = await ParseContract.CloudFunction.SendTrackInvitation(trackRelation.Get<ParseUser>(ParseContract.TrackRelationTable.OtherRole(role)).ObjectId, role,trackRelation.ObjectId,tk);
                 Debug.WriteLine("string returned " + result);
             }
             return resultMessage;

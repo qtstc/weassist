@@ -119,7 +119,7 @@ namespace CitySafe
             {
                 ScheduledActionService.Add(periodicTask);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show(AppResources.Setting_AgentDisabled);
                 return false;
