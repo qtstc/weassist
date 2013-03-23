@@ -14,21 +14,24 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/background.jpg"/>
+        </Grid.Background>
         <!--Pivot Control-->
-        <phone:Pivot x:Name="MapPivot" Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+        <phone:Pivot x:Name="MapPivot" Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Foreground="#DEFFFFFF">
             <!--Pivot item one-->
             <phone:PivotItem x:Name="LocationPivot" Margin="24,24,24,12">
                 <phone:LongListSelector x:Name="LocationList" 
                                         Background="Transparent"
                                         LayoutMode="List"
                                         IsGroupingEnabled="true"
-                                        HideEmptyGroups ="true" SelectionChanged="LocationList_SelectionChanged">
+                                        HideEmptyGroups ="true" SelectionChanged="LocationList_SelectionChanged" Foreground="#DEFFFFFF">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" Margin="12,6,12,6">
-                                <TextBlock Text="{Binding time}"  TextWrapping="Wrap" FontSize="30" Foreground="{StaticResource PhoneInverseBackgroundBrush}"/>
-                                <TextBlock Text="{Binding distance}"   TextWrapping="Wrap" FontSize="20" Margin="12,-6,12,0" Foreground="{StaticResource PhoneInverseInactiveBrush}"/>
+                                <TextBlock Text="{Binding time}"  TextWrapping="Wrap" FontSize="30" Foreground="White"/>
+                                <TextBlock Text="{Binding distance}"   TextWrapping="Wrap" FontSize="20" Margin="12,-6,12,0" Foreground="White"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -36,7 +39,7 @@
                         <DataTemplate>
                             <Border Background="Transparent" Padding="2">
                                 <Border  Margin="0,0,18,0" HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding Key}" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="40"  FontFamily="{StaticResource PhoneFontFamilySemiLight}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Key}" FontSize="40"  FontFamily="{StaticResource PhoneFontFamilySemiLight}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#DEFFFFFF"/>
                                 </Border>
                             </Border>
                         </DataTemplate>
@@ -48,7 +51,7 @@
                                 <Setter.Value>
                                     <DataTemplate>
                                         <Border  >
-                                            <TextBlock Text="{Binding Key}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="40"  VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Key}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="40"  VerticalAlignment="Center" Foreground="{StaticResource PhoneForegroundBrush}"/>
                                         </Border>
                                     </DataTemplate>
                                 </Setter.Value>

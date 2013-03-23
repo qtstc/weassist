@@ -15,12 +15,15 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <phone:Panorama Margin="9,-7,0,0" Title="{Binding LocalizedResources.SOSInfo_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" >
+        <phone:Panorama  Title="{Binding LocalizedResources.SOSInfo_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Foreground="#DEFFFFFF" >
+            <phone:Panorama.Background>
+                <ImageBrush Stretch="Fill" ImageSource="/Assets/background.jpg"/>
+            </phone:Panorama.Background>
 
             <!--Panorama item one-->
             <phone:PanoramaItem x:Name="MessagePage" Header="{Binding LocalizedResources.SOSSend_Message, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <Grid Margin="24,-12,24,24">
-                    <TextBlock Margin="12,0,12,0" x:Name="SOSMessage"  TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" />
+                    <TextBlock Margin="12,0,12,0" x:Name="SOSMessage"  TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" Foreground="#DEFFFFFF" />
                 </Grid>
             </phone:PanoramaItem>
 
@@ -28,7 +31,7 @@
             <phone:PanoramaItem x:Name="PhotoPage" Header="{Binding LocalizedResources.SOSSend_Photo, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <ScrollViewer Grid.Row="1">
                     <Grid Margin="36,0,36,36">
-                        <Border BorderThickness="12" BorderBrush="{StaticResource PhoneInverseBackgroundBrush}" CornerRadius="12">
+                        <Border BorderThickness="12" CornerRadius="12" BorderBrush="#26FFFFFF">
                             <Image x:Name="SOSImage" Source="/Assets/placeholder.png" />
                         </Border>
                     </Grid>

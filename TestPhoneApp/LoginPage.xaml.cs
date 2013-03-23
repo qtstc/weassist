@@ -48,16 +48,16 @@ namespace CitySafe
 
         private async void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
+            //NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
             WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/signup.php");
+            wbt.Uri = new Uri("http://weassist.azurewebsites.net/signup.html");
             wbt.Show();
         }
 
         private void Forget_Password_Button_Click(object sender, RoutedEventArgs e)
         {
             WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/forgetpassword.php");
+            wbt.Uri = new Uri("http://weassist.azurewebsites.net/forgetpassword.html");
             wbt.Show();
         }
         #endregion
@@ -206,7 +206,7 @@ namespace CitySafe
         #endregion
 
         #region Push Notification Code
-        public const string CHANNEL_NAME = "CitySafeChannel";// The name of our push channel.
+        public const string CHANNEL_NAME = "WeAssistChannel";// The name of our push channel.
 
         private async Task SetUpChannel()
         {

@@ -8,13 +8,20 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     d:DesignHeight="800" d:DesignWidth="800"  >
 
-    <Grid x:Name="LayoutRoot" Opacity="1" Background="{StaticResource PhoneBackgroundBrush}" >
+    <Grid x:Name="LayoutRoot" Opacity="1" >
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/background.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="800"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ProgressBar IsIndeterminate="True" Foreground="{StaticResource PhoneAccentBrush}" Height="50" Width="480" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock x:Name ="Overlay_Textblock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneForegroundBrush}" Margin="0,-24,0,0"/>
+            <ProgressBar IsIndeterminate="True" Height="50" Width="480" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+            <TextBlock x:Name ="Overlay_Textblock" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-24,0,0">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="#DEFFFFFF"/>
+                </TextBlock.Foreground>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>

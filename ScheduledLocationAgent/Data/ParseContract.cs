@@ -27,7 +27,8 @@ namespace ScheduledLocationAgent.Data
             private static string LOCATION_HISTORY { get { return "location_"; } }
             public static string TRACKING_ENABLED { get { return "trackingEnabled"; } }
             public static string LAST_LOCATION_INDEX { get { return "lastLocationIndex"; } }
-            public static string LAST_LOCATION{get {return "lastLocation";}}
+            //public static string LAST_LOCATION{get {return "lastLocation";}}
+            public static string LAST_GEO_POINT { get { return "lastGeoPoint"; } }
             public static string LOCATION_DATA_SIZE { get { return "locationDataSize"; } }
             public static string LOCATION(int key) { return LOCATION_HISTORY + key.ToString("000"); }
             public static string IN_DANGER { get { return "inDanger"; } }

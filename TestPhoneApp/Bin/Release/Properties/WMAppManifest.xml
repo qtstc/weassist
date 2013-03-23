@@ -2,7 +2,7 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
   <App xmlns="" ProductID="{66cb5f2f-2eb5-42e5-9a83-6186a54dd3a6}" Title="WeAssist" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Tao Qian, Rajat Kumar, Michael Osborn" Description="" Publisher="CitySafeDePauw" PublisherID="{b2d8d4f4-2d70-478c-bc37-6ce6fb0678c2}">
-    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+    <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
@@ -23,19 +23,17 @@
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="TestPhoneAppToken" TaskName="_default">
-        <TemplateIconic>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicTileSmall.png</SmallImageURI>
+        <TemplateFlip>
+          <SmallImageURI IsRelative="true" IsResource="false">FlipSmall.png</SmallImageURI>
           <Count>0</Count>
-          <IconImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicTileMediumLarge.png</IconImageURI>
-          <Title>CitySafe</Title>
-          <Message></Message>
-          <BackgroundColor></BackgroundColor>
-          <HasLarge>True</HasLarge>
-          <LargeContent1></LargeContent1>
-          <LargeContent2></LargeContent2>
-          <LargeContent3></LargeContent3>
+          <BackgroundImageURI IsRelative="true" IsResource="false">FlipMedium.png</BackgroundImageURI>
+          <Title></Title>
+          <BackContent></BackContent>
+          <BackBackgroundImageURI IsRelative="true" IsResource="false"></BackBackgroundImageURI>
+          <BackTitle></BackTitle>
           <DeviceLockImageURI IsRelative="true" IsResource="false"></DeviceLockImageURI>
-        </TemplateIconic>
+          <HasLarge>False</HasLarge>
+        </TemplateFlip>
       </PrimaryToken>
     </Tokens>
     <ScreenResolutions>

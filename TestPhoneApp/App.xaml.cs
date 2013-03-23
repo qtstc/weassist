@@ -14,6 +14,7 @@ using CitySafe.ViewModels;
 using ScheduledLocationAgent.Data;
 using Microsoft.Phone.Scheduler;
 using System.Threading;
+using System.Windows.Media;
 
 namespace CitySafe
 {
@@ -196,6 +197,7 @@ namespace CitySafe
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            (App.Current.Resources["PhoneRadioCheckBoxCheckBrush"] as SolidColorBrush).Color = Colors.White;
         }
 
         // Code to execute when the application is activated (brought to foreground)

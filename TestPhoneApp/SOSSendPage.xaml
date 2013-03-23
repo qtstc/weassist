@@ -14,8 +14,11 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <phone:Panorama Title="{Binding LocalizedResources.SOSSend_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" >
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/background.jpg" Stretch="Fill"/>
+        </Grid.Background>
+        <phone:Panorama Title="{Binding LocalizedResources.SOSSend_PageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Foreground="#DEFFFFFF" >
             <!--Panorama item one-->
             <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Message, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <Grid Margin="36,0,36,36">
@@ -25,11 +28,11 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBlock x:Name="CharCount" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,12"/>
-                        <Border CornerRadius="10" Background="{StaticResource PhoneTextBoxBrush}" >
-                            <TextBox x:Name="SOSMessage"  TextWrapping="Wrap" TextChanged="SOSMessage_TextChanged"/>
+                        <Border CornerRadius="10" BorderBrush="Black" Background="#66D3D3D3" >
+                            <TextBox x:Name="SOSMessage"  TextWrapping="Wrap" TextChanged="SOSMessage_TextChanged" Background="#99FFFFFF" SelectionForeground="White" BorderBrush="#26000000" Foreground="#DE4D4D4D"/>
                         </Border>
                     </Grid>
-                    <TextBlock Grid.Row="1" Text="{Binding LocalizedResources.SOSInfo_Disclaimer, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBlock Grid.Row="1" Text="{Binding LocalizedResources.SOSSend_Disclaimer, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="18" TextWrapping="Wrap" Foreground="#DEFFFFFF"/>
                 </Grid>
             </phone:PanoramaItem>
 
@@ -37,7 +40,7 @@
             <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Photo, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <ScrollViewer Grid.Row="1">
                     <Grid Margin="36,0,36,36">
-                        <Border BorderThickness="12" BorderBrush="{StaticResource PhoneTextBoxBrush}" CornerRadius="12">
+                        <Border BorderThickness="12" CornerRadius="12" BorderBrush="#26FFFFFF">
                             <Image x:Name="AddPhotoImage" Source="/Assets/addphoto.png" Tap="AddPhotoImage_Tap"/>
                         </Border>
                         <Image  x:Name="DeletePhotoImage" Source="/Assets/deletephoto.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-15,-15,0" Visibility="Collapsed" Tap="DeletePhotoImage_Tap"/>
@@ -53,14 +56,14 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel>
-                    <CheckBox Grid.Row="0" x:Name="ShareRequestCheck" Content="{Binding LocalizedResources.SOSSend_ShareRequest, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Checked="ShareRequestCheck_Checked"  Unchecked="ShareRequestCheck_Checked" />
+                    <CheckBox Grid.Row="0" x:Name="ShareRequestCheck" Content="{Binding LocalizedResources.SOSSend_ShareRequest, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Checked="ShareRequestCheck_Checked"  Unchecked="ShareRequestCheck_Checked" BorderBrush="#DEFFFFFF" Foreground="#DEFFFFFF" />
                     <TextBlock  Margin="12,-12,12,-12" Text="{Binding LocalizedResources.SOSSend_ShareRequestInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="16"/>
                     </StackPanel>
                         <StackPanel Grid.Row="1" x:Name="ShareSettingsPanel" Margin="24">
                         <TextBlock Margin ="0,0,0,-12" Text="{Binding LocalizedResources.SOSSend_ShareInfoInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"/>
-                        <CheckBox x:Name="ShareNameCheck" Content="{Binding LocalizedResources.SOSSend_ShareName, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
-                        <CheckBox x:Name="ShareEmailCheck" Content="{Binding LocalizedResources.SOSSend_ShareEmail, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
-                        <CheckBox x:Name="SharePhoneCheck" Content="{Binding LocalizedResources.SOSSend_SharePhone, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
+                        <CheckBox x:Name="ShareNameCheck" Content="{Binding LocalizedResources.SOSSend_ShareName, Mode=OneWay, Source={StaticResource LocalizedStrings}}" BorderBrush="#DEFFFFFF" Foreground="#DEFFFFFF" Background="{x:Null}" />
+                        <CheckBox x:Name="ShareEmailCheck" Content="{Binding LocalizedResources.SOSSend_ShareEmail, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Foreground="#DEFFFFFF" BorderBrush="#DEFFFFFF"/>
+                        <CheckBox x:Name="SharePhoneCheck" Content="{Binding LocalizedResources.SOSSend_SharePhone, Mode=OneWay, Source={StaticResource LocalizedStrings}}" BorderBrush="#DEFFFFFF" Foreground="#DEFFFFFF"/>
                     </StackPanel>
                 </Grid>
             </phone:PanoramaItem>

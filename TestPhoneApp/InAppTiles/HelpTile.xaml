@@ -6,8 +6,7 @@
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="200" d:DesignWidth="410">
+    d:DesignHeight="200" d:DesignWidth="410" Foreground="#DEFFFFFF">
 
     <UserControl.Resources>
 
@@ -28,14 +27,14 @@
         </Storyboard>
 
     </UserControl.Resources>
+    <UserControl.BorderBrush>
+        <ImageBrush Stretch="Fill" ImageSource="/Assets/HelpButtonBackground.jpg"/>
+    </UserControl.BorderBrush>
 
     <StackPanel Width="410" Height="200">
         <Grid Name="grid2" Width="410" Height="255" >
             <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White" Offset="0"/>
-                    <GradientStop Color="#FFFF7400" Offset="0.912"/>
-                </LinearGradientBrush>
+                <ImageBrush Stretch="Fill" ImageSource="/Assets/HelpButtonBackground.jpg"/>
             </Grid.Background>
             <Grid.RenderTransform>
                 <TranslateTransform x:Name="panel1" Y="0" X="0"/>

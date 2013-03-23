@@ -62,12 +62,12 @@ namespace CitySafe
             await LoadUIData();
         }
 
-        private void ChangePersonalInfoBarMenuItem_Click(object sender, EventArgs e)
-        {
-            WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/changeuserinfo.php");
-            wbt.Show();
-        }
+        //private void ChangePersonalInfoBarMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    WebBrowserTask wbt = new WebBrowserTask();
+        //    wbt.Uri = new Uri("http://weassist.azurewebsites.net/changeuserinfo.html");
+        //    wbt.Show();
+        //}
 
         #endregion
 
