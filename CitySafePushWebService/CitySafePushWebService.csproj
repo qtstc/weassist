@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CitySafePush.aspx" />
+    <Content Include="instructions.html" />
+    <Content Include="privacystatement.html" />
     <Content Include="test.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -80,6 +82,18 @@
     </Compile>
     <Compile Include="forgetpassword.php.designer.cs">
       <DependentUpon>forgetpassword.php.cs</DependentUpon>
+    </Compile>
+    <Compile Include="instructions.html.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="instructions.html.designer.cs">
+      <DependentUpon>instructions.html.cs</DependentUpon>
+    </Compile>
+    <Compile Include="privacystatement.html.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="privacystatement.html.designer.cs">
+      <DependentUpon>privacystatement.html.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="signup.php.cs">

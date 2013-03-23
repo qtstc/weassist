@@ -60,18 +60,18 @@
     </UserControl.Resources>
 
     <StackPanel Width="200" Height="200">
-        <Grid Name="grid1" Background="#1133CC" Canvas.ZIndex="1" Width="200" Height="200">
+        <Grid Name="grid1" Background="#FFA64873" Canvas.ZIndex="1" Width="200" Height="200">
             <Grid.RenderTransform>
                 <TranslateTransform x:Name="panel1" Y="0" />
             </Grid.RenderTransform>
             <Image Name="img1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 10, 0, 0" Width="120" Height="120" Source="/Assets/InAppTiles/connections.png" />
-            <TextBlock Name="txt1" Margin="0, 0, 5, 10" Text="My Friends" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Right" TextAlignment="Right" FontFamily="Segoe UI" FontSize="26" />
+            <TextBlock Name="txt1" Margin="0, 0, 5, 10" Text="{Binding LocalizedResources.SOS_Connections, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Right" TextAlignment="Right" FontFamily="Segoe UI" FontSize="26" TextWrapping="Wrap" Foreground="#DEFFFFFF" />
         </Grid>
-        <Grid Name="grid2" Canvas.ZIndex="2" Background="DarkSlateGray" Width="200" Height="200">
+        <Grid Name="grid2" Canvas.ZIndex="2" Background="#FFFB127C" Width="200" Height="200">
             <Grid.RenderTransform>
                 <TranslateTransform x:Name="panel2" Y="0" />
             </Grid.RenderTransform>
-            <TextBlock Name="txt2" Margin="10, 10, 10, 10" TextWrapping="Wrap" Text="Check out what your friends are doing!" Width="180" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="17" />
+            <TextBlock Name="txt2" Margin="10, 10, 10, 10" TextWrapping="Wrap" Text="{Binding LocalizedResources.SOS_ConnectionsInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Width="180" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="17" Foreground="#DEFFFFFF" />
         </Grid>
 
     </StackPanel>

@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using Microsoft.Phone.Notification;
 using System.Windows.Input;
+using Microsoft.Phone.Tasks;
 
 namespace CitySafe
 {
@@ -125,6 +126,25 @@ namespace CitySafe
             NavigationService.RemoveBackEntry();
             NavigationService.RemoveBackEntry();
             App.HideProgressOverlay();
+        }
+
+        private void PrivacyStatementButton_Click(object sender, EventArgs e)
+        {
+            WebBrowserTask wbt = new WebBrowserTask();
+            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/privacystatement.html");
+            wbt.Show();
+        }
+
+        private void InstructionsButton_Click(object sender, EventArgs e)
+        {
+            WebBrowserTask wbt = new WebBrowserTask();
+            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/instructions.html");
+            wbt.Show();
+        }
+
+        private void AboutButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(AppResources.SOS_About);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

@@ -96,11 +96,18 @@ namespace CitySafe
 
         private void Check_Previous_Location_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (App.trackItemModel.user.Get<Boolean>(ParseContract.UserTable.IN_DANGER) || App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.ALLOW_LOCATION_ACCESS))
+            try
             {
-                NavigationService.Navigate(new Uri("/TrackMapPage.xaml", UriKind.Relative));
+                if (App.trackItemModel.user.Get<Boolean>(ParseContract.UserTable.IN_DANGER) || App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.ALLOW_LOCATION_ACCESS))
+                {
+                    NavigationService.Navigate(new Uri("/TrackMapPage.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    MessageBox.Show(AppResources.TrackingSetting_LocationRequestDenied);
+                }
             }
-            else
+            catch
             {
                 MessageBox.Show(AppResources.TrackingSetting_LocationRequestDenied);
             }

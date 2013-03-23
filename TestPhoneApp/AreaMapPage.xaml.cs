@@ -148,7 +148,7 @@ namespace CitySafe
                 ParseObject location = request.Get<ParseObject>(ParseContract.SOSRequestTable.SENT_LOCATION);
                 //await location.FetchIfNeededAsync(tk);
                 GeoPosition<GeoCoordinate> l = ParseContract.LocationTable.ParseObjectToGeoPosition(location);
-                list.Add(new Pushpin(l, Pushpin.TYPE.KNOWN_SOS_LOCATION, reference, (sender, s) => SOSPushpin_Click(sender, s, request)));
+                list.Add(new Pushpin(l, Pushpin.TYPE.UNKNOWN_SOS_LOCATION, reference, (sender, s) => SOSPushpin_Click(sender, s, request)));
             }
             list.Sort((x, y) => y.position.Timestamp.DateTime.CompareTo(x.position.Timestamp.DateTime));
             return list;

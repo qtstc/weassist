@@ -33,14 +33,14 @@
         <Grid Name="grid2" Width="410" Height="255" >
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFEC8407" Offset="0"/>
-                    <GradientStop Color="#FFEA0707" Offset="1"/>
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="#FFFF7400" Offset="0.912"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.RenderTransform>
                 <TranslateTransform x:Name="panel1" Y="0" X="0"/>
             </Grid.RenderTransform>
-            <TextBlock x:Name="SOSTextblock" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120" FontWeight="Bold"/>
+            <TextBlock x:Name="SOSTextblock"  Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" TextWrapping="Wrap" FlowDirection="LeftToRight" Margin="27,111,27,91"/>
         </Grid>
 
     </StackPanel>

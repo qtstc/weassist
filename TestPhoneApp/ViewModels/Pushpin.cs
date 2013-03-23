@@ -51,7 +51,10 @@ namespace CitySafe.ViewModels
 
         public String time
         {
-            get { return position.Timestamp.DateTime.ToShortTimeString(); }
+            get {
+                if(_type.Equals(TYPE.KNOWN_SOS_LOCATION))
+                    return position.Timestamp.DateTime.ToShortDateString() + " on "+ position.Timestamp.DateTime.ToShortTimeString();
+                return position.Timestamp.DateTime.ToShortTimeString(); }
         }
 
         public string type
@@ -130,12 +133,6 @@ namespace CitySafe.ViewModels
         }
 
 
-        private void SOSPushpin_Click(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine("triggered in pushpin!");
-        }
-
-
         /// <summary>
         /// Not really used. Mostly for debugging purpose.
         /// </summary>
@@ -158,11 +155,11 @@ namespace CitySafe.ViewModels
                 case TYPE.MY_LOCATION:
                     return AppResources.Map_MyLocation;
                 case TYPE.KNOWN_SOS_LOCATION:
-                    return "SOS @ " + position.Timestamp.DateTime.ToShortTimeString() +" "+ position.Timestamp.DateTime.ToShortDateString();
+                    return position.Timestamp.DateTime.ToShortTimeString() +" on "+ position.Timestamp.DateTime.ToShortDateString() + "\nTap to view details";
                 case TYPE.UNKNOWN_SOS_LOCATION:
-                    return "SOS @ " + position.Timestamp.DateTime.ToShortTimeString() +" "+ position.Timestamp.DateTime.ToShortDateString();
+                    return position.Timestamp.DateTime.ToShortTimeString() + " on " + position.Timestamp.DateTime.ToShortDateString() + "\nTap to view details";
                 case TYPE.TRACKED_LOCATION:
-                    return position.Timestamp.DateTime.ToShortTimeString() +" "+ position.Timestamp.DateTime.ToShortDateString();
+                    return position.Timestamp.DateTime.ToShortTimeString() +" on "+ position.Timestamp.DateTime.ToShortDateString();
                 default:
                     return "";
             }

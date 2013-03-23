@@ -51,19 +51,19 @@
 
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="#1133CC" Canvas.ZIndex="1" Width="200" Height="200">
+    <Grid x:Name="LayoutRoot" Background="#FF9C13A2" Canvas.ZIndex="1" Width="200" Height="200">
         <Grid Name="Front" Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Grid.Projection>
                 <PlaneProjection x:Name="planePanel" RotationX="0" />
             </Grid.Projection>
-            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 10, 0, 0" Width="120" Height="120" Source="/Assets/InAppTiles/save.png" />
-            <TextBlock Margin="0, 0, 5, 10"  Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontFamily="Segoe UI" FontSize="26" Text="{Binding LocalizedResources.SOS_SavePeople, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
+            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,8,0,0" Width="90" Height="90" Source="/Assets/InAppTiles/save.png" />
+            <TextBlock Margin="0,0,7,2"  Width="185" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontFamily="Segoe UI" FontSize="26" Text="{Binding LocalizedResources.SOS_SavePeople, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FlowDirection="RightToLeft" Foreground="#DEFFFFFF" />
         </Grid>
         <Grid Name="Back" Margin="0, 0, 0, 0" Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Grid.Projection>
                 <PlaneProjection x:Name="planePanel2" RotationX="90" />
             </Grid.Projection>
-            <TextBlock Name="txt2" Margin="10, 10, 10, 10" TextWrapping="Wrap" Text="{Binding LocalizedResources.SOS_SavePeopleSubTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Width="180" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="17" />
+            <TextBlock Name="txt2" Margin="10, 10, 10, 10" TextWrapping="Wrap" Text="{Binding LocalizedResources.SOS_SavePeopleSubTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Width="180" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="17" Foreground="#DEFFFFFF" />
         </Grid>
 
     </Grid>

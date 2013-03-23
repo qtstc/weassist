@@ -85,6 +85,22 @@ namespace CitySafe
             {
                 await ParseUser.LogInAsync(username, password);
                 Debug.WriteLine("Log in with " + username + " and " + password + " succeeded.");
+                //Ask the user to agree on the location/privacy statement
+                if (!ParseUser.CurrentUser.ContainsKey(ParseContract.UserTable.AGREEMENT_CONFIRMED))
+                {
+                    if (MessageBox.Show(AppResources.Login_PrivacyStatement, AppResources.Login_PrivacyHeader, MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                    {
+                        ParseUser.CurrentUser[ParseContract.UserTable.AGREEMENT_CONFIRMED] = true;
+                        await ParseUser.CurrentUser.SaveAsync();
+                    }
+                    else
+                    {
+                        ParseUser.LogOut();
+                        App.HideProgressOverlay();
+                        return;
+                    }
+                }
+
                 //Save the username and password to the app so the background agent can log in.
                 Utilities.SaveParseCredential(username, password);
                 //Remove the progress overlay.

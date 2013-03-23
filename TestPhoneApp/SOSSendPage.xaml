@@ -19,10 +19,17 @@
             <!--Panorama item one-->
             <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Message, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <Grid Margin="36,0,36,36">
-                    <TextBlock x:Name="CharCount"   TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,12"/>
-                    <Border CornerRadius="10" Background="{StaticResource PhoneTextBoxBrush}" >
-                         <TextBox x:Name="SOSMessage"  TextWrapping="Wrap" TextChanged="SOSMessage_TextChanged"/>
-                    </Border>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="AUTO"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock x:Name="CharCount" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,12"/>
+                        <Border CornerRadius="10" Background="{StaticResource PhoneTextBoxBrush}" >
+                            <TextBox x:Name="SOSMessage"  TextWrapping="Wrap" TextChanged="SOSMessage_TextChanged"/>
+                        </Border>
+                    </Grid>
+                    <TextBlock Grid.Row="1" Text="{Binding LocalizedResources.SOSInfo_Disclaimer, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="18" TextWrapping="Wrap"/>
                 </Grid>
             </phone:PanoramaItem>
 
@@ -40,7 +47,7 @@
 
             <!--Panorama item three-->
             <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Settings, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <Grid>
+                <Grid Margin="0,-18,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>

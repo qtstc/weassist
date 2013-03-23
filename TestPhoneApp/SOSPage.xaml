@@ -23,20 +23,25 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <local:HelpTile x:Name="helpTile" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 0, 0, 0" Width="430" Height="200" Tap="HelpButton_Tap"/>
-            <local:PastRequestTile HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="20,210,0,0" Tap="CheckButton_Tap"/>
-            <local:ConnectionsTile HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230, 210, 0, 0" Tap="Manage_List_Button_Click"/>
-            <local:SettingsTile x:Name="settingsTile" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 420, 0, 0" Tap="Settings_Button_Click"/>
-            <local:CurrentRequestTile HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="230,420,0,0" Tap="SaveButton_Tap"/>
+            <local:HelpTile x:Name="helpTile" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 410, 0, 0" Width="430" Height="200" Tap="HelpButton_Tap"/>
+            <local:PastRequestTile HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="20, -10, 0, 0" Tap="CheckButton_Tap"/>
+            <local:ConnectionsTile HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="20,200,0,0" Tap="Manage_List_Button_Click"/>
+            <local:SettingsTile x:Name="settingsTile" HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="230,-10,0,0"  Tap="Settings_Button_Click"/>
+            <local:CurrentRequestTile HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="230,200,0,0"  Tap="SaveButton_Tap"/>
         </Grid>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
             <shell:ApplicationBarIconButton Text="log out" IconUri="/Assets/AppBar/door.leave.png" Click="ChangeUserButton_Click" />
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem  Text="privary statement"  Click="PrivacyStatementButton_Click" />
+                <shell:ApplicationBarMenuItem  Text="instructions"  Click="InstructionsButton_Click" />
+                <shell:ApplicationBarMenuItem Text="about" Click="AboutButton_Click"/>
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

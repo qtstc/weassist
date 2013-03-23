@@ -20,28 +20,29 @@
 
             <phone:PivotItem Header="{Binding LocalizedResources.Setting_LocationUpdatePageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}" >
                 <StackPanel Margin="12,0,12,0">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Setting_EnableTrackingInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Margin="12,0" />
                     <CheckBox x:Name="EnableTrackingCheckBox" Content="{Binding LocalizedResources.Setting_EnableTracking, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding trackingEnabled, Mode=TwoWay}" FontSize="24" Margin="12,0"/>
-                    <StackPanel  x:Name="UserSettingsPanel"  d:DataContext="{Binding}" Margin="36,12,12,0">
+                    <StackPanel  x:Name="UserSettingsPanel"  d:DataContext="{Binding}" Margin="36,0,12,0">
                         <TextBlock Text="{Binding LocalizedResources.Setting_UpdateFrequency, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
                         <RadioButton GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio0, Mode=TwoWay}" Content="30 minutes" FontSize="18" />
-                        <RadioButton Margin="0,-12,0,0" GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio1, Mode=TwoWay}" Content="1 hour" FontSize="18"/>
-                        <RadioButton Margin="0,-12,0,0" GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio2, Mode=TwoWay}" Content="3 hours" FontSize="18"/>
-                        <RadioButton Margin="0,-12,0,0" GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio3, Mode=TwoWay}" Content="6 hours" FontSize="18"/>
-                        <RadioButton Margin="0,-12,0,0" GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio4, Mode=TwoWay}" Content="24 hours" FontSize="18"/>
+                        <RadioButton Margin="0,-18,0,0" GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio1, Mode=TwoWay}" Content="1 hour" FontSize="18"/>
+                        <RadioButton Margin="0,-18,0,0" GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio2, Mode=TwoWay}" Content="3 hours" FontSize="18"/>
+                        <RadioButton Margin="0,-18,0,0" GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio3, Mode=TwoWay}" Content="6 hours" FontSize="18"/>
+                        <RadioButton Margin="0,-18,0,0" GroupName="UpdateIntervalGroup" IsChecked="{Binding intervalRadio4, Mode=TwoWay}" Content="24 hours" FontSize="18"/>
                     </StackPanel>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding lastUpdate, Mode=TwoWay}" Margin="12,24"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding lastUpdate, Mode=TwoWay}" Margin="24,0,24,0"/>
                 </StackPanel>
             </phone:PivotItem>
             
             <phone:PivotItem Header="{Binding LocalizedResources.Setting_ReceiveSOSPageHeader, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <StackPanel Margin="12,0,12,0">
                     <TextBlock Text="{Binding LocalizedResources.Setting_WhenDangerNotify, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="18" Margin="12,0"/>
-                    <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Push, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding notifyByPushStranger, Mode=TwoWay}" Margin="12,24"/>
-                    <TextBlock Text="{Binding LocalizedResources.TrackingSetting_PushInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="14" Margin="36,-36,36,0"/>
-                    <CheckBox Content="{Binding LocalizedResources.TrackingSetting_SMS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding notifyBySMSStranger, Mode=TwoWay}" Margin="12,24"/>
-                    <TextBlock Text="{Binding LocalizedResources.TrackingSetting_SMSInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="14" Margin="36,-36,36,0"/>
                     <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Email, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding notifyByEmailStranger, Mode=TwoWay}" Margin="12,24"/>
-                    <TextBlock Text="{Binding LocalizedResources.TrackingSetting_EmailInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="14" Margin="36,-36,36,0"/>
+                    <TextBlock Text="{Binding LocalizedResources.TrackingSetting_EmailInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="16" Margin="36,-36,36,0"/>
+                    <CheckBox Content="{Binding LocalizedResources.TrackingSetting_SMS, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding notifyBySMSStranger, Mode=TwoWay}" Margin="12,24"/>
+                    <TextBlock Text="{Binding LocalizedResources.TrackingSetting_SMSInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="16" Margin="36,-36,36,0"/>
+                    <CheckBox Content="{Binding LocalizedResources.TrackingSetting_Push, Mode=OneWay, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding notifyByPushStranger, Mode=TwoWay}" Margin="12,24"/>
+                    <TextBlock Text="{Binding LocalizedResources.TrackingSetting_PushInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="16" Margin="36,-36,36,0"/>
                 </StackPanel>
             </phone:PivotItem>
         </phone:Pivot>

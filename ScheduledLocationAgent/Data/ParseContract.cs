@@ -21,8 +21,6 @@ namespace ScheduledLocationAgent.Data
         /// </summary>
         public static class UserTable
         {
-            public static string TABLE_NAME { get { return "User"; } }
-
             public static string FIRST_NAME { get { return "firstName"; } }
             public static string LAST_NAME { get { return "lastName"; } }
             public static string UPDATE_INTERVAL { get { return "updateInterval"; } }
@@ -35,6 +33,7 @@ namespace ScheduledLocationAgent.Data
             public static string IN_DANGER { get { return "inDanger"; } }
             public static string WIN_PNONE_PUSH_URI { get { return "winPhonePushURI"; } }
             public static string PHONE { get { return "phone"; } }
+            public static string AGREEMENT_CONFIRMED { get { return "agreementConfirmed"; } }
 
             //public static string DUMMY_USER { get { return "WNrCdVZZ48"; } }
 

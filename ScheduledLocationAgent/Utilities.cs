@@ -15,6 +15,7 @@ namespace ScheduledLocationAgent.Data
     /// </summary>
     public class Utilities
     {
+
         #region Parse Credential Storage
 
         private const String SETTINGS_USERNAME_KEY = "settings_username_key";//Key used to store username in the IsolatedStorageSettings.

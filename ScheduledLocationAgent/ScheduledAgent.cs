@@ -81,7 +81,7 @@ namespace ScheduledLocationAgent
 
             if (queue.QueueSize() > 0)//Display message when there are unsent locations.
             {
-                Utilities.ShowToast("CitySafe", "Failed to upload location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
+                //Utilities.ShowToast("CitySafe", "Failed to upload location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
                 Debug.WriteLine("Sending unsent location failed");
             }
 
@@ -91,7 +91,7 @@ namespace ScheduledLocationAgent
                 GeoPosition<GeoCoordinate> newLocation = await Utilities.getCurrentGeoPosition();
                 if (newLocation == null)
                 {
-                    Utilities.ShowToast("CitySafe", "Failed to obtain location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
+                    //Utilities.ShowToast("CitySafe", "Failed to obtain location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
                     return;
                 }
                 if (queue.QueueSize() == 0)//Only send new data when previous data was sent.
@@ -120,7 +120,7 @@ namespace ScheduledLocationAgent
                     }
                     catch (Exception e)
                     {
-                        Utilities.ShowToast("CitySafe", "Failed to upload location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
+                        //Utilities.ShowToast("CitySafe", "Failed to upload location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
                         Debug.WriteLine("Failed to send location data to the server, stored it to the local location queue:");
                         Debug.WriteLine(e.ToString());
                         Utilities.WriteToExceptionLog("ScheduledAgent sending data", DateTime.Now, e);

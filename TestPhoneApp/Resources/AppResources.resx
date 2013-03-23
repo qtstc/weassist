@@ -126,7 +126,7 @@
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>CitySafe</value>
+    <value>WeAssist</value>
   </data>
   <data name="AppBarButtonText" xml:space="preserve">
     <value>add</value>
@@ -138,7 +138,7 @@
     <value>Log in</value>
   </data>
   <data name="Login_ForgetPassword" xml:space="preserve">
-    <value>Forget password?</value>
+    <value>Forgot password?</value>
   </data>
   <data name="Login_Password" xml:space="preserve">
     <value>Password</value>
@@ -150,7 +150,7 @@
     <value>Sign up</value>
   </data>
   <data name="Setting_LocationUpdatePageHeader" xml:space="preserve">
-    <value>My Locations</value>
+    <value>WeFind</value>
   </data>
   <data name="ProgressBar_Loading" xml:space="preserve">
     <value>Loading ...</value>
@@ -162,7 +162,7 @@
     <value>Sign up</value>
   </data>
   <data name="Setting_EnableTracking" xml:space="preserve">
-    <value>Enable tracking</value>
+    <value>Enable WeFind tracking</value>
   </data>
   <data name="Login_LoginFailMessage" xml:space="preserve">
     <value>Login failed. Please check your network settings and try again later.</value>
@@ -180,19 +180,16 @@
     <value>Initializing settings ...</value>
   </data>
   <data name="Tracker_TrackedHeader" xml:space="preserve">
-    <value>Tracked by</value>
+    <value>I'm tracked by</value>
   </data>
   <data name="Tracker_TrackingHeader" xml:space="preserve">
-    <value>Tracking</value>
+    <value>I'm tracking</value>
   </data>
   <data name="SOS_ManageList" xml:space="preserve">
     <value>Private Lists</value>
   </data>
-  <data name="SOS_PageHeader" xml:space="preserve">
-    <value>SOS</value>
-  </data>
   <data name="SOS_SendSOS" xml:space="preserve">
-    <value>Send</value>
+    <value>Request Assistance</value>
   </data>
   <data name="Tracker_Add" xml:space="preserve">
     <value>Add</value>
@@ -225,7 +222,7 @@
     <value>Loading tracking settings ...</value>
   </data>
   <data name="TrackingSetting_Push" xml:space="preserve">
-    <value>Push notification</value>
+    <value>Push</value>
   </data>
   <data name="TrackingSetting_Saving" xml:space="preserve">
     <value>Saving tracking settings ...</value>
@@ -234,13 +231,13 @@
     <value>SMS</value>
   </data>
   <data name="TrackingSetting_WhenDangerNotify" xml:space="preserve">
-    <value>When the person being tracked is in danger, notify me by:</value>
+    <value>When this person requests assistance, notify me via:</value>
   </data>
   <data name="TrackingSetting_LocationRequestDenied" xml:space="preserve">
-    <value>Your request has been denied. This user only shares location data when in danger.</value>
+    <value>Your request has been denied. This user only shares location data when they need assistance.</value>
   </data>
   <data name="TrackingSetting_RequestPreviousLocation" xml:space="preserve">
-    <value>Check previous locations</value>
+    <value>WeFind</value>
   </data>
   <data name="TrackingSetting_RemovingUser" xml:space="preserve">
     <value>Removing user from your tracking list ...</value>
@@ -249,10 +246,10 @@
     <value>Stop tracking</value>
   </data>
   <data name="TrackedSetting_FullLocationAccess" xml:space="preserve">
-    <value>Allow full access to my location</value>
+    <value>Give WeFind access for this user</value>
   </data>
   <data name="TrackedSetting_FullLocationAccessInfo" xml:space="preserve">
-    <value>Warning: when checked, the user who is tracking you will have access to your location data 24/7. By default, he or she will only have access to your location data when you have an unresolved SOS request.</value>
+    <value>Note: When checked, this user will have access to your location data 24x7. Otherwise, they will only have access to your location data when you have an unresolved assistance request.</value>
   </data>
   <data name="TrackedSetting_Loading" xml:space="preserve">
     <value>Loading tracked settings ...</value>
@@ -264,46 +261,46 @@
     <value>Removing user from your tracked list ...</value>
   </data>
   <data name="Map_LocationHeader" xml:space="preserve">
-    <value>Locations</value>
+    <value>WeFind History</value>
   </data>
   <data name="Map_LoadingFailed" xml:space="preserve">
     <value>Failed to load the location data. Please check your network settings and try again later.</value>
   </data>
   <data name="Map_LoadingLocation" xml:space="preserve">
-    <value>Loading location data. Please wait ...</value>
+    <value>Loading data. Please wait ...</value>
   </data>
   <data name="Map_MyLocation" xml:space="preserve">
     <value>my location</value>
   </data>
   <data name="SOS_CancelingRequest" xml:space="preserve">
-    <value>Canceling your last SOS request ...</value>
+    <value>Canceling your last assistance request ...</value>
   </data>
   <data name="SOS_Resolve" xml:space="preserve">
-    <value>Resolve</value>
+    <value>Resolve Request</value>
   </data>
   <data name="SOS_SendingRequest" xml:space="preserve">
-    <value>Sending your SOS request ...</value>
+    <value>Sending your assistance request ...</value>
   </data>
   <data name="SOS_SOSCanceledFail" xml:space="preserve">
-    <value>Failed to cancel your SOS request. Please check your network settings and try again later</value>
+    <value>Failed to resolve your assistance request. Please check your network settings and try again later</value>
   </data>
   <data name="SOS_SOSCanceledSuccess" xml:space="preserve">
-    <value>Your SOS request was canceled successfully.</value>
+    <value>Your assistance request was resolved successfully.</value>
   </data>
   <data name="SOS_SOSSentFail" xml:space="preserve">
-    <value>Sending SOS request failed. Please check your network settings and try again later.</value>
+    <value>Sending assistance request failed. Please check your network settings and try again later.</value>
   </data>
   <data name="SOS_SOSSentSuccess" xml:space="preserve">
-    <value>Your SOS request was sent successfully.</value>
+    <value>Your assistance request was sent successfully.</value>
   </data>
   <data name="Background_Description" xml:space="preserve">
-    <value>CitySafe background location updater.</value>
+    <value>WeAssist background location updater.</value>
   </data>
   <data name="SOS_FailToSetUpPush" xml:space="preserve">
     <value>Failed to set up push notifications. Will try again at next app launch.</value>
   </data>
   <data name="Login_SettingUp" xml:space="preserve">
-    <value>Setting up your account ...</value>
+    <value>loading account data...</value>
   </data>
   <data name="Setting_AgentDisabled" xml:space="preserve">
     <value>The location update background agent is disabled by the user. Please enable it in the phone settings to allow location update in the background.</value>
@@ -312,16 +309,16 @@
     <value>Last location was sent at </value>
   </data>
   <data name="Setting_UpdateFrequency" xml:space="preserve">
-    <value>Send my location to the server every: </value>
+    <value>Upload my location every:</value>
   </data>
   <data name="TrackingSetting_EmailInfo" xml:space="preserve">
-    <value>An email will be sent to your email address. It is recommended that you leave this feature on.</value>
+    <value>An email will be sent to your registered email address. (recommended)</value>
   </data>
   <data name="TrackingSetting_PushInfo" xml:space="preserve">
-    <value>Because the delievery of push noticaition may be affected by network connection, user is encouraged to use it together with other notification method.</value>
+    <value>The delivery of push notification may be affected by network conditions.</value>
   </data>
   <data name="TrackingSetting_SMSInfo" xml:space="preserve">
-    <value>An SMS message will be sent to the your phone. You may be charged for receiving the message depending on your plan.</value>
+    <value>Your carrier may charge you for receiving text messages.</value>
   </data>
   <data name="App_ConnectionError" xml:space="preserve">
     <value>Cannot connect to the  server. Please check network settings and try again later.</value>
@@ -351,16 +348,16 @@
     <value>Yesterday</value>
   </data>
   <data name="Map_SOSLocation" xml:space="preserve">
-    <value>SOS</value>
+    <value>Assistance Request</value>
   </data>
   <data name="SOSInfo_PageHeader" xml:space="preserve">
-    <value>SOS Request Details</value>
+    <value>Request</value>
   </data>
   <data name="SOSSend_DefaultMessage" xml:space="preserve">
-    <value>I am in danger! Please help me!</value>
+    <value>I need assistance. Please help me!</value>
   </data>
   <data name="SOSSend_PageHeader" xml:space="preserve">
-    <value>Send SOS Request</value>
+    <value>New Request</value>
   </data>
   <data name="SOSSend_Message" xml:space="preserve">
     <value>Message</value>
@@ -369,7 +366,7 @@
     <value>Photo</value>
   </data>
   <data name="SOSSend_Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Sharing Settings</value>
   </data>
   <data name="SOSInfo_SenderInfo" xml:space="preserve">
     <value>Sender Info</value>
@@ -378,25 +375,25 @@
     <value>Failed to load the photo. Please check network settings and try again.</value>
   </data>
   <data name="Setting_ReceiveSOSPageHeader" xml:space="preserve">
-    <value>Receive SOS</value>
+    <value>Nearby Requests</value>
   </data>
   <data name="Setting_WhenDangerNotify" xml:space="preserve">
-    <value>When people near me are in danger, notify me by:</value>
+    <value>When people near me request assitance, notify me via:</value>
   </data>
   <data name="SOS_Setting" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="SOS_CheckSurrounding" xml:space="preserve">
-    <value>Check</value>
+    <value>Nearby Requests Archive</value>
   </data>
   <data name="SOS_SavePeople" xml:space="preserve">
-    <value>Save</value>
+    <value>New WeAssist Request</value>
   </data>
   <data name="SOSSend_ShareEmail" xml:space="preserve">
     <value>Share my email</value>
   </data>
   <data name="SOSSend_ShareInfoInfo" xml:space="preserve">
-    <value>Decide on how much infomation you want to share in your request:</value>
+    <value>Decide how much infomation you want to share publicly:</value>
   </data>
   <data name="SOSSend_ShareName" xml:space="preserve">
     <value>Share my name</value>
@@ -405,7 +402,7 @@
     <value>Share my phone number</value>
   </data>
   <data name="SOSSend_ShareRequest" xml:space="preserve">
-    <value>Share my request</value>
+    <value>Make my request public</value>
   </data>
   <data name="SOSInfo_EmailTag" xml:space="preserve">
     <value>Email</value>
@@ -432,7 +429,7 @@
     <value>Email</value>
   </data>
   <data name="SOSSend_ShareRequestInfo" xml:space="preserve">
-    <value>Notify the people near me and allow them to see my request.</value>
+    <value>If unchecked, only your trusted WeAssist contacts can see your request</value>
   </data>
   <data name="Map_PastSOSHeader" xml:space="preserve">
     <value>Past Requests</value>
@@ -441,30 +438,56 @@
     <value>Unresolved</value>
   </data>
   <data name="SOS_CheckSurroundingSubTitle" xml:space="preserve">
-    <value>past SOS requests in your area</value>
-  </data>
-  <data name="SOS_ResolveSubTitle" xml:space="preserve">
-    <value>my last SOS request</value>
+    <value>Browse past public requests near your location</value>
   </data>
   <data name="SOS_SavePeopleSubTitle" xml:space="preserve">
-    <value>the people who are in danger</value>
-  </data>
-  <data name="SOS_SendSOSSubTitle" xml:space="preserve">
-    <value>SOS request to others</value>
+    <value>Browse current nearby public requests for assistance</value>
   </data>
   <data name="App_Error" xml:space="preserve">
     <value>An unexpected error occured. Please relaunch the application.</value>
   </data>
   <data name="SOS_NotificationOff" xml:space="preserve">
-    <value>not listening to SOS requests in your area</value>
+    <value>Notifications for nearby public requests: OFF</value>
   </data>
   <data name="SOS_NotificationOn" xml:space="preserve">
-    <value>listening to SOS requests in your area</value>
+    <value>Notifications for nearby public requests: ON</value>
   </data>
   <data name="SOS_TrackingOff" xml:space="preserve">
-    <value>location tracking is turned off</value>
+    <value>Background location tracking: OFF</value>
   </data>
   <data name="SOS_TrackingOn" xml:space="preserve">
-    <value>location tracking is turned on</value>
+    <value>Background location tracking: ON</value>
+  </data>
+  <data name="SOS_Connections" xml:space="preserve">
+    <value>My WeAssist Contacts</value>
+  </data>
+  <data name="SOS_ConnectionsInfo" xml:space="preserve">
+    <value>Manage your trusted contacts and view their location history</value>
+  </data>
+  <data name="Setting_EnableTrackingInfo" xml:space="preserve">
+    <value>Only WeAssist contacts for whom you enabled WeFind can access this information.</value>
+  </data>
+  <data name="TrackingSetting_RequestInfo" xml:space="preserve">
+    <value>Check previous locations</value>
+  </data>
+  <data name="SOSSend_Disclaimer" xml:space="preserve">
+    <value>If you are in an emergency, please call 911.</value>
+  </data>
+  <data name="Login_PrivacyHeader" xml:space="preserve">
+    <value>Allow access to location?</value>
+  </data>
+  <data name="Login_PrivacyStatement" xml:space="preserve">
+    <value>WeAssist
+Team DePauwsome
+
+The WeAssist app requires access to your location to function correctly. If you don't wish to allow access to your location, tap cancel and you will be signed out.
+
+We do not store your location data for basic WeAssist functions like browsing past and current WeAssist requests near you. When you send out an assistance request, your trusted contacts will have access to your current location. If you choose to additionally share the request publicly with those near you, the location of that specific request will be shared with all WeAssist users. When you use the WeFind service, your location data is stored on the server so your trusted contacts know where to find you if they think you might need some assistance.
+
+We are committed to keeping your data secure at all times. You may reach the WeAssist Developer team for feedback or support at weassistapp@live.com
+</value>
+  </data>
+  <data name="SOS_About" xml:space="preserve">
+    <value>WeAssist is created by three awesome computer science students from DePauw Univeristy.</value>
   </data>
 </root>
