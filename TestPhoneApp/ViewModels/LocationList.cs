@@ -1,14 +1,7 @@
 ﻿using CitySafe.Resources;
-using Microsoft.Phone.Globalization;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CitySafe.ViewModels
 {
@@ -28,6 +21,12 @@ namespace CitySafe.ViewModels
             Key = key;
         }
 
+        /// <summary>
+        /// Group a list of pushpins by their timestamp.
+        /// </summary>
+        /// <param name="l"></param>
+        /// <param name="hours"></param>
+        /// <returns></returns>
         public static List<LocationList<ViewModels.Pushpin>> GroupByTime(LocationList<ViewModels.Pushpin> l, int hours)
         {
             List<LocationList<ViewModels.Pushpin>> finalList = new List<LocationList<ViewModels.Pushpin>>();
@@ -55,6 +54,13 @@ namespace CitySafe.ViewModels
             }
         }
 
+        /// <summary>
+        /// Return a string representation of the date.
+        /// The string representation is relative to 
+        /// the current date.
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns></returns>
         private static string ToRelativeDateTime(DateTime d)
         {
             int n = DateTime.Now.Subtract(d).Days;
@@ -62,8 +68,8 @@ namespace CitySafe.ViewModels
                 return AppResources.Date_Today;
             if (n == 1)
                 return AppResources.Date_Yesterday;
-            if( n <= 30)
-               return n + AppResources.Date_DaysAgo;
+            if (n <= 30)
+                return n + AppResources.Date_DaysAgo;
             return d.ToShortDateString();
         }
     }

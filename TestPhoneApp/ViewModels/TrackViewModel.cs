@@ -37,7 +37,7 @@ namespace CitySafe.ViewModels
         /// Load data from the parse server. Only work when called for the first time.
         /// </summary>
         /// <param name="mode">can be either ParseContract.TrackRelationTable.TRACKED or ParseContract.TrackRelationTable.TRACKING</param>
-        public async Task LoadData(String mode,CancellationToken tk)
+        public async Task LoadData(String mode, CancellationToken tk)
         {
             if (loaded)
                 return;
@@ -46,9 +46,9 @@ namespace CitySafe.ViewModels
             //Query the server for the tracking relations.
             var confirmedRelation = from relation in ParseObject.GetQuery(ParseContract.TrackRelationTable.TABLE_NAME).Include(ParseContract.TrackRelationTable.OtherRole(mode))
                                     where relation.Get<bool>(ParseContract.TrackRelationTable.TRACKED_VERIFIED) == true
-                                     where relation.Get<bool>(ParseContract.TrackRelationTable.TRACKING_VERIFIED) == true
-                                     where relation.Get<ParseUser>(mode) == ParseUser.CurrentUser
-                                     select relation;
+                                    where relation.Get<bool>(ParseContract.TrackRelationTable.TRACKING_VERIFIED) == true
+                                    where relation.Get<ParseUser>(mode) == ParseUser.CurrentUser
+                                    select relation;
             IEnumerable<ParseObject> results = await confirmedRelation.FindAsync(tk);
 
             //For each tracking relations, get the user.
@@ -56,7 +56,7 @@ namespace CitySafe.ViewModels
             {
                 ParseUser user = u.Get<ParseUser>(ParseContract.TrackRelationTable.OtherRole(mode));
                 await user.FetchAsync();
-                trackItems.Add(new TrackItemModel(user,u));
+                trackItems.Add(new TrackItemModel(user, u));
             }
 
             loaded = true;
@@ -88,7 +88,7 @@ namespace CitySafe.ViewModels
         /// <param name="newEmail"> the email of the user, used to identify the user</param>
         /// <param name="role">the role of the current user</param>
         /// <returns>the result message</returns>
-        public async Task<String> AddNewUser(string newEmail, string role, string verified,CancellationToken tk)
+        public async Task<String> AddNewUser(string newEmail, string role, string verified, CancellationToken tk)
         {
             var query = from user in ParseUser.Query
                         where user.Get<string>("email") == newEmail
@@ -157,10 +157,10 @@ namespace CitySafe.ViewModels
                     //Store the email
                     trackRelation[ParseContract.TrackRelationTable.UNREGISTERED_USER_EMAIL] = newEmail;
                 }
-                
+
                 Debug.WriteLine("Send membership invitation");
                 needTrackInvitation = false;
-                string result = await ParseContract.CloudFunction.InviteNewUser(newEmail, role,tk);
+                string result = await ParseContract.CloudFunction.InviteNewUser(newEmail, role, tk);
                 Debug.WriteLine("string returned " + result);
             }
             else
@@ -170,7 +170,7 @@ namespace CitySafe.ViewModels
             {
                 //Create a new record.
                 trackRelation[role] = ParseUser.CurrentUser;
-                if(invited != null)
+                if (invited != null)
                     trackRelation[ParseContract.TrackRelationTable.OtherRole(role)] = invited;
                 trackRelation[verified] = true;
                 trackRelation[ParseContract.TrackRelationTable.OtherVerified(verified)] = false;
@@ -188,7 +188,7 @@ namespace CitySafe.ViewModels
             if (needTrackInvitation)
             {
                 Debug.WriteLine("Send track invitation");
-                string result = await ParseContract.CloudFunction.SendTrackInvitation(trackRelation.Get<ParseUser>(ParseContract.TrackRelationTable.OtherRole(role)).ObjectId, role,trackRelation.ObjectId,tk);
+                string result = await ParseContract.CloudFunction.SendTrackInvitation(trackRelation.Get<ParseUser>(ParseContract.TrackRelationTable.OtherRole(role)).ObjectId, role, trackRelation.ObjectId, tk);
                 Debug.WriteLine("string returned " + result);
             }
             return resultMessage;

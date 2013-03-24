@@ -7,14 +7,8 @@ using Parse;
 using System.Diagnostics;
 using ScheduledLocationAgent.Data;
 using Microsoft.Phone.Notification;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
-using Newtonsoft.Json;
-using System.Threading;
-using System.ComponentModel;
-using System.Collections.Generic;
 
 namespace CitySafe
 {
@@ -27,17 +21,24 @@ namespace CitySafe
         public LoginPage()
         {
             InitializeComponent();
+            d = new PasswordResetDialog();
         }
 
         private const string DUMMY_PASSWORD = "DUMMY_PASSWORD";//The password that is used as a place holder on the logging page.
+        private PasswordResetDialog d;
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-          //Navigate driectly to the settings page if logged in.
+            //Navigate driectly to the settings page if logged in.
             if (ParseUser.CurrentUser != null)
             {
-                 await NavigateToSOSPage();
-            } 
+                await NavigateToSOSPage();
+            }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            d.m_Popup.IsOpen = false;
         }
 
         #region listener for UI.
@@ -56,9 +57,13 @@ namespace CitySafe
 
         private void Forget_Password_Button_Click(object sender, RoutedEventArgs e)
         {
-            WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://weassist.azurewebsites.net/forgotpassword.php");
-            wbt.Show();
+            //WebBrowserTask wbt = new WebBrowserTask();
+            //wbt.Uri = new Uri("http://weassist.azurewebsites.net/forgotpassword.php");
+            //wbt.Show();
+            if (d.m_Popup.IsOpen)
+                return;
+            d.m_Popup.IsOpen = true;
+            d.email_TextBox.Text = "";
         }
         #endregion
 
@@ -72,11 +77,11 @@ namespace CitySafe
         /// </summary>
         private async void loginWithProgressOverlay()
         {
-            if (ParseUser.CurrentUser != null && login_password_textbox.Password.Equals(DUMMY_PASSWORD)&& login_username_textbox.Text.Equals(ParseUser.CurrentUser.Username))
+            if (ParseUser.CurrentUser != null && login_password_textbox.Password.Equals(DUMMY_PASSWORD) && login_username_textbox.Text.Equals(ParseUser.CurrentUser.Username))
             {
                 await NavigateToSOSPage();
                 return;
-            } 
+            }
 
             App.ShowProgressOverlay(AppResources.ProgressBar_VerifyingUser);
             string username = login_username_textbox.Text;
@@ -305,7 +310,7 @@ namespace CitySafe
             //    }
             //}
 
-             //Display a dialog of all the fields in the toast.
+            //Display a dialog of all the fields in the toast.
             Dispatcher.BeginInvoke(() => MessageBox.Show(e.Collection["wp:Text2"]));
         }
         #endregion

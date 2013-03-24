@@ -34,9 +34,9 @@ namespace CitySafe
             //string message = "";
             //try
             //{
-                //Set the title
-                TrackedTitle.Text = App.trackItemModel.user.Get<string>(ParseContract.UserTable.FIRST_NAME);
-                trackedSettings.LoadSettings(CancellationToken.None);
+            //Set the title
+            TrackedTitle.Text = App.trackItemModel.user.Get<string>(ParseContract.UserTable.FIRST_NAME);
+            trackedSettings.LoadSettings(CancellationToken.None);
             //}
             //catch (Exception e)
             //{

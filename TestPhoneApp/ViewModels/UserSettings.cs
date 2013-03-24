@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using Parse;
 using ScheduledLocationAgent.Data;
-using System.Diagnostics;
 using CitySafe.Resources;
 using System.Threading;
 
@@ -50,8 +49,10 @@ namespace CitySafe.ViewModels
         [DataMember(Name = "intervalRadio0")]
         public bool intervalRadio0
         {
-            get {
-                return interval == intervalRadioMultiplier[0]; }
+            get
+            {
+                return interval == intervalRadioMultiplier[0];
+            }
             set
             {
                 if (value)
@@ -107,8 +108,10 @@ namespace CitySafe.ViewModels
         [DataMember(Name = "intervalRadio4")]
         public bool intervalRadio4
         {
-            get {
-                return interval == intervalRadioMultiplier[4]; }
+            get
+            {
+                return interval == intervalRadioMultiplier[4];
+            }
             set
             {
                 if (value)
@@ -123,10 +126,11 @@ namespace CitySafe.ViewModels
         public String lastUpdate
         {
             get { return _lastUpdate; }
-            set {
-                if(value.Equals(""))
+            set
+            {
+                if (value.Equals(""))
                     SetProperty(ref _lastUpdate, "");
-                else SetProperty(ref _lastUpdate, AppResources.Setting_LastUpdateAt+value);
+                else SetProperty(ref _lastUpdate, AppResources.Setting_LastUpdateAt + value);
             }
         }
 
@@ -134,7 +138,7 @@ namespace CitySafe.ViewModels
         public bool notifyByPushStranger
         {
             get { return _notifyByPushStranger; }
-            set{ SetProperty(ref _notifyByPushStranger, value);}
+            set { SetProperty(ref _notifyByPushStranger, value); }
         }
 
         [DataMember(Name = "notifyByEmailStranger")]

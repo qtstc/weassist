@@ -493,4 +493,20 @@ We are committed to keeping your data secure at all times. You may reach the WeA
   <data name="Tracker_NeedHelp" xml:space="preserve">
     <value>(Needs Help)</value>
   </data>
+  <data name="Login_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Login_FailSendResetEmail" xml:space="preserve">
+    <value>Sending password reset email failed. Please check your network settings and try again later.</value>
+  </data>
+  <data name="Login_ResetHeader" xml:space="preserve">
+    <value>Reset your password. 
+Please enter your email address below</value>
+  </data>
+  <data name="Login_ResetPassword" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Login_SendingResetEmail" xml:space="preserve">
+    <value>Sending password reset email ...</value>
+  </data>
 </root>

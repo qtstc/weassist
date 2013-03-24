@@ -27,7 +27,6 @@ namespace ScheduledLocationAgent.Data
             private static string LOCATION_HISTORY { get { return "location_"; } }
             public static string TRACKING_ENABLED { get { return "trackingEnabled"; } }
             public static string LAST_LOCATION_INDEX { get { return "lastLocationIndex"; } }
-            //public static string LAST_LOCATION{get {return "lastLocation";}}
             public static string LAST_GEO_POINT { get { return "lastGeoPoint"; } }
             public static string LOCATION_DATA_SIZE { get { return "locationDataSize"; } }
             public static string LOCATION(int key) { return LOCATION_HISTORY + key.ToString("000"); }
@@ -36,11 +35,9 @@ namespace ScheduledLocationAgent.Data
             public static string PHONE { get { return "phone"; } }
             public static string AGREEMENT_CONFIRMED { get { return "agreementConfirmed"; } }
 
-            //public static string DUMMY_USER { get { return "WNrCdVZZ48"; } }
-
-            public static string NOTIFY_BY_SMS_STRANGER{get {return "notifyBySMSStranger";}}
-            public static string NOTIFY_BY_EMAIL_STRANGER{get {return "notifyByEmailStranger";}}
-            public static string NOTIFY_BY_PUSH_STRANGER{get {return "notifyByPushStranger";}}
+            public static string NOTIFY_BY_SMS_STRANGER { get { return "notifyBySMSStranger"; } }
+            public static string NOTIFY_BY_EMAIL_STRANGER { get { return "notifyByEmailStranger"; } }
+            public static string NOTIFY_BY_PUSH_STRANGER { get { return "notifyByPushStranger"; } }
 
             public const int DEFAULT_INTERVAL = 30;
             public const int DEFAULT_DATA_SIZE = 96;
@@ -53,7 +50,7 @@ namespace ScheduledLocationAgent.Data
         {
             public static string TABLE_NAME { get { return "Locations"; } }
 
-            public static string LOCATION { get { return "geoLocation";} }
+            public static string LOCATION { get { return "geoLocation"; } }
             public static string TIME_STAMP { get { return "timeStamp"; } }
             public static string ALTITUDE { get { return "altitude"; } }
             public static string HORIZONTAL_ACCURACY { get { return "horizontalAccuracy"; } }
@@ -71,7 +68,7 @@ namespace ScheduledLocationAgent.Data
             /// <param name="g">the GeoPosition instance</param>
             /// <returns>the ParseObject</returns>
             public static ParseObject GeoPositionToParseObject(GeoPosition<GeoCoordinate> g)
-            { 
+            {
                 ParseObject Locations = new ParseObject(TABLE_NAME);
                 GeoPositionSetParseObject(g, Locations);
                 return Locations;
@@ -166,8 +163,8 @@ namespace ScheduledLocationAgent.Data
             public static string SOS_IMAGE_FILE_NAME { get { return "sosimage.jpg"; } }
             public const int MAX_MESSAGE_LENGTH = 200;
 
-            public static string SHARE_NAME { get { return "shareName";} }
-            public static string SHARE_EMAIL{get {return "shareEmail";}}
+            public static string SHARE_NAME { get { return "shareName"; } }
+            public static string SHARE_EMAIL { get { return "shareEmail"; } }
             public static string SHARE_PHONE { get { return "sharePhone"; } }
             public static string SHARE_REQUEST { get { return "shareRequest"; } }
 
@@ -187,8 +184,8 @@ namespace ScheduledLocationAgent.Data
 
             public static string TRACKING { get { return "tracking"; } }
             public static string TRACKED { get { return "tracked"; } }
-            public static string TRACKED_VERIFIED { get {return "trackedVerified";}}
-            public static string TRACKING_VERIFIED {get {return "trackingVerified";}}
+            public static string TRACKED_VERIFIED { get { return "trackedVerified"; } }
+            public static string TRACKING_VERIFIED { get { return "trackingVerified"; } }
             public static string UNREGISTERED_USER_EMAIL { get { return "unregisteredUserEmail"; } }
             public static string NOTIFY_BY_SMS { get { return "notifyBySMS"; } }
             public static string NOTIFY_BY_EMAIL { get { return "notifyByEmail"; } }
@@ -220,23 +217,42 @@ namespace ScheduledLocationAgent.Data
             }
         }
 
+        /// <summary>
+        /// A class used to store class functions.
+        /// It also defines the interface used for each cloud function.
+        /// </summary>
         public static class CloudFunction
         {
-            public static async Task<string> SendTrackInvitation(string userID,string role, string relationID, CancellationToken tk)
+            /// <summary>
+            /// Send track invitaion to a user.
+            /// </summary>
+            /// <param name="userID"></param>
+            /// <param name="role"></param>
+            /// <param name="relationID"></param>
+            /// <param name="tk"></param>
+            /// <returns></returns>
+            public static async Task<string> SendTrackInvitation(string userID, string role, string relationID, CancellationToken tk)
             {
                 IDictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("userID", userID);
                 parameters.Add("relation", role);
                 parameters.Add("relationID", relationID);
                 string result;
-                if(tk != CancellationToken.None)
-                    result = await ParseCloud.CallFunctionAsync<string>("InviteExistingUser", parameters,tk);
+                if (tk != CancellationToken.None)
+                    result = await ParseCloud.CallFunctionAsync<string>("InviteExistingUser", parameters, tk);
                 else
                     result = await ParseCloud.CallFunctionAsync<string>("InviteExistingUser", parameters);
                 return result;
             }
 
-            public static async Task<string> InviteNewUser(string newEmail, string role,CancellationToken tk)
+            /// <summary>
+            /// Invite a new user.
+            /// </summary>
+            /// <param name="newEmail"></param>
+            /// <param name="role"></param>
+            /// <param name="tk"></param>
+            /// <returns></returns>
+            public static async Task<string> InviteNewUser(string newEmail, string role, CancellationToken tk)
             {
                 IDictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("email", newEmail);
@@ -249,7 +265,13 @@ namespace ScheduledLocationAgent.Data
                 return result;
             }
 
-            public static async Task<string> NewSOSCall(string requestTableRowID,CancellationToken tk)
+            /// <summary>
+            /// Make a new SOS Call.
+            /// </summary>
+            /// <param name="requestTableRowID"></param>
+            /// <param name="tk"></param>
+            /// <returns></returns>
+            public static async Task<string> NewSOSCall(string requestTableRowID, CancellationToken tk)
             {
                 IDictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("requestTableRowID", requestTableRowID);

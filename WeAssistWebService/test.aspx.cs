@@ -15,9 +15,9 @@ namespace CitySafePushWebService
         protected void Page_Load(object sender, EventArgs e)
         {
             NameValueCollection data = new NameValueCollection();
-            data.Add(AzureContract.PushNotificationPost.TITLE, "WeAssist Request");
-            data.Add(AzureContract.PushNotificationPost.SUBSCRIPTION_URI, "http://sn1.notify.live.net/throttledthirdparty/01.00/AAF2ToTPnLiqSqPp9LVXRwkaAgAAAAADkgAAAAQUZm52OkJCMjg1QTg1QkZDMkUxREQ");
-            data.Add(AzureContract.PushNotificationPost.CONTENT, "I lost my glasses...");
+            data.Add(AzureContract.PushNotificationPost.TITLE, "Mike Stephens");
+            data.Add(AzureContract.PushNotificationPost.SUBSCRIPTION_URI, "http://sn1.notify.live.net/throttledthirdparty/01.00/AAF2ToTPnLiqSqPp9LVXRwkaAgAAAAADkQAAAAQUZm52OkJCMjg1QTg1QkZDMkUxREQ");
+            data.Add(AzureContract.PushNotificationPost.CONTENT, "My bike is broken ...");
             data.Add(AzureContract.PushNotificationPost.NAVIGATION_URI, "/LoginPage.xaml");
             RedirectAndPOST(this.Page, "http://weassist.azurewebsites.net/push.aspx", data);
         }

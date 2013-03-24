@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Parse;
 using ScheduledLocationAgent.Data;
@@ -82,13 +78,13 @@ namespace CitySafe
                 noCancel = true;
                 ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = true;
                 await ParseUser.CurrentUser.SaveAsync(tk);//No cancellation because the sos request is already sent.
-                string result = await ParseContract.CloudFunction.NewSOSCall(sos.ObjectId,tk);
+                string result = await ParseContract.CloudFunction.NewSOSCall(sos.ObjectId, tk);
                 Debug.WriteLine("string returned " + result);
 
                 message = AppResources.SOS_SOSSentSuccess;
                 NavigationService.GoBack();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
                 ApplicationBar.IsVisible = true;
@@ -121,7 +117,7 @@ namespace CitySafe
 
                 Debug.WriteLine(dimension[0] + " " + dimension[1]);
                 imageStream = new MemoryStream();
-                bmp.SaveJpeg(imageStream, dimension[0], dimension[1], 0,100);//Resize and save the image to the stream
+                bmp.SaveJpeg(imageStream, dimension[0], dimension[1], 0, 100);//Resize and save the image to the stream
 
                 bmp.SetSource(imageStream);
 

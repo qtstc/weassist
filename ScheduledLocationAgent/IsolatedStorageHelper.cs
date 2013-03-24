@@ -38,7 +38,7 @@ namespace ScheduledLocationAgent.Data
             {
                 using (IsolatedStorageFile isolatedStorageFile = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    using (IsolatedStorageFileStream isolatedStorageFileStream = isolatedStorageFile.OpenFile(fileName,FileMode.Append,FileAccess.ReadWrite))
+                    using (IsolatedStorageFileStream isolatedStorageFileStream = isolatedStorageFile.OpenFile(fileName, FileMode.Append, FileAccess.ReadWrite))
                     {
                         using (StreamWriter streamWriter = new StreamWriter(isolatedStorageFileStream))
                         {
@@ -109,7 +109,7 @@ namespace ScheduledLocationAgent.Data
             return result;
         }
 
-        public static void WriteObjectToFileUsingJson<T>(bool isAppend,string fileName, T objectToSave, string mutexName = null) where T : class
+        public static void WriteObjectToFileUsingJson<T>(bool isAppend, string fileName, T objectToSave, string mutexName = null) where T : class
         {
             if (mutexName != null && _mutex == null)
             {
@@ -188,7 +188,7 @@ namespace ScheduledLocationAgent.Data
 
                                 result = JsonConvert.DeserializeObject<T>(json, jsonSerializerSettings);
                             }
-                            catch(Exception e)
+                            catch (Exception e)
                             {
                                 Debug.WriteLine("File opening error: ");
                                 Debug.WriteLine(e.ToString());

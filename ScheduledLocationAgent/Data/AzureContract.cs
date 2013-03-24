@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ScheduledLocationAgent.Data
 {
+    /// <summary>
+    /// The contract used for doing push notification on Azure,
+    /// </summary>
     public static class AzureContract
     {
         public static class PushNotificationPost

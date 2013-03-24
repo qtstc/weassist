@@ -142,11 +142,29 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Login_Cancel {
+            get {
+                return ResourceManager.GetString("Login_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Login_Email {
             get {
                 return ResourceManager.GetString("Login_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending password reset email failed. Please check your network settings and try again later..
+        /// </summary>
+        public static string Login_FailSendResetEmail {
+            get {
+                return ResourceManager.GetString("Login_FailSendResetEmail", resourceCulture);
             }
         }
         
@@ -215,6 +233,34 @@ namespace CitySafe.Resources {
         public static string Login_PrivacyStatement {
             get {
                 return ResourceManager.GetString("Login_PrivacyStatement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset your password. 
+        ///Please enter your email address below.
+        /// </summary>
+        public static string Login_ResetHeader {
+            get {
+                return ResourceManager.GetString("Login_ResetHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Login_ResetPassword {
+            get {
+                return ResourceManager.GetString("Login_ResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending password reset email ....
+        /// </summary>
+        public static string Login_SendingResetEmail {
+            get {
+                return ResourceManager.GetString("Login_SendingResetEmail", resourceCulture);
             }
         }
         

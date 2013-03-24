@@ -1,9 +1,5 @@
 ﻿using ScheduledLocationAgent.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +9,7 @@ namespace CitySafe.ViewModels
     /// The data context for the tracked settings page.
     /// </summary>
     [DataContract]
-    public class TrackedSettings:Settings
+    public class TrackedSettings : Settings
     {
         private bool _allowLocationAccess;
 

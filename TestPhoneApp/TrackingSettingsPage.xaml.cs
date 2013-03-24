@@ -1,15 +1,15 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Navigation;
+﻿using CitySafe.Resources;
+using CitySafe.ViewModels;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using CitySafe.ViewModels;
-using CitySafe.Resources;
 using ScheduledLocationAgent.Data;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using System.Threading;
+using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Navigation;
 
 namespace CitySafe
 {
@@ -34,9 +34,9 @@ namespace CitySafe
             //string message = "";
             //try
             //{
-                //Set the title
-                TrackingTitle.Text = App.trackItemModel.user.Get<string>(ParseContract.UserTable.FIRST_NAME);
-                trackingSettings.LoadSettings(CancellationToken.None);
+            //Set the title
+            TrackingTitle.Text = App.trackItemModel.user.Get<string>(ParseContract.UserTable.FIRST_NAME);
+            trackingSettings.LoadSettings(CancellationToken.None);
             //}
             //catch (Exception e)
             //{

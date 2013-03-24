@@ -3,16 +3,12 @@ using System.Windows;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using CitySafe.Resources;
-using Parse;
 using System.Diagnostics;
-using ScheduledLocationAgent.Data;
 using System.Threading.Tasks;
 using CitySafe.ViewModels;
 using Microsoft.Phone.Shell;
-using Microsoft.Phone.Notification;
 using System.Threading;
 using System.ComponentModel;
-using Microsoft.Phone.Tasks;
 
 namespace CitySafe
 {
@@ -25,7 +21,7 @@ namespace CitySafe
     {
         //private PeriodicTask periodicTask;//The background agent used to update user location
         private UserSettings userSettings;//View Model for loading and saving data.
-        
+
         public SettingsPage()
         {
             InitializeComponent();

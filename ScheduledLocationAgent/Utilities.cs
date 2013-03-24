@@ -29,10 +29,10 @@ namespace ScheduledLocationAgent.Data
         /// <param name="password">The password to be stored</param>
         public static void SaveParseCredential(String username, String password)
         {
-             var encrypted = ProtectedData.Protect(Encoding.UTF8.GetBytes(password), null);
-             IsolatedStorageSettings.ApplicationSettings[SETTINGS_PASSWORD_KEY] = encrypted;
-             IsolatedStorageSettings.ApplicationSettings[SETTINGS_USERNAME_KEY] = username;
-             IsolatedStorageSettings.ApplicationSettings.Save();
+            var encrypted = ProtectedData.Protect(Encoding.UTF8.GetBytes(password), null);
+            IsolatedStorageSettings.ApplicationSettings[SETTINGS_PASSWORD_KEY] = encrypted;
+            IsolatedStorageSettings.ApplicationSettings[SETTINGS_USERNAME_KEY] = username;
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         /// <summary>
@@ -46,14 +46,14 @@ namespace ScheduledLocationAgent.Data
             String storedUsername = "";
             String storedPassword = "";
             if (IsolatedStorageSettings.ApplicationSettings.Contains(SETTINGS_USERNAME_KEY))
-                 storedUsername = IsolatedStorageSettings.ApplicationSettings[SETTINGS_USERNAME_KEY] as string;
-             if(IsolatedStorageSettings.ApplicationSettings.Contains(SETTINGS_USERNAME_KEY))
-             {
-                 var bytes = IsolatedStorageSettings.ApplicationSettings[SETTINGS_PASSWORD_KEY] as byte[];
-                 var unEncrypted = ProtectedData.Unprotect(bytes, null);
-                 storedPassword = Encoding.UTF8.GetString(unEncrypted, 0, unEncrypted.Length);
-             }
-             return new String[] { storedUsername, storedPassword };
+                storedUsername = IsolatedStorageSettings.ApplicationSettings[SETTINGS_USERNAME_KEY] as string;
+            if (IsolatedStorageSettings.ApplicationSettings.Contains(SETTINGS_USERNAME_KEY))
+            {
+                var bytes = IsolatedStorageSettings.ApplicationSettings[SETTINGS_PASSWORD_KEY] as byte[];
+                var unEncrypted = ProtectedData.Unprotect(bytes, null);
+                storedPassword = Encoding.UTF8.GetString(unEncrypted, 0, unEncrypted.Length);
+            }
+            return new String[] { storedUsername, storedPassword };
         }
 
         #endregion
@@ -128,7 +128,7 @@ namespace ScheduledLocationAgent.Data
                 //Change the location entry without creating a new one.
                 ParseContract.LocationTable.GeoPositionSetParseObject(newData, newLocation);
             }
-            user[ParseContract.UserTable.LAST_GEO_POINT] = new ParseGeoPoint(newData.Location.Latitude,newData.Location.Longitude);
+            user[ParseContract.UserTable.LAST_GEO_POINT] = new ParseGeoPoint(newData.Location.Latitude, newData.Location.Longitude);
         }
         #endregion
 
@@ -153,8 +153,8 @@ namespace ScheduledLocationAgent.Data
         public const string LOG_FILE_NAME = "ExceptionLog.dat";
         public static void WriteToExceptionLog(String tag, DateTime time, Exception e)
         {
-            LogEntry log = new LogEntry(tag, time, e.ToString(), e.StackTrace);
-            IsolatedStorageHelper.WriteObjectToFileUsingJson<LogEntry>(true,LOG_FILE_NAME, log,"randomMutex");
+            //LogEntry log = new LogEntry(tag, time, e.ToString(), e.StackTrace);
+            //IsolatedStorageHelper.WriteObjectToFileUsingJson<LogEntry>(true,LOG_FILE_NAME, log,"randomMutex");
         }
         #endregion
     }

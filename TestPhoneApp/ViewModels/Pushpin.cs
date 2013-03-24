@@ -1,15 +1,12 @@
 ﻿using CitySafe.Resources;
 using Microsoft.Phone.Maps.Controls;
-using Parse;
 using System;
 using System.Device.Location;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Windows.Devices.Geolocation;
 
 namespace CitySafe.ViewModels
 {
@@ -32,7 +29,8 @@ namespace CitySafe.ViewModels
 
         public String distance
         {
-            get {
+            get
+            {
                 if (_referencePosition == null)
                     return "";
                 int meter = (int)position.Location.GetDistanceTo(_referencePosition.Location);
@@ -51,15 +49,17 @@ namespace CitySafe.ViewModels
 
         public String time
         {
-            get {
-                if(_type.Equals(TYPE.KNOWN_SOS_LOCATION))
-                    return  position.Timestamp.DateTime.ToShortTimeString() + " on "+ position.Timestamp.DateTime.ToShortDateString();
-                return position.Timestamp.DateTime.ToShortTimeString(); }
+            get
+            {
+                if (_type.Equals(TYPE.KNOWN_SOS_LOCATION))
+                    return position.Timestamp.DateTime.ToShortTimeString() + " on " + position.Timestamp.DateTime.ToShortDateString();
+                return position.Timestamp.DateTime.ToShortTimeString();
+            }
         }
 
         public string type
         {
-            get { return _type;}
+            get { return _type; }
         }
 
         public Pushpin(GeoPosition<GeoCoordinate> position, string type, GeoPosition<GeoCoordinate> referencePosition = null, RoutedEventHandler pushpinEvent = null)
@@ -155,11 +155,11 @@ namespace CitySafe.ViewModels
                 case TYPE.MY_LOCATION:
                     return AppResources.Map_MyLocation;
                 case TYPE.KNOWN_SOS_LOCATION:
-                    return position.Timestamp.DateTime.ToShortTimeString() +" on "+ position.Timestamp.DateTime.ToShortDateString() + "\nTap to view details";
+                    return ToShortString(position.Timestamp.DateTime) + "\nTap to view details";
                 case TYPE.UNKNOWN_SOS_LOCATION:
-                    return position.Timestamp.DateTime.ToShortTimeString() + " on " + position.Timestamp.DateTime.ToShortDateString() + "\nTap to view details";
+                    return ToShortString(position.Timestamp.DateTime) + " on " + position.Timestamp.DateTime.ToShortDateString() + "\nTap to view details";
                 case TYPE.TRACKED_LOCATION:
-                    return position.Timestamp.DateTime.ToShortTimeString() +" on "+ position.Timestamp.DateTime.ToShortDateString();
+                    return ToShortString(position.Timestamp.DateTime) + " on " + position.Timestamp.DateTime.ToShortDateString();
                 default:
                     return "";
             }
@@ -186,13 +186,18 @@ namespace CitySafe.ViewModels
             }
         }
 
+        private string ToShortString(DateTime dt)
+        {
+            return dt.ToShortTimeString() + " on " + dt.ToShortDateString();
+        }
+
         /// <summary>
         /// A class that store the info used to identify different types of Pushpins.
         /// </summary>
         public static class TYPE
         {
             public const string MY_LOCATION = "MY_LOCATION";
-            public const string KNOWN_SOS_LOCATION = "KNOWN_SOS_LOCATION"; 
+            public const string KNOWN_SOS_LOCATION = "KNOWN_SOS_LOCATION";
             public const string UNKNOWN_SOS_LOCATION = "UNKNOWN_SOS_LOCATION";
             public const string TRACKED_LOCATION = "TRACKED_LOCATION";
         }

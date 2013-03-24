@@ -111,6 +111,9 @@
     <Compile Include="InAppTiles\CurrentRequestTile.xaml.cs">
       <DependentUpon>CurrentRequestTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PasswordResetDialog.xaml.cs">
+      <DependentUpon>PasswordResetDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SOSPage.xaml.cs">
       <DependentUpon>SOSPage.xaml</DependentUpon>
     </Compile>
@@ -153,9 +156,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SignupPage.xaml.cs">
-      <DependentUpon>SignupPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TrackPage.xaml.cs">
       <DependentUpon>TrackPage.xaml</DependentUpon>
     </Compile>
@@ -193,6 +193,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PasswordResetDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SOSPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,10 +206,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SignupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,7 +9,6 @@ using ScheduledLocationAgent.Data;
 using System.Text.RegularExpressions;
 using CitySafe.Resources;
 using System.Threading.Tasks;
-using Microsoft.Phone.Shell;
 using System.Threading;
 using System.ComponentModel;
 
@@ -41,7 +40,7 @@ namespace CitySafe
                 await App.trackingModel.LoadData(ParseContract.TrackRelationTable.TRACKING, tk);
                 await App.trackedModel.LoadData(ParseContract.TrackRelationTable.TRACKED, tk);
             }
-            catch(OperationCanceledException)
+            catch (OperationCanceledException)
             {
                 Debug.WriteLine("Load track page canceled");
             }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using ScheduledLocationAgent.Data;
 using System.Threading;
@@ -65,10 +59,10 @@ namespace CitySafe.ViewModels
         /// </summary>
         public async override Task LoadSettings(CancellationToken tk)
         {
-                //Use the data to populate UI.
-                usePushNotification = App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.NOTIFY_BY_PUSH);
-                useSMS = App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.NOTIFY_BY_SMS);
-                useEmail = App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL);
+            //Use the data to populate UI.
+            usePushNotification = App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.NOTIFY_BY_PUSH);
+            useSMS = App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.NOTIFY_BY_SMS);
+            useEmail = App.trackItemModel.relation.Get<bool>(ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL);
         }
 
         /// <summary>
@@ -77,11 +71,11 @@ namespace CitySafe.ViewModels
         /// </summary>
         public async override Task SaveSettings(CancellationToken tk)
         {
-                //Not all fields are saved.
-                App.trackItemModel.relation[ParseContract.TrackRelationTable.NOTIFY_BY_PUSH] = usePushNotification;
-                App.trackItemModel.relation[ParseContract.TrackRelationTable.NOTIFY_BY_SMS] = useSMS;
-                App.trackItemModel.relation[ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL] = useEmail;
-                await App.trackItemModel.relation.SaveAsync(tk);
+            //Not all fields are saved.
+            App.trackItemModel.relation[ParseContract.TrackRelationTable.NOTIFY_BY_PUSH] = usePushNotification;
+            App.trackItemModel.relation[ParseContract.TrackRelationTable.NOTIFY_BY_SMS] = useSMS;
+            App.trackItemModel.relation[ParseContract.TrackRelationTable.NOTIFY_BY_EMAIL] = useEmail;
+            await App.trackItemModel.relation.SaveAsync(tk);
         }
 
         /// <summary>

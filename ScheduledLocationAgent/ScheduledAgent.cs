@@ -7,7 +7,6 @@ using System;
 using ScheduledLocationAgent.Data;
 using Parse;
 using System.Device.Location;
-using Microsoft.Phone.Shell;
 
 namespace ScheduledLocationAgent
 {
@@ -59,7 +58,7 @@ namespace ScheduledLocationAgent
             int interval = queue.UpdateInterval;//The update interval stored in the phone, should be the same as the one in the server.
             int unsentSize = queue.QueueSize();
 
-            Debug.WriteLine("Background task invoked:\ninterval: " + interval + "\nlast update: " + lastUpdate+"\nunsent size: "+unsentSize);
+            Debug.WriteLine("Background task invoked:\ninterval: " + interval + "\nlast update: " + lastUpdate + "\nunsent size: " + unsentSize);
 
             if (unsentSize > 0)//First try to send the unsent locations if there is any.
             {
@@ -128,7 +127,7 @@ namespace ScheduledLocationAgent
                     }
                 }
                 else//If the unsent data was not sent, just add the current location to the unsent data.
-                queue.Enqueue(newLocation);
+                    queue.Enqueue(newLocation);
             }
 
             queue.Save();

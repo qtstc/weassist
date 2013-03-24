@@ -1,14 +1,9 @@
 ﻿using CitySafe.Resources;
 using Parse;
 using ScheduledLocationAgent.Data;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CitySafe.ViewModels
 {
@@ -44,7 +39,7 @@ namespace CitySafe.ViewModels
                     result = result + " " + AppResources.Tracker_NeedHelp;
                 return result;
             }
-            set 
+            set
             {
                 user[ParseContract.UserTable.FIRST_NAME] = value;
                 this.OnPropertyChanged(name);
