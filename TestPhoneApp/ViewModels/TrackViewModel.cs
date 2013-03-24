@@ -55,7 +55,7 @@ namespace CitySafe.ViewModels
             foreach (ParseObject u in results)
             {
                 ParseUser user = u.Get<ParseUser>(ParseContract.TrackRelationTable.OtherRole(mode));
-                //await user.FetchAsync(tk);
+                await user.FetchAsync();
                 trackItems.Add(new TrackItemModel(user,u));
             }
 

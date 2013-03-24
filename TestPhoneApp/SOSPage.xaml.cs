@@ -46,6 +46,7 @@ namespace CitySafe
                 //TODO: do this in the cloud.
                 var requests = from request in ParseObject.GetQuery(ParseContract.SOSRequestTable.TABLE_NAME)
                                where request.Get<ParseUser>(ParseContract.SOSRequestTable.SENDER) == ParseUser.CurrentUser
+                               where request.Get<Boolean>(ParseContract.SOSRequestTable.RESOLVED) == false
                                select request;
                 IEnumerable<ParseObject> results = await requests.FindAsync(tk);
                 foreach (ParseObject p in results)
@@ -131,14 +132,14 @@ namespace CitySafe
         private void PrivacyStatementButton_Click(object sender, EventArgs e)
         {
             WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/privacystatement.html");
+            wbt.Uri = new Uri("http://weassist.azurewebsites.net/privacystatement.php");
             wbt.Show();
         }
 
         private void InstructionsButton_Click(object sender, EventArgs e)
         {
             WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://citysafe.azurewebsites.net/instructions.html");
+            wbt.Uri = new Uri("http://weassist.azurewebsites.net/instructions.php");
             wbt.Show();
         }
 

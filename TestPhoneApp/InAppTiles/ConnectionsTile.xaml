@@ -67,7 +67,7 @@
             <Image Name="img1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 10, 0, 0" Width="120" Height="120" Source="/Assets/InAppTiles/connections.png" />
             <TextBlock Name="txt1" Margin="0, 0, 5, 10" Text="{Binding LocalizedResources.SOS_Connections, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Right" TextAlignment="Right" FontFamily="Segoe UI" FontSize="26" TextWrapping="Wrap" Foreground="#DEFFFFFF" />
         </Grid>
-        <Grid Name="grid2" Canvas.ZIndex="2" Background="#FFFB127C" Width="200" Height="200">
+        <Grid Name="grid2" Canvas.ZIndex="2" Background="#FFA64873" Width="200" Height="200">
             <Grid.RenderTransform>
                 <TranslateTransform x:Name="panel2" Y="0" />
             </Grid.RenderTransform>

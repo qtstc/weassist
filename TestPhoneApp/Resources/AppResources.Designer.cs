@@ -561,7 +561,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notifications for nearby public requests: OFF.
+        ///   Looks up a localized string similar to Get public requests: OFF.
         /// </summary>
         public static string SOS_NotificationOff {
             get {
@@ -570,7 +570,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notifications for nearby public requests: ON.
+        ///   Looks up a localized string similar to Get public requests: ON.
         /// </summary>
         public static string SOS_NotificationOn {
             get {
@@ -588,7 +588,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New WeAssist Request.
+        ///   Looks up a localized string similar to Current WeAssist Requests.
         /// </summary>
         public static string SOS_SavePeople {
             get {
@@ -669,7 +669,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Background location tracking: OFF.
+        ///   Looks up a localized string similar to WeFind: OFF.
         /// </summary>
         public static string SOS_TrackingOff {
             get {
@@ -678,7 +678,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Background location tracking: ON.
+        ///   Looks up a localized string similar to WeFind: ON.
         /// </summary>
         public static string SOS_TrackingOn {
             get {
@@ -939,7 +939,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User is added to your list successfully..
+        ///   Looks up a localized string similar to User was added to your list successfully..
         /// </summary>
         public static string Tracker_AddSuccess {
             get {
@@ -975,7 +975,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invitation is sent successfully..
+        ///   Looks up a localized string similar to Invitation was sent successfully..
         /// </summary>
         public static string Tracker_InvitationSuccess {
             get {
@@ -989,6 +989,15 @@ namespace CitySafe.Resources {
         public static string Tracker_LoadList {
             get {
                 return ResourceManager.GetString("Tracker_LoadList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Needs Help).
+        /// </summary>
+        public static string Tracker_NeedHelp {
+            get {
+                return ResourceManager.GetString("Tracker_NeedHelp", resourceCulture);
             }
         }
         

@@ -266,6 +266,7 @@
     <Content Include="Assets\AppBar\history.png" />
     <Content Include="Assets\InAppTiles\save.png" />
     <Content Include="Assets\InAppTiles\setting.png" />
+    <Content Include="Assets\logo.png" />
     <Content Include="FlipMedium.png" />
     <Content Include="FlipSmall.png" />
     <Content Include="Assets\placeholder.png" />
@@ -298,13 +299,13 @@
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Tiles\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ScheduledLocationAgent\ScheduledLocationAgent.csproj">
       <Project>{4D7D645C-2D97-4701-A41D-AE79CF8FA8CA}</Project>
       <Name>ScheduledLocationAgent</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Tiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

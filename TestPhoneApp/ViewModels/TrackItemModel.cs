@@ -1,4 +1,5 @@
-﻿using Parse;
+﻿using CitySafe.Resources;
+using Parse;
 using ScheduledLocationAgent.Data;
 using System;
 using System.Collections.Generic;
@@ -36,15 +37,19 @@ namespace CitySafe.ViewModels
         [DataMember(Name = "name")]
         public string name
         {
-            get { return user.Get<string>(ParseContract.UserTable.FIRST_NAME); }
+            get
+            {
+                string result = user.Get<string>(ParseContract.UserTable.FIRST_NAME);
+                if (user.Get<bool>(ParseContract.UserTable.IN_DANGER))
+                    result = result + " " + AppResources.Tracker_NeedHelp;
+                return result;
+            }
             set 
             {
                 user[ParseContract.UserTable.FIRST_NAME] = value;
                 this.OnPropertyChanged(name);
             }
         }
-
-
 
         /// <summary>
         /// Multicast event for property change notifications.

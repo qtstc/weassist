@@ -80,10 +80,10 @@ namespace CitySafe
                 sos[ParseContract.SOSRequestTable.SENT_LOCATION] = location;
                 await sos.SaveAsync(tk);
                 noCancel = true;
+                ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = true;
                 await ParseUser.CurrentUser.SaveAsync(tk);//No cancellation because the sos request is already sent.
                 string result = await ParseContract.CloudFunction.NewSOSCall(sos.ObjectId,tk);
                 Debug.WriteLine("string returned " + result);
-                ParseUser.CurrentUser[ParseContract.UserTable.IN_DANGER] = true;
 
                 message = AppResources.SOS_SOSSentSuccess;
                 NavigationService.GoBack();

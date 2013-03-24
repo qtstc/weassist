@@ -53,7 +53,7 @@ namespace CitySafe.ViewModels
         {
             get {
                 if(_type.Equals(TYPE.KNOWN_SOS_LOCATION))
-                    return position.Timestamp.DateTime.ToShortDateString() + " on "+ position.Timestamp.DateTime.ToShortTimeString();
+                    return  position.Timestamp.DateTime.ToShortTimeString() + " on "+ position.Timestamp.DateTime.ToShortDateString();
                 return position.Timestamp.DateTime.ToShortTimeString(); }
         }
 

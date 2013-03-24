@@ -46,18 +46,18 @@ namespace CitySafe
             loginWithProgressOverlay();
         }
 
-        private async void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
+        private void Login_Signup_Button_Click(object sender, RoutedEventArgs e)
         {
             //NavigationService.Navigate(new Uri("/SignupPage.xaml", UriKind.Relative));
             WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://weassist.azurewebsites.net/signup.html");
+            wbt.Uri = new Uri("http://weassist.azurewebsites.net/signup.php");
             wbt.Show();
         }
 
         private void Forget_Password_Button_Click(object sender, RoutedEventArgs e)
         {
             WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://weassist.azurewebsites.net/forgetpassword.html");
+            wbt.Uri = new Uri("http://weassist.azurewebsites.net/forgotpassword.php");
             wbt.Show();
         }
         #endregion

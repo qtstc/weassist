@@ -174,6 +174,7 @@ namespace CitySafe
         private async Task<Pushpin> LoadUserLocation()
         {
             GeoPosition<GeoCoordinate> p = await Utilities.getCurrentGeoPosition();
+            //GeoPosition<GeoCoordinate> p = new GeoPosition<GeoCoordinate>(new DateTimeOffset(DateTime.Now), new GeoCoordinate(39.6471, -086.8158));
             if (p == null)
                 return null;
             return new Pushpin(p, Pushpin.TYPE.MY_LOCATION);

@@ -38,10 +38,10 @@
         </Grid>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton Text="log out" IconUri="/Assets/AppBar/door.leave.png" Click="ChangeUserButton_Click" />
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem  Text="privary statement"  Click="PrivacyStatementButton_Click" />
+                <shell:ApplicationBarMenuItem  Text="privacy statement"  Click="PrivacyStatementButton_Click" />
                 <shell:ApplicationBarMenuItem  Text="instructions"  Click="InstructionsButton_Click" />
                 <shell:ApplicationBarMenuItem Text="about" Click="AboutButton_Click"/>
             </shell:ApplicationBar.MenuItems>

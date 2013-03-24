@@ -1,6 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="signup.aspx.cs" Inherits="WeAssistWebService.signup" %>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -9,7 +7,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+    <p>forgotpassword page</p>
     </div>
     </form>
 </body>

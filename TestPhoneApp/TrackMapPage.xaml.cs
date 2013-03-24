@@ -139,6 +139,11 @@ namespace CitySafe
             return new Pushpin(p, Pushpin.TYPE.MY_LOCATION);
         }
 
+        //private Pushpin GetTestPushpin(double x, double y, DateTime d, GeoPosition<GeoCoordinate> my)
+        //{
+        //    return new Pushpin(new GeoPosition<GeoCoordinate>(d, new GeoCoordinate(x, y)), Pushpin.TYPE.TRACKED_LOCATION, my);
+        //}
+
         /// <summary>
         /// Initialize and load data into lastLocations.
         /// </summary>
@@ -147,6 +152,36 @@ namespace CitySafe
         {
             //Initialize the locationList.
             LocationList<Pushpin> Locations = new LocationList<Pushpin>(Pushpin.TYPE.TRACKED_LOCATION);
+            //DateTime d = DateTime.Now;
+            //d = d.Subtract(new TimeSpan(0, 20, 0));
+            //Locations.Add(GetTestPushpin(39.6393, -086.8628, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 55, 0));
+            //Locations.Add(GetTestPushpin(39.6394, -086.8627, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 60, 0));
+            //Locations.Add(GetTestPushpin(39.6392, -086.8628, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 58, 0));
+            //Locations.Add(GetTestPushpin(39.6392, -086.8628, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 63, 0));
+            //Locations.Add(GetTestPushpin(39.6392, -086.8628, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 53, 0));
+            //Locations.Add(GetTestPushpin(39.6393, -086.8629, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 61, 0));
+            //Locations.Add(GetTestPushpin(39.6394, -086.8628, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 55, 0));
+            //Locations.Add(GetTestPushpin(39.6353, -086.8627, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 60, 0));
+            //Locations.Add(GetTestPushpin(39.6353, -086.8628, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 61, 0));
+            //Locations.Add(GetTestPushpin(39.6353, -086.8648, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 59, 0));
+            //Locations.Add(GetTestPushpin(39.6343, -086.8658, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 50, 0));
+            //Locations.Add(GetTestPushpin(39.6353, -086.8658, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 60, 0));
+            //Locations.Add(GetTestPushpin(39.6353, -086.8668, d, reference));
+            //d = d.Subtract(new TimeSpan(0, 61, 0));
+            //Locations.Add(GetTestPushpin(39.6353, -086.8668, d, reference));
+
 
             //Get the position of the first location data(oldest one).
             int locationSize = App.trackItemModel.user.Get<int>(ParseContract.UserTable.LOCATION_DATA_SIZE);
@@ -169,6 +204,7 @@ namespace CitySafe
                     Locations.Add(new Pushpin(gp, Pushpin.TYPE.TRACKED_LOCATION, reference));
                 }
             }
+
             //Sort to make sure the GeoPositions are in sorted order.
             //This is just making sure, the GeoPositions should be sorted already at this point.
             Locations.Sort((x, y) => y.position.Timestamp.DateTime.CompareTo(x.position.Timestamp.DateTime));

@@ -31,13 +31,14 @@
 
         <!--ContentPanel - place additional content here-->
         <StackPanel x:Name="LoginPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Text="{Binding LocalizedResources.Login_Email, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="24" Margin="12,36,0,0" Foreground="#DEFFFFFF"/>
-            <TextBox x:Name="login_username_textbox" InputScope="EmailUserName" AcceptsReturn="True" ToolTipService.ToolTip="" Margin="12,12,12,0" Foreground="#FF919191" SelectionForeground="{x:Null}" SelectionBackground="{StaticResource PhoneAccentBrush}" Background="#26FFFFFF" BorderBrush="#26FFFFFF"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_Password, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="24" Margin="12,32,0,0" Foreground="#DEFFFFFF"/>
-            <PasswordBox x:Name="login_password_textbox" Margin="12,12,12,0" Foreground="#DE919191" BorderBrush="#26FFFFFF" Background="#26FFFFFF" SelectionForeground="{x:Null}" />
-            <Button Content="{Binding LocalizedResources.Login_Signin, Mode=OneWay, Source={StaticResource LocalizedStrings}}"  Click="Login_Signin_Button_Click" Margin="12,60,12,0" Foreground="#DEFFFFFF" BorderBrush="#DEFFFFFF" />
+            <TextBlock Text="{Binding LocalizedResources.Login_Email, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" FontSize="24" Margin="12,0,0,0" Foreground="#DEFFFFFF"/>
+            <TextBox x:Name="login_username_textbox" InputScope="EmailUserName" AcceptsReturn="True" ToolTipService.ToolTip="" Margin="12,0,12,0" Foreground="White" SelectionForeground="{x:Null}" SelectionBackground="{StaticResource PhoneAccentBrush}" Background="#26FFFFFF" BorderBrush="#26FFFFFF"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.Login_Password, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="24" Margin="12,0,0,0" Foreground="#DEFFFFFF"/>
+            <PasswordBox x:Name="login_password_textbox" Margin="12,0,12,0" Foreground="#DEFFFFFF" BorderBrush="#26FFFFFF" Background="#26FFFFFF" SelectionForeground="{x:Null}" />
+            <Button Content="{Binding LocalizedResources.Login_Signin, Mode=OneWay, Source={StaticResource LocalizedStrings}}"  Click="Login_Signin_Button_Click" Margin="12,0,12,0" Foreground="#DEFFFFFF" BorderBrush="#DEFFFFFF" />
             <Button Content="{Binding LocalizedResources.Login_Signup, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Click="Login_Signup_Button_Click" Margin="12,0,12,0" BorderBrush="#DEFFFFFF" Foreground="#DEFFFFFF"/>
-            <Button Content="{Binding LocalizedResources.Login_ForgetPassword, Mode=OneWay, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Right" Margin="0,0,48,0" BorderBrush="{x:Null}" BorderThickness="0" Padding="0" FontSize="20" Click="Forget_Password_Button_Click" Foreground="#DEFFFFFF"/>
+            <Button Content="{Binding LocalizedResources.Login_ForgetPassword, Mode=OneWay, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Right" Margin="0,0,24,0" BorderBrush="{x:Null}" BorderThickness="0" Padding="0" FontSize="20" Click="Forget_Password_Button_Click" Foreground="#DEFFFFFF"/>
+            <Image Source="/Assets/logo.png" Width="200" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-24,0,0"/>
         </StackPanel>
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
     </Grid>

@@ -201,13 +201,13 @@
     <value>The email address entered is invalid.</value>
   </data>
   <data name="Tracker_InvitationSuccess" xml:space="preserve">
-    <value>Invitation is sent successfully.</value>
+    <value>Invitation was sent successfully.</value>
   </data>
   <data name="Tracker_SendingInvitation" xml:space="preserve">
     <value>Sending invitation ...</value>
   </data>
   <data name="Tracker_AddSuccess" xml:space="preserve">
-    <value>User is added to your list successfully.</value>
+    <value>User was added to your list successfully.</value>
   </data>
   <data name="Tracker_FailToLoadList" xml:space="preserve">
     <value>Failed to load your private lists. Please check your network settings and try again later.</value>
@@ -387,7 +387,7 @@
     <value>Nearby Requests Archive</value>
   </data>
   <data name="SOS_SavePeople" xml:space="preserve">
-    <value>New WeAssist Request</value>
+    <value>Current WeAssist Requests</value>
   </data>
   <data name="SOSSend_ShareEmail" xml:space="preserve">
     <value>Share my email</value>
@@ -447,16 +447,16 @@
     <value>An unexpected error occured. Please relaunch the application.</value>
   </data>
   <data name="SOS_NotificationOff" xml:space="preserve">
-    <value>Notifications for nearby public requests: OFF</value>
+    <value>Get public requests: OFF</value>
   </data>
   <data name="SOS_NotificationOn" xml:space="preserve">
-    <value>Notifications for nearby public requests: ON</value>
+    <value>Get public requests: ON</value>
   </data>
   <data name="SOS_TrackingOff" xml:space="preserve">
-    <value>Background location tracking: OFF</value>
+    <value>WeFind: OFF</value>
   </data>
   <data name="SOS_TrackingOn" xml:space="preserve">
-    <value>Background location tracking: ON</value>
+    <value>WeFind: ON</value>
   </data>
   <data name="SOS_Connections" xml:space="preserve">
     <value>My WeAssist Contacts</value>
@@ -489,5 +489,8 @@ We are committed to keeping your data secure at all times. You may reach the WeA
   </data>
   <data name="SOS_About" xml:space="preserve">
     <value>WeAssist is created by three awesome computer science students from DePauw Univeristy.</value>
+  </data>
+  <data name="Tracker_NeedHelp" xml:space="preserve">
+    <value>(Needs Help)</value>
   </data>
 </root>

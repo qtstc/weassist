@@ -26,7 +26,7 @@ namespace WeAssistWebService
                 string.IsNullOrEmpty(nvc[AzureContract.PushNotificationPost.SUBSCRIPTION_URI]) ||
                 string.IsNullOrEmpty(nvc[AzureContract.PushNotificationPost.NAVIGATION_URI]))
             {
-                lt.Text = "Error, one of the required post fields is empty.";
+                lt.Text = "Error, one of the required post fields is empty.\n"+nvc[AzureContract.PushNotificationPost.TITLE]+"\n"+nvc[AzureContract.PushNotificationPost.CONTENT]+"\n"+nvc[AzureContract.PushNotificationPost.SUBSCRIPTION_URI]+"\n"+nvc[AzureContract.PushNotificationPost.NAVIGATION_URI];
                 return;
             }
 

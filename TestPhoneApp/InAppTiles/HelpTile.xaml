@@ -39,7 +39,7 @@
             <Grid.RenderTransform>
                 <TranslateTransform x:Name="panel1" Y="0" X="0"/>
             </Grid.RenderTransform>
-            <TextBlock x:Name="SOSTextblock"  Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" TextWrapping="Wrap" FlowDirection="LeftToRight" Margin="27,111,27,91"/>
+            <TextBlock x:Name="SOSTextblock"  Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" TextWrapping="Wrap" FlowDirection="LeftToRight" Margin="27,111,27,91" FontFamily="Segoe UI"/>
         </Grid>
 
     </StackPanel>

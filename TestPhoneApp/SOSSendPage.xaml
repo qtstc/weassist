@@ -29,7 +29,7 @@
                     <Grid Grid.Row="0">
                         <TextBlock x:Name="CharCount" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,12"/>
                         <Border CornerRadius="10" BorderBrush="Black" Background="#66D3D3D3" >
-                            <TextBox x:Name="SOSMessage"  TextWrapping="Wrap" TextChanged="SOSMessage_TextChanged" Background="#99FFFFFF" SelectionForeground="White" BorderBrush="#26000000" Foreground="#DE4D4D4D"/>
+                            <TextBox x:Name="SOSMessage"  TextWrapping="Wrap" TextChanged="SOSMessage_TextChanged" Background="{x:Null}" SelectionForeground="{x:Null}" BorderBrush="#26000000" Foreground="#DEFFFFFF"/>
                         </Border>
                     </Grid>
                     <TextBlock Grid.Row="1" Text="{Binding LocalizedResources.SOSSend_Disclaimer, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="18" TextWrapping="Wrap" Foreground="#DEFFFFFF"/>

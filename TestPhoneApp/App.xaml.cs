@@ -80,7 +80,7 @@ namespace CitySafe
         #region Background Agent
 
         //Used to identify the periodic task
-        private const string periodicTaskName = "CitySafeLocationPeriodicAgent";
+        private const string periodicTaskName = "WeAssistLocationPeriodicAgent";
 
         /// <summary>
         /// Start the background periodic agent.
@@ -198,6 +198,7 @@ namespace CitySafe
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             (App.Current.Resources["PhoneRadioCheckBoxCheckBrush"] as SolidColorBrush).Color = Colors.White;
+            (App.Current.Resources["PhoneTextBoxEditBackgroundBrush"] as SolidColorBrush).Color = Colors.Transparent;
         }
 
         // Code to execute when the application is activated (brought to foreground)

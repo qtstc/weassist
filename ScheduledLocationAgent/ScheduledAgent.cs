@@ -81,7 +81,7 @@ namespace ScheduledLocationAgent
 
             if (queue.QueueSize() > 0)//Display message when there are unsent locations.
             {
-                //Utilities.ShowToast("CitySafe", "Failed to upload location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
+                //Utilities.ShowToast("WeAssist", "Failed to upload location data.", new Uri("/LoginPage.xaml", UriKind.Relative));
                 Debug.WriteLine("Sending unsent location failed");
             }
 
