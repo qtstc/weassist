@@ -1,7 +1,8 @@
-﻿<xapCache source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\TestPhoneApp_Release_AnyCPU.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="3/24/2013 3:32:22 PM">
-  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Release\CitySafe.dll" archivePath="CitySafe.dll" lastWriteTime="3/24/2013 3:32:21 PM" />
-  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\addphoto.png" archivePath="Assets\addphoto.png" lastWriteTime="3/10/2013 9:11:23 PM" />
+﻿<xapCache source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\TestPhoneApp_Release_AnyCPU.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="4/11/2013 1:14:17 PM">
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\obj\Release\CitySafe.dll" archivePath="CitySafe.dll" lastWriteTime="4/11/2013 1:14:16 PM" />
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\addphoto.png" archivePath="Assets\addphoto.png" lastWriteTime="4/11/2013 12:49:26 PM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="12/29/2012 10:53:49 AM" />
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\AppBar\appbar.information.circle.png" archivePath="Assets\AppBar\appbar.information.circle.png" lastWriteTime="4/11/2013 1:11:02 PM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\AppBar\add.png" archivePath="Assets\AppBar\add.png" lastWriteTime="3/3/2013 1:26:08 PM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\AppBar\back.png" archivePath="Assets\AppBar\back.png" lastWriteTime="3/3/2013 2:25:04 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\AppBar\basecircle.png" archivePath="Assets\AppBar\basecircle.png" lastWriteTime="3/3/2013 1:26:34 PM" />
@@ -27,14 +28,14 @@
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\FlipSmall.png" archivePath="FlipSmall.png" lastWriteTime="3/23/2013 2:11:46 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Assets\placeholder.png" archivePath="Assets\placeholder.png" lastWriteTime="3/11/2013 11:24:48 PM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\SplashScreenImage.jpg" archivePath="SplashScreenImage.jpg" lastWriteTime="3/23/2013 2:32:53 AM" />
-  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="3/24/2013 3:12:39 PM" />
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="3/25/2013 1:30:28 AM" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\Windows Phone\v8.0\Libraries\Microsoft.Expression.Interactions.dll" archivePath="Microsoft.Expression.Interactions.dll" lastWriteTime="9/25/2012 2:41:02 AM" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Windows Phone\v8.0\Libraries\Microsoft.Phone.Controls.dll" archivePath="Microsoft.Phone.Controls.dll" lastWriteTime="9/26/2012 3:30:38 PM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Newtonsoft.Json.dll" archivePath="Newtonsoft.Json.dll" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Parse.dll" archivePath="Parse.dll" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Parse.Phone.dll" archivePath="Parse.Phone.dll" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\PhonePerformance.1.2.1\lib\sl4-windowsphone71\PhonePerformance.dll" archivePath="PhonePerformance.dll" lastWriteTime="3/11/2013 10:33:35 PM" />
-  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Release\ScheduledLocationAgent.dll" archivePath="ScheduledLocationAgent.dll" lastWriteTime="3/24/2013 3:01:59 PM" />
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\ScheduledLocationAgent\Bin\Release\ScheduledLocationAgent.dll" archivePath="ScheduledLocationAgent.dll" lastWriteTime="4/11/2013 12:49:34 PM" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\Windows Phone\v8.0\Libraries\System.Windows.Interactivity.dll" archivePath="System.Windows.Interactivity.dll" lastWriteTime="9/25/2012 2:41:02 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Newtonsoft.Json.xml" archivePath="Newtonsoft.Json.xml" lastWriteTime="2/21/2013 12:52:58 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\parse.1.0.4\lib\wp8\Parse.xml" archivePath="Parse.xml" lastWriteTime="2/21/2013 12:52:58 AM" />
@@ -42,5 +43,5 @@
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\packages\PhonePerformance.1.2.1\lib\sl4-windowsphone71\PhonePerformance.xml" archivePath="PhonePerformance.xml" lastWriteTime="3/11/2013 10:33:35 PM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\ApplicationIcon.png" archivePath="ApplicationIcon.png" lastWriteTime="3/23/2013 2:11:27 AM" />
   <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\FlipMedium.png" archivePath="FlipMedium.png" lastWriteTime="3/23/2013 2:12:01 AM" />
-  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="3/24/2013 3:32:22 PM" />
+  <file source="E:\Projects\Visual Studio Projects\Windows Phone\TestPhoneApp\TestPhoneApp\Bin\Release\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="4/11/2013 1:14:17 PM" />
 </xapCache>

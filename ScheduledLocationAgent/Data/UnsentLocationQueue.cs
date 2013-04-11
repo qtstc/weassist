@@ -152,8 +152,10 @@ namespace ScheduledLocationAgent.Data
                 {
                     Enqueue(temp.Dequeue());
                 }
+                Save();
                 return false;
             }
+            Save();
             return true;
         }
     }

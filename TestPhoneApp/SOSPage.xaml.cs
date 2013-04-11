@@ -142,7 +142,9 @@ namespace CitySafe
 
         private void AboutButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(AppResources.SOS_About);
+            WebBrowserTask wbt = new WebBrowserTask();
+            wbt.Uri = new Uri("http://weassist.azurewebsites.net/about.php");
+            wbt.Show();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

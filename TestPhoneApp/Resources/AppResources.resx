@@ -471,7 +471,7 @@
     <value>Check previous locations</value>
   </data>
   <data name="SOSSend_Disclaimer" xml:space="preserve">
-    <value>If you are in an emergency, please call 911.</value>
+    <value>When in an emergency, tap here to call 911.</value>
   </data>
   <data name="Login_PrivacyHeader" xml:space="preserve">
     <value>Allow access to location?</value>
@@ -488,7 +488,7 @@ We are committed to keeping your data secure at all times. You may reach the WeA
 </value>
   </data>
   <data name="SOS_About" xml:space="preserve">
-    <value>WeAssist is created by three awesome computer science students from DePauw Univeristy.</value>
+    <value />
   </data>
   <data name="Tracker_NeedHelp" xml:space="preserve">
     <value>(Needs Help)</value>

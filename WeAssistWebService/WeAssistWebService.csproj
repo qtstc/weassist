@@ -84,9 +84,11 @@
     <Content Include="changeuserinfo.php" />
     <Content Include="instructions.php" />
     <Content Include="privacystatement.php" />
+    <Content Include="about.php" />
     <None Include="Properties\PublishProfiles\weassist - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\weassist - Web Deploy.pubxml" />
     <Content Include="signup.php" />
+    <Content Include="resources\instructions.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

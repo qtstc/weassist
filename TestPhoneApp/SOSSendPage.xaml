@@ -32,7 +32,10 @@
                             <TextBox x:Name="SOSMessage"  TextWrapping="Wrap" TextChanged="SOSMessage_TextChanged" Background="{x:Null}" SelectionForeground="{x:Null}" BorderBrush="#26000000" Foreground="#DEFFFFFF"/>
                         </Border>
                     </Grid>
-                    <TextBlock Grid.Row="1" Text="{Binding LocalizedResources.SOSSend_Disclaimer, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="18" TextWrapping="Wrap" Foreground="#DEFFFFFF"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Tap="Emergence_Call_Tap">
+                        <Image Source="/Assets/AppBar/appbar.information.circle.png" Width="30" Height="30" Margin="0,-3,0,0"/>
+                        <TextBlock Text="{Binding LocalizedResources.SOSSend_Disclaimer, Mode=OneWay, Source={StaticResource LocalizedStrings}}" FontSize="16" TextWrapping="Wrap" Foreground="#DEFFFFFF"/>
+                    </StackPanel>
                 </Grid>
             </phone:PanoramaItem>
 
@@ -41,7 +44,7 @@
                 <ScrollViewer Grid.Row="1">
                     <Grid Margin="36,0,36,36">
                         <Border BorderThickness="12" CornerRadius="12" BorderBrush="#26FFFFFF">
-                            <Image x:Name="AddPhotoImage" Source="/Assets/addphoto.png" Tap="AddPhotoImage_Tap"/>
+                            <Image x:Name="AddPhotoImage" Source="/Assets/addphoto.png" Tap="AddPhotoImage_Tap" Margin="60" Opacity="0.5"/>
                         </Border>
                         <Image  x:Name="DeletePhotoImage" Source="/Assets/deletephoto.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-15,-15,0" Visibility="Collapsed" Tap="DeletePhotoImage_Tap"/>
                     </Grid>

@@ -535,7 +535,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WeAssist is created by three awesome computer science students from DePauw Univeristy..
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string SOS_About {
             get {
@@ -814,7 +814,7 @@ namespace CitySafe.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you are in an emergency, please call 911..
+        ///   Looks up a localized string similar to When in an emergency, tap here to call 911..
         /// </summary>
         public static string SOSSend_Disclaimer {
             get {

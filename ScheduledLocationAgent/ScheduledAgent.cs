@@ -123,7 +123,7 @@ namespace ScheduledLocationAgent
                         Debug.WriteLine("Failed to send location data to the server, stored it to the local location queue:");
                         Debug.WriteLine(e.ToString());
                         Utilities.WriteToExceptionLog("ScheduledAgent sending data", DateTime.Now, e);
-                        queue.Enqueue(newLocation);
+                            queue.Enqueue(newLocation);
                     }
                 }
                 else//If the unsent data was not sent, just add the current location to the unsent data.

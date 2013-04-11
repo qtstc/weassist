@@ -206,5 +206,12 @@ namespace CitySafe
             if (App.HideProgressOverlay())
                 e.Cancel = true;
         }
+
+        private void Emergence_Call_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            PhoneCallTask pct = new PhoneCallTask();
+            pct.PhoneNumber = "911";
+            pct.Show();
+        }
     }
 }
