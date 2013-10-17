@@ -42,9 +42,9 @@
             <!--Panorama item two-->
             <phone:PanoramaItem Header="{Binding LocalizedResources.SOSSend_Photo, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <ScrollViewer Grid.Row="1">
-                    <Grid Margin="36,0,36,36">
-                        <Border BorderThickness="12" CornerRadius="12" BorderBrush="#26FFFFFF">
-                            <Image x:Name="AddPhotoImage" Source="/Assets/addphoto.png" Tap="AddPhotoImage_Tap" Margin="60" Opacity="0.5"/>
+                    <Grid Margin="36,24,36,36">
+                        <Border BorderThickness="12" CornerRadius="12" BorderBrush="#26FFFFFF" Margin="0,-20,0,20">
+                            <Image x:Name="AddPhotoImage" Source="/Assets/addphoto.png" Tap="AddPhotoImage_Tap"  Opacity="0.5"/>
                         </Border>
                         <Image  x:Name="DeletePhotoImage" Source="/Assets/deletephoto.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-15,-15,0" Visibility="Collapsed" Tap="DeletePhotoImage_Tap"/>
                     </Grid>
@@ -64,8 +64,8 @@
                     </StackPanel>
                         <StackPanel Grid.Row="1" x:Name="ShareSettingsPanel" Margin="24">
                         <TextBlock Margin ="0,0,0,-12" Text="{Binding LocalizedResources.SOSSend_ShareInfoInfo, Mode=OneWay, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"/>
-                        <CheckBox x:Name="ShareNameCheck" Content="{Binding LocalizedResources.SOSSend_ShareName, Mode=OneWay, Source={StaticResource LocalizedStrings}}" BorderBrush="#DEFFFFFF" Foreground="#DEFFFFFF" Background="{x:Null}" />
                         <CheckBox x:Name="ShareEmailCheck" Content="{Binding LocalizedResources.SOSSend_ShareEmail, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Foreground="#DEFFFFFF" BorderBrush="#DEFFFFFF"/>
+                        <CheckBox x:Name="ShareNameCheck" Content="{Binding LocalizedResources.SOSSend_ShareName, Mode=OneWay, Source={StaticResource LocalizedStrings}}" BorderBrush="#DEFFFFFF" Foreground="#DEFFFFFF" Background="{x:Null}" />
                         <CheckBox x:Name="SharePhoneCheck" Content="{Binding LocalizedResources.SOSSend_SharePhone, Mode=OneWay, Source={StaticResource LocalizedStrings}}" BorderBrush="#DEFFFFFF" Foreground="#DEFFFFFF"/>
                     </StackPanel>
                 </Grid>

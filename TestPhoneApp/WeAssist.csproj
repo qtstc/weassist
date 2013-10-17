@@ -243,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.png" />
+    <Content Include="Assets\car.png" />
     <Content Include="Assets\addphoto.png" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\AppBar\appbar.information.circle.png" />

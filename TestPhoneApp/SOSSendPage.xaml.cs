@@ -122,7 +122,7 @@ namespace CitySafe
                 bmp.SetSource(imageStream);
 
                 AddPhotoImage.Source = bmp;
-
+                //AddPhotoImage.Source = new BitmapImage(new Uri("/Assets/car.png", UriKind.Relative));
                 DeletePhotoImage.Visibility = System.Windows.Visibility.Visible;
             }
         }

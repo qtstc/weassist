@@ -157,9 +157,9 @@ namespace CitySafe.ViewModels
                 case TYPE.KNOWN_SOS_LOCATION:
                     return ToShortString(position.Timestamp.DateTime) + "\nTap to view details";
                 case TYPE.UNKNOWN_SOS_LOCATION:
-                    return ToShortString(position.Timestamp.DateTime) + " on " + position.Timestamp.DateTime.ToShortDateString() + "\nTap to view details";
+                    return ToShortString(position.Timestamp.DateTime) + "\nTap to view details";
                 case TYPE.TRACKED_LOCATION:
-                    return ToShortString(position.Timestamp.DateTime) + " on " + position.Timestamp.DateTime.ToShortDateString();
+                    return ToShortString(position.Timestamp.DateTime);
                 default:
                     return "";
             }
